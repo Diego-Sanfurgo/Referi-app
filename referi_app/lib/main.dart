@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
+import 'package:sizer/sizer.dart';
 import 'package:referi_app/views/home.dart';
 
-import 'package:referi_app/routes/routes.dart';
-import "package:referi_app/styles/theme.dart" as theme;
-import 'package:referi_app/utils/utils.dart';
-import 'package:referi_app/views/signin/signin.dart';
-import 'package:sizer/sizer.dart';
+import '../../routes/routes.dart';
+import '../../views/signin/signin.dart';
+import "../../styles/theme.dart" as theme;
+import "../../utils/utils.dart" as util;
 
 void main() => runApp(const MyApp());
 
@@ -20,9 +20,10 @@ class MyApp extends StatelessWidget {
         title: 'REFERÍ',
         theme: theme.theme,
         routes: routesMap,
-        scaffoldMessengerKey: rootScaffoldMessengerKey,
+        scaffoldMessengerKey: util.scaffoldKey,
+        navigatorKey: util.navigatorKey,
         debugShowCheckedModeBanner: false,
-        home: const SignIn(),
+        home: const Home(),
       );
     }));
   }

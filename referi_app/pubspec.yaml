@@ -15,14 +15,22 @@ dependencies:
   flutter:
     sdk: flutter
 
+  #Responsiveness
+  sizer: ^2.0.15
+  auto_size_text: ^3.0.0
 
-  cupertino_icons: ^1.0.2
+  #Funtionalities
   image_picker: ^0.8.5+3
   mobile_scanner: ^2.0.0
+
+  #Visuals
   flutter_custom_clippers: ^2.0.0
-  auto_size_text: ^3.0.0
-  sizer: ^2.0.15
+  badges: ^2.0.3
+  
+  #Utils
   pin_code_fields: ^7.4.0
+
+  # cupertino_icons: ^1.0.2
 
 dev_dependencies:
   flutter_test:

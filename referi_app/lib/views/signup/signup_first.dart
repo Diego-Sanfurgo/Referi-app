@@ -10,7 +10,6 @@ class SignUpFirst extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
       appBar: AppBar(
         title: const Text("Registro"),
@@ -26,8 +25,7 @@ class SignUpFirst extends StatelessWidget {
               const SignUpFirstBody(),
               SignUpBottomButton(
                 "CONTINUAR",
-                onPress: () =>
-                    NavigationController.goTo(context, route: Routes.signup_2),
+                onPress: () => NavigationController.goTo(Routes.signup_2),
               ),
             ],
           ),

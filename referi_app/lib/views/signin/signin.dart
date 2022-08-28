@@ -103,16 +103,14 @@ class SignInFooter extends StatelessWidget {
       child: Column(
         children: [
           ElevatedButton(
-              onPressed: () =>
-                  NavigationController.goTo(context, route: Routes.home),
+              onPressed: () => NavigationController.goTo(Routes.home),
               child: const Text("INGRESAR")),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const AutoSizeText("Si no tienes cuenta"),
               TextButton(
-                  onPressed: () => NavigationController.goTo(context,
-                      route: Routes.signup_1),
+                  onPressed: () => NavigationController.goTo(Routes.signup_1),
                   child: const AutoSizeText(
                     "Registrate",
                     style: TextStyle(

@@ -15,3 +15,5 @@ MaterialColor primary = const MaterialColor(_orangePrimaryValue, <int, Color>{
 });
 
 Color secondary = const Color(0XFF0C9EE8);
+
+Color secondaryDark = const Color(0XFF0070B5);
