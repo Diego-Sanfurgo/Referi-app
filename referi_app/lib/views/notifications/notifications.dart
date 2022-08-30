@@ -18,13 +18,17 @@ class _Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.separated(
-      itemCount: 3,
-      itemBuilder: (context, index) {
-        return const _NotificationListTile(
-            "El pago de tu cuota fue realizado con éxito.");
-      },
-      separatorBuilder: (ctx, idx) => const Divider(color: Colors.grey),
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 16),
+      child: ListView.separated(
+        itemCount: 3,
+        itemBuilder: (context, index) {
+          return const _NotificationListTile(
+              "El pago de tu cuota fue realizado con éxito.");
+        },
+        separatorBuilder: (ctx, idx) =>
+            const Divider(color: Colors.grey, height: 8),
+      ),
     );
   }
 }
@@ -39,7 +43,7 @@ class _NotificationListTile extends StatelessWidget {
       title: AutoSizeText(title),
       leading: const Icon(Icons.check_circle_rounded, color: Colors.green),
       horizontalTitleGap: 0,
-      onTap: (){},
+      onTap: () {},
     );
   }
 }
