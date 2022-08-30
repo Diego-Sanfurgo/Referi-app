@@ -25,15 +25,19 @@ class Home extends StatelessWidget {
 }
 
 List<Widget> _appBarActions() => [
-  IconButton(onPressed: () {}, icon: const Icon(Icons.qr_code_scanner_rounded)),
-  Badge(
-    ignorePointer: true,
-    animationType: BadgeAnimationType.scale,
-    badgeContent: const Text("1", style: TextStyle(color: Colors.white)),
-    padding: const EdgeInsets.all(8),
-    position: BadgePosition.bottomStart(bottom: 0, start: 0),
-    child: IconButton(
-        onPressed: () => NavigationController.goTo(Routes.notifications),
-        icon: const Icon(Icons.notifications_rounded)),
-  ),
-];
+      IconButton(
+          onPressed: () {}, icon: const Icon(Icons.qr_code_scanner_rounded)),
+      IconButton(
+          onPressed: () => NavigationController.goTo(Routes.notifications),
+          icon: const Icon(Icons.notifications_rounded)),
+      // Badge(
+      //   ignorePointer: true,
+      //   animationType: BadgeAnimationType.scale,
+      //   badgeContent: const Text("1", style: TextStyle(color: Colors.white)),
+      //   padding: const EdgeInsets.all(8),
+      //   position: BadgePosition.bottomStart(bottom: 0, start: 0),
+      //   child: IconButton(
+      //       onPressed: () => NavigationController.goTo(Routes.notifications),
+      //       icon: const Icon(Icons.notifications_rounded)),
+      // ),
+    ];
