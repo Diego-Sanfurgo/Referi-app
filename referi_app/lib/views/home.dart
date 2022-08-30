@@ -1,6 +1,7 @@
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:referi_app/controllers/navigation_controller.dart';
+import 'package:referi_app/views/activities/home_activities.dart';
 
 import 'package:referi_app/widgets/bottom_navbar.dart';
 import 'package:referi_app/widgets/home/profile_icon.dart';
@@ -20,6 +21,7 @@ class Home extends StatelessWidget {
         actions: _appBarActions(),
       ),
       bottomNavigationBar: const BottomNavBar(),
+      body: const HomeActivities(),
     );
   }
 }
