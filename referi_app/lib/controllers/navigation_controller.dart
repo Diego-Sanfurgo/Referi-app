@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 
-// import 'package:referi_app/utils/utils.dart' as utils;
+import '../../utils/utils.dart' as util;
 
 abstract class NavigationController {
-  static void goTo(BuildContext context, {required Routes route, bool popPage = false, bool popUntil = false}) {
-    // BuildContext context = utils.actualContext;
-
+  static void goTo(Routes route,
+      {bool popPage = false, bool popUntil = false}) {
     if (popPage) {
-      Navigator.popAndPushNamed(context, route.name);
+      util.navigatorState?.popAndPushNamed(route.name);
     } else if (popUntil) {
-      Navigator.popUntil(context, ModalRoute.withName(route.name));
+      util.navigatorState?.popUntil(ModalRoute.withName(route.name));
     } else {
-      Navigator.pushNamed(context, route.name);
+      util.navigatorState?.pushNamed(route.name);
     }
   }
 }
@@ -28,8 +27,8 @@ enum Routes {
   // activitySearch,
   // activityDetail,
   // activityPayment,
-  // profile,
-  // personalData,
-  // notifications,
+  profile,
+  personalData,
+  notifications,
   // operationDetail
 }

@@ -29,8 +29,7 @@ class VerificationCode extends StatelessWidget {
               const ProgressBarSignUp(),
               const _Body(),
               SignUpBottomButton("INGRESAR",
-                  onPress: (() =>
-                      NavigationController.goTo(context, route: Routes.home)))
+                  onPress: (() => NavigationController.goTo(Routes.home)))
             ],
           ),
         ),

@@ -20,8 +20,8 @@ class SignUpSecond extends StatelessWidget {
             const ProgressBarSignUp(),
             const _Body(),
             SignUpBottomButton("CONTINUAR",
-                onPress: () => NavigationController.goTo(context,
-                    route: Routes.signup_3, popPage: true)),
+                onPress: () =>
+                    NavigationController.goTo(Routes.signup_3, popPage: true)),
           ],
         ),
       )),

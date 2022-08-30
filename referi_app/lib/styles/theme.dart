@@ -9,8 +9,22 @@ ThemeData _referiTheme = ThemeData(
   scaffoldBackgroundColor: Colors.white,
   backgroundColor: Colors.white,
   inputDecorationTheme: _inputDecorationTheme,
-  elevatedButtonTheme: ElevatedButtonThemeData(style: elevatedButtonStyle),
+  elevatedButtonTheme: ElevatedButtonThemeData(style: _elevatedButtonStyle),
   appBarTheme: _appBarTheme,
+  bottomNavigationBarTheme: _barTheme,
+  listTileTheme: _tileThemeData,
+);
+
+ListTileThemeData _tileThemeData = const ListTileThemeData(iconColor: Colors.black);
+
+
+BottomNavigationBarThemeData _barTheme = BottomNavigationBarThemeData(
+  backgroundColor: colors.primary.shade400,
+  selectedItemColor: colors.secondaryDark,
+  unselectedItemColor: Colors.black,
+  type: BottomNavigationBarType.fixed,
+  unselectedLabelStyle: const TextStyle(fontSize: 12),
+  selectedLabelStyle: const TextStyle(fontSize: 12),
 );
 
 InputDecorationTheme _inputDecorationTheme = const InputDecorationTheme(
@@ -18,7 +32,7 @@ InputDecorationTheme _inputDecorationTheme = const InputDecorationTheme(
   labelStyle: TextStyle(fontSize: 14),
 );
 
-ButtonStyle elevatedButtonStyle = ButtonStyle(
+ButtonStyle _elevatedButtonStyle = ButtonStyle(
     maximumSize: MaterialStateProperty.all(const Size(double.infinity, 36)),
     minimumSize: MaterialStateProperty.all(const Size(double.infinity, 36)),
     textStyle: MaterialStateProperty.all(

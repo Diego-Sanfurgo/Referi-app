@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 
-final GlobalKey<ScaffoldMessengerState> rootScaffoldMessengerKey =
+final GlobalKey<ScaffoldMessengerState> scaffoldKey =
     GlobalKey<ScaffoldMessengerState>();
+    final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+
+    NavigatorState? get navigatorState => navigatorKey.currentState;
 
 BuildContext get actualContext =>
-    rootScaffoldMessengerKey.currentContext as BuildContext;
+    scaffoldKey.currentContext as BuildContext;
