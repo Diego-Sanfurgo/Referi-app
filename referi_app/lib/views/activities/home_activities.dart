@@ -1,62 +1,92 @@
 import 'package:flutter/material.dart';
 
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:referi_app/controllers/navigation_controller.dart';
+
+import '../../models/grid_activity.dart' as gact;
 
 class HomeActivities extends StatelessWidget {
   const HomeActivities({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    // AutoSizeText(
-    //         "Actividades",
-    //         style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
-    //       ),
-    //       SizedBox(height: 24),
-    return GridView.builder(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+    return CustomScrollView(
       physics: const BouncingScrollPhysics(),
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        mainAxisSpacing: 16,
-        crossAxisSpacing: 16,
-      ),
-      itemCount: 11,
-      itemBuilder: (BuildContext context, int index) {
-        return const _ActivityCard();
-      },
+      slivers: [
+        SliverPadding(
+          padding: const EdgeInsets.all(16),
+          sliver: SliverList(
+            delegate: SliverChildListDelegate([
+              const AutoSizeText(
+                "Actividades",
+                textAlign: TextAlign.center,
+                style: TextStyle(fontWeight: FontWeight.w500),
+                maxFontSize: 26,
+                minFontSize: 22,
+              ),
+            ]),
+          ),
+        ),
+        SliverPadding(
+          padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+          sliver: SliverGrid(
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              mainAxisSpacing: 16,
+              crossAxisSpacing: 16,
+            ),
+            delegate: SliverChildBuilderDelegate(
+              (context, index) {
+                var activity = gact.gridActivities[index];
+
+                return _ActivityCard(
+                  activityName: activity.name,
+                  cardColor: activity.color,
+                  imagePath: activity.imagePath,
+                );
+              },
+              childCount: 11,
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
 
 class _ActivityCard extends StatelessWidget {
-  const _ActivityCard({Key? key}) : super(key: key);
+  final String imagePath;
+  final String activityName;
+  final Color cardColor;
+  const _ActivityCard({
+    Key? key,
+    required this.imagePath,
+    required this.activityName,
+    required this.cardColor,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       borderRadius: BorderRadius.circular(10),
-      onTap: () {},
+      onTap: () => NavigationController.goToWithArguments(Routes.activitySearch,
+          args: activityName),
       child: Card(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         clipBehavior: Clip.hardEdge,
         child: Stack(
-          alignment: Alignment.center,
           fit: StackFit.expand,
           children: [
-            Image.asset(
-              "assets/images/gim.jpg",
-              fit: BoxFit.cover,
-            ),
-            Container(
-              color: const Color.fromRGBO(171, 108, 252, 0.4),
-            ),
+            Image.asset(imagePath, fit: BoxFit.cover),
+            Container(color: cardColor),
             Center(
               child: AutoSizeText(
-                "Gimnasio".toUpperCase(),
+                activityName.toUpperCase(),
+                textAlign: TextAlign.center,
                 style:
-                    const TextStyle(fontWeight: FontWeight.w900, fontSize: 16),
-                minFontSize: 14,
-                maxFontSize: 18,
+                    const TextStyle(fontWeight: FontWeight.w900, fontSize: 22),
+                minFontSize: 20,
+                maxFontSize: 26,
               ),
             ),
           ],

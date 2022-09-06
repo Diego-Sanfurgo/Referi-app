@@ -13,6 +13,15 @@ abstract class NavigationController {
       util.navigatorState?.pushNamed(route.name);
     }
   }
+
+  static void goToWithArguments(Routes route,
+      {bool popPage = false, required dynamic args}) {
+    if (popPage) {
+      util.navigatorState?.popAndPushNamed(route.name, arguments: args);
+    } else {
+      util.navigatorState?.pushNamed(route.name, arguments: args);
+    }
+  }
 }
 
 enum Routes {
@@ -24,7 +33,7 @@ enum Routes {
   // account,
   // institutions,
   // credential,
-  // activitySearch,
+  activitySearch,
   // activityDetail,
   // activityPayment,
   profile,
