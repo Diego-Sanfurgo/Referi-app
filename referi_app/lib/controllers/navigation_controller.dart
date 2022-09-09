@@ -34,7 +34,7 @@ enum Routes {
   // institutions,
   // credential,
   activitySearch,
-  // activityDetail,
+  activityDetail,
   // activityPayment,
   profile,
   personalData,

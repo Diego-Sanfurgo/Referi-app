@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:referi_app/controllers/navigation_controller.dart';
 
 import 'package:referi_app/styles/colors.dart' as colors;
 
@@ -46,9 +47,10 @@ class _ActivityCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String imagePath = "assets/images/futbol_regatas.jpg";
     return ListTile(
       isThreeLine: true,
-      leading: Image.asset("assets/images/futbol_regatas.jpg"),
+      leading: Image.asset(imagePath),
       title: const AutoSizeText("Actividad"),
       subtitle: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -57,6 +59,8 @@ class _ActivityCard extends StatelessWidget {
           AutoSizeText("Todos los dias (9hs a 12hs)"),
         ],
       ),
+      onTap: () => NavigationController.goToWithArguments(Routes.activityDetail,
+          args: imagePath),
     );
   }
 }
