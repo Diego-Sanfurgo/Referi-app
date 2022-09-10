@@ -5,7 +5,7 @@ import 'package:referi_app/views/home.dart';
 
 import '../../routes/routes.dart';
 import '../../views/signin/signin.dart';
-import "../../styles/theme.dart" as theme;
+import "../../theme/theme.dart" as theme;
 import "../../utils/utils.dart" as util;
 
 void main() => runApp(const MyApp());

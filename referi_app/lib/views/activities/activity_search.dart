@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:referi_app/controllers/navigation_controller.dart';
+import '../../controllers/navigation_controller.dart';
 
-import 'package:referi_app/styles/colors.dart' as colors;
+import '../../theme/colors.dart' as colors;
 
 class ActivitySearch extends StatelessWidget {
   const ActivitySearch({Key? key}) : super(key: key);

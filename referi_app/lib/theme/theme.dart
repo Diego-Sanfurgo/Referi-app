@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:referi_app/styles/colors.dart' as colors;
+import '../../theme/colors.dart' as colors;
 
 ThemeData get theme => _referiTheme;
 

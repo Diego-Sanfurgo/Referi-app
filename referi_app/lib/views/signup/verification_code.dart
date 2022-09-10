@@ -2,14 +2,14 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
-import 'package:referi_app/controllers/navigation_controller.dart';
-import 'package:referi_app/widgets/signup_bottom_btn.dart';
+import '../../controllers/navigation_controller.dart';
+import '../../widgets/signup_bottom_btn.dart';
 
 import 'package:sizer/sizer.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 
-import 'package:referi_app/styles/colors.dart' as colors;
-import 'package:referi_app/widgets/forms/progress_bar_signup.dart';
+import '../../theme/colors.dart' as colors;
+import '../../widgets/forms/progress_bar_signup.dart';
 
 class VerificationCode extends StatelessWidget {
   const VerificationCode({Key? key}) : super(key: key);
