@@ -1,14 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:referi_app/controllers/alert_controller.dart';
+import 'package:referi_app/controllers/signup_controller.dart';
 
 import 'package:sizer/sizer.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 
 class CustomTextField extends StatelessWidget {
   final String labelText;
+  final String saveKeyLabel;
   final TextInputType keyboard;
+  final String? Function(String?)? validator;
+  final int? maxLength;
+  final bool showCounter;
+  final void Function()? onTap;
 
-  const CustomTextField(this.labelText, {Key? key, required this.keyboard})
-      : super(key: key);
+  const CustomTextField(
+    this.labelText, {
+    Key? key,
+    required this.keyboard,
+    this.validator,
+    this.maxLength = 50,
+    this.showCounter = true,
+    this.onTap,
+    required this.saveKeyLabel,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,13 +32,12 @@ class CustomTextField extends StatelessWidget {
       child: TextFormField(
         style: const TextStyle(fontSize: 14),
         keyboardType: keyboard,
-        validator: (value) {
-          if (value != null && value.isNotEmpty) {
-            return null;
-          }
-          return "Debe completar este campo.";
-        },
+        maxLength: showCounter ? maxLength : null,
         decoration: InputDecoration(labelText: labelText),
+        onTap: onTap, textInputAction: TextInputAction.next,
+        onSaved: (value) => SignUpController.saveValue(value!, saveKeyLabel),
+        // inputFormatters: [LengthLimitingTextInputFormatter(maxLength)],
+        validator: validator ?? _validator,
       ),
     );
   }
@@ -32,8 +46,15 @@ class CustomTextField extends StatelessWidget {
 //Textfield for passwords
 class PasswordTextField extends StatefulWidget {
   final String label;
+  final String? Function(String?)? validator;
+  final bool saveField;
 
-  const PasswordTextField(this.label, {Key? key}) : super(key: key);
+  const PasswordTextField(
+    this.label, {
+    Key? key,
+    this.validator,
+    this.saveField = true,
+  }) : super(key: key);
   @override
   State<PasswordTextField> createState() => _PasswordTextFieldState();
 }
@@ -62,9 +83,13 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
     return TextFormField(
       controller: controller,
       obscureText: obscureText,
+      validator: widget.validator ?? _validator,
+      textInputAction: TextInputAction.next,
+      onSaved: widget.saveField
+          ? (value) => SignUpController.saveValue(value!, 'password')
+          : null,
       decoration: InputDecoration(
         label: AutoSizeText(widget.label),
-        // contentPadding: const EdgeInsets.fromLTRB(12, 12, 12, 12),
         suffixIcon: IconButton(
           icon: Icon(icon),
           onPressed: () {
@@ -89,25 +114,25 @@ class PasswordRules extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: const [
-          RuleText("Debe tener entre 8 y 12 caracteres"),
-          RuleText("Debe incluir mayúsculas y minúsculas"),
-          RuleText("Debe incluir al menos un carácter especial")
+          _RuleText("Debe tener entre 8 y 12 caracteres"),
+          _RuleText("Debe incluir mayúsculas y minúsculas"),
+          _RuleText("Debe incluir al menos un carácter especial")
         ],
       ),
     );
   }
 }
 
-class RuleText extends StatefulWidget {
+class _RuleText extends StatefulWidget {
   final String text;
 
-  const RuleText(this.text, {Key? key}) : super(key: key);
+  const _RuleText(this.text, {Key? key}) : super(key: key);
 
   @override
-  State<RuleText> createState() => _RuleTextState();
+  State<_RuleText> createState() => _RuleTextState();
 }
 
-class _RuleTextState extends State<RuleText> {
+class _RuleTextState extends State<_RuleText> {
   AutoSizeGroup rulesGroup = AutoSizeGroup();
 
   @override
@@ -125,4 +150,69 @@ class _RuleTextState extends State<RuleText> {
       ),
     );
   }
+}
+
+//TextField for DatePickers
+class DateTextField extends StatefulWidget {
+  final String labelText;
+  final TextInputType keyboard;
+  final String? Function(String?)? validator;
+  final String saveKeyLabel;
+
+  const DateTextField(
+    this.labelText, {
+    Key? key,
+    required this.keyboard,
+    this.validator,
+    required this.saveKeyLabel,
+  }) : super(key: key);
+
+  @override
+  State<DateTextField> createState() => _DateTextFieldState();
+}
+
+class _DateTextFieldState extends State<DateTextField> {
+  late final TextEditingController controller;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.only(bottom: 24),
+      child: TextFormField(
+        controller: controller,
+        readOnly: true,
+        keyboardType: widget.keyboard,
+        style: const TextStyle(fontSize: 14),
+        decoration: InputDecoration(labelText: widget.labelText),
+        onTap: () async {
+          String? chosenDate = await Alert.showDateAlert();
+          if (chosenDate != null) {
+            controller.text = chosenDate;
+          }
+        },
+        validator: widget.validator ?? _validator,
+        onSaved: (value) =>
+            SignUpController.saveValue(value!, widget.saveKeyLabel),
+      ),
+    );
+  }
+}
+
+String? _validator(String? value) {
+  if (value != null && value.isNotEmpty) {
+    return null;
+  }
+  return "Debe completar este campo.";
 }

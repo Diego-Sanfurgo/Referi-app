@@ -18,10 +18,10 @@ class SignIn extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: const [
-              SignInHeader(),
-              SinInBody(),
+              _Header(),
+              _Body(),
               SizedBox(height: 64),
-              SignInFooter()
+              _Footer()
             ],
           ),
         ),
@@ -30,8 +30,8 @@ class SignIn extends StatelessWidget {
   }
 }
 
-class SignInHeader extends StatelessWidget {
-  const SignInHeader({Key? key}) : super(key: key);
+class _Header extends StatelessWidget {
+  const _Header({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -54,8 +54,8 @@ class SignInHeader extends StatelessWidget {
   }
 }
 
-class SinInBody extends StatelessWidget {
-  const SinInBody({Key? key}) : super(key: key);
+class _Body extends StatelessWidget {
+  const _Body({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -79,8 +79,11 @@ class SinInBody extends StatelessWidget {
             child: Form(
                 child: Column(
               children: const [
-                CustomTextField("Correo electrónico",
-                    keyboard: TextInputType.emailAddress),
+                CustomTextField(
+                  "Correo electrónico",
+                  keyboard: TextInputType.emailAddress,
+                  saveKeyLabel: 'email',
+                ),
                 PasswordTextField("Contraseña")
               ],
             )),
@@ -93,8 +96,8 @@ class SinInBody extends StatelessWidget {
   }
 }
 
-class SignInFooter extends StatelessWidget {
-  const SignInFooter({Key? key}) : super(key: key);
+class _Footer extends StatelessWidget {
+  const _Footer({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

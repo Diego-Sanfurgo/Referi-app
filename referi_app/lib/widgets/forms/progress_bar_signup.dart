@@ -1,7 +1,15 @@
 import 'package:flutter/material.dart';
 
 class ProgressBarSignUp extends StatelessWidget {
-  const ProgressBarSignUp({Key? key}) : super(key: key);
+  final bool firstCompleted;
+  final bool secondCompleted;
+  final bool thirdCompleted;
+  const ProgressBarSignUp({
+    Key? key,
+    this.firstCompleted = false,
+    this.secondCompleted = false,
+    this.thirdCompleted = false,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -10,12 +18,12 @@ class ProgressBarSignUp extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
-        children: const [
-          _ProgressCircle(),
-          _ProgressBarConnector(),
-          _ProgressCircle(),
-          _ProgressBarConnector(),
-          _ProgressCircle()
+        children: [
+          _ProgressCircle(firstCompleted),
+          _ProgressBarConnector(firstCompleted),
+          _ProgressCircle(secondCompleted),
+          _ProgressBarConnector(secondCompleted),
+          _ProgressCircle(thirdCompleted)
         ],
       ),
     );
@@ -23,38 +31,47 @@ class ProgressBarSignUp extends StatelessWidget {
 }
 
 class _ProgressCircle extends StatelessWidget {
-  const _ProgressCircle({Key? key}) : super(key: key);
+  final bool completed;
+  const _ProgressCircle(this.completed, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 32,
-      height: 32,
-      padding: const EdgeInsets.all(8),
-      decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          border: Border.all(color: const Color(0xFF77797B), width: 2)),
-      child: Container(
-        width: 10,
-        height: 10,
-        decoration: const BoxDecoration(
-          shape: BoxShape.circle,
-          color: Color(0xFF77797B),
-        ),
-      ),
-    );
+    return completed
+        ? Container(
+            decoration: const BoxDecoration(
+                shape: BoxShape.circle, color: Colors.green),
+            child:
+                const Icon(Icons.check_rounded, color: Colors.white, size: 32),
+          )
+        : Container(
+            width: 32,
+            height: 32,
+            padding: const EdgeInsets.all(8),
+            decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                border: Border.all(color: const Color(0xFF77797B), width: 2)),
+            child: Container(
+              width: 10,
+              height: 10,
+              decoration: const BoxDecoration(
+                shape: BoxShape.circle,
+                color: Color(0xFF77797B),
+              ),
+            ),
+          );
   }
 }
 
 class _ProgressBarConnector extends StatelessWidget {
-  const _ProgressBarConnector({Key? key}) : super(key: key);
+  final bool completed;
+  const _ProgressBarConnector(this.completed, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       height: 2,
       width: 80,
-      color: const Color(0xFF77797B),
+      color: completed ? Colors.green : const Color(0xFF77797B),
     );
   }
 }

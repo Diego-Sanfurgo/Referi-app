@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:referi_app/controllers/navigation_controller.dart';
+import 'package:referi_app/controllers/signup_controller.dart';
 import 'package:referi_app/widgets/forms/progress_bar_signup.dart';
 import 'package:referi_app/widgets/forms/textfield.dart';
 import 'package:referi_app/widgets/signup_bottom_btn.dart';
@@ -9,6 +10,8 @@ class SignUpSecond extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final GlobalKey<FormState> formKey = GlobalKey();
+
     return Scaffold(
       appBar: AppBar(title: const Text("Registro")),
       body: SingleChildScrollView(
@@ -17,11 +20,10 @@ class SignUpSecond extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const ProgressBarSignUp(),
-            const _Body(),
+            const ProgressBarSignUp(firstCompleted: true),
+            _Body(formKey),
             SignUpBottomButton("CONTINUAR",
-                onPress: () =>
-                    NavigationController.goTo(Routes.signup_3, popPage: true)),
+                onPress: () => SignUpController.checkSecondForm(formKey)),
           ],
         ),
       )),
@@ -30,18 +32,30 @@ class SignUpSecond extends StatelessWidget {
 }
 
 class _Body extends StatelessWidget {
-  const _Body({Key? key}) : super(key: key);
+  final GlobalKey<FormState> formKey;
+
+  const _Body(this.formKey, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: const [
-        CustomTextField("Correo electrónico",
-            keyboard: TextInputType.emailAddress),
-        PasswordTextField("Contraseña"),
-        PasswordRules(),
-        PasswordTextField("Repetir contraseña"),
-      ],
+    return Form(
+      key: formKey,
+      child: Column(
+        children: const [
+          CustomTextField(
+            "Correo electrónico",
+            keyboard: TextInputType.emailAddress,
+            showCounter: false,
+            saveKeyLabel: "email",
+          ),
+          PasswordTextField("Contraseña"),
+          PasswordRules(),
+          PasswordTextField(
+            "Repetir contraseña",
+            saveField: false,
+          ),
+        ],
+      ),
     );
   }
 }
