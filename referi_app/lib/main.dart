@@ -28,7 +28,7 @@ class ReferiApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return Sizer(builder: ((context, orientation, deviceType) {
       return MaterialApp(
-        title: 'REFERÍ',
+        title: 'Referi',
         theme: theme.theme,
         routes: routesMap,
         scaffoldMessengerKey: util.scaffoldKey,
