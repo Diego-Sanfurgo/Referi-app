@@ -30,6 +30,17 @@ abstract class SignUpController {
         .addValueToUserRegister(value, label);
   }
 
+  static comparePasswords(String value) {
+    String psw = Provider.of<UserProvider>(util.actualContext, listen: false)
+        .userRegister['password'];
+
+    if (value != psw) {
+      return "Las contraseñas no son iguales.";
+    }
+
+    return null;
+  }
+
   static saveRegisteringUser() {
     Provider.of<UserProvider>(util.actualContext, listen: false).userRegister;
   }

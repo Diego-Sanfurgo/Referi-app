@@ -46,14 +46,20 @@ class CustomTextField extends StatelessWidget {
 //Textfield for passwords
 class PasswordTextField extends StatefulWidget {
   final String label;
-  final String? Function(String?)? validator;
   final bool saveField;
+  final TextEditingController? controller;
+  final String? Function(String?)? validator;
+  final void Function(String?)? onChange;
+  final String? helperText;
 
   const PasswordTextField(
     this.label, {
     Key? key,
     this.validator,
     this.saveField = true,
+    this.controller,
+    this.onChange,
+    this.helperText,
   }) : super(key: key);
   @override
   State<PasswordTextField> createState() => _PasswordTextFieldState();
@@ -81,14 +87,18 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
         obscureText ? Icons.visibility_off_rounded : Icons.visibility_rounded;
 
     return TextFormField(
-      controller: controller,
+      controller: widget.controller ?? controller,
       obscureText: obscureText,
       validator: widget.validator ?? _validator,
       textInputAction: TextInputAction.next,
+      onChanged: widget.onChange ?? (_) {},
       onSaved: widget.saveField
           ? (value) => SignUpController.saveValue(value!, 'password')
           : null,
       decoration: InputDecoration(
+        errorMaxLines: 3,
+        helperText: widget.helperText,
+        // helperStyle: TextStyle(color: Colors.green),
         label: AutoSizeText(widget.label),
         suffixIcon: IconButton(
           icon: Icon(icon),
@@ -214,5 +224,5 @@ String? _validator(String? value) {
   if (value != null && value.isNotEmpty) {
     return null;
   }
-  return "Debe completar este campo.";
+  return "Completar campo.";
 }

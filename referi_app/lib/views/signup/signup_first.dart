@@ -130,12 +130,18 @@ class _DirectionFields extends StatelessWidget {
               )),
           SizedBox(
               width: 30.w,
-              child: const CustomTextField(
+              child: CustomTextField(
                 "Número",
                 keyboard: TextInputType.number,
                 showCounter: false,
                 maxLength: 10,
                 saveKeyLabel: "numero",
+                validator: (value) {
+                  if (value != null && value.isNotEmpty) {
+                    return null;
+                  }
+                  return "Completar";
+                },
               )),
         ],
       ),

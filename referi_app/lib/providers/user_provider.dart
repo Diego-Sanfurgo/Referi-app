@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../models/user.dart';
 
 class UserProvider extends ChangeNotifier {
+  final String _auxPass = '';
   final Map<String, dynamic> _userRegister = {
     "email": "",
     "password": "string",
@@ -25,7 +26,10 @@ class UserProvider extends ChangeNotifier {
   bool get progressBarSecondCompleted => _progressBarSecondCompleted;
   bool get progressBarThirdCompleted => _progressBarThirdompleted;
 
-  User get userRegister => User.fromJson(_userRegister);
+  User get userRegisterModel => User.fromJson(_userRegister);
+  Map<String, dynamic> get userRegister => _userRegister;
+
+  String get auxPsw => _auxPass;
 
   setProgressBarValue(bool value, int num) {
     if (num == 1) {

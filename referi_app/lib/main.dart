@@ -15,7 +15,7 @@ import "../../utils/utils.dart" as util;
 void main() {
   runApp(MultiProvider(
     providers: [
-      Provider<UserProvider>(create: (_) => UserProvider()),
+      ChangeNotifierProvider(create: (_) => UserProvider()),
     ],
     child: const ReferiApp(),
   ));

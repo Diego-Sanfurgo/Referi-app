@@ -83,6 +83,7 @@ class _Body extends StatelessWidget {
                   "Correo electrónico",
                   keyboard: TextInputType.emailAddress,
                   saveKeyLabel: 'email',
+                  showCounter: false,
                 ),
                 PasswordTextField("Contraseña")
               ],
