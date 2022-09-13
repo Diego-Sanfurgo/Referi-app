@@ -2,6 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 import 'package:referi_app/controllers/navigation_controller.dart';
+import 'package:referi_app/controllers/signup_controller.dart';
 import 'package:referi_app/widgets/forms/textfield.dart';
 
 class SignIn extends StatelessWidget {
@@ -9,6 +10,8 @@ class SignIn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    GlobalKey<FormState> formKey = GlobalKey();
+
     return Scaffold(
       body: SizedBox(
         width: double.infinity,
@@ -17,11 +20,11 @@ class SignIn extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
-            children: const [
-              SignInHeader(),
-              SinInBody(),
+            children: [
+              _Header(),
+              _Body(formKey),
               SizedBox(height: 64),
-              SignInFooter()
+              _Footer(formKey)
             ],
           ),
         ),
@@ -30,8 +33,8 @@ class SignIn extends StatelessWidget {
   }
 }
 
-class SignInHeader extends StatelessWidget {
-  const SignInHeader({Key? key}) : super(key: key);
+class _Header extends StatelessWidget {
+  const _Header({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -54,8 +57,9 @@ class SignInHeader extends StatelessWidget {
   }
 }
 
-class SinInBody extends StatelessWidget {
-  const SinInBody({Key? key}) : super(key: key);
+class _Body extends StatelessWidget {
+  final GlobalKey<FormState> formKey;
+  const _Body(this.formKey, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -77,13 +81,18 @@ class SinInBody extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(bottom: 16),
             child: Form(
+                key: formKey,
                 child: Column(
-              children: const [
-                CustomTextField("Correo electrónico",
-                    keyboard: TextInputType.emailAddress),
-                PasswordTextField("Contraseña")
-              ],
-            )),
+                  children: const [
+                    CustomTextField(
+                      "Correo electrónico",
+                      keyboard: TextInputType.emailAddress,
+                      saveKeyLabel: 'email',
+                      showCounter: false,
+                    ),
+                    PasswordTextField("Contraseña")
+                  ],
+                )),
           ),
           const AutoSizeText("¿Olvidaste tu contraseña?",
               style: TextStyle(fontSize: 16)),
@@ -93,8 +102,10 @@ class SinInBody extends StatelessWidget {
   }
 }
 
-class SignInFooter extends StatelessWidget {
-  const SignInFooter({Key? key}) : super(key: key);
+class _Footer extends StatelessWidget {
+  final GlobalKey<FormState> formKey;
+
+  const _Footer(this.formKey, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -103,7 +114,7 @@ class SignInFooter extends StatelessWidget {
       child: Column(
         children: [
           ElevatedButton(
-              onPressed: () => NavigationController.goTo(Routes.home),
+              onPressed: () => SignUpController.login(formKey),
               child: const Text("INGRESAR")),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
