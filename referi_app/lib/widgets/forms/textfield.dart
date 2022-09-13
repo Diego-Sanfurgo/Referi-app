@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:referi_app/controllers/alert_controller.dart';
 import 'package:referi_app/controllers/signup_controller.dart';
 
@@ -13,6 +14,7 @@ class CustomTextField extends StatelessWidget {
   final int? maxLength;
   final bool showCounter;
   final void Function()? onTap;
+  final void Function(String?)? onChaged;
 
   const CustomTextField(
     this.labelText, {
@@ -23,6 +25,7 @@ class CustomTextField extends StatelessWidget {
     this.showCounter = true,
     this.onTap,
     required this.saveKeyLabel,
+    this.onChaged,
   }) : super(key: key);
 
   @override
@@ -35,6 +38,7 @@ class CustomTextField extends StatelessWidget {
         maxLength: showCounter ? maxLength : null,
         decoration: InputDecoration(labelText: labelText),
         onTap: onTap, textInputAction: TextInputAction.next,
+        onChanged: onChaged,
         onSaved: (value) => SignUpController.saveValue(value!, saveKeyLabel),
         // inputFormatters: [LengthLimitingTextInputFormatter(maxLength)],
         validator: validator ?? _validator,
@@ -91,7 +95,7 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
       obscureText: obscureText,
       validator: widget.validator ?? _validator,
       textInputAction: TextInputAction.next,
-      onChanged: widget.onChange ?? (_) {},
+      onChanged: widget.onChange,
       onSaved: widget.saveField
           ? (value) => SignUpController.saveValue(value!, 'password')
           : null,

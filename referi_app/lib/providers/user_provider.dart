@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 
 import '../models/user.dart';
@@ -6,16 +8,16 @@ class UserProvider extends ChangeNotifier {
   final String _auxPass = '';
   final Map<String, dynamic> _userRegister = {
     "email": "",
-    "password": "string",
-    "nombre": "string",
-    "apellido": "string",
+    "password": "",
+    "nombre": "",
+    "apellido": "",
     "dni": 0,
-    "telefono": "string",
-    "fechaNacimiento": "2022-09-11T06:08:48.701Z",
-    "fotoPerfil": "string",
+    "telefono": "",
+    "fechaNacimiento": "",
+    "fotoPerfil": "",
     "domicilio": {
       "calle": "",
-      "numero": 123,
+      "numero": 0,
     }
   };
   bool _progressBarFirstCompleted = false;
@@ -43,11 +45,15 @@ class UserProvider extends ChangeNotifier {
   }
 
   addValueToUserRegister(String value, String label) {
-    if (label == "calle" || label == "numero") {
-      _userRegister.addAll({
-        "Domicilio": {label: value}
-      });
+    if (label == "calle" ||
+        label == "numero" ||
+        label == "ciudad" ||
+        label == "provincia") {
+      final Map<String, dynamic> domicilio = _userRegister['domicilio'];
+      domicilio[label] = value;
+      _userRegister.addAll({'domicilio': domicilio});
+      return;
     }
-    _userRegister.addAll({label.toLowerCase(): value});
+    _userRegister.addAll({label: value});
   }
 }

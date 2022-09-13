@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:referi_app/controllers/navigation_controller.dart';
-import 'package:referi_app/controllers/signup_controller.dart';
-import 'package:referi_app/widgets/forms/progress_bar_signup.dart';
-import 'package:referi_app/widgets/forms/textfield.dart';
-import 'package:referi_app/widgets/signup_bottom_btn.dart';
+import '../../controllers/signup_controller.dart';
+import '../../widgets/forms/progress_bar_signup.dart';
+import '../../widgets/forms/textfield.dart';
+import '../../widgets/signup_bottom_btn.dart';
 
 class SignUpSecond extends StatelessWidget {
   const SignUpSecond({Key? key}) : super(key: key);
@@ -23,7 +22,7 @@ class SignUpSecond extends StatelessWidget {
             const ProgressBarSignUp(firstCompleted: true),
             _Body(formKey),
             SignUpBottomButton("CONTINUAR",
-                onPress: () => SignUpController.checkSecondForm(formKey)),
+                onPress: () => SignUpController.checkSignUpForm(formKey, 2)),
           ],
         ),
       )),
@@ -77,11 +76,10 @@ class _BodyState extends State<_Body> {
           PasswordTextField(
             "Contraseña",
             controller: pass_1,
-            onChange: passwordSave,
+            onChange: (value) => _saveValue(value, 'password'),
             helperText: helperErrorText,
             validator: _passwordValidator,
           ),
-          // const PasswordRules(),
           Container(
             margin: const EdgeInsets.only(top: 16),
             child: PasswordTextField("Repetir contraseña",
@@ -126,11 +124,11 @@ String? _passwordValidator(String? value) {
   return errorText;
 }
 
-void passwordSave(String? value) {
+void _saveValue(String? value, String label) {
   if (value == null) {
     return;
   }
-  SignUpController.saveValue(value, 'password');
+  SignUpController.saveValue(value, label);
 }
 
 String? _comparePasswords(String? value) {

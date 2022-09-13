@@ -1,5 +1,8 @@
 import 'dart:async';
 
+import 'package:provider/provider.dart';
+import 'package:referi_app/controllers/signup_controller.dart';
+import 'package:referi_app/providers/user_provider.dart';
 import 'package:sizer/sizer.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
@@ -17,9 +20,7 @@ class VerificationCode extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Verificación"),
-      ),
+      appBar: AppBar(title: const Text("Verificación")),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 40),
@@ -32,7 +33,7 @@ class VerificationCode extends StatelessWidget {
               ),
               const _Body(),
               SignUpBottomButton("INGRESAR",
-                  onPress: (() => NavigationController.goTo(Routes.home)))
+                  onPress: (() => SignUpController.saveRegisteringUser()))
             ],
           ),
         ),
@@ -49,29 +50,62 @@ class _Body extends StatefulWidget {
 }
 
 class _BodyState extends State<_Body> {
-  String timeToResend = "30";
-  late final Timer timer;
+  late Timer timer;
+  bool isWaiting = true;
+  late Duration duration;
 
   @override
   void initState() {
     super.initState();
-    timer = Timer.periodic(const Duration(seconds: 30), (timer) {
-      timeToResend = timer.tick.toString();
-      setState(() {});
+    startTimer();
+  }
+
+  void startTimer() {
+    timer =
+        Timer.periodic(const Duration(seconds: 1), (cTimer) => setCountDown());
+    duration = const Duration(seconds: 5);
+  }
+
+  void stopTimer() => setState(() => timer.cancel());
+
+  void resetTimer() {
+    setState(() {
+      startTimer();
+    });
+  }
+
+  void setCountDown() {
+    setState(() {
+      final seconds = duration.inSeconds - 1;
+      if (seconds < 0) {
+        timer.cancel();
+        isWaiting = false;
+      } else {
+        duration = Duration(seconds: seconds);
+      }
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    String userEmail = Provider.of<UserProvider>(context).userRegister['email'];
+    List<String> splitEmail = userEmail.split('@');
+
+    String hiddenPart =
+        userEmail.replaceRange(2, splitEmail.first.length - 1, "****");
+
+    String strDigits(int n) => n.toString().padLeft(2, '0');
+    final seconds = strDigits(duration.inSeconds.remainder(60));
+
     Widget guideText = SizedBox(
       width: double.infinity,
       height: 10.h,
-      child: const AutoSizeText(
-        "Para verificar tu identidad enviaremos un correo a *****@ejemplo.com",
+      child: AutoSizeText(
+        "Para verificar tu identidad enviaremos un correo a $hiddenPart",
         maxLines: 3,
         maxFontSize: 24,
         minFontSize: 18,
-        style: TextStyle(fontSize: 20),
+        style: const TextStyle(fontSize: 20),
         textAlign: TextAlign.center,
       ),
     );
@@ -81,17 +115,16 @@ class _BodyState extends State<_Body> {
         guideText,
         const SizedBox(height: 32),
         const Text("Ingrese el código", style: TextStyle(fontSize: 16)),
-        const CodeInputField(),
+        const _CodeInputField(),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             TextButton(
-                onPressed: () {},
-                child: const Text(
-                  "Reenviar",
-                  style: TextStyle(fontSize: 16, color: Colors.black),
-                )),
-            Text("($timeToResend)", style: const TextStyle(fontSize: 16))
+                onPressed: isWaiting ? null : () => resetTimer(),
+                child: const Text("Reenviar", style: TextStyle(fontSize: 16))),
+            Visibility(
+                visible: isWaiting,
+                child: Text("($seconds)", style: const TextStyle(fontSize: 16)))
           ],
         )
       ],
@@ -99,8 +132,8 @@ class _BodyState extends State<_Body> {
   }
 }
 
-class CodeInputField extends StatelessWidget {
-  const CodeInputField({Key? key}) : super(key: key);
+class _CodeInputField extends StatelessWidget {
+  const _CodeInputField({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

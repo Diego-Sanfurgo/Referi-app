@@ -30,7 +30,7 @@ class SignUpFirst extends StatelessWidget {
               _Body(formKey),
               SignUpBottomButton(
                 "CONTINUAR",
-                onPress: () => SignUpController.checkFirstForm(formKey),
+                onPress: () => SignUpController.checkSignUpForm(formKey, 1),
               ),
             ],
           ),

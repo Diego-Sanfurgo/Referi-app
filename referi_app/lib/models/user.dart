@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:intl/intl.dart';
+
 User userFromJson(String str) => User.fromJson(json.decode(str));
 
 String userToJson(User data) => json.encode(data.toJson());
@@ -55,9 +57,9 @@ class User {
         password: json["password"],
         nombre: json["nombre"],
         apellido: json["apellido"],
-        dni: json["dni"],
+        dni: int.parse(json["dni"]),
         telefono: json["telefono"],
-        fechaNacimiento: DateTime.parse(json["fechaNacimiento"]),
+        fechaNacimiento: DateFormat.yMd().parse(json["fechaNacimiento"]),
         fotoPerfil: json["fotoPerfil"],
         domicilio: Domicilio.fromJson(json["domicilio"]),
       );
@@ -103,7 +105,7 @@ class Domicilio {
 
   factory Domicilio.fromJson(Map<String, dynamic> json) => Domicilio(
         calle: json["calle"],
-        numero: json["numero"],
+        numero: int.parse(json["numero"]),
         ciudad: json["ciudad"],
         provincia: json["provincia"],
       );
