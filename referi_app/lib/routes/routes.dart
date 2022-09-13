@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:referi_app/views/activities/activity_detail.dart';
+import 'package:referi_app/views/activities/activity_search.dart';
 
 import '../../views/home.dart';
 import '../../views/notifications/notifications.dart';
@@ -24,6 +26,10 @@ Map<String, WidgetBuilder> routes = {
 
   //Notifications
   'notifications': (_) => const Notifications(),
+
+  //Activities
+  'activitySearch': (_) => const ActivitySearch(),
+  'activityDetail': (_) => const ActivityDetail(),
 
   //
 };

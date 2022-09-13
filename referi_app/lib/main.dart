@@ -10,7 +10,7 @@ import 'providers/user_provider.dart';
 import '../../views/home.dart';
 import '../../routes/routes.dart';
 import '../../views/signin/signin.dart';
-import "../../styles/theme.dart" as theme;
+import "../../theme/theme.dart" as theme;
 import "../../utils/utils.dart" as util;
 
 void main() {

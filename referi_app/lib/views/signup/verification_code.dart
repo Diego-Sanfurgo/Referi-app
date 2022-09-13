@@ -7,11 +7,13 @@ import 'package:sizer/sizer.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
+import '../../controllers/navigation_controller.dart';
+import '../../widgets/signup_bottom_btn.dart';
 
 import '../../widgets/signup_bottom_btn.dart';
 import '../../controllers/navigation_controller.dart';
 
-import '../../styles/colors.dart' as colors;
+import '../../theme/colors.dart' as colors;
 import '../../widgets/forms/progress_bar_signup.dart';
 
 class VerificationCode extends StatelessWidget {
