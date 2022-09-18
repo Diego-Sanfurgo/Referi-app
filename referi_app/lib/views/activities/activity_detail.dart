@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:referi_app/controllers/navigation_controller.dart';
 
 import 'package:sizer/sizer.dart';
 import 'package:auto_size_text/auto_size_text.dart';
@@ -32,7 +33,10 @@ class _Body extends StatelessWidget {
           const _HeaderActivity(),
           const _TimeRanges(),
           const _Fees(),
-          ElevatedButton(onPressed: () {}, child: const Text("INSCRIBIRSE"))
+          ElevatedButton(
+              onPressed: () =>
+                  NavigationController.goTo(Routes.activityPayment),
+              child: const Text("INSCRIBIRSE"))
         ],
       ),
     );
@@ -148,7 +152,7 @@ class _Fees extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children:  [
+        children: [
           const AutoSizeText(
             "Tarifas",
             style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
