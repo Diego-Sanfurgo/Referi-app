@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:sizer/sizer.dart';
 
 import '../../theme/colors.dart' as colors;
 
@@ -23,16 +24,15 @@ class _Body extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
-      // margin: const EdgeInsets.only(top: 24),
       child: Column(
         // mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           const _ActivityCardDetail(),
           const SizedBox(height: 24),
           const _ActivityFees(),
+          // SizedBox(height: 20.h),
+          const Spacer(),
           ElevatedButton(onPressed: () {}, child: const Text("PAGAR"))
-
-          // _ActivityDetail(),
         ],
       ),
     );
@@ -58,7 +58,6 @@ class _ActivityCardDetail extends StatelessWidget {
           elevation: 5,
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-          // color: Colors.grey.shade50,
           child: Column(
             children: [
               ListTile(
@@ -77,7 +76,7 @@ class _ActivityCardDetail extends StatelessWidget {
                 visualDensity: VisualDensity.compact,
                 leading: AutoSizeText("Horario elegido:",
                     style: TextStyle(color: Colors.grey.shade600)),
-                trailing: const AutoSizeText("Lunes y martes de 16h a 20h"),
+                trailing: const AutoSizeText("Toda la semana"),
               ),
             ],
           ),
@@ -96,7 +95,7 @@ class _ActivityFees extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const AutoSizeText(
-          "Resúmen de pago",
+          "Resumen de pago",
           minFontSize: 20,
           maxFontSize: 26,
           style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
@@ -104,15 +103,18 @@ class _ActivityFees extends StatelessWidget {
         const ListTile(
           leading: AutoSizeText("Inscripción"),
           trailing: AutoSizeText("\$1500"),
+          visualDensity: VisualDensity.compact,
         ),
         const ListTile(
           leading: AutoSizeText("Pago mensual"),
           trailing: AutoSizeText("\$2800"),
+          visualDensity: VisualDensity.compact,
         ),
         Divider(color: colors.primary),
         const ListTile(
           leading: AutoSizeText("Total"),
           trailing: AutoSizeText("\$2800"),
+          visualDensity: VisualDensity.compact,
         ),
       ],
     );
