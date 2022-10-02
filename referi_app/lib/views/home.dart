@@ -1,10 +1,18 @@
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
-import 'package:referi_app/controllers/navigation_controller.dart';
-import 'package:referi_app/views/activities/home_activities.dart';
 
-import 'package:referi_app/widgets/bottom_navbar.dart';
-import 'package:referi_app/widgets/home/profile_icon.dart';
+import 'package:animate_do/animate_do.dart';
+
+import '../../controllers/navigation_controller.dart';
+import '../../providers/app_providers.dart';
+
+import '../../views/clubs/clubs_home.dart';
+import '../../views/account/account_home.dart';
+import '../../views/credential/credential.dart';
+import '../../views/activities/activities_home.dart';
+
+import '../../widgets/bottom_navbar.dart';
+import '../../widgets/home/profile_icon.dart';
 
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);
@@ -17,16 +25,57 @@ class Home extends StatelessWidget {
           size: 40,
           onPressed: () => NavigationController.goTo(Routes.profile),
         ),
-        title: const Text("Hola Diego"),
-        actions: _appBarActions(),
+        title: const _AppBarTitle(),
+        actions: _appBarActions,
       ),
       bottomNavigationBar: const BottomNavBar(),
-      body: const HomeActivities(),
+      body: ValueListenableBuilder<int>(
+        valueListenable: AppProviders.navigationProvider.navbarIndex,
+        builder: (BuildContext context, int value, Widget? child) {
+          switch (value) {
+            case 0:
+              return const ActivitiesHome();
+            case 1:
+              return const AccountHome();
+            case 2:
+              return const ClubsHome();
+            case 3:
+              return const CredentialHome();
+            default:
+              return const ActivitiesHome();
+          }
+        },
+      ),
     );
   }
 }
 
-List<Widget> _appBarActions() => [
+class _AppBarTitle extends StatelessWidget {
+  const _AppBarTitle({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ValueListenableBuilder<int>(
+      valueListenable: AppProviders.navigationProvider.navbarIndex,
+      builder: (BuildContext context, int value, Widget? child) {
+        switch (value) {
+          case 0:
+            return const Text("Hola Diego");
+          case 1:
+            return const Text("Cuenta");
+          case 2:
+            return const Text("Clubes");
+          case 3:
+            return const Text("Credenciales");
+          default:
+            return const Text("Hola Diego");
+        }
+      },
+    );
+  }
+}
+
+List<Widget> get _appBarActions => [
       IconButton(
           onPressed: () {}, icon: const Icon(Icons.qr_code_scanner_rounded)),
       IconButton(

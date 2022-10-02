@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:referi_app/views/account/account_home.dart';
 import 'package:referi_app/views/activities/activity_detail.dart';
 import 'package:referi_app/views/activities/activity_payment.dart';
 import 'package:referi_app/views/activities/activity_search.dart';
@@ -8,6 +9,7 @@ import '../../views/notifications/notifications.dart';
 import '../../views/profile/personal_data.dart';
 import '../../views/profile/profile.dart';
 import '../../views/signin/signin.dart';
+import '../views/account/opration_detail.dart';
 import '../views/signup/signup_1.dart';
 import '../views/signup/signup_2.dart';
 import '../../views/signup/verification_code.dart';
@@ -16,6 +18,8 @@ Map<String, WidgetBuilder> get routesMap => routes;
 
 Map<String, WidgetBuilder> routes = {
   'home': (_) => const Home(),
+
+  //SignIn and SignUp
   'signin': (_) => const SignIn(),
   'signup_1': (_) => const SignUpFirst(),
   'signup_2': (_) => const SignUpSecond(),
@@ -32,6 +36,10 @@ Map<String, WidgetBuilder> routes = {
   'activitySearch': (_) => const ActivitySearch(),
   'activityDetail': (_) => const ActivityDetail(),
   'activityPayment': (_) => const ActivityPayment(),
+
+  //Account
+  'accountHome':(_)=> const AccountHome(),
+  'operationDetail':(_)=> const OperationDetail(),
 
   //
 };

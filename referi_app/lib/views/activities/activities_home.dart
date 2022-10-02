@@ -5,8 +5,8 @@ import 'package:referi_app/controllers/navigation_controller.dart';
 
 import '../../models/grid_activity.dart' as gact;
 
-class HomeActivities extends StatelessWidget {
-  const HomeActivities({Key? key}) : super(key: key);
+class ActivitiesHome extends StatelessWidget {
+  const ActivitiesHome({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

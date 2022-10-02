@@ -36,6 +36,7 @@ dependencies:
   provider: ^6.0.3
   intl: ^0.17.0
   location: ^4.4.0
+  animate_do: ^2.1.0
 
   # cupertino_icons: ^1.0.2
 

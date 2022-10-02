@@ -21,9 +21,9 @@ class SignIn extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              _Header(),
+              const _Header(),
               _Body(formKey),
-              SizedBox(height: 64),
+              const SizedBox(height: 64),
               _Footer(formKey)
             ],
           ),

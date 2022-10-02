@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:referi_app/providers/app_providers.dart';
+import 'package:referi_app/providers/navigation_provider.dart';
 
 import '../../utils/utils.dart' as util;
 
@@ -22,6 +25,9 @@ abstract class NavigationController {
       util.navigatorState?.pushNamed(route.name, arguments: args);
     }
   }
+
+  static void changeNavbarIndex(int value) =>
+      AppProviders.navigationProviderDeaf.setNavbarIndex(value);
 }
 
 enum Routes {
@@ -29,15 +35,21 @@ enum Routes {
   signup_1,
   signup_2,
   signup_3,
+  //homes
   home,
-  // account,
+  // activityHome,
+  accountHome,
+  // clubsHome,
+  // credentialHome,
+
+  account,
   // institutions,
   // credential,
+  operationDetail,
   activitySearch,
   activityDetail,
   activityPayment,
   profile,
   personalData,
   notifications,
-  // operationDetail
 }

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:referi_app/controllers/alert_controller.dart';
 import 'package:referi_app/controllers/signup_controller.dart';
 

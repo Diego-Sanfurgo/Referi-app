@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:referi_app/views/signup/verification_code.dart';
 
 import 'package:sizer/sizer.dart';
 import 'package:provider/provider.dart';
 
 import 'providers/user_provider.dart';
+import 'providers/navigation_provider.dart';
 
 import '../../views/home.dart';
 import '../../routes/routes.dart';
-import '../../views/signin/signin.dart';
+// import '../../views/signin/signin.dart';
 import "../../theme/theme.dart" as theme;
 import "../../utils/utils.dart" as util;
 
@@ -17,6 +17,7 @@ void main() {
   runApp(MultiProvider(
     providers: [
       ChangeNotifierProvider(create: (_) => UserProvider()),
+      ChangeNotifierProvider(create: (_) => NavigationProvider()),
     ],
     child: const ReferiApp(),
   ));
@@ -41,7 +42,7 @@ class ReferiApp extends StatelessWidget {
           GlobalCupertinoLocalizations.delegate,
         ],
         supportedLocales: const [Locale('en', ''), Locale('es', 'ES')],
-        home: const SignIn(),
+        home: const Home(),
       );
     }));
   }
