@@ -37,7 +37,7 @@ class _Body extends StatelessWidget {
           return const _ActivityCard();
         },
         separatorBuilder: (context, index) =>
-            Divider(height: 8, color: colors.primary.shade800),
+            Divider(height: 1, color: colors.primary.shade800),
         itemCount: 10);
   }
 }

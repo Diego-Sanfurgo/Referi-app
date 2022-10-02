@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:referi_app/views/activities/activity_detail.dart';
+import 'package:referi_app/views/activities/activity_payment.dart';
 import 'package:referi_app/views/activities/activity_search.dart';
 
 import '../../views/home.dart';
@@ -30,6 +31,7 @@ Map<String, WidgetBuilder> routes = {
   //Activities
   'activitySearch': (_) => const ActivitySearch(),
   'activityDetail': (_) => const ActivityDetail(),
+  'activityPayment': (_) => const ActivityPayment(),
 
   //
 };
