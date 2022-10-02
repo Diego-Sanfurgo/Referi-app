@@ -73,6 +73,7 @@ class _HeaderActivity extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
       ),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
             clipBehavior: Clip.hardEdge,
@@ -85,19 +86,22 @@ class _HeaderActivity extends StatelessWidget {
               height: 25.h,
             ),
           ),
-          ListTile(
-            title: const AutoSizeText(
-              "Activity name",
-              style: TextStyle(fontWeight: FontWeight.bold),
+          Container(
+            padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const AutoSizeText(
+                  "Activity name",
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                const AutoSizeText("Club regatas"),
+                AutoSizeText(
+                  "Ver más actividades del club",
+                  style: TextStyle(color: colors.secondaryDark),
+                )
+              ],
             ),
-            subtitle:
-                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              const AutoSizeText("Club regatas"),
-              AutoSizeText(
-                "Ver más actividades del club",
-                style: TextStyle(color: colors.secondary),
-              )
-            ]),
           )
         ],
       ),
@@ -105,16 +109,8 @@ class _HeaderActivity extends StatelessWidget {
   }
 }
 
-class _TimeRanges extends StatefulWidget {
+class _TimeRanges extends StatelessWidget {
   const _TimeRanges({Key? key}) : super(key: key);
-
-  @override
-  State<_TimeRanges> createState() => __TimeRangesState();
-}
-
-class __TimeRangesState extends State<_TimeRanges> {
-  bool box_1 = false;
-  bool box_2 = false;
 
   @override
   Widget build(BuildContext context) {
@@ -122,51 +118,50 @@ class __TimeRangesState extends State<_TimeRanges> {
       padding: const EdgeInsets.symmetric(vertical: 24),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const AutoSizeText(
+        children: const [
+          AutoSizeText(
             "Seleccionar horario",
             style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
           ),
-          ExpansionTile(
-            controlAffinity: ListTileControlAffinity.leading,
-            trailing: Checkbox(
-                value: box_1,
-                onChanged: (value) {
-                  box_1 = value!;
-                  setState(() {});
-                }),
-            tilePadding: EdgeInsets.zero,
-            title: const Text("Horario prueba"),
-            children: const [
-              ListTile(
-                dense: true,
-                leading: Text("Lunes"),
-                title: Text("16 a 20"),
-                visualDensity: VisualDensity.compact,
-              )
-            ],
-          ),
-          ExpansionTile(
-            controlAffinity: ListTileControlAffinity.leading,
-            trailing: Checkbox(
-                value: box_2,
-                onChanged: (value) {
-                  box_2 = value!;
-                  setState(() {});
-                }),
-            tilePadding: EdgeInsets.zero,
-            title: const Text("Horario prueba 2"),
-            children: [
-              ListTile(
-                tileColor: Colors.grey[100],
-                dense: true,
-                leading: const Text("Lunes"),
-                title: const Text("16 a 20"),
-              )
-            ],
-          ),
+          _TimeExpansionTile(),
+          _TimeExpansionTile(),
+          _TimeExpansionTile(),
         ],
       ),
+    );
+  }
+}
+
+class _TimeExpansionTile extends StatefulWidget {
+  const _TimeExpansionTile({Key? key}) : super(key: key);
+
+  @override
+  State<_TimeExpansionTile> createState() => _TimeExpansionTileState();
+}
+
+class _TimeExpansionTileState extends State<_TimeExpansionTile> {
+  bool boxValue = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return ExpansionTile(
+      controlAffinity: ListTileControlAffinity.leading,
+      trailing: Checkbox(
+          value: boxValue,
+          onChanged: (value) {
+            boxValue = value!;
+            setState(() {});
+          }),
+      tilePadding: EdgeInsets.zero,
+      title: const Text("Horario prueba"),
+      children: const [
+        ListTile(
+          dense: true,
+          leading: Text("Lunes"),
+          title: Text("16 a 20"),
+          visualDensity: VisualDensity.compact,
+        )
+      ],
     );
   }
 }
