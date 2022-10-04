@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:referi_app/providers/app_providers.dart';
-import 'package:referi_app/providers/navigation_provider.dart';
 
 import '../../utils/utils.dart' as util;
 
@@ -37,19 +35,23 @@ enum Routes {
   signup_3,
   //homes
   home,
-  // activityHome,
   accountHome,
   // clubsHome,
-  // credentialHome,
 
   account,
   // institutions,
-  // credential,
+  credentialHome,
+  credentialDetail,
+
   operationDetail,
+
+  // activityHome,
   activitySearch,
   activityDetail,
   activityPayment,
+
   profile,
   personalData,
+
   notifications,
 }

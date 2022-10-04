@@ -15,8 +15,8 @@ ThemeData _referiTheme = ThemeData(
   listTileTheme: _tileThemeData,
 );
 
-ListTileThemeData _tileThemeData = const ListTileThemeData(iconColor: Colors.black);
-
+ListTileThemeData _tileThemeData =
+    const ListTileThemeData(iconColor: Colors.black);
 
 BottomNavigationBarThemeData _barTheme = BottomNavigationBarThemeData(
   backgroundColor: colors.primary.shade400,

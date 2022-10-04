@@ -3,13 +3,15 @@ import 'package:referi_app/views/account/account_home.dart';
 import 'package:referi_app/views/activities/activity_detail.dart';
 import 'package:referi_app/views/activities/activity_payment.dart';
 import 'package:referi_app/views/activities/activity_search.dart';
+import 'package:referi_app/views/credential/credential_home.dart';
+import 'package:referi_app/views/credential/credential_detail.dart';
 
 import '../../views/home.dart';
 import '../../views/notifications/notifications.dart';
 import '../../views/profile/personal_data.dart';
 import '../../views/profile/profile.dart';
 import '../../views/signin/signin.dart';
-import '../views/account/opration_detail.dart';
+import '../views/account/operation_detail.dart';
 import '../views/signup/signup_1.dart';
 import '../views/signup/signup_2.dart';
 import '../../views/signup/verification_code.dart';
@@ -38,8 +40,10 @@ Map<String, WidgetBuilder> routes = {
   'activityPayment': (_) => const ActivityPayment(),
 
   //Account
-  'accountHome':(_)=> const AccountHome(),
-  'operationDetail':(_)=> const OperationDetail(),
+  'accountHome': (_) => const AccountHome(),
+  'operationDetail': (_) => const OperationDetail(),
 
-  //
+  //Credential
+  'credential': (_) => const CredentialHome(),
+  'credentialDetail': (_) => const CredentialDetail(),
 };

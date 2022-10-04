@@ -8,10 +8,10 @@ import '../../providers/app_providers.dart';
 
 import '../../views/clubs/clubs_home.dart';
 import '../../views/account/account_home.dart';
-import '../../views/credential/credential.dart';
+import 'credential/credential_home.dart';
 import '../../views/activities/activities_home.dart';
 
-import '../../widgets/bottom_navbar.dart';
+import '../widgets/home/bottom_navbar.dart';
 import '../../widgets/home/profile_icon.dart';
 
 class Home extends StatelessWidget {
