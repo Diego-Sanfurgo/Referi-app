@@ -110,10 +110,10 @@ class _ClubCard extends StatelessWidget {
                 alignment: Alignment.bottomCenter,
                 child: Container(
                   color: const Color.fromRGBO(0, 0, 0, 0.7),
-                  height: 8.h,
+                  height: 10.h,
                   width: double.infinity,
                   child: const ListTile(
-                    // contentPadding: EdgeInsets.all(8),
+                    contentPadding: EdgeInsets.all(8),
                     title: Text(
                       "Club Obras",
                       style: TextStyle(color: Colors.white),

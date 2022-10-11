@@ -4,10 +4,9 @@ import 'package:sizer/sizer.dart';
 import 'package:badges/badges.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 
+import '../../controllers/alert_controller.dart';
 import '../../controllers/navigation_controller.dart';
 import '../../theme/colors.dart' as colors;
-
-
 
 class Profile extends StatelessWidget {
   const Profile({Key? key}) : super(key: key);
@@ -61,8 +60,9 @@ class _ProfileImage extends StatelessWidget {
         padding: const EdgeInsets.all(8),
         animationType: BadgeAnimationType.scale,
         animationDuration: Duration.zero,
-        child: GestureDetector(
-          onTap: () {},
+        child: InkWell(
+          borderRadius: BorderRadius.circular(60),
+          onTap: () => Alert.showImagePickerSheet(),
           child: Icon(
             Icons.account_circle_rounded,
             color: Colors.grey,

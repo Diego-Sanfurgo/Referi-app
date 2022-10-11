@@ -37,6 +37,7 @@ dependencies:
   intl: ^0.17.0
   location: ^4.4.0
   animate_do: ^2.1.0
+  icons_launcher: ^2.0.4
 
   # change_app_package_name:
   # cupertino_icons: ^1.0.2
@@ -46,7 +47,7 @@ dev_dependencies:
     sdk: flutter
 
   flutter_lints: ^2.0.0
-  flutter_launcher_icons: "^0.10.0"
+  # flutter_launcher_icons: "^0.10.0"
 
 # The following section is specific to Flutter packages.
 flutter:
@@ -83,30 +84,55 @@ flutter:
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
 
+#flutter pub run flutter_native_splash:create
 flutter_native_splash:
-  # color: "#FFFFFF"
-  # image: assets/logo/logo_horizontal.png
   color: "#FF9800"
-  image: assets/logo/logo_blanco.png
+  image: assets/logo/logo_splash_900x900.png
 
   android_12:
-    # image: "assets/logo/logo_horizontal.png"
-    # color: "#FFFFFF"
     color: "#FF9800"
-    image: assets/logo/logo_blanco.png
+    image: assets/logo/logo_splash_900x900.png
 
   android: true
   fullscreen: true
 
+#flutter pub run flutter_launcher_icons:main
+# flutter_icons:
+#   android: true
+#   ios: false
+#   image_path: "assets/logo/logo_900x900.png"
+#   min_sdk_android: 21 # android min sdk min:16, default 21
+#   adaptive_icon_background: '#FF9800'
+#   adaptive_icon_foreground: "assets/logo/logo_900x900.png"
+#   adaptive_icon_round: "assets/logo/logo_launch_108x108.png"
+#   web:
+#     generate: false
+#   windows:
+#     generate: false
 
-flutter_icons:
-  android: true
-  ios: false
-  image_path: "assets/logo/logo_blanco.png"
-  min_sdk_android: 21 # android min sdk min:16, default 21
-  adaptive_icon_background: '#FF9800'
-  adaptive_icon_foreground: "assets/logo/logo_blanco.png"
-  web:
-    generate: false
-  windows:
-    generate: false
+icons_launcher:
+  # image_path: 'assets/logo/logo_launch_108x108.png'
+  platforms:
+    android:
+      enable: true
+      image_path: 'assets/logo/logo_900x900.png'
+      # adaptive_background_color: '#FF9800'
+      adaptive_background_image: 'assets/logo/logo_900x900.png'
+      adaptive_foreground_image: 'assets/logo/logo_900x900.png'
+      adaptive_round_image: 'assets/logo/logo_900x900.png'
+    # ios:
+    #   enable: false
+    #   image_path: 'assets/ic_logo_rectangle.png'
+    # web:
+    #   enable: false
+    #   image_path: 'assets/ic_logo_border.png'
+    #   favicon_path: 'assets/ic_logo_round.png'
+    # macos:
+    #   enable: false
+    #   image_path: 'assets/ic_logo_border.png'
+    # windows:
+    #   enable: false
+    #   image_path: 'assets/ic_logo_border.png'
+    # linux:
+    #   enable: false
+    #   image_path: 'assets/ic_logo_border.png'

@@ -24,50 +24,52 @@ class _Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(16),
-      child: Center(
-        child: Column(
-          children: [
-            Container(
-                alignment: Alignment.center,
-                height: 15.h,
-                width: double.infinity,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Padding(
-                      padding: EdgeInsets.only(bottom: 8),
-                      child: AutoSizeText(
-                        "Club Obras",
-                        minFontSize: 16,
-                        maxFontSize: 24,
-                        style: TextStyle(fontSize: 18),
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Center(
+          child: Column(
+            children: [
+              Container(
+                  alignment: Alignment.center,
+                  height: 15.h,
+                  width: double.infinity,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Padding(
+                        padding: EdgeInsets.only(bottom: 8),
+                        child: AutoSizeText(
+                          "Club Obras",
+                          minFontSize: 16,
+                          maxFontSize: 24,
+                          style: TextStyle(fontSize: 18),
+                        ),
                       ),
-                    ),
-                    AutoSizeText(
-                      "\$2500",
-                      minFontSize: 20,
-                      maxFontSize: 36,
-                      style: TextStyle(
-                          fontSize: 26, color: colors.primary.shade800),
-                    ),
-                  ],
-                )),
-            // AutoSizeText(
-            //     "Realizada el ${DateFormat.yMd('es, ES').format(DateTime.now()).toString()}"),
-            // const AutoSizeText("Número de operación: 0123456789"),
-            ListView.separated(
-              physics: const NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              itemCount: operationFillData.length,
-              separatorBuilder: (BuildContext context, int index) =>
-                  Divider(color: colors.primary.shade800),
-              itemBuilder: (BuildContext context, int index) {
-                return _DetailRow(index);
-              },
-            ),
-          ],
+                      AutoSizeText(
+                        "\$2500",
+                        minFontSize: 20,
+                        maxFontSize: 36,
+                        style: TextStyle(
+                            fontSize: 26, color: colors.primary.shade800),
+                      ),
+                    ],
+                  )),
+              // AutoSizeText(
+              //     "Realizada el ${DateFormat.yMd('es, ES').format(DateTime.now()).toString()}"),
+              // const AutoSizeText("Número de operación: 0123456789"),
+              ListView.separated(
+                physics: const NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                itemCount: operationFillData.length,
+                separatorBuilder: (BuildContext context, int index) =>
+                    Divider(color: colors.primary.shade800),
+                itemBuilder: (BuildContext context, int index) {
+                  return _DetailRow(index);
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );

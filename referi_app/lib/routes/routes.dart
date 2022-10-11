@@ -7,6 +7,8 @@ import 'package:referi_app/views/clubs/club_detail.dart';
 import 'package:referi_app/views/clubs/clubs_home.dart';
 import 'package:referi_app/views/credential/credential_home.dart';
 import 'package:referi_app/views/credential/credential_detail.dart';
+import 'package:referi_app/views/profile/peronal_data_edit.dart';
+import 'package:referi_app/views/scanner/scanner.dart';
 
 import '../../views/home.dart';
 import '../../views/notifications/notifications.dart';
@@ -32,6 +34,7 @@ Map<String, WidgetBuilder> routes = {
   //Profile
   'profile': (_) => const Profile(),
   'personalData': (_) => const PersonalData(),
+  'personalDataEdit': (_) => const PersonalDataEdit(),
 
   //Notifications
   'notifications': (_) => const Notifications(),
@@ -52,4 +55,7 @@ Map<String, WidgetBuilder> routes = {
   //Clubs
   'clubHome': (_) => const ClubsHome(),
   'clubDetail': (_) => const ClubDetail(),
+
+  //Scanner
+  'scanner': (_) => const Scanner(),
 };

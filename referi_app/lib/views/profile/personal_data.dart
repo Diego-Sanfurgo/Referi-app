@@ -1,5 +1,8 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+
+import 'package:auto_size_text/auto_size_text.dart';
+
+import 'package:referi_app/controllers/navigation_controller.dart';
 
 class PersonalData extends StatelessWidget {
   const PersonalData({Key? key}) : super(key: key);
@@ -18,21 +21,32 @@ class _Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 16),
-      child: Column(
-        children: const [
-          _PersonalDataListTile(
-              title: "Nombre y apellido", value: "Diego Sanfurgo"),
-          _PersonalDataListTile(
-              title: "DNI", value: "41.363.675", isEditable: false),
-          _PersonalDataListTile(
-              title: "Fecha de nacimiento", value: "18/08/1998"),
-          _PersonalDataListTile(title: "Domicilio", value: "Sobremonte 385"),
-          _PersonalDataListTile(
-              title: "E-mail", value: "ejemplo@gmail.com", isEditable: false),
-          _PersonalDataListTile(title: "Teléfono", value: "1234567890"),
-        ],
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 16),
+        child: Column(
+          children: [
+            const _PersonalDataListTile(
+                title: "Nombre y apellido", value: "Diego Sanfurgo"),
+            const _PersonalDataListTile(
+                title: "DNI", value: "41.363.675", isEditable: false),
+            const _PersonalDataListTile(
+                title: "Fecha de nacimiento", value: "18/08/1998"),
+            const _PersonalDataListTile(
+                title: "Domicilio", value: "Sobremonte 385"),
+            const _PersonalDataListTile(
+                title: "E-mail", value: "ejemplo@gmail.com", isEditable: false),
+            const _PersonalDataListTile(title: "Teléfono", value: "1234567890"),
+            Container(
+              margin: const EdgeInsets.only(top: 32),
+              child: OutlinedButton.icon(
+                  onPressed: () =>
+                      NavigationController.goTo(Routes.personalDataEdit),
+                  icon: const Icon(Icons.edit_rounded),
+                  label: const Text("Editar datos")),
+            )
+          ],
+        ),
       ),
     );
   }
@@ -57,8 +71,8 @@ class __PersonalDataListTileState extends State<_PersonalDataListTile> {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      trailing:
-          IconButton(onPressed: () {}, icon: const Icon(Icons.edit_rounded)),
+      // trailing:
+      //     IconButton(onPressed: () {}, icon: const Icon(Icons.edit_rounded)),
       title: AutoSizeText(
         widget.title,
         maxFontSize: 20,

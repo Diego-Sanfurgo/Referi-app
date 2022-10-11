@@ -1,8 +1,6 @@
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 
-import 'package:animate_do/animate_do.dart';
-
 import '../../controllers/navigation_controller.dart';
 import '../../providers/app_providers.dart';
 
@@ -77,7 +75,8 @@ class _AppBarTitle extends StatelessWidget {
 
 List<Widget> get _appBarActions => [
       IconButton(
-          onPressed: () {}, icon: const Icon(Icons.qr_code_scanner_rounded)),
+          onPressed: () => NavigationController.goTo(Routes.scanner),
+          icon: const Icon(Icons.qr_code_scanner_rounded)),
       IconButton(
           onPressed: () => NavigationController.goTo(Routes.notifications),
           icon: const Icon(Icons.notifications_rounded)),

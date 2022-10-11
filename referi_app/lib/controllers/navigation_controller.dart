@@ -51,8 +51,13 @@ enum Routes {
   activityDetail,
   activityPayment,
 
+  //Profile
   profile,
   personalData,
+  personalDataEdit,
 
   notifications,
+
+  //Scanner
+  scanner,
 }

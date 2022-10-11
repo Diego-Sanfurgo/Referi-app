@@ -96,9 +96,12 @@ class _HeaderActivity extends StatelessWidget {
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
                 const AutoSizeText("Club regatas"),
-                AutoSizeText(
-                  "Ver más actividades del club",
-                  style: TextStyle(color: colors.secondaryDark),
+                GestureDetector(
+                  onTap: () => NavigationController.goTo(Routes.clubDetail),
+                  child: AutoSizeText(
+                    "Ver más actividades del club",
+                    style: TextStyle(color: colors.secondaryDark),
+                  ),
                 )
               ],
             ),
@@ -157,8 +160,20 @@ class _TimeExpansionTileState extends State<_TimeExpansionTile> {
       children: const [
         ListTile(
           dense: true,
-          leading: Text("Lunes"),
-          title: Text("16 a 20"),
+          title: Text("Lunes"),
+          trailing: Text("16 a 20"),
+          visualDensity: VisualDensity.compact,
+        ),
+        ListTile(
+          dense: true,
+          title: Text("Miércoles"),
+          trailing: Text("16 a 20"),
+          visualDensity: VisualDensity.compact,
+        ),
+        ListTile(
+          dense: true,
+          title: Text("Viernes"),
+          trailing: Text("16 a 20"),
           visualDensity: VisualDensity.compact,
         )
       ],

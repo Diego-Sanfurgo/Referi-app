@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:referi_app/theme/colors.dart';
 
 class CredentialDetail extends StatelessWidget {
   const CredentialDetail({Key? key}) : super(key: key);
@@ -20,28 +21,33 @@ class _Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 24),
-        child: Card(
-          shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(5))),
-          elevation: 3,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                const AutoSizeText(
-                  "Club Regatas",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                  maxFontSize: 22,
-                  minFontSize: 16,
-                ),
-                Image.asset('assets/images/perfil_prueba.png'),
-                const SizedBox(height: 32),
-                const _CredentialData()
-              ],
+    return SingleChildScrollView(
+      child: Center(
+        child: Container(
+          padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 16),
+          child: Card(
+            shape: RoundedRectangleBorder(
+                side: BorderSide(color: primary.shade100),
+                borderRadius: const BorderRadius.all(Radius.circular(5))),
+            elevation: 6,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const AutoSizeText(
+                    "Club Obras",
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    maxFontSize: 22,
+                    minFontSize: 16,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 8, bottom: 32),
+                    child: Image.asset('assets/images/perfil_prueba.png'),
+                  ),
+                  const _CredentialData()
+                ],
+              ),
             ),
           ),
         ),
