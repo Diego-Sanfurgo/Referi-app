@@ -38,6 +38,7 @@ dependencies:
   location: ^4.4.0
   animate_do: ^2.1.0
 
+  # change_app_package_name:
   # cupertino_icons: ^1.0.2
 
 dev_dependencies:
@@ -45,6 +46,7 @@ dev_dependencies:
     sdk: flutter
 
   flutter_lints: ^2.0.0
+  flutter_launcher_icons: "^0.10.0"
 
 # The following section is specific to Flutter packages.
 flutter:
@@ -58,13 +60,8 @@ flutter:
   assets:
       - assets/images/
       - assets/images/card_images/
+      - assets/images/clubs/
       - assets/logo/
-
-  # An image asset can refer to one or more resolution-specific "variants", see
-  # https://flutter.dev/assets-and-images/#resolution-aware
-
-  # For details regarding adding assets from package dependencies, see
-  # https://flutter.dev/assets-and-images/#from-packages
 
   # To add custom fonts to your application, add a fonts section here,
   # in this "flutter" section. Each entry in this list should have a
@@ -87,12 +84,29 @@ flutter:
   # see https://flutter.dev/custom-fonts/#from-packages
 
 flutter_native_splash:
-  color: "#FFFFFF"
-  image: assets/logo/logo_horizontal.png
+  # color: "#FFFFFF"
+  # image: assets/logo/logo_horizontal.png
+  color: "#FF9800"
+  image: assets/logo/logo_blanco.png
 
   android_12:
-    image: "assets/logo/logo_horizontal.png"
-    color: "#FFFFFF"
+    # image: "assets/logo/logo_horizontal.png"
+    # color: "#FFFFFF"
+    color: "#FF9800"
+    image: assets/logo/logo_blanco.png
 
   android: true
   fullscreen: true
+
+
+flutter_icons:
+  android: true
+  ios: false
+  image_path: "assets/logo/logo_blanco.png"
+  min_sdk_android: 21 # android min sdk min:16, default 21
+  adaptive_icon_background: '#FF9800'
+  adaptive_icon_foreground: "assets/logo/logo_blanco.png"
+  web:
+    generate: false
+  windows:
+    generate: false

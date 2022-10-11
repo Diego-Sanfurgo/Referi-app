@@ -1,4 +1,4 @@
-package com.example.referi_app
+package com.referi.referiapp
 
 import io.flutter.embedding.android.FlutterActivity
 

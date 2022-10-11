@@ -67,18 +67,16 @@ abstract class SignUpController {
   }
 
   static login(GlobalKey<FormState> formKey) async {
-
     formKey.currentState?.save();
 
     Map<String, dynamic> user =
         Provider.of<UserProvider>(util.actualContext, listen: false)
             .userRegister;
 
-    bool? isLogged = await AuthHandler.postLogin(user['email'], user['password']);
+    bool isLogged =
+        await AuthHandler.postLogin(user['email'], user['password']);
 
-    if (isLogged == null || !isLogged) {
-      return;
-    }
+    if (!isLogged) return;
 
     NavigationController.goTo(Routes.home, popPage: true);
   }

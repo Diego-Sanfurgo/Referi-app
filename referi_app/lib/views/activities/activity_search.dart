@@ -4,6 +4,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import '../../controllers/navigation_controller.dart';
 
 import '../../theme/colors.dart' as colors;
+import '../../widgets/activity_card.dart';
 
 class ActivitySearch extends StatelessWidget {
   const ActivitySearch({Key? key}) : super(key: key);
@@ -34,33 +35,18 @@ class _Body extends StatelessWidget {
     return ListView.separated(
         padding: const EdgeInsets.symmetric(vertical: 16),
         itemBuilder: (context, index) {
-          return const _ActivityCard();
+          String imagePath = "assets/images/futbol_regatas.jpg";
+
+          return ActivityCard(
+            imagePath: imagePath,
+            title: "Actividad",
+            subtitle1: "Club Regatas",
+            subtitle2: "9h a 12h",
+            isCard: false,
+          );
         },
         separatorBuilder: (context, index) =>
             Divider(height: 1, color: colors.primary.shade800),
         itemCount: 10);
-  }
-}
-
-class _ActivityCard extends StatelessWidget {
-  const _ActivityCard({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    String imagePath = "assets/images/futbol_regatas.jpg";
-    return ListTile(
-      isThreeLine: true,
-      leading: Image.asset(imagePath),
-      title: const AutoSizeText("Actividad"),
-      subtitle: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: const [
-          AutoSizeText("Club REGATAS"),
-          AutoSizeText("Todos los dias (9hs a 12hs)"),
-        ],
-      ),
-      onTap: () => NavigationController.goToWithArguments(Routes.activityDetail,
-          args: imagePath),
-    );
   }
 }

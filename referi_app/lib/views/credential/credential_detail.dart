@@ -8,7 +8,7 @@ class CredentialDetail extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Credenciales"),
+        title: const Text("Credenciales"),
       ),
       body: const _Body(),
     );
@@ -39,8 +39,8 @@ class _Body extends StatelessWidget {
                   minFontSize: 16,
                 ),
                 Image.asset('assets/images/perfil_prueba.png'),
-                SizedBox(height: 32),
-                _CredentialData()
+                const SizedBox(height: 32),
+                const _CredentialData()
               ],
             ),
           ),

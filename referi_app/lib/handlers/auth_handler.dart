@@ -18,6 +18,6 @@ class AuthHandler {
   }
 
   static postAuthRecover() async {}
-  static Future<bool?> postLogin(String email, String password) async =>
+  static Future<bool> postLogin(String email, String password) async =>
       await postAuthLogin(email, password);
 }

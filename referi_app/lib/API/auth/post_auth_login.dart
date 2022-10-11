@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import '../../API/params.dart';
 
-Future<bool?> postAuthLogin(String email, String password) async {
+Future<bool> postAuthLogin(String email, String password) async {
   Dio dio = Dio();
 
   Map body = {

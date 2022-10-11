@@ -36,7 +36,8 @@ enum Routes {
   //homes
   home,
   accountHome,
-  // clubsHome,
+  clubsHome,
+  clubDetail,
 
   account,
   // institutions,

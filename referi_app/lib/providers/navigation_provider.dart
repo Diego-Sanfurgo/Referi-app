@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class NavigationProvider extends ChangeNotifier {
-  ValueNotifier<int> _navbarIndex = ValueNotifier<int>(0);
+  final ValueNotifier<int> _navbarIndex = ValueNotifier<int>(0);
 
   ValueNotifier<int> get navbarIndex => _navbarIndex;
 

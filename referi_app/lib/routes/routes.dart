@@ -3,6 +3,8 @@ import 'package:referi_app/views/account/account_home.dart';
 import 'package:referi_app/views/activities/activity_detail.dart';
 import 'package:referi_app/views/activities/activity_payment.dart';
 import 'package:referi_app/views/activities/activity_search.dart';
+import 'package:referi_app/views/clubs/club_detail.dart';
+import 'package:referi_app/views/clubs/clubs_home.dart';
 import 'package:referi_app/views/credential/credential_home.dart';
 import 'package:referi_app/views/credential/credential_detail.dart';
 
@@ -46,4 +48,8 @@ Map<String, WidgetBuilder> routes = {
   //Credential
   'credential': (_) => const CredentialHome(),
   'credentialDetail': (_) => const CredentialDetail(),
+
+  //Clubs
+  'clubHome': (_) => const ClubsHome(),
+  'clubDetail': (_) => const ClubDetail(),
 };
