@@ -112,7 +112,7 @@ class _ActivityFees extends StatelessWidget {
         Divider(color: colors.primary),
         const ListTile(
           leading: AutoSizeText("Total"),
-          trailing: AutoSizeText("\$2800"),
+          trailing: AutoSizeText("\$4300"),
           visualDensity: VisualDensity.compact,
         ),
       ],
