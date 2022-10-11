@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:auto_size_text/auto_size_text.dart';
-import '../../controllers/navigation_controller.dart';
-
 import '../../theme/colors.dart' as colors;
 import '../../widgets/activity_card.dart';
 

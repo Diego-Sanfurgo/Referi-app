@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:referi_app/theme/colors.dart';
 
 class PersonalDataEdit extends StatelessWidget {
   const PersonalDataEdit({Key? key}) : super(key: key);
@@ -57,8 +56,9 @@ class _Body extends StatelessWidget {
               itemCount: 6,
             ),
           ),
-          ElevatedButton(onPressed: () {}, child: Text("Guardar cambios")),
-          OutlinedButton(onPressed: () {}, child: Text("Cancelar"))
+          ElevatedButton(
+              onPressed: () {}, child: const Text("Guardar cambios")),
+          OutlinedButton(onPressed: () {}, child: const Text("Cancelar"))
         ],
       ),
     );

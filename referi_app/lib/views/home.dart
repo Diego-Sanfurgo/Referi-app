@@ -56,9 +56,10 @@ class _AppBarTitle extends StatelessWidget {
     return ValueListenableBuilder<int>(
       valueListenable: AppProviders.navigationProvider.navbarIndex,
       builder: (BuildContext context, int value, Widget? child) {
+        String? nombre = AppProviders.userProvider.currentUser?.nombre;
         switch (value) {
           case 0:
-            return const Text("Hola Diego");
+            return Text("Hola $nombre");
           case 1:
             return const Text("Cuenta");
           case 2:

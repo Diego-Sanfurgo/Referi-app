@@ -1,70 +1,79 @@
+// To parse this JSON data, do
+//
+//     final userModel = userModelFromJson(jsonString);
+
 import 'dart:convert';
 
-import 'package:intl/intl.dart';
+UserModel userModelFromJson(String str) => UserModel.fromJson(json.decode(str));
 
-User userFromJson(String str) => User.fromJson(json.decode(str));
+String userModelToJson(UserModel data) => json.encode(data.toJson());
 
-String userToJson(User data) => json.encode(data.toJson());
+class UserModel {
+  UserModel({
+    required this.user,
+    required this.accessToken,
+  });
+
+  final User user;
+  final String accessToken;
+
+  factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
+        user: User.fromJson(json["user"]),
+        accessToken: json["access_token"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "user": user.toJson(),
+        "access_token": accessToken,
+      };
+}
 
 class User {
   User({
+    required this.id,
     required this.email,
     required this.password,
     required this.nombre,
     required this.apellido,
     required this.dni,
-    required this.telefono,
+    this.telefono,
     required this.fechaNacimiento,
     this.fotoPerfil,
-    required this.domicilio,
+    required this.fechaCreacion,
+    required this.fechaActualizacion,
+    this.fechaBaja,
   });
 
-  String email;
-  String password;
-  String nombre;
-  String apellido;
-  int dni;
-  String telefono;
-  DateTime fechaNacimiento;
-  String? fotoPerfil;
-  Domicilio domicilio;
-
-  User copyWith({
-    required String email,
-    String? password,
-    String? nombre,
-    String? apellido,
-    required int dni,
-    String? telefono,
-    required DateTime fechaNacimiento,
-    String? fotoPerfil,
-    Domicilio? domicilio,
-  }) =>
-      User(
-        email: this.email,
-        password: password ?? this.password,
-        nombre: nombre ?? this.nombre,
-        apellido: apellido ?? this.apellido,
-        dni: this.dni,
-        telefono: telefono ?? this.telefono,
-        fechaNacimiento: this.fechaNacimiento,
-        fotoPerfil: fotoPerfil ?? this.fotoPerfil,
-        domicilio: domicilio ?? this.domicilio,
-      );
+  final String id;
+  final String email;
+  final String password;
+  final String nombre;
+  final String apellido;
+  final int dni;
+  final String? telefono;
+  final DateTime fechaNacimiento;
+  final String? fotoPerfil;
+  final DateTime fechaCreacion;
+  final DateTime fechaActualizacion;
+  final DateTime? fechaBaja;
 
   factory User.fromJson(Map<String, dynamic> json) => User(
+        id: json["id"],
         email: json["email"],
         password: json["password"],
         nombre: json["nombre"],
         apellido: json["apellido"],
-        dni: int.parse(json["dni"]),
+        dni: json["dni"],
         telefono: json["telefono"],
-        fechaNacimiento: DateFormat.yMd().parse(json["fechaNacimiento"]),
+        fechaNacimiento: DateTime.parse(json["fechaNacimiento"]),
         fotoPerfil: json["fotoPerfil"],
-        domicilio: Domicilio.fromJson(json["domicilio"]),
+        fechaCreacion: DateTime.parse(json["fechaCreacion"]),
+        fechaActualizacion: DateTime.parse(json["fechaActualizacion"]),
+        fechaBaja: json["fechaBaja"],
       );
 
   Map<String, dynamic> toJson() => {
+        "id": id,
         "email": email,
         "password": password,
         "nombre": nombre,
@@ -73,47 +82,8 @@ class User {
         "telefono": telefono,
         "fechaNacimiento": fechaNacimiento.toIso8601String(),
         "fotoPerfil": fotoPerfil,
-        "domicilio": domicilio.toJson(),
-      };
-}
-
-class Domicilio {
-  Domicilio({
-    required this.calle,
-    required this.numero,
-    required this.ciudad,
-    required this.provincia,
-  });
-
-  String calle;
-  int numero;
-  String ciudad;
-  String provincia;
-
-  Domicilio copyWith({
-    required String calle,
-    required int numero,
-    String? ciudad,
-    String? provincia,
-  }) =>
-      Domicilio(
-        calle: this.calle,
-        numero: this.numero,
-        ciudad: ciudad ?? this.ciudad,
-        provincia: provincia ?? this.provincia,
-      );
-
-  factory Domicilio.fromJson(Map<String, dynamic> json) => Domicilio(
-        calle: json["calle"],
-        numero: int.parse(json["numero"]),
-        ciudad: json["ciudad"],
-        provincia: json["provincia"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "calle": calle,
-        "numero": numero,
-        "ciudad": ciudad,
-        "provincia": provincia,
+        "fechaCreacion": fechaCreacion.toIso8601String(),
+        "fechaActualizacion": fechaActualizacion.toIso8601String(),
+        "fechaBaja": fechaBaja,
       };
 }

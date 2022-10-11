@@ -4,6 +4,7 @@ import '../models/user.dart';
 
 class UserProvider extends ChangeNotifier {
   final String _auxPass = '';
+  UserModel? _currentUser;
   final Map<String, dynamic> _userRegister = {
     "email": "",
     "password": "",
@@ -30,6 +31,14 @@ class UserProvider extends ChangeNotifier {
   Map<String, dynamic> get userRegister => _userRegister;
 
   String get auxPsw => _auxPass;
+
+  UserModel? get currentUserModel => _currentUser;
+  User? get currentUser => _currentUser?.user;
+
+  setUser(UserModel value) {
+    _currentUser = value;
+    notifyListeners();
+  }
 
   setProgressBarValue(bool value, int num) {
     if (num == 1) {

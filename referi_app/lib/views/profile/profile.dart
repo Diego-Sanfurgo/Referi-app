@@ -91,7 +91,7 @@ class _ActionsList extends StatelessWidget {
           leading: const Icon(Icons.logout_rounded),
           trailing: const Icon(Icons.keyboard_arrow_right),
           title: const AutoSizeText("Cerrar sesión"),
-          onTap: () {},
+          onTap: () => NavigationController.goTo(Routes.signin, popUntil: true),
         ),
       ],
     );

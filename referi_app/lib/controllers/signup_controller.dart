@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:location/location.dart';
 import 'package:provider/provider.dart';
 import 'package:referi_app/handlers/auth_handler.dart';
 import 'package:referi_app/handlers/location_handler.dart';
-import 'package:referi_app/handlers/users_handler.dart';
 import 'package:referi_app/models/local_geolocation.dart';
+import 'package:referi_app/providers/app_providers.dart';
 
 import '../../providers/user_provider.dart';
 
@@ -69,9 +68,7 @@ abstract class SignUpController {
   static login(GlobalKey<FormState> formKey) async {
     formKey.currentState?.save();
 
-    Map<String, dynamic> user =
-        Provider.of<UserProvider>(util.actualContext, listen: false)
-            .userRegister;
+    Map<String, dynamic> user = AppProviders.userProviderDeaf.userRegister;
 
     bool isLogged =
         await AuthHandler.postLogin(user['email'], user['password']);

@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:intl/intl.dart';
 
 import 'package:referi_app/controllers/navigation_controller.dart';
+import 'package:referi_app/providers/app_providers.dart';
+
+import '../../models/user.dart';
 
 class PersonalData extends StatelessWidget {
   const PersonalData({Key? key}) : super(key: key);
@@ -21,22 +25,24 @@ class _Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    User user = AppProviders.userProvider.currentUser as User;
+    String date = DateFormat.yMd('es, ES').format(user.fechaNacimiento);
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 16),
         child: Column(
           children: [
-            const _PersonalDataListTile(
-                title: "Nombre y apellido", value: "Diego Sanfurgo"),
-            const _PersonalDataListTile(
-                title: "DNI", value: "41.363.675", isEditable: false),
-            const _PersonalDataListTile(
-                title: "Fecha de nacimiento", value: "18/08/1998"),
+            _PersonalDataListTile(
+                title: "Nombre y apellido",
+                value: "${user.nombre} ${user.apellido}"),
+            _PersonalDataListTile(
+                title: "DNI", value: "${user.dni}", isEditable: false),
+            _PersonalDataListTile(title: "Fecha de nacimiento", value: date),
             const _PersonalDataListTile(
                 title: "Domicilio", value: "Sobremonte 385"),
-            const _PersonalDataListTile(
-                title: "E-mail", value: "ejemplo@gmail.com", isEditable: false),
-            const _PersonalDataListTile(title: "Teléfono", value: "1234567890"),
+            _PersonalDataListTile(
+                title: "E-mail", value: user.email, isEditable: false),
+            _PersonalDataListTile(title: "Teléfono", value: "${user.telefono}"),
             Container(
               margin: const EdgeInsets.only(top: 32),
               child: OutlinedButton.icon(
@@ -70,6 +76,9 @@ class _PersonalDataListTile extends StatefulWidget {
 class __PersonalDataListTileState extends State<_PersonalDataListTile> {
   @override
   Widget build(BuildContext context) {
+    String value =
+        widget.value == "" ? "Sin ${widget.title.toLowerCase()}" : widget.value;
+
     return ListTile(
       // trailing:
       //     IconButton(onPressed: () {}, icon: const Icon(Icons.edit_rounded)),
@@ -78,7 +87,7 @@ class __PersonalDataListTileState extends State<_PersonalDataListTile> {
         maxFontSize: 20,
         minFontSize: 12,
       ),
-      subtitle: AutoSizeText(widget.value, maxFontSize: 16, minFontSize: 10),
+      subtitle: AutoSizeText(value, maxFontSize: 16, minFontSize: 10),
     );
   }
 }

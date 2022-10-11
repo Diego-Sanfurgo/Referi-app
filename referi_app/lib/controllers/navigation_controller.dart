@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:referi_app/providers/app_providers.dart';
 
 import '../../utils/utils.dart' as util;
@@ -9,7 +8,8 @@ abstract class NavigationController {
     if (popPage) {
       util.navigatorState?.popAndPushNamed(route.name);
     } else if (popUntil) {
-      util.navigatorState?.popUntil(ModalRoute.withName(route.name));
+      util.navigatorState?.popUntil((route) => false);
+      util.navigatorState?.pushNamed(route.name);
     } else {
       util.navigatorState?.pushNamed(route.name);
     }
@@ -23,6 +23,8 @@ abstract class NavigationController {
       util.navigatorState?.pushNamed(route.name, arguments: args);
     }
   }
+
+  static void pop() => util.navigatorState?.pop();
 
   static void changeNavbarIndex(int value) =>
       AppProviders.navigationProviderDeaf.setNavbarIndex(value);
