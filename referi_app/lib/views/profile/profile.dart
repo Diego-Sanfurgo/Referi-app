@@ -55,13 +55,16 @@ class _ProfileImage extends StatelessWidget {
       child: Badge(
         stackFit: StackFit.loose,
         badgeColor: Colors.black,
-        badgeContent: const Icon(Icons.camera_alt_rounded, color: Colors.white),
+        badgeContent: IconButton(
+            onPressed: () => Alert.showImagePickerSheet(),
+            icon: const Icon(Icons.camera_alt_rounded),
+            color: Colors.white),
         position: BadgePosition.bottomEnd(bottom: 2.h, end: 5.w),
         padding: const EdgeInsets.all(8),
         animationType: BadgeAnimationType.scale,
         animationDuration: Duration.zero,
-        child: InkWell(
-          borderRadius: BorderRadius.circular(60),
+        child: GestureDetector(
+          // borderRadius: BorderRadius.circular(60),
           onTap: () => Alert.showImagePickerSheet(),
           child: Icon(
             Icons.account_circle_rounded,

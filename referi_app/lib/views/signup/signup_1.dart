@@ -1,5 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:referi_app/widgets/forms/name_and_surname_fields.dart';
+import 'package:referi_app/widgets/forms/street_and_number_fields.dart';
 
 import 'package:sizer/sizer.dart';
 
@@ -71,35 +73,15 @@ class _PersonalFields extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(top: 8),
       child: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              SizedBox(
-                  width: 40.w,
-                  child: const CustomTextField(
-                    "Nombre",
-                    keyboard: TextInputType.name,
-                    showCounter: false,
-                    saveKeyLabel: "nombre",
-                  )),
-              SizedBox(
-                  width: 40.w,
-                  child: const CustomTextField(
-                    "Apellido",
-                    keyboard: TextInputType.name,
-                    showCounter: false,
-                    saveKeyLabel: "apellido",
-                  )),
-            ],
-          ),
-          const CustomTextField(
+        children: const [
+          NameAndSurnameTextFields(),
+          CustomTextField(
             "DNI",
             keyboard: TextInputType.number,
             maxLength: 8,
             saveKeyLabel: "dni",
           ),
-          const DateTextField(
+          DateTextField(
             "Fecha de nacimiento",
             keyboard: TextInputType.datetime,
             saveKeyLabel: 'fechaNacimiento',
@@ -115,36 +97,7 @@ class _DirectionFields extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 8),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          SizedBox(
-              width: 50.w,
-              child: const CustomTextField(
-                "Calle",
-                keyboard: TextInputType.streetAddress,
-                showCounter: false,
-                saveKeyLabel: "calle",
-              )),
-          SizedBox(
-              width: 30.w,
-              child: CustomTextField(
-                "Número",
-                keyboard: TextInputType.number,
-                showCounter: false,
-                maxLength: 10,
-                saveKeyLabel: "numero",
-                validator: (value) {
-                  if (value != null && value.isNotEmpty) {
-                    return null;
-                  }
-                  return "Completar";
-                },
-              )),
-        ],
-      ),
-    );
+    return const Padding(
+        padding: EdgeInsets.only(top: 8), child: StreetAndNumberFields());
   }
 }
