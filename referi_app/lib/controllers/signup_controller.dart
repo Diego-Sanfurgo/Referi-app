@@ -28,14 +28,11 @@ abstract class SignUpController {
     formKey.currentState?.save();
   }
 
-  static saveValue(String value, String label) {
-    Provider.of<UserProvider>(util.actualContext, listen: false)
-        .addValueToUserRegister(value, label);
-  }
+  static saveValue(String value, String label) =>
+      AppProviders.userProviderDeaf.addValueToUserRegister(value, label);
 
   static comparePasswords(String value) {
-    String psw = Provider.of<UserProvider>(util.actualContext, listen: false)
-        .userRegister['password'];
+    String psw = AppProviders.userProviderDeaf.userRegister['password'];
 
     if (value != psw) {
       return "Las contraseñas no son iguales.";
@@ -47,7 +44,7 @@ abstract class SignUpController {
   static saveRegisteringUser() async {
     bool isRegistered = await AuthHandler.registerUser();
     if (!isRegistered) {
-      NavigationController.goTo(Routes.signin, popPage: true);
+      // NavigationController.goTo(Routes.signin, popPage: true);
       return;
     }
 

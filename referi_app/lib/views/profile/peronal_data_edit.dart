@@ -1,12 +1,12 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:referi_app/controllers/navigation_controller.dart';
-import 'package:referi_app/widgets/forms/name_and_surname_fields.dart';
-import 'package:referi_app/widgets/forms/street_and_number_fields.dart';
 
-import 'package:sizer/sizer.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 
-import 'package:referi_app/widgets/forms/textfield.dart';
+import '../../controllers/navigation_controller.dart';
+import '../../widgets/forms/name_and_surname_fields.dart';
+import '../../widgets/forms/street_and_number_fields.dart';
+
+import '../../widgets/forms/textfield.dart';
 
 class PersonalDataEdit extends StatelessWidget {
   const PersonalDataEdit({Key? key}) : super(key: key);

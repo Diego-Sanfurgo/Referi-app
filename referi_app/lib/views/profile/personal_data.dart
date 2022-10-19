@@ -80,8 +80,6 @@ class __PersonalDataListTileState extends State<_PersonalDataListTile> {
         widget.value == "" ? "Sin ${widget.title.toLowerCase()}" : widget.value;
 
     return ListTile(
-      // trailing:
-      //     IconButton(onPressed: () {}, icon: const Icon(Icons.edit_rounded)),
       title: AutoSizeText(
         widget.title,
         maxFontSize: 20,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:referi_app/models/user_register.dart';
 
 import '../models/user.dart';
 
@@ -27,7 +28,7 @@ class UserProvider extends ChangeNotifier {
   bool get progressBarSecondCompleted => _progressBarSecondCompleted;
   bool get progressBarThirdCompleted => _progressBarThirdompleted;
 
-  User get userRegisterModel => User.fromJson(_userRegister);
+  UserRegister get userRegisterModel => UserRegister.fromJson(_userRegister);
   Map<String, dynamic> get userRegister => _userRegister;
 
   String get auxPsw => _auxPass;

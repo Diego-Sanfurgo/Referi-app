@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-import 'package:referi_app/theme/colors.dart';
 
+import 'package:intl/intl.dart';
 import 'package:sizer/sizer.dart';
 
-import 'package:referi_app/utils/utils.dart' as util;
+import '../../utils/utils.dart' as util;
 
 import '../widgets/circular_container.dart';
 
@@ -17,9 +16,7 @@ abstract class Alert {
         lastDate: DateTime.now(),
         locale: const Locale('es', ''));
 
-    if (chosenDate == null) {
-      return null;
-    }
+    if (chosenDate == null) return null;
 
     return DateFormat('dd/MM/yyyy').format(chosenDate.toUtc());
   }

@@ -1,15 +1,12 @@
-import 'package:provider/provider.dart';
-import 'package:referi_app/API/auth/post_auth_login.dart';
-import 'package:referi_app/utils/utils.dart' as util;
+import '../../models/user_register.dart';
+import '../../providers/app_providers.dart';
+import '../../API/auth/post_auth_login.dart';
 
 import '../API/auth/post_auth_register.dart';
-import '../models/user.dart';
-import '../providers/user_provider.dart';
 
 class AuthHandler {
   static Future<bool> registerUser() async {
-    User newUser = Provider.of<UserProvider>(util.actualContext, listen: false)
-        .userRegisterModel;
+    UserRegister newUser = AppProviders.userProviderDeaf.userRegisterModel;
     bool? isRegistered = await postAuthRegister(newUser);
     if (isRegistered == null) {
       return false;

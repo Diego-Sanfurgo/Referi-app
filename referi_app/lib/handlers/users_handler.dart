@@ -1,1 +1,5 @@
-abstract class UsersHandler {}
+import '../models/user.dart';
+
+abstract class UserHandler {
+  updateUser(User user) {}
+}

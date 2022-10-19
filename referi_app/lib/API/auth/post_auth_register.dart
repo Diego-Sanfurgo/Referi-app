@@ -1,17 +1,19 @@
 import 'package:dio/dio.dart';
+import 'package:referi_app/models/user_register.dart';
 
 import '../params.dart';
 
-import '../../models/user.dart';
-
-Future<bool?> postAuthRegister(User user) async {
+Future<bool?> postAuthRegister(UserRegister user) async {
   Dio dio = Dio();
 
   Map body = user.toJson();
 
   return await dio.post(AuthUrls.postAuthRegister, data: body).then((value) {
-    if (value.statusCode == 201) {
+    int statusCode = value.statusCode as int;
+    if (statusCode >= 201 && statusCode < 300) {
       return true;
     }
-  }).onError((error, stackTrace) => false);
+  }).onError((error, stackTrace) {
+    return false;
+  });
 }
