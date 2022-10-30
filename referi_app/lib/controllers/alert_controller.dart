@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:intl/intl.dart';
+import 'package:referi_app/controllers/user_controller.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../utils/utils.dart' as util;
@@ -43,12 +44,12 @@ abstract class Alert {
               children: [
                 CircularContainer(
                   child: IconButton(
-                      onPressed: () {},
+                      onPressed: () => UserController.captureImage(true),
                       icon: const Icon(Icons.camera_alt_rounded)),
                 ),
                 CircularContainer(
                   child: IconButton(
-                      onPressed: () {},
+                      onPressed: () => UserController.captureImage(false),
                       icon: const Icon(Icons.photo_library_rounded)),
                 )
               ],

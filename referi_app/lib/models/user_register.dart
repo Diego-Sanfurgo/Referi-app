@@ -43,7 +43,7 @@ class UserRegister {
       telefono: json["telefono"],
       fechaNacimiento: DateFormat('dd/MM/yyyy').parse(json["fechaNacimiento"]),
       fotoPerfil: json["fotoPerfil"],
-      domicilio: json['domicilio']);
+      domicilio: Domicilio.fromJson(json['domicilio']));
 
   Map<String, dynamic> toJson() => {
         "email": email,
@@ -68,12 +68,12 @@ class Domicilio {
 
   final String calle;
   final int numero;
-  final String ciudad;
-  final String provincia;
+  final String? ciudad;
+  final String? provincia;
 
   factory Domicilio.fromJson(Map<String, dynamic> json) => Domicilio(
         calle: json["calle"],
-        numero: json["numero"],
+        numero: int.parse(json["numero"]),
         ciudad: json["ciudad"],
         provincia: json["Provincia"],
       );

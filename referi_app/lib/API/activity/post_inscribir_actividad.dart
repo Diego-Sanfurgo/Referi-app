@@ -11,8 +11,8 @@ Future postInscribirActividad() async {
   };
 
   await dio
-      .post(ActivityUrls.postInscripcion)
+      .post(ActivityUrls.postInscripcion, data: body.toString())
       .then((value) {})
       .onError((error, stackTrace) {})
-      .timeout(Duration(seconds: 40));
+      .timeout(const Duration(seconds: 40));
 }

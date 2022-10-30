@@ -2,16 +2,17 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 import 'package:referi_app/controllers/signup_controller.dart';
-import 'package:referi_app/providers/user_provider.dart';
+import 'package:referi_app/providers/app_providers.dart';
 
 import 'package:sizer/sizer.dart';
-import 'package:provider/provider.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 import '../../theme/colors.dart' as colors;
 import '../../widgets/signup_bottom_btn.dart';
 import '../../widgets/forms/progress_bar_signup.dart';
+
+ValueNotifier<bool> _enableBtn = ValueNotifier(false);
 
 class VerificationCode extends StatelessWidget {
   const VerificationCode({Key? key}) : super(key: key);
@@ -31,8 +32,11 @@ class VerificationCode extends StatelessWidget {
                 secondCompleted: true,
               ),
               const _Body(),
-              SignUpBottomButton("INGRESAR",
-                  onPress: (() => SignUpController.saveRegisteringUser()))
+              SignUpBottomButton(
+                "INGRESAR",
+                onPress: (() => SignUpController.saveRegisteringUser()),
+                enable: _enableBtn,
+              )
             ],
           ),
         ),
@@ -87,7 +91,7 @@ class _BodyState extends State<_Body> {
 
   @override
   Widget build(BuildContext context) {
-    String userEmail = Provider.of<UserProvider>(context).userRegister['email'];
+    String userEmail = AppProviders.userProvider(context).userRegister['email'];
     List<String> splitEmail = userEmail.split('@');
 
     String hiddenPart =
@@ -152,7 +156,13 @@ class _CodeInputField extends StatelessWidget {
             inactiveColor: Colors.grey,
             fieldWidth: 56,
             fieldHeight: 56),
-        onChanged: (value) {},
+        onChanged: (value) {
+          if (value.length == 4) {
+            _enableBtn.value = true;
+          } else {
+            _enableBtn.value = false;
+          }
+        },
       ),
     );
   }

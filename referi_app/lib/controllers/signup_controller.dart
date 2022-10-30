@@ -1,31 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:referi_app/handlers/auth_handler.dart';
-import 'package:referi_app/handlers/location_handler.dart';
-import 'package:referi_app/models/local_geolocation.dart';
-import 'package:referi_app/providers/app_providers.dart';
 
-import '../../providers/user_provider.dart';
+import '../../handlers/auth_handler.dart';
+import '../../handlers/location_handler.dart';
+import '../../models/local_geolocation.dart';
+import '../../providers/app_providers.dart';
 
 import 'navigation_controller.dart';
-import '../../utils/utils.dart' as util;
 
 abstract class SignUpController {
   static checkSignUpForm(GlobalKey<FormState> formKey, int progressValue) {
-    if (!formKey.currentState!.validate()) {
-      return;
-    }
+    if (!formKey.currentState!.validate()) return;
 
-    Provider.of<UserProvider>(util.actualContext, listen: false)
-        .setProgressBarValue(true, progressValue);
+    AppProviders.userProviderDeaf.setProgressBarValue(true, progressValue);
     if (progressValue == 1) {
       NavigationController.goTo(Routes.signup_2);
       getAndSaveProvinceAndCountry();
     } else {
-      NavigationController.goTo(Routes.signup_3, popPage: true);
+      NavigationController.goTo(Routes.signup_3);
     }
 
     formKey.currentState?.save();
+    AppProviders.userProviderDeaf.setFormValidation(false);
   }
 
   static saveValue(String value, String label) =>
@@ -53,9 +48,8 @@ abstract class SignUpController {
 
   static getAndSaveProvinceAndCountry() async {
     LocalGeolocation? actualLocation = await LocationHandler.getLocal();
-    if (actualLocation == null) {
-      return;
-    }
+    if (actualLocation == null) return;
+
     String dpto = actualLocation.ubicacion.departamento.nombre!;
     String prov = actualLocation.ubicacion.provincia.nombre!;
     saveValue(dpto, 'ciudad');

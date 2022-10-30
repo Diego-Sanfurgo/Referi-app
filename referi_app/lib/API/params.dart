@@ -38,3 +38,9 @@ abstract class NotificationUrls {
 abstract class AssistanceUrls {
   static const String postAssistance = "$baseUrl/asistencias/crear";
 }
+
+abstract class ImageUrls {
+  static const String postImage = "$baseUrl/uploads";
+  static const String getImage = "$baseUrl/uploads/";
+  static const String deleteImage = "$baseUrl/uploads/";
+}

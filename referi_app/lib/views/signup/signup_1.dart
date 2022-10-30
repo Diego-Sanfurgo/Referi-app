@@ -1,9 +1,9 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:referi_app/widgets/forms/name_and_surname_fields.dart';
-import 'package:referi_app/widgets/forms/street_and_number_fields.dart';
 
-import 'package:sizer/sizer.dart';
+import 'package:auto_size_text/auto_size_text.dart';
+
+import '../../widgets/forms/name_and_surname_fields.dart';
+import '../../widgets/forms/street_and_number_fields.dart';
 
 import '../../controllers/signup_controller.dart';
 import '../../widgets/forms/progress_bar_signup.dart';
@@ -15,7 +15,7 @@ class SignUpFirst extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    GlobalKey<FormState> formKey = GlobalKey<FormState>();
+    GlobalKey<FormState> formKey = GlobalKey();
 
     return Scaffold(
       appBar: AppBar(
@@ -30,10 +30,8 @@ class SignUpFirst extends StatelessWidget {
             children: [
               const ProgressBarSignUp(),
               _Body(formKey),
-              SignUpBottomButton(
-                "CONTINUAR",
-                onPress: () => SignUpController.checkSignUpForm(formKey, 1),
-              ),
+              SignUpBottomButton("CONTINUAR",
+                  onPress: () => SignUpController.checkSignUpForm(formKey, 1)),
             ],
           ),
         ),
@@ -43,7 +41,7 @@ class SignUpFirst extends StatelessWidget {
 }
 
 class _Body extends StatelessWidget {
-  final GlobalKey<FormState> formKey;
+  final Key formKey;
   const _Body(this.formKey, {Key? key}) : super(key: key);
 
   @override

@@ -28,6 +28,9 @@ class UserProvider extends ChangeNotifier {
   bool get progressBarSecondCompleted => _progressBarSecondCompleted;
   bool get progressBarThirdCompleted => _progressBarThirdompleted;
 
+  final ValueNotifier<bool> _isFormValid = ValueNotifier(false);
+  ValueNotifier<bool> get isFormValid => _isFormValid;
+
   UserRegister get userRegisterModel => UserRegister.fromJson(_userRegister);
   Map<String, dynamic> get userRegister => _userRegister;
 
@@ -64,4 +67,6 @@ class UserProvider extends ChangeNotifier {
     }
     _userRegister.addAll({label: value});
   }
+
+  setFormValidation(bool value) => _isFormValid.value = value;
 }

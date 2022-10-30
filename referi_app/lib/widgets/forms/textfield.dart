@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:referi_app/controllers/alert_controller.dart';
-import 'package:referi_app/controllers/signup_controller.dart';
 
 import 'package:sizer/sizer.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+
+import '../../controllers/alert_controller.dart';
+import '../../controllers/signup_controller.dart';
+import '../../controllers/user_controller.dart';
 
 class CustomTextField extends StatelessWidget {
   final String labelText;
@@ -19,28 +21,38 @@ class CustomTextField extends StatelessWidget {
     this.labelText, {
     Key? key,
     required this.keyboard,
+    required this.saveKeyLabel,
     this.validator,
     this.maxLength = 50,
     this.showCounter = true,
     this.onTap,
-    required this.saveKeyLabel,
     this.onChaged,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    // RegExp formatter = getFormatter(keyboard);
+
     return Container(
       margin: const EdgeInsets.only(bottom: 24),
-      child: TextFormField(
-        style: const TextStyle(fontSize: 14),
-        keyboardType: keyboard,
-        maxLength: showCounter ? maxLength : null,
-        decoration: InputDecoration(labelText: labelText),
-        onTap: onTap, textInputAction: TextInputAction.next,
-        onChanged: onChaged,
-        onSaved: (value) => SignUpController.saveValue(value!, saveKeyLabel),
-        // inputFormatters: [LengthLimitingTextInputFormatter(maxLength)],
-        validator: validator ?? _validator,
+      child: Focus(
+        onFocusChange: ((hasFocus) {
+          if (!hasFocus) {
+            UserController.setFormValidationValue(Form.of(context)?.validate());
+          }
+        }),
+        child: TextFormField(
+          style: const TextStyle(fontSize: 14),
+          keyboardType: keyboard,
+          maxLength: showCounter ? maxLength : null,
+          decoration: InputDecoration(labelText: labelText),
+          textInputAction: TextInputAction.next,
+          onTap: onTap,
+          onChanged: onChaged,
+          onSaved: (value) => SignUpController.saveValue(value!, saveKeyLabel),
+          // inputFormatters: [LengthLimitingTextInputFormatter(maxLength)],
+          validator: validator ?? _validator,
+        ),
       ),
     );
   }
@@ -95,13 +107,14 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
       validator: widget.validator ?? _validator,
       textInputAction: TextInputAction.next,
       onChanged: widget.onChange,
+      onEditingComplete: () =>
+          UserController.setFormValidationValue(Form.of(context)?.validate()),
       onSaved: widget.saveField
           ? (value) => SignUpController.saveValue(value!, 'password')
           : null,
       decoration: InputDecoration(
         errorMaxLines: 3,
         helperText: widget.helperText,
-        // helperStyle: TextStyle(color: Colors.green),
         label: AutoSizeText(widget.label),
         suffixIcon: IconButton(
           icon: Icon(icon),
@@ -176,8 +189,8 @@ class DateTextField extends StatefulWidget {
     this.labelText, {
     Key? key,
     required this.keyboard,
-    this.validator,
     required this.saveKeyLabel,
+    this.validator,
   }) : super(key: key);
 
   @override
@@ -201,23 +214,30 @@ class _DateTextFieldState extends State<DateTextField> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(bottom: 24),
-      child: TextFormField(
-        controller: controller,
-        readOnly: true,
-        keyboardType: widget.keyboard,
-        style: const TextStyle(fontSize: 14),
-        decoration: InputDecoration(labelText: widget.labelText),
-        onTap: () async {
-          String? chosenDate = await Alert.showDateAlert();
-          if (chosenDate != null) {
-            controller.text = chosenDate;
-          }
-        },
-        validator: widget.validator ?? _validator,
-        onSaved: (value) =>
-            SignUpController.saveValue(value!, widget.saveKeyLabel),
+    return Focus(
+      onFocusChange: ((hasFocus) {
+        if (!hasFocus) {
+          UserController.setFormValidationValue(Form.of(context)?.validate());
+        }
+      }),
+      child: Container(
+        margin: const EdgeInsets.only(bottom: 24),
+        child: TextFormField(
+          controller: controller,
+          readOnly: true,
+          keyboardType: widget.keyboard,
+          style: const TextStyle(fontSize: 14),
+          decoration: InputDecoration(labelText: widget.labelText),
+          onTap: () async {
+            String? chosenDate = await Alert.showDateAlert();
+            if (chosenDate != null) {
+              controller.text = chosenDate;
+            }
+          },
+          validator: widget.validator ?? _validator,
+          onSaved: (value) =>
+              SignUpController.saveValue(value!, widget.saveKeyLabel),
+        ),
       ),
     );
   }
@@ -229,3 +249,13 @@ String? _validator(String? value) {
   }
   return "Completar campo.";
 }
+
+// RegExp getFormatter(TextInputType keyboard) {
+//   if (keyboard == TextInputType.emailAddress) {
+//     return RegExp(
+//         r"([a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)");
+//   } else {
+//     return RegExp(
+//         r'([^0-9\.\,\"\?\!\;\:\#\$\%\&\(\)\*\+\-\/\<\>\=\@\[\]\\\^\_\{\}\|\~]+)');
+//   }
+// }
