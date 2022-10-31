@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:referi_app/views/home.dart';
 
-
 import 'package:sizer/sizer.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -44,7 +43,8 @@ class ReferiApp extends StatelessWidget {
           GlobalCupertinoLocalizations.delegate,
         ],
         supportedLocales: const [Locale('en', ''), Locale('es', 'ES')],
-        home: const Home(),
+        // home: const Home(),
+        home: const SignIn(),
       );
     }));
   }

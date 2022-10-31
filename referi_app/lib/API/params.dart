@@ -1,3 +1,5 @@
+import 'package:referi_app/providers/app_providers.dart';
+
 const String baseUrl = "https://referiapp.com.ar/v1";
 
 abstract class AuthUrls {
@@ -43,4 +45,9 @@ abstract class ImageUrls {
   static const String postImage = "$baseUrl/uploads";
   static const String getImage = "$baseUrl/uploads/";
   static const String deleteImage = "$baseUrl/uploads/";
+}
+
+Map<String, String> getUserToken() {
+  String token = AppProviders.userProviderDeaf.currentUserModel!.accessToken;
+  return {"Authorization": "bearer $token"};
 }

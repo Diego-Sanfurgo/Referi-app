@@ -8,6 +8,9 @@ import '../../utils/utils.dart' as util;
 
 import '../widgets/circular_container.dart';
 
+final BuildContext _navigatorContext =
+    util.navigatorKey.currentContext as BuildContext;
+
 abstract class Alert {
   static Future<String?> showDateAlert() async {
     DateTime? chosenDate = await showDatePicker(
@@ -56,5 +59,15 @@ abstract class Alert {
             ),
           );
         });
+  }
+
+  static Future showLoading() async {
+    await showDialog(
+      context: _navigatorContext,
+      barrierDismissible: false,
+      builder: (_) => const Center(
+        child: CircularProgressIndicator(),
+      ),
+    );
   }
 }

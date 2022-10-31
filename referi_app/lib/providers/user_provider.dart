@@ -6,6 +6,8 @@ import '../models/user.dart';
 class UserProvider extends ChangeNotifier {
   final String _auxPass = '';
   UserModel? _currentUser;
+  final UserRegister _userRegisterCompleteModel = UserRegister();
+
   final Map<String, dynamic> _userRegister = {
     "email": "",
     "password": "",
@@ -33,11 +35,12 @@ class UserProvider extends ChangeNotifier {
 
   UserRegister get userRegisterModel => UserRegister.fromJson(_userRegister);
   Map<String, dynamic> get userRegister => _userRegister;
+  UserRegister get userRegisterCompleteModel => _userRegisterCompleteModel;
 
   String get auxPsw => _auxPass;
 
   UserModel? get currentUserModel => _currentUser;
-  User? get currentUser => _currentUser?.user;
+  User get currentUser => _currentUser!.user;
 
   setUser(UserModel value) {
     _currentUser = value;

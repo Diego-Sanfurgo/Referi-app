@@ -7,7 +7,7 @@ import 'package:referi_app/views/clubs/club_detail.dart';
 import 'package:referi_app/views/clubs/clubs_home.dart';
 import 'package:referi_app/views/credential/credential_home.dart';
 import 'package:referi_app/views/credential/credential_detail.dart';
-import 'package:referi_app/views/profile/peronal_data_edit.dart';
+import 'package:referi_app/views/profile/personal_data_edit.dart';
 import 'package:referi_app/views/scanner/scanner.dart';
 
 import '../../views/home.dart';

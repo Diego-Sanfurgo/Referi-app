@@ -19,7 +19,6 @@ Future<bool> postAuthLogin(String email, String password) async {
     }
     return false;
   }).onError((error, stackTrace) {
-    print(error);
     return false;
   });
 }

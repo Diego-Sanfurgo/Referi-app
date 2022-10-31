@@ -7,7 +7,7 @@ import '../../widgets/forms/street_and_number_fields.dart';
 
 import '../../controllers/signup_controller.dart';
 import '../../widgets/forms/progress_bar_signup.dart';
-import '../../widgets/forms/textfield.dart';
+import '../../widgets/forms/textfields.dart';
 import '../../widgets/signup_bottom_btn.dart';
 
 class SignUpFirst extends StatelessWidget {
@@ -72,18 +72,9 @@ class _PersonalFields extends StatelessWidget {
       padding: const EdgeInsets.only(top: 8),
       child: Column(
         children: const [
-          NameAndSurnameTextFields(),
-          CustomTextField(
-            "DNI",
-            keyboard: TextInputType.number,
-            maxLength: 8,
-            saveKeyLabel: "dni",
-          ),
-          DateTextField(
-            "Fecha de nacimiento",
-            keyboard: TextInputType.datetime,
-            saveKeyLabel: 'fechaNacimiento',
-          ),
+          NameAndSurnameTextFields(false),
+          NumberTextField(false, label: "DNI", maxLength: 8),
+          DateTextField(false, label: "Fecha de nacimiento"),
         ],
       ),
     );
@@ -96,6 +87,6 @@ class _DirectionFields extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Padding(
-        padding: EdgeInsets.only(top: 8), child: StreetAndNumberFields());
+        padding: EdgeInsets.only(top: 8), child: StreetAndNumberFields(false));
   }
 }

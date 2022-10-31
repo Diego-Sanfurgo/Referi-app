@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:referi_app/controllers/user_controller.dart';
 
 import '../../controllers/signup_controller.dart';
 import '../../widgets/forms/progress_bar_signup.dart';
@@ -129,7 +130,7 @@ void _saveValue(String? value, String label) {
   if (value == null) {
     return;
   }
-  SignUpController.saveValue(value, label);
+  UserController.addValueToUser(value, label);
 }
 
 String? _comparePasswords(String? value) {

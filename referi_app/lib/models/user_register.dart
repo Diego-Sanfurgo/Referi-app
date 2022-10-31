@@ -13,33 +13,57 @@ String userRegisterToJson(UserRegister data) => json.encode(data.toJson());
 
 class UserRegister {
   UserRegister({
-    required this.email,
-    required this.password,
-    required this.nombre,
-    required this.apellido,
-    required this.dni,
+    this.email,
+    this.password,
+    this.nombre,
+    this.apellido,
+    this.dni,
     this.telefono,
-    required this.fechaNacimiento,
+    this.fechaNacimiento,
     this.fotoPerfil,
-    required this.domicilio,
+    this.domicilio,
   });
 
-  final String email;
-  final String password;
-  final String nombre;
-  final String apellido;
-  final int dni;
-  final String? telefono;
-  final DateTime fechaNacimiento;
+  final String? email;
+  final String? password;
+  String? nombre;
+  String? apellido;
+  final int? dni;
+  String? telefono;
+  DateTime? fechaNacimiento;
   final String? fotoPerfil;
-  final Domicilio domicilio;
+  final Domicilio? domicilio;
+
+  UserRegister copyWith({
+    String? email,
+    String? password,
+    String? nombre,
+    String? apellido,
+    int? dni,
+    String? telefono,
+    DateTime? fechaNacimiento,
+    String? fotoPerfil,
+    Domicilio? domicilio,
+  }) =>
+      UserRegister(
+        email: email ?? this.email,
+        password: password ?? this.password,
+        nombre: nombre ?? this.nombre,
+        apellido: apellido ?? this.apellido,
+        dni: dni ?? this.dni,
+        telefono: telefono ?? this.telefono,
+        fechaNacimiento: fechaNacimiento ?? this.fechaNacimiento,
+        fotoPerfil: fotoPerfil ?? this.fotoPerfil,
+        domicilio: domicilio ?? this.domicilio,
+      );
 
   factory UserRegister.fromJson(Map<String, dynamic> json) => UserRegister(
       email: json["email"],
       password: json["password"],
       nombre: json["nombre"],
       apellido: json["apellido"],
-      dni: int.parse(json["dni"]),
+      // dni: int.parse(json["dni"]),
+      dni: (json["dni"]),
       telefono: json["telefono"],
       fechaNacimiento: DateFormat('dd/MM/yyyy').parse(json["fechaNacimiento"]),
       fotoPerfil: json["fotoPerfil"],
@@ -52,24 +76,37 @@ class UserRegister {
         "apellido": apellido,
         "dni": dni,
         "telefono": telefono,
-        "fechaNacimiento": fechaNacimiento.toIso8601String(),
+        "fechaNacimiento": fechaNacimiento?.toIso8601String(),
         "fotoPerfil": fotoPerfil,
-        "domicilio": domicilio.toJson()
+        "domicilio": domicilio?.toJson()
       };
 }
 
 class Domicilio {
   Domicilio({
-    required this.calle,
-    required this.numero,
-    required this.ciudad,
-    required this.provincia,
+    this.calle,
+    this.numero,
+    this.ciudad,
+    this.provincia,
   });
 
-  final String calle;
-  final int numero;
+  String? calle;
+  int? numero;
   final String? ciudad;
   final String? provincia;
+
+  Domicilio copyWith({
+    String? calle,
+    int? numero,
+    String? ciudad,
+    String? provincia,
+  }) =>
+      Domicilio(
+        calle: calle ?? this.calle,
+        numero: numero ?? this.numero,
+        ciudad: ciudad ?? this.ciudad,
+        provincia: provincia ?? this.provincia,
+      );
 
   factory Domicilio.fromJson(Map<String, dynamic> json) => Domicilio(
         calle: json["calle"],

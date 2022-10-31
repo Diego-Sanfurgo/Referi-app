@@ -8,6 +8,7 @@ ThemeData _referiTheme = ThemeData(
   primarySwatch: colors.primary,
   scaffoldBackgroundColor: Colors.white,
   backgroundColor: Colors.white,
+  //
   inputDecorationTheme: _inputDecorationTheme,
   elevatedButtonTheme: ElevatedButtonThemeData(style: _elevatedButtonStyle),
   appBarTheme: _appBarTheme,

@@ -1,7 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:image_picker/image_picker.dart';
-import 'package:referi_app/controllers/navigation_controller.dart';
+import '../../handlers/image_handler.dart';
 
 abstract class ImageController {
   static Future<Uint8List?> getImage(ImageSource source,
@@ -19,13 +19,9 @@ abstract class ImageController {
 
     Uint8List imageContent = await image.readAsBytes();
     return imageContent;
-    
-    // String imageContentString = imageContent.toString();
+  }
 
-    // provider.setImageContentString(imageContentString);
-    // provider.setImageContent(imageContent);
-    if (popContext) {
-      NavigationController.pop();
-    }
+  static uploadUserImage(Uint8List image) async {
+    await ImageHandler.uploadImage(image);
   }
 }
