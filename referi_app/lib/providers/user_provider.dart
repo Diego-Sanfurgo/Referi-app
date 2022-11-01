@@ -13,25 +13,16 @@ class UserProvider extends ChangeNotifier {
     "password": "",
     "nombre": "",
     "apellido": "",
-    "dni": 0,
+    "dni": "123",
     "telefono": "",
-    "fechaNacimiento": "",
-    "fotoPerfil": "",
+    // "fechaNacimiento": "",
+    "fechaacimiento": "",
+    "fotoperfil": "",
     "domicilio": {
       "calle": "",
       "numero": 0,
     }
   };
-  bool _progressBarFirstCompleted = false;
-  bool _progressBarSecondCompleted = false;
-  bool _progressBarThirdompleted = false;
-
-  bool get progressBarFirstCompleted => _progressBarFirstCompleted;
-  bool get progressBarSecondCompleted => _progressBarSecondCompleted;
-  bool get progressBarThirdCompleted => _progressBarThirdompleted;
-
-  final ValueNotifier<bool> _isFormValid = ValueNotifier(false);
-  ValueNotifier<bool> get isFormValid => _isFormValid;
 
   UserRegister get userRegisterModel => UserRegister.fromJson(_userRegister);
   Map<String, dynamic> get userRegister => _userRegister;
@@ -40,7 +31,7 @@ class UserProvider extends ChangeNotifier {
   String get auxPsw => _auxPass;
 
   UserModel? get currentUserModel => _currentUser;
-  User get currentUser => _currentUser!.user;
+  User? get currentUser => _currentUser?.user;
 
   setUserModel(UserModel value) {
     _currentUser = value;
@@ -49,17 +40,6 @@ class UserProvider extends ChangeNotifier {
 
   setUser(User user) {
     _currentUser!.user = user;
-    notifyListeners();
-  }
-
-  setProgressBarValue(bool value, int num) {
-    if (num == 1) {
-      _progressBarFirstCompleted = value;
-    } else if (num == 2) {
-      _progressBarSecondCompleted = value;
-    } else if (num == 3) {
-      _progressBarThirdompleted = value;
-    }
     notifyListeners();
   }
 
@@ -75,6 +55,4 @@ class UserProvider extends ChangeNotifier {
     }
     _userRegister.addAll({label: value});
   }
-
-  setFormValidation(bool value) => _isFormValid.value = value;
 }

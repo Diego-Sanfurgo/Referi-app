@@ -8,7 +8,6 @@ import '../../widgets/forms/street_and_number_fields.dart';
 import '../../controllers/signup_controller.dart';
 import '../../widgets/forms/progress_bar_signup.dart';
 import '../../widgets/forms/textfields.dart';
-import '../../widgets/signup_bottom_btn.dart';
 
 class SignUpFirst extends StatelessWidget {
   const SignUpFirst({Key? key}) : super(key: key);
@@ -30,8 +29,12 @@ class SignUpFirst extends StatelessWidget {
             children: [
               const ProgressBarSignUp(),
               _Body(formKey),
-              SignUpBottomButton("CONTINUAR",
-                  onPress: () => SignUpController.checkSignUpForm(formKey, 1)),
+              Container(
+                margin: const EdgeInsets.only(top: 72),
+                child: ElevatedButton(
+                    onPressed: () => SignUpController.checkFirstForm(formKey),
+                    child: const Text("CONTINUAR")),
+              ),
             ],
           ),
         ),

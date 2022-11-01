@@ -29,7 +29,6 @@ class _NumberTextFieldState extends State<NumberTextField> {
   @override
   void initState() {
     super.initState();
-    // controller = TextEditingController();
     controller = _initController(widget.label);
   }
 
@@ -41,26 +40,17 @@ class _NumberTextFieldState extends State<NumberTextField> {
 
   @override
   Widget build(BuildContext context) {
-    // controller.text = selectProperty(widget.label, context);
-
     return Container(
       margin: const EdgeInsets.only(bottom: 24),
-      child: Focus(
-        onFocusChange: ((hasFocus) {
-          if (!hasFocus) {
-            // UserController.setFormValidationValue(Form.of(context)?.validate());
-          }
-        }),
-        child: TextFormField(
-          controller: controller,
-          keyboardType: TextInputType.number,
-          maxLength: widget.maxLength ?? 10,
-          decoration: InputDecoration(labelText: widget.label),
-          textInputAction: TextInputAction.next,
-          onSaved: (value) => UserController.addValueToUser(
-              controller.text, util.removeAccentsToLowerCase(widget.label)),
-          validator: Validators.numberValidator,
-        ),
+      child: TextFormField(
+        controller: controller,
+        keyboardType: TextInputType.number,
+        maxLength: widget.maxLength ?? 10,
+        decoration: InputDecoration(labelText: widget.label),
+        textInputAction: TextInputAction.next,
+        onSaved: (value) =>
+            UserController.addValueToUser(controller.text, widget.label),
+        validator: Validators.numberValidator,
       ),
     );
   }
@@ -82,7 +72,6 @@ class _NameTextFieldState extends State<NameTextField> {
   @override
   void initState() {
     super.initState();
-    // controller = TextEditingController();
     controller = _initController(widget.label);
   }
 
@@ -94,26 +83,18 @@ class _NameTextFieldState extends State<NameTextField> {
 
   @override
   Widget build(BuildContext context) {
-    // controller.text = selectProperty(widget.label, context);
-
     return Container(
       margin: const EdgeInsets.only(bottom: 24),
-      child: Focus(
-        onFocusChange: ((hasFocus) {
-          if (!hasFocus) {
-            // UserController.setFormValidationValue(Form.of(context)?.validate());
-          }
-        }),
-        child: TextFormField(
-          controller: controller,
-          keyboardType: TextInputType.name,
-          decoration: InputDecoration(labelText: widget.label),
-          textInputAction: TextInputAction.next,
-          onSaved: (value) => UserController.addValueToUser(
-              controller.text, util.removeAccentsToLowerCase(widget.label)),
-          validator: Validators.nameValidator,
-          autovalidateMode: AutovalidateMode.onUserInteraction,
-        ),
+      child: TextFormField(
+        controller: controller,
+        keyboardType: TextInputType.name,
+        decoration: InputDecoration(labelText: widget.label),
+        textInputAction: TextInputAction.next,
+        onSaved: (value) =>
+            UserController.addValueToUser(controller.text, widget.label),
+        validator: widget.label == "Correo electrónico"
+            ? Validators.emailValidator
+            : Validators.nameValidator,
       ),
     );
   }
@@ -151,31 +132,22 @@ class _DateTextFieldState extends State<DateTextField> {
 
   @override
   Widget build(BuildContext context) {
-    // controller.text = selectProperty(widget.label, context);
-
-    return Focus(
-      onFocusChange: ((hasFocus) {
-        if (!hasFocus) {
-          // UserController.setFormValidationValue(Form.of(context)?.validate());
-        }
-      }),
-      child: Container(
-        margin: const EdgeInsets.only(bottom: 24),
-        child: TextFormField(
-          controller: controller,
-          readOnly: true,
-          keyboardType: TextInputType.datetime,
-          decoration: const InputDecoration(labelText: "Fecha de nacimiento"),
-          onTap: () async {
-            String? chosenDate = await Alert.showDateAlert();
-            if (chosenDate != null) {
-              controller.text = chosenDate;
-            }
-          },
-          validator: Validators.defaultValidator,
-          onSaved: (value) =>
-              UserController.addValueToUser(value!, "fechaNacimiento"),
-        ),
+    return Container(
+      margin: const EdgeInsets.only(bottom: 24),
+      child: TextFormField(
+        readOnly: true,
+        controller: controller,
+        keyboardType: TextInputType.datetime,
+        decoration: const InputDecoration(labelText: "Fecha de nacimiento"),
+        onTap: () async {
+          String? chosenDate = await Alert.showDateAlert();
+          if (chosenDate != null) {
+            controller.text = chosenDate;
+          }
+        },
+        validator: Validators.defaultValidator,
+        onSaved: (_) =>
+            UserController.addValueToUser(controller.text, "fechaNacimiento"),
       ),
     );
   }
@@ -187,7 +159,9 @@ TextEditingController _initController(String label) {
 
 String selectProperty(String label) {
   String value = util.removeAccentsToLowerCase(label);
-  User user = AppProviders.userProviderDeaf.currentUser;
+  User? user = AppProviders.userProviderDeaf.currentUser;
+
+  if (user == null) return '';
 
   switch (value) {
     case "nombre":

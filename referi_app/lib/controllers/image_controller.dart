@@ -2,6 +2,7 @@ import 'dart:typed_data';
 
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:referi_app/controllers/navigation_controller.dart';
 import '../../handlers/image_handler.dart';
 
 abstract class ImageController {
@@ -25,6 +26,7 @@ abstract class ImageController {
   static uploadUserImage(Uint8List image) async {
     Uint8List lightImage = await _compressImage(image);
     await ImageHandler.uploadImage(lightImage);
+    NavigationController.pop();
   }
 }
 

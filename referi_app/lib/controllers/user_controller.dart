@@ -2,25 +2,22 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 
 import 'package:image_picker/image_picker.dart';
-import 'package:referi_app/handlers/user_handler.dart';
+import 'package:referi_app/controllers/navigation_controller.dart';
 
-import '../../controllers/image_controller.dart';
+import '../../handlers/user_handler.dart';
 import '../../providers/app_providers.dart';
+import '../../controllers/image_controller.dart';
+import '../utils/utils.dart' as util;
 
-import '../handlers/location_handler.dart';
 import '../models/local_geolocation.dart';
-import 'alert_controller.dart';
+import '../handlers/location_handler.dart';
 
 abstract class UserController {
   static updateUser(GlobalKey<FormState> formKey) async {
     formKey.currentState!.save();
-    await UserHandler.updateUser();
-  }
-
-  static setFormValidationValue(bool? value) {
-    if (value == null) return;
-
-    AppProviders.userProviderDeaf.setFormValidation(value);
+    bool isOK = await UserHandler.updateUser();
+    if (!isOK) return;
+    NavigationController.pop();
   }
 
   static captureImage(bool fromCamera) async {
@@ -29,16 +26,16 @@ abstract class UserController {
         : await ImageController.getImage(ImageSource.gallery);
 
     if (bytesImage == null) {
-      Alert.showError(
-          "Ocurrió un error al obtener la imágen. Intentalo de nuevo.");
       return;
     }
 
     ImageController.uploadUserImage(bytesImage);
   }
 
-  static addValueToUser(String value, String label) =>
-      AppProviders.userProviderDeaf.addValueToUserRegister(value, label);
+  static addValueToUser(String value, String label) {
+    String formattedLabel = util.removeAccentsToLowerCase(label);
+    AppProviders.userProviderDeaf.addValueToUserRegister(value, formattedLabel);
+  }
 
   static getAndSaveProvinceAndCountry() async {
     LocalGeolocation? actualLocation = await LocationHandler.getLocal();

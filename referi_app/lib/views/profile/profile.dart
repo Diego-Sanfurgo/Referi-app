@@ -28,16 +28,19 @@ class _Body extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
-      child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
-        const _ProfileImage(),
-        const AutoSizeText("Tu foto se podrá usar para credenciales.",
-            maxFontSize: 16, minFontSize: 12),
-        const SizedBox(height: 8),
-        Divider(color: colors.secondaryDark),
-        SizedBox(height: 4.6.h),
-        const _ActionsList(),
-      ]),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 40),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          const _ProfileImage(),
+          const AutoSizeText("Tu foto se podrá usar para credenciales.",
+              maxFontSize: 16, minFontSize: 12),
+          const SizedBox(height: 8),
+          Divider(color: colors.secondaryDark),
+          SizedBox(height: 4.6.h),
+          const _ActionsList(),
+        ],
+      ),
     );
   }
 }

@@ -8,19 +8,22 @@ import 'navigation_controller.dart';
 import 'user_controller.dart';
 
 abstract class SignUpController {
-  static checkSignUpForm(GlobalKey<FormState> formKey, int progressValue) {
+  static checkFirstForm(GlobalKey<FormState> formKey) {
     if (!formKey.currentState!.validate()) return;
+    formKey.currentState!.save();
 
-    AppProviders.userProviderDeaf.setProgressBarValue(true, progressValue);
-    if (progressValue == 1) {
-      NavigationController.goTo(Routes.signup_2);
-      UserController.getAndSaveProvinceAndCountry();
-    } else {
-      NavigationController.goTo(Routes.signup_3);
-    }
+    NavigationController.goTo(Routes.signup_2);
+    UserController.getAndSaveProvinceAndCountry();
+  }
 
-    formKey.currentState?.save();
-    AppProviders.userProviderDeaf.setFormValidation(false);
+  static checkSecondForm(GlobalKey<FormState> formKey) async {
+    if (!formKey.currentState!.validate()) return;
+    formKey.currentState!.save();
+
+    bool isOK = await AuthHandler.registerUser();
+    if (!isOK) return;
+
+    NavigationController.goTo(Routes.signup_3);
   }
 
   static comparePasswords(String value) {
@@ -36,7 +39,6 @@ abstract class SignUpController {
   static saveRegisteringUser() async {
     bool isRegistered = await AuthHandler.registerUser();
     if (!isRegistered) {
-      // NavigationController.goTo(Routes.signin, popPage: true);
       return;
     }
 
@@ -47,14 +49,10 @@ abstract class SignUpController {
     formKey.currentState?.save();
     Map<String, dynamic> user = AppProviders.userProviderDeaf.userRegister;
 
-    Alert.showLoading();
     bool isLogged =
         await AuthHandler.postLogin(user['email'], user['password']);
 
-    if (!isLogged) {
-      NavigationController.pop();
-      return;
-    }
+    if (!isLogged) return;
 
     NavigationController.goTo(Routes.home, popUntil: true);
   }

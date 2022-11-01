@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:sizer/sizer.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 
 import '../../controllers/user_controller.dart';
@@ -33,25 +32,17 @@ class CustomTextField extends StatelessWidget {
 
     return Container(
       margin: const EdgeInsets.only(bottom: 24),
-      child: Focus(
-        onFocusChange: ((hasFocus) {
-          if (!hasFocus) {
-            UserController.setFormValidationValue(Form.of(context)?.validate());
-          }
-        }),
-        child: TextFormField(
-          style: const TextStyle(fontSize: 14),
-          keyboardType: keyboard,
-          maxLength: showCounter ? maxLength : null,
-          decoration: InputDecoration(labelText: labelText),
-          textInputAction: TextInputAction.next,
-          onTap: onTap,
-          onChanged: onChaged,
-          onSaved: (value) =>
-              UserController.addValueToUser(value!, saveKeyLabel),
-          // inputFormatters: [LengthLimitingTextInputFormatter(maxLength)],
-          validator: validator ?? _validator,
-        ),
+      child: TextFormField(
+        style: const TextStyle(fontSize: 14),
+        keyboardType: keyboard,
+        maxLength: showCounter ? maxLength : null,
+        decoration: InputDecoration(labelText: labelText),
+        textInputAction: TextInputAction.next,
+        onTap: onTap,
+        onChanged: onChaged,
+        onSaved: (value) => UserController.addValueToUser(value!, saveKeyLabel),
+        // inputFormatters: [LengthLimitingTextInputFormatter(maxLength)],
+        validator: validator ?? _validator,
       ),
     );
   }
@@ -106,8 +97,6 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
       validator: widget.validator ?? _validator,
       textInputAction: TextInputAction.next,
       onChanged: widget.onChange,
-      onEditingComplete: () =>
-          UserController.setFormValidationValue(Form.of(context)?.validate()),
       onSaved: widget.saveField
           ? (value) => UserController.addValueToUser(value!, 'password')
           : null,
@@ -127,55 +116,55 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
   }
 }
 
-class PasswordRules extends StatelessWidget {
-  const PasswordRules({Key? key}) : super(key: key);
+// class PasswordRules extends StatelessWidget {
+//   const PasswordRules({Key? key}) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: 90.w,
-      height: 10.h,
-      margin: const EdgeInsets.only(top: 8, bottom: 8, left: 8),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: const [
-          _RuleText("Debe tener entre 8 y 12 caracteres"),
-          _RuleText("Debe incluir mayúsculas y minúsculas"),
-          _RuleText("Debe incluir al menos un carácter especial")
-        ],
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//       width: 90.w,
+//       height: 10.h,
+//       margin: const EdgeInsets.only(top: 8, bottom: 8, left: 8),
+//       child: Column(
+//         crossAxisAlignment: CrossAxisAlignment.start,
+//         children: const [
+//           _RuleText("Debe tener entre 8 y 12 caracteres"),
+//           _RuleText("Debe incluir mayúsculas y minúsculas"),
+//           _RuleText("Debe incluir al menos un carácter especial")
+//         ],
+//       ),
+//     );
+//   }
+// }
 
-class _RuleText extends StatefulWidget {
-  final String text;
+// class _RuleText extends StatefulWidget {
+//   final String text;
 
-  const _RuleText(this.text, {Key? key}) : super(key: key);
+//   const _RuleText(this.text, {Key? key}) : super(key: key);
 
-  @override
-  State<_RuleText> createState() => _RuleTextState();
-}
+//   @override
+//   State<_RuleText> createState() => _RuleTextState();
+// }
 
-class _RuleTextState extends State<_RuleText> {
-  AutoSizeGroup rulesGroup = AutoSizeGroup();
+// class _RuleTextState extends State<_RuleText> {
+//   AutoSizeGroup rulesGroup = AutoSizeGroup();
 
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 8.0),
-      child: AutoSizeText(
-        "${String.fromCharCode(0x2022)} ${widget.text}",
-        group: rulesGroup,
-        maxLines: 2,
-        minFontSize: 10,
-        maxFontSize: 14,
-        softWrap: true,
-        style: const TextStyle(fontSize: 11),
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Padding(
+//       padding: const EdgeInsets.only(bottom: 8.0),
+//       child: AutoSizeText(
+//         "${String.fromCharCode(0x2022)} ${widget.text}",
+//         group: rulesGroup,
+//         maxLines: 2,
+//         minFontSize: 10,
+//         maxFontSize: 14,
+//         softWrap: true,
+//         style: const TextStyle(fontSize: 11),
+//       ),
+//     );
+//   }
+// }
 
 String? _validator(String? value) {
   if (value != null && value.isNotEmpty) {

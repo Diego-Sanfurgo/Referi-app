@@ -1,7 +1,4 @@
-import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_image_compress/flutter_image_compress.dart';
 
 final GlobalKey<ScaffoldMessengerState> scaffoldKey =
     GlobalKey<ScaffoldMessengerState>();
@@ -19,5 +16,8 @@ String removeAccentsToLowerCase(String value) {
       .replaceAll(RegExp(r'í'), 'i')
       .replaceAll(RegExp(r'ó'), 'o')
       .replaceAll(RegExp(r'ú'), 'u');
+  if (auxVal == "correo electronico") {
+    auxVal = "email";
+  }
   return auxVal;
 }

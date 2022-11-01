@@ -63,9 +63,9 @@ class UserRegister {
       nombre: json["nombre"],
       apellido: json["apellido"],
       // dni: int.parse(json["dni"]),
-      dni: (json["dni"]),
+      dni: int.parse(json["dni"]),
       telefono: json["telefono"],
-      fechaNacimiento: DateFormat('dd/MM/yyyy').parse(json["fechaNacimiento"]),
+      fechaNacimiento: DateFormat('dd/MM/yyyy').parse(json["fechanacimiento"]),
       fotoPerfil: json["fotoPerfil"],
       domicilio: Domicilio.fromJson(json['domicilio']));
 
@@ -76,7 +76,7 @@ class UserRegister {
         "apellido": apellido,
         "dni": dni,
         "telefono": telefono,
-        "fechaNacimiento": fechaNacimiento?.toIso8601String(),
+        "fechaNacimiento": fechaNacimiento?.toUtc().toIso8601String(),
         "fotoPerfil": fotoPerfil,
         "domicilio": domicilio?.toJson()
       };

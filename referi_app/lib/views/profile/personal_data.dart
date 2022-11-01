@@ -25,7 +25,7 @@ class _Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    User user = AppProviders.userProvider(context).currentUser;
+    User user = AppProviders.userProvider(context).currentUser!;
     String date = DateFormat.yMd('es, ES').format(user.fechaNacimiento);
 
     return SingleChildScrollView(

@@ -9,10 +9,9 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 import '../../theme/colors.dart' as colors;
-import '../../widgets/signup_bottom_btn.dart';
 import '../../widgets/forms/progress_bar_signup.dart';
 
-ValueNotifier<bool> _enableBtn = ValueNotifier(false);
+bool _enableBtn = false;
 
 class VerificationCode extends StatelessWidget {
   const VerificationCode({Key? key}) : super(key: key);
@@ -32,11 +31,14 @@ class VerificationCode extends StatelessWidget {
                 secondCompleted: true,
               ),
               const _Body(),
-              SignUpBottomButton(
-                "INGRESAR",
-                onPress: (() => SignUpController.saveRegisteringUser()),
-                enable: _enableBtn,
-              )
+              Container(
+                margin: const EdgeInsets.only(top: 72),
+                child: ElevatedButton(
+                    onPressed: _enableBtn
+                        ? () => SignUpController.saveRegisteringUser()
+                        : null,
+                    child: const Text("CONTINUAR")),
+              ),
             ],
           ),
         ),
@@ -66,7 +68,7 @@ class _BodyState extends State<_Body> {
   void startTimer() {
     timer =
         Timer.periodic(const Duration(seconds: 1), (cTimer) => setCountDown());
-    duration = const Duration(seconds: 5);
+    duration = const Duration(seconds: 30);
   }
 
   void stopTimer() => setState(() => timer.cancel());
@@ -135,9 +137,14 @@ class _BodyState extends State<_Body> {
   }
 }
 
-class _CodeInputField extends StatelessWidget {
+class _CodeInputField extends StatefulWidget {
   const _CodeInputField({Key? key}) : super(key: key);
 
+  @override
+  State<_CodeInputField> createState() => _CodeInputFieldState();
+}
+
+class _CodeInputFieldState extends State<_CodeInputField> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -158,10 +165,11 @@ class _CodeInputField extends StatelessWidget {
             fieldHeight: 56),
         onChanged: (value) {
           if (value.length == 4) {
-            _enableBtn.value = true;
+            _enableBtn = true;
           } else {
-            _enableBtn.value = false;
+            _enableBtn = false;
           }
+          setState(() {});
         },
       ),
     );

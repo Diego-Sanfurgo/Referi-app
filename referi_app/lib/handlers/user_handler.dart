@@ -4,17 +4,18 @@ import '../API/users/patch_user.dart';
 import '../controllers/navigation_controller.dart';
 
 abstract class UserHandler {
-  static updateUser() async {
+  static Future<bool> updateUser() async {
     Alert.showLoading();
     bool requestOK = await patchUser();
+    NavigationController.pop();
+
     if (!requestOK) {
       Alert.showError(
           "Ocurrió un error al intentar actualizar los datos. Intenta en unos segundos.");
-      NavigationController.pop();
-      return;
+      return false;
     }
 
     Alert.showToast("¡Editaste tus datos personales!");
-    NavigationController.goTo(Routes.personalData, popPage: true);
+    return true;
   }
 }

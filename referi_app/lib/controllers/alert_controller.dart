@@ -76,7 +76,7 @@ abstract class Alert {
   }
 
   static Future showError(String? errorText) async {
-    Timer(const Duration(seconds: 5), () => NavigationController.pop());
+    // Timer(const Duration(seconds: 6), () => NavigationController.pop());
     await showDialog(
         context: _navigatorContext,
         builder: (_) {
@@ -85,8 +85,11 @@ abstract class Alert {
               Icons.error_rounded,
               color: Colors.red,
             ),
-            content: Text(errorText ??
-                "Ocurrió un error al intentar realizar la acción. Intenta de nuevo en unos segundos."),
+            content: Text(
+              errorText ??
+                  "Ocurrió un error al intentar realizar la acción. Intenta de nuevo en unos segundos.",
+              textAlign: TextAlign.center,
+            ),
             alignment: Alignment.center,
           );
         });
