@@ -15,7 +15,7 @@ class UserModel {
     required this.accessToken,
   });
 
-  final User user;
+  User user;
   final String accessToken;
 
   UserModel copyWith({

@@ -5,20 +5,16 @@ import 'package:image_picker/image_picker.dart';
 import 'package:referi_app/handlers/user_handler.dart';
 
 import '../../controllers/image_controller.dart';
-import '../../models/user_register.dart';
 import '../../providers/app_providers.dart';
 
 import '../handlers/location_handler.dart';
 import '../models/local_geolocation.dart';
+import 'alert_controller.dart';
 
 abstract class UserController {
-  static updateUser(UserRegister user) async {
-    // GlobalKey<FormState> globalKey = formKey as GlobalKey<FormState>;
-    // if (!formKey.currentState!.validate()) {
-    //   return;
-    // }
-    // formKey.currentState!.save();
-    await UserHandler.updateUser(user);
+  static updateUser(GlobalKey<FormState> formKey) async {
+    formKey.currentState!.save();
+    await UserHandler.updateUser();
   }
 
   static setFormValidationValue(bool? value) {
@@ -33,7 +29,8 @@ abstract class UserController {
         : await ImageController.getImage(ImageSource.gallery);
 
     if (bytesImage == null) {
-      //Alert.Error
+      Alert.showError(
+          "Ocurrió un error al obtener la imágen. Intentalo de nuevo.");
       return;
     }
 

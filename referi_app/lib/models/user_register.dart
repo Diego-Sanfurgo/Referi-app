@@ -110,7 +110,7 @@ class Domicilio {
 
   factory Domicilio.fromJson(Map<String, dynamic> json) => Domicilio(
         calle: json["calle"],
-        numero: int.parse(json["numero"]),
+        numero: json["numero"] == "" ? null : int.parse(json["numero"]),
         ciudad: json["ciudad"],
         provincia: json["Provincia"],
       );

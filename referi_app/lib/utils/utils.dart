@@ -12,23 +12,12 @@ NavigatorState? get navigatorState => navigatorKey.currentState;
 BuildContext get actualContext => scaffoldKey.currentContext as BuildContext;
 
 String removeAccentsToLowerCase(String value) {
-  String auxVal = value.toLowerCase();
-  auxVal.replaceAll(r'á', 'a');
-  auxVal.replaceAll(r'é', 'e');
-  auxVal.replaceAll(r'í', 'i');
-  auxVal.replaceAll(r'ó', 'o');
-  auxVal.replaceAll(r'ú', 'u');
+  String auxVal = value
+      .toLowerCase()
+      .replaceAll(RegExp(r'á'), 'a')
+      .replaceAll(RegExp(r'é'), 'e')
+      .replaceAll(RegExp(r'í'), 'i')
+      .replaceAll(RegExp(r'ó'), 'o')
+      .replaceAll(RegExp(r'ú'), 'u');
   return auxVal;
-}
-
-// 4. compress Uint8List and get another Uint8List.
-Future<Uint8List> compressImage(Uint8List list) async {
-  Uint8List result = await FlutterImageCompress.compressWithList(
-    list,
-    minHeight: 750,
-    minWidth: 750,
-    quality: 85,
-    format: CompressFormat.png,
-  );
-  return result;
 }

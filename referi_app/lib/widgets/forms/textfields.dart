@@ -29,7 +29,8 @@ class _NumberTextFieldState extends State<NumberTextField> {
   @override
   void initState() {
     super.initState();
-    controller = TextEditingController();
+    // controller = TextEditingController();
+    controller = _initController(widget.label);
   }
 
   @override
@@ -40,14 +41,14 @@ class _NumberTextFieldState extends State<NumberTextField> {
 
   @override
   Widget build(BuildContext context) {
-    controller.text = selectProperty(widget.label, context);
+    // controller.text = selectProperty(widget.label, context);
 
     return Container(
       margin: const EdgeInsets.only(bottom: 24),
       child: Focus(
         onFocusChange: ((hasFocus) {
           if (!hasFocus) {
-            UserController.setFormValidationValue(Form.of(context)?.validate());
+            // UserController.setFormValidationValue(Form.of(context)?.validate());
           }
         }),
         child: TextFormField(
@@ -81,7 +82,8 @@ class _NameTextFieldState extends State<NameTextField> {
   @override
   void initState() {
     super.initState();
-    controller = TextEditingController();
+    // controller = TextEditingController();
+    controller = _initController(widget.label);
   }
 
   @override
@@ -92,14 +94,14 @@ class _NameTextFieldState extends State<NameTextField> {
 
   @override
   Widget build(BuildContext context) {
-    controller.text = selectProperty(widget.label, context);
+    // controller.text = selectProperty(widget.label, context);
 
     return Container(
       margin: const EdgeInsets.only(bottom: 24),
       child: Focus(
         onFocusChange: ((hasFocus) {
           if (!hasFocus) {
-            UserController.setFormValidationValue(Form.of(context)?.validate());
+            // UserController.setFormValidationValue(Form.of(context)?.validate());
           }
         }),
         child: TextFormField(
@@ -110,6 +112,7 @@ class _NameTextFieldState extends State<NameTextField> {
           onSaved: (value) => UserController.addValueToUser(
               controller.text, util.removeAccentsToLowerCase(widget.label)),
           validator: Validators.nameValidator,
+          autovalidateMode: AutovalidateMode.onUserInteraction,
         ),
       ),
     );
@@ -137,7 +140,7 @@ class _DateTextFieldState extends State<DateTextField> {
   @override
   void initState() {
     super.initState();
-    controller = TextEditingController();
+    controller = _initController(widget.label);
   }
 
   @override
@@ -148,12 +151,12 @@ class _DateTextFieldState extends State<DateTextField> {
 
   @override
   Widget build(BuildContext context) {
-    controller.text = selectProperty(widget.label, context);
+    // controller.text = selectProperty(widget.label, context);
 
     return Focus(
       onFocusChange: ((hasFocus) {
         if (!hasFocus) {
-          UserController.setFormValidationValue(Form.of(context)?.validate());
+          // UserController.setFormValidationValue(Form.of(context)?.validate());
         }
       }),
       child: Container(
@@ -178,9 +181,13 @@ class _DateTextFieldState extends State<DateTextField> {
   }
 }
 
-String selectProperty(String label, BuildContext context) {
+TextEditingController _initController(String label) {
+  return TextEditingController(text: selectProperty(label));
+}
+
+String selectProperty(String label) {
   String value = util.removeAccentsToLowerCase(label);
-  User user = AppProviders.userProvider(context).currentUser;
+  User user = AppProviders.userProviderDeaf.currentUser;
 
   switch (value) {
     case "nombre":

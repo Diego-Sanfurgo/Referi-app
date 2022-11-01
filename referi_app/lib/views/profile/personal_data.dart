@@ -25,8 +25,9 @@ class _Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    User user = AppProviders.userProvider(context).currentUser as User;
+    User user = AppProviders.userProvider(context).currentUser;
     String date = DateFormat.yMd('es, ES').format(user.fechaNacimiento);
+
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 16),

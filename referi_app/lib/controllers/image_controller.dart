@@ -1,5 +1,6 @@
 import 'dart:typed_data';
 
+import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:image_picker/image_picker.dart';
 import '../../handlers/image_handler.dart';
 
@@ -22,6 +23,19 @@ abstract class ImageController {
   }
 
   static uploadUserImage(Uint8List image) async {
-    await ImageHandler.uploadImage(image);
+    Uint8List lightImage = await _compressImage(image);
+    await ImageHandler.uploadImage(lightImage);
   }
+}
+
+// 4. compress Uint8List and get another Uint8List.
+Future<Uint8List> _compressImage(Uint8List list) async {
+  Uint8List result = await FlutterImageCompress.compressWithList(
+    list,
+    minHeight: 750,
+    minWidth: 750,
+    quality: 85,
+    format: CompressFormat.png,
+  );
+  return result;
 }

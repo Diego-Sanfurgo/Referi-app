@@ -4,8 +4,11 @@ import 'package:referi_app/providers/app_providers.dart';
 
 import 'package:referi_app/API/params.dart';
 
-Future<bool> patchUser(UserRegister user) async {
+import '../../models/user.dart';
+
+Future<bool> patchUser() async {
   Dio dio = Dio();
+  UserRegister user = AppProviders.userProviderDeaf.userRegisterModel;
   String url =
       UserUrls.patchUserById + AppProviders.userProviderDeaf.currentUser.id;
   bool result = false;
@@ -17,11 +20,9 @@ Future<bool> patchUser(UserRegister user) async {
     options: Options(headers: getUserToken()),
   )
       .then((value) {
-    if (value.statusCode == 200) {
-      result = true;
-      return;
-    }
-    result = false;
+    AppProviders.userProviderDeaf.setUser(User.fromJson(value.data["data"]));
+    result = true;
+    return;
   }).onError((error, stackTrace) {
     result = false;
   }).timeout(

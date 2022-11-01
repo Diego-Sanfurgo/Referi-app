@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:referi_app/controllers/user_controller.dart';
-import 'package:referi_app/providers/app_providers.dart';
 
 import '../../controllers/navigation_controller.dart';
-import '../../models/user_register.dart';
 import '../../widgets/forms/name_and_surname_fields.dart';
 import '../../widgets/forms/street_and_number_fields.dart';
 
@@ -82,8 +80,6 @@ class _Buttons extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    UserRegister user = AppProviders.userProvider(context).userRegisterModel;
-
     return SliverPadding(
       padding: const EdgeInsets.all(16),
       sliver: SliverToBoxAdapter(
@@ -91,7 +87,7 @@ class _Buttons extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             ElevatedButton(
-                onPressed: () => UserController.updateUser(user),
+                onPressed: () => UserController.updateUser(formKey),
                 child: const Text("Guardar cambios")),
             SizedBox(
                 width: double.infinity,

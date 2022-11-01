@@ -42,8 +42,13 @@ class UserProvider extends ChangeNotifier {
   UserModel? get currentUserModel => _currentUser;
   User get currentUser => _currentUser!.user;
 
-  setUser(UserModel value) {
+  setUserModel(UserModel value) {
     _currentUser = value;
+    notifyListeners();
+  }
+
+  setUser(User user) {
+    _currentUser!.user = user;
     notifyListeners();
   }
 
