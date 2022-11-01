@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:referi_app/views/account/account_home.dart';
 import 'package:referi_app/views/activities/activity_detail.dart';
 import 'package:referi_app/views/activities/activity_payment.dart';
+import 'package:referi_app/views/activities/activity_payment_data.dart';
 import 'package:referi_app/views/activities/activity_search.dart';
 import 'package:referi_app/views/clubs/club_detail.dart';
 import 'package:referi_app/views/clubs/clubs_home.dart';
@@ -43,6 +44,7 @@ Map<String, WidgetBuilder> routes = {
   'activitySearch': (_) => const ActivitySearch(),
   'activityDetail': (_) => const ActivityDetail(),
   'activityPayment': (_) => const ActivityPayment(),
+  'activityPaymentData': (_) => const ActivityPaymentData(),
 
   //Account
   'accountHome': (_) => const AccountHome(),

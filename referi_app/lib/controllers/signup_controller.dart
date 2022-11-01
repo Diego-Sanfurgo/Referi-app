@@ -36,8 +36,8 @@ abstract class SignUpController {
     return null;
   }
 
-  static saveRegisteringUser() async {
-    bool isRegistered = await AuthHandler.registerUser();
+  static saveRegisteringUser(String code) async {
+    bool isRegistered = await AuthHandler.verifyUser(code);
     if (!isRegistered) {
       return;
     }

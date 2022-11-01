@@ -6,6 +6,7 @@ abstract class AuthUrls {
   static const String postAuthLogin = "$baseUrl/auth/login";
   static const String postAuthRegister = "$baseUrl/auth/register";
   static const String postAuthRecover = "$baseUrl/auth/recover";
+  static const String postVerify = "$baseUrl/auth/verify";
 }
 
 abstract class UserUrls {

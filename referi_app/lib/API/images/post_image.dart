@@ -4,8 +4,6 @@ import 'package:dio/dio.dart';
 
 import 'package:referi_app/API/params.dart';
 
-import '../../providers/app_providers.dart';
-
 Future<bool> postImage(Uint8List imageBytes) async {
   Dio dio = Dio();
   // String userId = AppProviders.userProviderDeaf.currentUser!.id;

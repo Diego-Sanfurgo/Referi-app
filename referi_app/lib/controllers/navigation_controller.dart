@@ -52,6 +52,7 @@ enum Routes {
   activitySearch,
   activityDetail,
   activityPayment,
+  activityPaymentData,
 
   //Profile
   profile,

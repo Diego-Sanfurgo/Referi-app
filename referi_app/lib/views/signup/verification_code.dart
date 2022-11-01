@@ -11,7 +11,8 @@ import 'package:pin_code_fields/pin_code_fields.dart';
 import '../../theme/colors.dart' as colors;
 import '../../widgets/forms/progress_bar_signup.dart';
 
-bool _enableBtn = false;
+ValueNotifier<bool> _enableBtn = ValueNotifier<bool>(false);
+TextEditingController _codeController = TextEditingController();
 
 class VerificationCode extends StatelessWidget {
   const VerificationCode({Key? key}) : super(key: key);
@@ -34,8 +35,9 @@ class VerificationCode extends StatelessWidget {
               Container(
                 margin: const EdgeInsets.only(top: 72),
                 child: ElevatedButton(
-                    onPressed: _enableBtn
-                        ? () => SignUpController.saveRegisteringUser()
+                    onPressed: _enableBtn.value
+                        ? () => SignUpController.saveRegisteringUser(
+                            _codeController.text)
                         : null,
                     child: const Text("CONTINUAR")),
               ),
@@ -146,11 +148,18 @@ class _CodeInputField extends StatefulWidget {
 
 class _CodeInputFieldState extends State<_CodeInputField> {
   @override
+  void dispose() {
+    _codeController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
       child: PinCodeTextField(
         appContext: context,
+        controller: _codeController,
         length: 4,
         keyboardType: TextInputType.number,
         autoDismissKeyboard: false,
@@ -165,11 +174,10 @@ class _CodeInputFieldState extends State<_CodeInputField> {
             fieldHeight: 56),
         onChanged: (value) {
           if (value.length == 4) {
-            _enableBtn = true;
+            _enableBtn.value = true;
           } else {
-            _enableBtn = false;
+            _enableBtn.value = false;
           }
-          setState(() {});
         },
       ),
     );
