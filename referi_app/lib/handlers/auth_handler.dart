@@ -25,10 +25,12 @@ class AuthHandler {
   }
 
   static postAuthRecover() async {}
+
   static Future<bool> postLogin(String email, String password) async {
     Alert.showLoading();
     bool isOk = await postAuthLogin(email, password);
     NavigationController.pop();
+
     if (!isOk) {
       Alert.showToast("Usuario o contraseña incorrectos");
       return false;
@@ -36,7 +38,17 @@ class AuthHandler {
     return true;
   }
 
-  static verifyUser(String code) async {
-    await postVerify(code);
+  static Future<bool> verifyUser(String code) async {
+    Alert.showLoading();
+    bool isOK = await postVerify(code);
+    NavigationController.pop();
+
+    if (!isOK) {
+      Alert.showError(
+          "Ocurrió un error al validar el código. Intenta de nuevo.");
+      return false;
+    }
+
+    return true;
   }
 }

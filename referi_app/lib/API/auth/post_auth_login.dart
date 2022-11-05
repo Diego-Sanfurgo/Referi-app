@@ -11,7 +11,7 @@ Future<bool> postAuthLogin(String email, String password) async {
     "password": password,
   };
 
-  return await dio.post(AuthUrls.postAuthLogin, data: body).then((value) {
+  return await dio.post(AuthUrls.postLogin, data: body).then((value) {
     if (value.statusCode == 200) {
       UserModel registeredUser = UserModel.fromJson(value.data['data']);
       AppProviders.userProviderDeaf.setUserModel(registeredUser);

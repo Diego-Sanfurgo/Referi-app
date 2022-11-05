@@ -53,7 +53,7 @@ class User {
     required this.fechaCreacion,
     required this.fechaActualizacion,
     this.fechaBaja,
-    // required this.domicilio,
+    required this.domicilio,
   });
 
   final String id;
@@ -69,7 +69,7 @@ class User {
   final DateTime fechaCreacion;
   final DateTime fechaActualizacion;
   final DateTime? fechaBaja;
-  // final Domicilio domicilio;
+  final Domicilio domicilio;
 
   User copyWith({
     String? id,
@@ -101,7 +101,7 @@ class User {
         fechaCreacion: fechaCreacion ?? this.fechaCreacion,
         fechaActualizacion: fechaActualizacion ?? this.fechaActualizacion,
         fechaBaja: fechaBaja ?? this.fechaBaja,
-        // domicilio: domicilio ?? this.domicilio,
+        domicilio: domicilio ?? this.domicilio,
       );
 
   factory User.fromJson(Map<String, dynamic> json) => User(
@@ -118,7 +118,7 @@ class User {
         fechaCreacion: DateTime.parse(json["fechaCreacion"]),
         fechaActualizacion: DateTime.parse(json["fechaActualizacion"]),
         fechaBaja: json["fechaBaja"],
-        // domicilio: Domicilio.fromJson(json["domicilio"]),
+        domicilio: Domicilio.fromJson(json["domicilio"]),
       );
 
   Map<String, dynamic> toJson() => {

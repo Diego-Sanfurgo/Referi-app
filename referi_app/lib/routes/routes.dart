@@ -8,6 +8,8 @@ import 'package:referi_app/views/clubs/club_detail.dart';
 import 'package:referi_app/views/clubs/clubs_home.dart';
 import 'package:referi_app/views/credential/credential_home.dart';
 import 'package:referi_app/views/credential/credential_detail.dart';
+import 'package:referi_app/views/login/login.dart';
+import 'package:referi_app/views/password%20recover/pass_recover.dart';
 import 'package:referi_app/views/profile/personal_data_edit.dart';
 import 'package:referi_app/views/scanner/scanner.dart';
 
@@ -15,7 +17,6 @@ import '../../views/home.dart';
 import '../../views/notifications/notifications.dart';
 import '../../views/profile/personal_data.dart';
 import '../../views/profile/profile.dart';
-import '../../views/signin/signin.dart';
 import '../views/account/operation_detail.dart';
 import '../views/signup/signup_1.dart';
 import '../views/signup/signup_2.dart';
@@ -26,11 +27,12 @@ Map<String, WidgetBuilder> get routesMap => routes;
 Map<String, WidgetBuilder> routes = {
   'home': (_) => const Home(),
 
-  //SignIn and SignUp
-  'signin': (_) => const SignIn(),
+  //Auth
+  'login': (_) => const Login(),
   'signup_1': (_) => const SignUpFirst(),
   'signup_2': (_) => const SignUpSecond(),
   'signup_3': (_) => const VerificationCode(),
+  'passwordRecover': (_) => const PassRecover(),
 
   //Profile
   'profile': (_) => const Profile(),

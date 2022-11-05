@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:referi_app/API/params.dart';
 import 'package:referi_app/providers/app_providers.dart';
 
-Future postVerify(String code) async {
+Future<bool> postVerify(String code) async {
   Dio dio = Dio();
 
   Map body = {
@@ -10,7 +10,7 @@ Future postVerify(String code) async {
     "code": int.parse(code)
   };
 
-  await dio.post(AuthUrls.postVerify, data: body).then((value) {
+  return await dio.post(AuthUrls.postVerify, data: body).then((value) {
     return true;
   }).onError((error, stackTrace) {
     return false;

@@ -1,12 +1,17 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
-import 'package:referi_app/controllers/navigation_controller.dart';
-import 'package:referi_app/controllers/signup_controller.dart';
-import 'package:referi_app/widgets/forms/textfield.dart';
 
-class SignIn extends StatelessWidget {
-  const SignIn({Key? key}) : super(key: key);
+import 'package:auto_size_text/auto_size_text.dart';
+import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
+
+import '../../widgets/forms/textfield.dart';
+import '../../widgets/forms/textfields.dart';
+import '../../controllers/signup_controller.dart';
+import '../../controllers/navigation_controller.dart';
+
+import 'package:referi_app/theme/colors.dart' as colors;
+
+class Login extends StatelessWidget {
+  const Login({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -84,18 +89,21 @@ class _Body extends StatelessWidget {
                 key: formKey,
                 child: Column(
                   children: const [
-                    CustomTextField(
-                      "Correo electrónico",
-                      keyboard: TextInputType.emailAddress,
-                      saveKeyLabel: 'email',
-                      showCounter: false,
-                    ),
+                    NameTextField(false, label: "Correo electrónico"),
                     PasswordTextField("Contraseña")
                   ],
                 )),
           ),
-          const AutoSizeText("¿Olvidaste tu contraseña?",
-              style: TextStyle(fontSize: 16)),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              GestureDetector(
+                onTap: () => NavigationController.goTo(Routes.passwordRecover),
+                child: AutoSizeText("Recuperar contraseña",
+                    style: TextStyle(fontSize: 14, color: colors.secondary)),
+              ),
+            ],
+          ),
         ],
       ),
     );
@@ -122,10 +130,10 @@ class _Footer extends StatelessWidget {
               const AutoSizeText("Si no tienes cuenta"),
               TextButton(
                   onPressed: () => NavigationController.goTo(Routes.signup_1),
-                  child: const AutoSizeText(
+                  child: AutoSizeText(
                     "Registrate",
                     style: TextStyle(
-                      color: Color(0XFF0C9EE8),
+                      color: colors.secondary,
                     ),
                   ))
             ],

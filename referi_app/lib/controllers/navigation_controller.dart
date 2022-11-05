@@ -31,10 +31,12 @@ abstract class NavigationController {
 }
 
 enum Routes {
-  signin,
+  //Auth
+  login,
   signup_1,
   signup_2,
   signup_3,
+  passwordRecover,
   //homes
   home,
   accountHome,

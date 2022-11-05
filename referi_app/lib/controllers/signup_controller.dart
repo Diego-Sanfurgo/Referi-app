@@ -38,9 +38,13 @@ abstract class SignUpController {
 
   static saveRegisteringUser(String code) async {
     bool isRegistered = await AuthHandler.verifyUser(code);
-    if (!isRegistered) {
-      return;
-    }
+    if (!isRegistered) return;
+
+    String email = AppProviders.userProviderDeaf.userRegisterModel.email!;
+    String password = AppProviders.userProviderDeaf.userRegisterModel.password!;
+
+    bool isLogged = await AuthHandler.postLogin(email, password);
+    if (!isLogged) return;
 
     NavigationController.goTo(Routes.home, popUntil: true);
   }

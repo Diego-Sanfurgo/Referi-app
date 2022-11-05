@@ -12,7 +12,7 @@ import '../../theme/colors.dart' as colors;
 import '../../widgets/forms/progress_bar_signup.dart';
 
 ValueNotifier<bool> _enableBtn = ValueNotifier<bool>(false);
-TextEditingController _codeController = TextEditingController();
+late final String _code;
 
 class VerificationCode extends StatelessWidget {
   const VerificationCode({Key? key}) : super(key: key);
@@ -34,12 +34,16 @@ class VerificationCode extends StatelessWidget {
               const _Body(),
               Container(
                 margin: const EdgeInsets.only(top: 72),
-                child: ElevatedButton(
-                    onPressed: _enableBtn.value
-                        ? () => SignUpController.saveRegisteringUser(
-                            _codeController.text)
-                        : null,
-                    child: const Text("CONTINUAR")),
+                child: ValueListenableBuilder(
+                  valueListenable: _enableBtn,
+                  builder: (context, bool enableBtn, child) {
+                    return ElevatedButton(
+                        onPressed: enableBtn
+                            ? () => SignUpController.saveRegisteringUser(_code)
+                            : null,
+                        child: const Text("CONTINUAR"));
+                  },
+                ),
               ),
             ],
           ),
@@ -147,9 +151,17 @@ class _CodeInputField extends StatefulWidget {
 }
 
 class _CodeInputFieldState extends State<_CodeInputField> {
+  late final TextEditingController codeController;
+
+  @override
+  void initState() {
+    super.initState();
+    codeController = TextEditingController();
+  }
+
   @override
   void dispose() {
-    _codeController.dispose();
+    codeController.dispose();
     super.dispose();
   }
 
@@ -159,11 +171,12 @@ class _CodeInputFieldState extends State<_CodeInputField> {
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
       child: PinCodeTextField(
         appContext: context,
-        controller: _codeController,
+        controller: codeController,
         length: 4,
         keyboardType: TextInputType.number,
         autoDismissKeyboard: false,
         animationType: AnimationType.scale,
+        autoDisposeControllers: false,
         pinTheme: PinTheme(
             activeColor: colors.secondary,
             selectedColor: colors.secondary,
@@ -175,6 +188,7 @@ class _CodeInputFieldState extends State<_CodeInputField> {
         onChanged: (value) {
           if (value.length == 4) {
             _enableBtn.value = true;
+            _code = codeController.text;
           } else {
             _enableBtn.value = false;
           }

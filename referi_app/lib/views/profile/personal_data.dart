@@ -36,13 +36,12 @@ class _Body extends StatelessWidget {
             _PersonalDataListTile(
                 title: "Nombre y apellido",
                 value: "${user.nombre} ${user.apellido}"),
-            _PersonalDataListTile(
-                title: "DNI", value: "${user.dni}", isEditable: false),
+            _PersonalDataListTile(title: "DNI", value: "${user.dni}"),
             _PersonalDataListTile(title: "Fecha de nacimiento", value: date),
-            const _PersonalDataListTile(
-                title: "Domicilio", value: "Sobremonte 385"),
             _PersonalDataListTile(
-                title: "E-mail", value: user.email, isEditable: false),
+                title: "Domicilio",
+                value: "${user.domicilio.calle} ${user.domicilio.numero}"),
+            _PersonalDataListTile(title: "E-mail", value: user.email),
             _PersonalDataListTile(title: "Teléfono", value: "${user.telefono}"),
             Container(
               margin: const EdgeInsets.only(top: 32),
@@ -62,12 +61,8 @@ class _Body extends StatelessWidget {
 class _PersonalDataListTile extends StatefulWidget {
   final String title;
   final String value;
-  final bool? isEditable;
   const _PersonalDataListTile(
-      {Key? key,
-      this.isEditable = true,
-      required this.title,
-      required this.value})
+      {Key? key, required this.title, required this.value})
       : super(key: key);
 
   @override

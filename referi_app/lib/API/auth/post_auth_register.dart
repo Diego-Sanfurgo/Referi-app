@@ -8,7 +8,7 @@ Future<bool> postAuthRegister(UserRegister user) async {
 
   Map body = user.toJson();
 
-  return await dio.post(AuthUrls.postAuthRegister, data: body).then((value) {
+  return await dio.post(AuthUrls.postRegister, data: body).then((value) {
     return true;
   }).onError((error, stackTrace) {
     return false;

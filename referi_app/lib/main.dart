@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:referi_app/views/home.dart';
+import 'package:referi_app/views/login/login.dart';
 
 import 'package:sizer/sizer.dart';
 import 'package:provider/provider.dart';
@@ -12,7 +12,6 @@ import '../../routes/routes.dart';
 // import '../../views/signin/signin.dart';
 import "../../utils/utils.dart" as util;
 import "../../theme/theme.dart" as theme;
-import 'package:referi_app/views/signin/signin.dart';
 
 void main() {
   runApp(MultiProvider(
@@ -44,7 +43,7 @@ class ReferiApp extends StatelessWidget {
         ],
         supportedLocales: const [Locale('en', ''), Locale('es', 'ES')],
         // home: const Home(),
-        home: const SignIn(),
+        home: const Login(),
       );
     }));
   }
