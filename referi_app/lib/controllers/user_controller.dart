@@ -25,9 +25,7 @@ abstract class UserController {
         ? await ImageController.getImage(ImageSource.camera)
         : await ImageController.getImage(ImageSource.gallery);
 
-    if (bytesImage == null) {
-      return;
-    }
+    if (bytesImage == null) return;
 
     ImageController.uploadUserImage(bytesImage);
   }

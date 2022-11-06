@@ -31,7 +31,7 @@ class UserRegister {
   final int? dni;
   String? telefono;
   DateTime? fechaNacimiento;
-  final String? fotoPerfil;
+   String? fotoPerfil;
   final Domicilio? domicilio;
 
   UserRegister copyWith({

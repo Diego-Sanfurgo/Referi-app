@@ -11,10 +11,12 @@ Future<bool> postImage(Uint8List imageBytes) async {
   String userId = AppProviders.userProviderDeaf.currentUser!.id;
 
   FormData body = FormData.fromMap({
-    "file": MultipartFile.fromBytes(imageBytes,
-        filename: "${userId}_profileImage.png")
+    "file": MultipartFile.fromBytes(
+      imageBytes,
+      // filename: "${userId}_profileImage.jpg",
+    )
   });
-  // Map body = {"file":  imageBytes};
+  // Map body = {"file": imageBytes};
 
   return await dio
       .post(ImageUrls.postImage,
@@ -24,11 +26,10 @@ Future<bool> postImage(Uint8List imageBytes) async {
             contentType: 'multipart/form-data',
           ))
       .then((value) {
-    if (value.statusCode! >= 200 && value.statusCode! < 300) {
-      return true;
-    }
-    return false;
+    AppProviders.userProviderDeaf.userRegisterModel.fotoPerfil =
+        value.data['path'];
+    return true;
   }).onError((error, stackTrace) {
     return false;
-  }).timeout(const Duration(seconds: 30));
+  }).timeout(const Duration(seconds: 60), onTimeout: () => false);
 }
