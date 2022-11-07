@@ -1,10 +1,9 @@
 import 'package:dio/dio.dart';
-import 'package:referi_app/models/user_register.dart';
-import 'package:referi_app/providers/app_providers.dart';
 
-import 'package:referi_app/API/params.dart';
-
+import '../../API/params.dart';
 import '../../models/user.dart';
+import '../../models/user_register.dart';
+import '../../providers/app_providers.dart';
 
 Future<bool> patchUser() async {
   Dio dio = Dio();

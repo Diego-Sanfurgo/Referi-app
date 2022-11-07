@@ -1,4 +1,5 @@
 import 'package:provider/provider.dart';
+import 'package:referi_app/providers/activity_provider.dart';
 
 import 'user_provider.dart';
 import 'navigation_provider.dart';
@@ -16,4 +17,9 @@ abstract class AppProviders {
       Provider.of<UserProvider>(context);
   static UserProvider get userProviderDeaf =>
       Provider.of<UserProvider>(util.actualContext, listen: false);
+
+  static ActivityProvider activityProvider(context) =>
+      Provider.of<ActivityProvider>(context);
+  static ActivityProvider get activityProviderDeaf =>
+      Provider.of<ActivityProvider>(util.actualContext, listen: false);
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:referi_app/providers/activity_provider.dart';
 import 'package:referi_app/views/login/login.dart';
 
 import 'package:sizer/sizer.dart';
@@ -18,6 +19,7 @@ void main() {
     providers: [
       ChangeNotifierProvider(create: (_) => UserProvider()),
       ChangeNotifierProvider(create: (_) => NavigationProvider()),
+      ChangeNotifierProvider(create: (_) => ActivityProvider()),
     ],
     child: const ReferiApp(),
   ));

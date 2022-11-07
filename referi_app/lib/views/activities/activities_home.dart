@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:referi_app/controllers/activity_controller.dart';
 import 'package:referi_app/controllers/navigation_controller.dart';
 
 import '../../models/grid_activity.dart' as gact;
@@ -27,29 +28,43 @@ class ActivitiesHome extends StatelessWidget {
             ]),
           ),
         ),
-        SliverPadding(
-          padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
-          sliver: SliverGrid(
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              mainAxisSpacing: 16,
-              crossAxisSpacing: 16,
-            ),
-            delegate: SliverChildBuilderDelegate(
-              (context, index) {
-                var activity = gact.gridActivities[index];
-
-                return _ActivityCard(
-                  activityName: activity.name,
-                  cardColor: activity.color,
-                  imagePath: activity.imagePath,
-                );
-              },
-              childCount: 11,
-            ),
-          ),
+        const SliverPadding(
+          padding: EdgeInsets.fromLTRB(16, 0, 16, 16),
+          sliver: _ActivityGrid(),
         ),
       ],
+    );
+  }
+}
+
+class _ActivityGrid extends StatelessWidget {
+  const _ActivityGrid({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder(
+      future: ActivityController.obtainActivityTypes(),
+      builder: (context, snapshot) {
+        return SliverGrid(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            mainAxisSpacing: 16,
+            crossAxisSpacing: 16,
+          ),
+          delegate: SliverChildBuilderDelegate(
+            (context, index) {
+              var activity = gact.gridActivities[index];
+
+              return _ActivityCard(
+                activityName: activity.name,
+                cardColor: activity.color,
+                imagePath: activity.imageUrl,
+              );
+            },
+            childCount: 11,
+          ),
+        );
+      },
     );
   }
 }
