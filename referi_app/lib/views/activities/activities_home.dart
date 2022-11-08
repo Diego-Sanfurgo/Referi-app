@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:referi_app/controllers/activity_controller.dart';
-import 'package:referi_app/controllers/navigation_controller.dart';
 
-import '../../models/grid_activity.dart' as gact;
+import '../../controllers/activity_controller.dart';
+import '../../controllers/navigation_controller.dart';
+
+import '../../models/grid_activity.dart';
 
 class ActivitiesHome extends StatelessWidget {
   const ActivitiesHome({Key? key}) : super(key: key);
@@ -42,61 +43,58 @@ class _ActivityGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: ActivityController.obtainActivityTypes(),
-      builder: (context, snapshot) {
-        return SliverGrid(
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            mainAxisSpacing: 16,
-            crossAxisSpacing: 16,
-          ),
-          delegate: SliverChildBuilderDelegate(
-            (context, index) {
-              var activity = gact.gridActivities[index];
+    return SliverToBoxAdapter(
+      child: FutureBuilder<List<GridActivity>>(
+        future: ActivityController.obtainActivityTypes(),
+        builder: (context, AsyncSnapshot<List<GridActivity>> snapshot) {
+          if (!snapshot.hasData) {
+            return const Center(child: CircularProgressIndicator());
+          }
 
-              return _ActivityCard(
-                activityName: activity.name,
-                cardColor: activity.color,
-                imagePath: activity.imageUrl,
-              );
+          return GridView.builder(
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              mainAxisSpacing: 16,
+              crossAxisSpacing: 16,
+            ),
+            itemCount: snapshot.data!.length,
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            itemBuilder: (BuildContext context, int index) {
+              var activity = snapshot.data![index];
+
+              return _ActivityCard(activity);
             },
-            childCount: 11,
-          ),
-        );
-      },
+          );
+        },
+      ),
     );
   }
 }
 
 class _ActivityCard extends StatelessWidget {
-  final String imagePath;
-  final String activityName;
-  final Color cardColor;
-  const _ActivityCard({
-    Key? key,
-    required this.imagePath,
-    required this.activityName,
-    required this.cardColor,
-  }) : super(key: key);
+  final GridActivity activity;
+
+  const _ActivityCard(this.activity, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      borderRadius: BorderRadius.circular(10),
-      onTap: () => NavigationController.goToWithArguments(Routes.activitySearch,
-          args: activityName),
-      child: Card(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-        clipBehavior: Clip.hardEdge,
+    return Card(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+      clipBehavior: Clip.hardEdge,
+      child: InkWell(
+        borderRadius: BorderRadius.circular(10),
+        onTap: () => NavigationController.goToWithArguments(
+            Routes.activitySearch,
+            args: activity),
         child: Stack(
           fit: StackFit.expand,
           children: [
-            Image.asset(imagePath, fit: BoxFit.cover),
-            Container(color: cardColor),
+            Image.asset(activity.imgUrl, fit: BoxFit.cover),
+            Container(color: activity.color),
             Center(
               child: AutoSizeText(
-                activityName.toUpperCase(),
+                activity.tipo.toUpperCase(),
                 textAlign: TextAlign.center,
                 style:
                     const TextStyle(fontWeight: FontWeight.w900, fontSize: 22),
