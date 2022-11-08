@@ -18,9 +18,7 @@ class CredentialHome extends StatelessWidget {
               onTap: () => NavigationController.goTo(Routes.credentialDetail),
               shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(5))),
-              leading: Image.asset(
-                'assets/images/perfil_prueba.png',
-              ),
+              leading: Image.asset('assets/images/perfil_prueba.png'),
               title: const Text("Club Obras"),
               subtitle: const Text("Estado: Activo"),
             ),

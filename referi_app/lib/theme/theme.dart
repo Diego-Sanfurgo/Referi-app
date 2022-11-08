@@ -17,12 +17,14 @@ ThemeData _referiTheme = ThemeData(
 );
 
 ListTileThemeData _tileThemeData =
-    const ListTileThemeData(iconColor: Colors.black);
+    const ListTileThemeData(iconColor: Colors.black87);
 
 BottomNavigationBarThemeData _barTheme = BottomNavigationBarThemeData(
+  elevation: 4,
   backgroundColor: colors.primary.shade400,
-  selectedItemColor: colors.secondaryDark,
-  unselectedItemColor: Colors.black,
+  // selectedItemColor: colors.secondaryDark,
+  selectedItemColor: Colors.white,
+  unselectedItemColor: Colors.black87,
   type: BottomNavigationBarType.fixed,
   unselectedLabelStyle: const TextStyle(fontSize: 12),
   selectedLabelStyle: const TextStyle(fontSize: 12),
@@ -52,4 +54,4 @@ ButtonStyle _elevatedButtonStyle = ButtonStyle(
 
 AppBarTheme _appBarTheme = const AppBarTheme(
     titleTextStyle: TextStyle(
-        fontSize: 20, fontWeight: FontWeight.w600, color: Colors.black));
+        fontSize: 20, fontWeight: FontWeight.w600, color: Colors.black87));

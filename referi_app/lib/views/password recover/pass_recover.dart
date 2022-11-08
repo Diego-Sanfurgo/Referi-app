@@ -32,7 +32,7 @@ class _Body extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const AutoSizeText(
-              "Introduce un correo electrónico para recibir un código de recuperación.",
+              "Introduce un correo electrónico para recibir una contraseña auxiliar.",
               maxLines: 2,
               maxFontSize: 24,
               minFontSize: 18,
@@ -43,7 +43,7 @@ class _Body extends StatelessWidget {
             const SizedBox(height: 40),
             ElevatedButton(
                 onPressed: () {
-                  if(!formKey.currentState!.validate()){
+                  if (!formKey.currentState!.validate()) {
                     return;
                   }
                   formKey.currentState!.save();

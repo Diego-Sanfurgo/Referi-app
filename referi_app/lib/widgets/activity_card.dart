@@ -1,5 +1,7 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+
+import 'package:sizer/sizer.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 
 import '../controllers/navigation_controller.dart';
 
@@ -38,7 +40,28 @@ class ActivityCard extends StatelessWidget {
       subtitleWidget = AutoSizeText("$subtitle1");
     }
 
-    Widget activityTile = ListTile(
+    Widget activityTile = Row(
+      children: [
+        SizedBox(
+            width: 30.w,
+            height: double.infinity,
+            child: Image.asset(imagePath, fit: BoxFit.fill)),
+        SizedBox(
+          width: 45.w,
+          height: double.infinity,
+          child: ListTile(
+            // isThreeLine: isThreeLine,
+            // leading: Image.asset(imagePath),
+            title: const AutoSizeText("Fútbol 11 Juvenil"),
+            subtitle: subtitleWidget,
+            onTap: () => NavigationController.goToWithArguments(
+                Routes.activityDetail,
+                args: imagePath),
+          ),
+        ),
+      ],
+    );
+    ListTile(
       isThreeLine: isThreeLine,
       leading: Image.asset(imagePath),
       title: const AutoSizeText("Fútbol 11 Juvenil"),
@@ -51,8 +74,10 @@ class ActivityCard extends StatelessWidget {
         ? Card(
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+            clipBehavior: Clip.hardEdge,
             elevation: 5,
-            child: activityTile)
+            child: activityTile,
+          )
         : activityTile;
   }
 }

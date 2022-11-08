@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
-import 'package:referi_app/models/activity.dart';
-import 'package:referi_app/models/grid_activity.dart';
+
+import '../../models/activity.dart';
+import '../../models/grid_activity.dart';
 
 class ActivityProvider extends ChangeNotifier {
   final List<GridActivity> _gridActivityList = gridActivities;

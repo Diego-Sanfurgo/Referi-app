@@ -30,6 +30,7 @@ dependencies:
   shimmer: ^2.0.0
   fluttertoast: ^8.1.1
   pin_code_fields: ^7.4.0
+  pattern_formatter: ^2.0.0
   flutter_native_splash: ^2.2.9
   flutter_custom_clippers: ^2.0.0
 
@@ -66,6 +67,7 @@ flutter:
     - assets/images/card_images/
     - assets/images/clubs/
     - assets/logo/
+    - assets/animations/
 
   # To add custom fonts to your application, add a fonts section here,
   # in this "flutter" section. Each entry in this list should have a

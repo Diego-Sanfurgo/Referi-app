@@ -1,16 +1,13 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-
-import 'package:lottie/lottie.dart';
-import 'package:sizer/sizer.dart';
 
 import '../../models/activity.dart';
 import '../../models/grid_activity.dart';
 import '../../controllers/activity_controller.dart';
 
-import '../../theme/colors.dart' as colors;
-import '../../utils/network_assets_urls.dart';
 import '../../widgets/activity_card.dart';
+import '../../theme/colors.dart' as colors;
+import '../../theme/animations/loading_animation.dart';
+import '../../theme/animations/activities_not_found.dart';
 
 class ActivitySearch extends StatelessWidget {
   const ActivitySearch({Key? key}) : super(key: key);
@@ -70,56 +67,6 @@ class _Body extends StatelessWidget {
                     Divider(height: 1, color: colors.primary.shade800),
                 itemCount: 10);
           }),
-    );
-  }
-}
-
-class LoadingAnimation extends StatelessWidget {
-  const LoadingAnimation({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    double widthAndHeight = 35.w;
-
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          LottieBuilder.network(
-            NetworkAssets.loadingChangingBall,
-            width: widthAndHeight,
-            height: widthAndHeight,
-          ),
-          const SizedBox(height: 32),
-          const AutoSizeText("Buscando actividades...",
-              minFontSize: 18, maxFontSize: 24)
-        ],
-      ),
-    );
-  }
-}
-
-class NotFoundAnimation extends StatelessWidget {
-  const NotFoundAnimation({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    double widthAndHeight = 50.w;
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          LottieBuilder.network(
-            NetworkAssets.noDataFound,
-            width: widthAndHeight,
-            height: widthAndHeight,
-            repeat: false,
-          ),
-          const SizedBox(height: 16),
-          const AutoSizeText("No encontramos actividades :(",
-              minFontSize: 18, maxFontSize: 24)
-        ],
-      ),
     );
   }
 }

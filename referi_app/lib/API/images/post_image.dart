@@ -10,11 +10,14 @@ Future<bool> postImage(Uint8List imageBytes) async {
   Dio dio = Dio();
   String userId = AppProviders.userProviderDeaf.currentUser!.id;
 
+  // FormData body = FormData.fromMap({
+  //   "file": MultipartFile.fromBytes(
+  //     imageBytes,
+  //     // filename: "${userId}_profileImage.jpg",
+  //   )
+  // });
   FormData body = FormData.fromMap({
-    "file": MultipartFile.fromBytes(
-      imageBytes,
-      // filename: "${userId}_profileImage.jpg",
-    )
+    "file": imageBytes,
   });
   // Map body = {"file": imageBytes};
 
