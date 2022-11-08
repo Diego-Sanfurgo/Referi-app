@@ -1,7 +1,8 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:referi_app/theme/colors.dart';
+import 'package:auto_size_text/auto_size_text.dart';
+
 import 'package:referi_app/widgets/activity_card.dart';
+import 'package:referi_app/theme/colors.dart' as colors;
 
 class ClubDetail extends StatelessWidget {
   const ClubDetail({Key? key}) : super(key: key);
@@ -47,10 +48,7 @@ class _Body extends StatelessWidget {
         SliverToBoxAdapter(
             child: ListTile(
           onTap: () {},
-          leading: Icon(
-            Icons.location_pin,
-            color: secondary,
-          ),
+          leading: Icon(Icons.location_pin, color: colors.secondary),
           title: const Text("Av. Boulogne Sur Mer 302, Mendoza"),
           visualDensity: VisualDensity.compact,
         )),
@@ -89,16 +87,24 @@ class _ClubActivities extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverPadding(
-      padding: const EdgeInsets.only(top: 16),
+      padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 8),
       sliver: SliverList(
         delegate: SliverChildBuilderDelegate(
           (context, index) {
             String imagePath = "assets/images/futbol_regatas.jpg";
 
-            return ActivityCard(
-              title: "Hockey femenino",
-              imagePath: imagePath,
-              isCard: false,
+            return Column(
+              children: [
+                ActivityCard(
+                  title: "Hockey femenino",
+                  imagePath: imagePath,
+                  isCard: false,
+                ),
+                Divider(
+                  color: colors.primary,
+                  height: 8,
+                ),
+              ],
             );
           },
           childCount: 10,

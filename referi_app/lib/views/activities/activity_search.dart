@@ -38,10 +38,10 @@ class _Body extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(16, 16, 16, 40),
+      padding: const EdgeInsets.fromLTRB(16, 8, 16, 40),
       child: FutureBuilder<List<Activity>?>(
           future: ActivityController.obtainActivitiesByType(activity.id),
-          builder: (context, AsyncSnapshot snapshot) {
+          builder: (context, AsyncSnapshot<List<Activity>?> snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const LoadingAnimation();
             }
@@ -50,22 +50,22 @@ class _Body extends StatelessWidget {
               return const NotFoundAnimation();
             }
             return ListView.separated(
-                padding: const EdgeInsets.symmetric(vertical: 16),
-                itemBuilder: (context, index) {
-                  Activity activity = snapshot.data[index];
-                  String imagePath = "assets/images/futbol_regatas.jpg";
+              padding: const EdgeInsets.symmetric(vertical: 16),
+              itemBuilder: (context, index) {
+                Activity activity = snapshot.data![index];
 
-                  return ActivityCard(
-                    imagePath: imagePath,
-                    title: "Actividad",
-                    subtitle1: "Club Regatas",
-                    subtitle2: "9h a 12h",
-                    isCard: false,
-                  );
-                },
-                separatorBuilder: (context, index) =>
-                    Divider(height: 1, color: colors.primary.shade800),
-                itemCount: 10);
+                return ActivityCard(
+                  imagePath: activity.imgUrl,
+                  title: activity.nombre,
+                  subtitle1: activity.organizacion.nombre,
+                  subtitle2: activity.turnos.length.toString(),
+                  isCard: false,
+                );
+              },
+              separatorBuilder: (context, index) =>
+                  Divider(height: 1, color: colors.primary.shade800),
+              itemCount: snapshot.data!.length,
+            );
           }),
     );
   }

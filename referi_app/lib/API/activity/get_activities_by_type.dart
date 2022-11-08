@@ -16,8 +16,7 @@ Future<List<Activity>?> getActivitiesByType(String activityId) async {
     List<Activity> activityList = [];
 
     for (var activity in value.data['data']) {
-      // activityList.add(Activity.fromJson(activity));
-      print(activityId);
+      activityList.add(Activity.fromJson(activity));
     }
     return activityList;
   }).onError((error, stackTrace) {

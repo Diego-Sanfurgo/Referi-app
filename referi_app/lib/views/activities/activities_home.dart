@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:referi_app/theme/animations/loading_animation.dart';
+import 'package:referi_app/API/params.dart';
 
 import '../../controllers/activity_controller.dart';
 import '../../controllers/navigation_controller.dart';
@@ -49,7 +49,7 @@ class _ActivityGrid extends StatelessWidget {
         future: ActivityController.obtainActivityTypes(),
         builder: (context, AsyncSnapshot<List<GridActivity>> snapshot) {
           if (!snapshot.hasData) {
-            return const LoadingAnimation();
+            return const Center(child: CircularProgressIndicator());
           }
 
           return GridView.builder(
@@ -91,7 +91,7 @@ class _ActivityCard extends StatelessWidget {
         child: Stack(
           fit: StackFit.expand,
           children: [
-            Image.asset(activity.imgUrl, fit: BoxFit.cover),
+            Image.network(activity.imgUrl, fit: BoxFit.cover),
             Container(color: activity.color),
             Center(
               child: AutoSizeText(
