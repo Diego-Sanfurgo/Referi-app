@@ -48,6 +48,10 @@ abstract class ImageUrls {
   static const String deleteImage = "$_baseUrl/uploads/";
 }
 
+abstract class ShiftUrls {
+  static const String getShiftById = "$_baseUrl/actividades/turno/";
+}
+
 Map<String, String> getUserToken() {
   String token = AppProviders.userProviderDeaf.currentUserModel!.accessToken;
   return {"Authorization": "bearer $token"};

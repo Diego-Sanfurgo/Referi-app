@@ -48,12 +48,13 @@ class _MyActivities extends StatelessWidget {
                 padEnds: false,
                 itemBuilder: (context, index) {
                   String imagePath = "assets/images/futbol_regatas.jpg";
+                  return SizedBox();
 
-                  return ActivityCard(
-                    imagePath: imagePath,
-                    title: "Futbol 11 juvenil",
-                    subtitle1: "Club Regatas",
-                  );
+                  // return ActivityCard(
+                  //   imagePath: imagePath,
+                  //   title: "Futbol 11 juvenil",
+                  //   subtitle1: "Club Regatas",
+                  // );
                 },
               ),
             ),

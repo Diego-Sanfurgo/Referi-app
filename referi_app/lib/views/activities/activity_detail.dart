@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:referi_app/controllers/activity_controller.dart';
+import 'package:referi_app/models/activity.dart';
 
 import 'package:sizer/sizer.dart';
 import 'package:auto_size_text/auto_size_text.dart';
@@ -11,17 +13,18 @@ class ActivityDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final imagePath = ModalRoute.of(context)!.settings.arguments as String;
+    final activity = ModalRoute.of(context)!.settings.arguments as Activity;
 
     return Scaffold(
       appBar: AppBar(title: const Text("Detalle de actividad")),
-      body: const _Body(),
+      body: _Body(activity),
     );
   }
 }
 
 class _Body extends StatelessWidget {
-  const _Body({Key? key}) : super(key: key);
+  final Activity activity;
+  const _Body(this.activity, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -32,10 +35,10 @@ class _Body extends StatelessWidget {
           sliver: SliverToBoxAdapter(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [
-                _HeaderActivity(),
-                _TimeRanges(),
-                _Fees(),
+              children: [
+                _HeaderActivity(activity),
+                _TimeRanges(activity.turnos),
+                const _Fees(),
               ],
             ),
           ),
@@ -60,12 +63,11 @@ class _Body extends StatelessWidget {
 }
 
 class _HeaderActivity extends StatelessWidget {
-  const _HeaderActivity({Key? key}) : super(key: key);
+  final Activity activity;
+  const _HeaderActivity(this.activity, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    String imagePath = "assets/images/futbol_regatas.jpg";
-
     return Container(
       width: 100.w,
       decoration: BoxDecoration(
@@ -79,27 +81,34 @@ class _HeaderActivity extends StatelessWidget {
             clipBehavior: Clip.hardEdge,
             margin: const EdgeInsets.only(bottom: 16),
             decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
-            child: Image.asset(
-              imagePath,
-              fit: BoxFit.cover,
-              width: 100.w,
-              height: 25.h,
-            ),
+            child: activity.imgUrl != null
+                ? Image.network(
+                    activity.imgUrl!,
+                    fit: BoxFit.cover,
+                    width: 100.w,
+                    height: 25.h,
+                  )
+                : Image.asset(
+                    "assets/images/no_image_placeholder.png",
+                    fit: BoxFit.cover,
+                    width: 100.w,
+                    height: 25.h,
+                  ),
           ),
           Container(
             padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const AutoSizeText(
-                  "Activity name",
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                AutoSizeText(
+                  activity.nombre,
+                  style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
-                const AutoSizeText("Club regatas"),
+                AutoSizeText(activity.organizacion.nombre),
                 GestureDetector(
                   onTap: () => NavigationController.goTo(Routes.clubDetail),
                   child: AutoSizeText(
-                    "Ver más actividades del club",
+                    "Ver más actividades de este lugar",
                     style: TextStyle(color: colors.secondaryDark),
                   ),
                 )
@@ -113,22 +122,27 @@ class _HeaderActivity extends StatelessWidget {
 }
 
 class _TimeRanges extends StatelessWidget {
-  const _TimeRanges({Key? key}) : super(key: key);
+  final List<Turno> timeRanges;
+  const _TimeRanges(this.timeRanges, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    List<_TimeExpansionTile> timeTiles = [];
+
+    for (var shift in timeRanges) {
+      timeTiles.add(_TimeExpansionTile(shift));
+    }
+
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 24),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: const [
-          AutoSizeText(
+        children: [
+          const AutoSizeText(
             "Seleccionar horario",
             style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
           ),
-          _TimeExpansionTile(),
-          _TimeExpansionTile(),
-          _TimeExpansionTile(),
+          ...timeTiles,
         ],
       ),
     );
@@ -136,7 +150,8 @@ class _TimeRanges extends StatelessWidget {
 }
 
 class _TimeExpansionTile extends StatefulWidget {
-  const _TimeExpansionTile({Key? key}) : super(key: key);
+  final Turno shift;
+  const _TimeExpansionTile(this.shift, {Key? key}) : super(key: key);
 
   @override
   State<_TimeExpansionTile> createState() => _TimeExpansionTileState();
@@ -147,36 +162,45 @@ class _TimeExpansionTileState extends State<_TimeExpansionTile> {
 
   @override
   Widget build(BuildContext context) {
-    return ExpansionTile(
-      controlAffinity: ListTileControlAffinity.leading,
-      trailing: Checkbox(
-          value: boxValue,
-          onChanged: (value) {
-            boxValue = value!;
-            setState(() {});
-          }),
-      tilePadding: EdgeInsets.zero,
-      title: const Text("Horario prueba"),
-      children: const [
-        ListTile(
-          dense: true,
-          title: Text("Lunes"),
-          trailing: Text("16 a 20"),
-          visualDensity: VisualDensity.compact,
-        ),
-        ListTile(
-          dense: true,
-          title: Text("Miércoles"),
-          trailing: Text("16 a 20"),
-          visualDensity: VisualDensity.compact,
-        ),
-        ListTile(
-          dense: true,
-          title: Text("Viernes"),
-          trailing: Text("16 a 20"),
-          visualDensity: VisualDensity.compact,
-        )
-      ],
+    return FutureBuilder(
+      future: ActivityController.obtainShift(widget.shift.id),
+      builder: (BuildContext context, AsyncSnapshot snapshot) {
+        if (snapshot.connectionState != ConnectionState.done) {
+          return const Center(child: LinearProgressIndicator());
+        }
+
+        return ExpansionTile(
+          controlAffinity: ListTileControlAffinity.leading,
+          trailing: Checkbox(
+              value: boxValue,
+              onChanged: (value) {
+                boxValue = value!;
+                setState(() {});
+              }),
+          tilePadding: EdgeInsets.zero,
+          title: Text(widget.shift.id),
+          children: const [
+            ListTile(
+              dense: true,
+              title: Text("Lunes"),
+              trailing: Text("16 a 20"),
+              visualDensity: VisualDensity.compact,
+            ),
+            ListTile(
+              dense: true,
+              title: Text("Miércoles"),
+              trailing: Text("16 a 20"),
+              visualDensity: VisualDensity.compact,
+            ),
+            ListTile(
+              dense: true,
+              title: Text("Viernes"),
+              trailing: Text("16 a 20"),
+              visualDensity: VisualDensity.compact,
+            )
+          ],
+        );
+      },
     );
   }
 }

@@ -95,11 +95,11 @@ class _ClubActivities extends StatelessWidget {
 
             return Column(
               children: [
-                ActivityCard(
-                  title: "Hockey femenino",
-                  imagePath: imagePath,
-                  isCard: false,
-                ),
+                // ActivityCard(
+                //   title: "Hockey femenino",
+                //   imagePath: imagePath,
+                //   isCard: false,
+                // ),
                 Divider(
                   color: colors.primary,
                   height: 8,

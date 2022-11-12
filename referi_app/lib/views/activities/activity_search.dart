@@ -54,16 +54,10 @@ class _Body extends StatelessWidget {
               itemBuilder: (context, index) {
                 Activity activity = snapshot.data![index];
 
-                return ActivityCard(
-                  imagePath: activity.imgUrl,
-                  title: activity.nombre,
-                  subtitle1: activity.organizacion.nombre,
-                  subtitle2: activity.turnos.length.toString(),
-                  isCard: false,
-                );
+                return ActivityCard(activity, isCard: false);
               },
               separatorBuilder: (context, index) =>
-                  Divider(height: 1, color: colors.primary.shade800),
+                  Divider(height: 8, color: colors.primary.shade800),
               itemCount: snapshot.data!.length,
             );
           }),

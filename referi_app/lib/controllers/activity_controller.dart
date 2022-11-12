@@ -12,4 +12,7 @@ abstract class ActivityController {
       String activityId) async {
     return await ActivityHandler.obtainActivitiesByType(activityId);
   }
+
+  static Future<List> obtainShift(String shiftId) async =>
+      await ActivityHandler.obtainShift(shiftId);
 }
