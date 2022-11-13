@@ -40,7 +40,7 @@ ButtonStyle _elevatedButtonStyle = ButtonStyle(
     minimumSize: MaterialStateProperty.all(const Size(double.infinity, 36)),
     textStyle: MaterialStateProperty.all(
         const TextStyle(fontWeight: FontWeight.w600, fontSize: 14)),
-    foregroundColor: MaterialStateProperty.all(Colors.black),
+    foregroundColor: MaterialStateProperty.all(Colors.white),
     backgroundColor: MaterialStateProperty.resolveWith((states) {
       if (states.contains(MaterialState.disabled)) {
         return const Color(0XFFD9D9D9);

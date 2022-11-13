@@ -74,64 +74,64 @@ class Turno {
       };
 }
 
-class Tarifas {
-  Tarifas({
-    required this.id,
-    required this.nombre,
-    required this.monto,
-    required this.esOpcional,
-    required this.fechaCreacion,
-    required this.fechaActualizacion,
-    required this.fechaBaja,
-  });
+// class Tarifas {
+//   Tarifas({
+//     required this.id,
+//     required this.nombre,
+//     required this.monto,
+//     required this.esOpcional,
+//     required this.fechaCreacion,
+//     required this.fechaActualizacion,
+//     required this.fechaBaja,
+//   });
 
-  final String id;
-  final String nombre;
-  final int monto;
-  final bool esOpcional;
-  final DateTime fechaCreacion;
-  final DateTime fechaActualizacion;
-  final dynamic fechaBaja;
+//   final String id;
+//   final String nombre;
+//   final int monto;
+//   final bool esOpcional;
+//   final DateTime fechaCreacion;
+//   final DateTime fechaActualizacion;
+//   final dynamic fechaBaja;
 
-  // Tarifas copyWith({
-  //   String id,
-  //   String nombre,
-  //   int monto,
-  //   bool esOpcional,
-  //   DateTime fechaCreacion,
-  //   DateTime fechaActualizacion,
-  //   dynamic fechaBaja,
-  // }) =>
-  //     Tarifas(
-  //       id: id ?? this.id,
-  //       nombre: nombre ?? this.nombre,
-  //       monto: monto ?? this.monto,
-  //       esOpcional: esOpcional ?? this.esOpcional,
-  //       fechaCreacion: fechaCreacion ?? this.fechaCreacion,
-  //       fechaActualizacion: fechaActualizacion ?? this.fechaActualizacion,
-  //       fechaBaja: fechaBaja ?? this.fechaBaja,
-  //     );
+//   // Tarifas copyWith({
+//   //   String id,
+//   //   String nombre,
+//   //   int monto,
+//   //   bool esOpcional,
+//   //   DateTime fechaCreacion,
+//   //   DateTime fechaActualizacion,
+//   //   dynamic fechaBaja,
+//   // }) =>
+//   //     Tarifas(
+//   //       id: id ?? this.id,
+//   //       nombre: nombre ?? this.nombre,
+//   //       monto: monto ?? this.monto,
+//   //       esOpcional: esOpcional ?? this.esOpcional,
+//   //       fechaCreacion: fechaCreacion ?? this.fechaCreacion,
+//   //       fechaActualizacion: fechaActualizacion ?? this.fechaActualizacion,
+//   //       fechaBaja: fechaBaja ?? this.fechaBaja,
+//   //     );
 
-  factory Tarifas.fromJson(Map<String, dynamic> json) => Tarifas(
-        id: json["id"],
-        nombre: json["nombre"],
-        monto: json["monto"],
-        esOpcional: json["esOpcional"],
-        fechaCreacion: DateTime.parse(json["fechaCreacion"]),
-        fechaActualizacion: DateTime.parse(json["fechaActualizacion"]),
-        fechaBaja: json["fechaBaja"],
-      );
+//   factory Tarifas.fromJson(Map<String, dynamic> json) => Tarifas(
+//         id: json["id"],
+//         nombre: json["nombre"],
+//         monto: json["monto"],
+//         esOpcional: json["esOpcional"],
+//         fechaCreacion: DateTime.parse(json["fechaCreacion"]),
+//         fechaActualizacion: DateTime.parse(json["fechaActualizacion"]),
+//         fechaBaja: json["fechaBaja"],
+//       );
 
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "nombre": nombre,
-        "monto": monto,
-        "esOpcional": esOpcional,
-        "fechaCreacion": fechaCreacion.toIso8601String(),
-        "fechaActualizacion": fechaActualizacion.toIso8601String(),
-        "fechaBaja": fechaBaja,
-      };
-}
+//   Map<String, dynamic> toJson() => {
+//         "id": id,
+//         "nombre": nombre,
+//         "monto": monto,
+//         "esOpcional": esOpcional,
+//         "fechaCreacion": fechaCreacion.toIso8601String(),
+//         "fechaActualizacion": fechaActualizacion.toIso8601String(),
+//         "fechaBaja": fechaBaja,
+//       };
+// }
 
 class Estado {
   Estado({
@@ -162,6 +162,7 @@ class Estado {
   factory Estado.fromJson(Map<String, dynamic> json) => Estado(
         id: json["id"],
         estado: json["estado"],
+        //
         fechaCreacion: DateTime.parse(json["fechaCreacion"]),
         fechaBaja: json["fechaBaja"],
       );

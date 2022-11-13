@@ -2,6 +2,7 @@ import 'package:referi_app/handlers/activity_handler.dart';
 import 'package:referi_app/models/grid_activity.dart';
 
 import '../models/activity.dart';
+import '../models/turno.dart';
 
 abstract class ActivityController {
   static Future<List<GridActivity>> obtainActivityTypes() async {
@@ -13,6 +14,6 @@ abstract class ActivityController {
     return await ActivityHandler.obtainActivitiesByType(activityId);
   }
 
-  static Future<List> obtainShift(String shiftId) async =>
+  static Future<Turno?> obtainShift(String shiftId) async =>
       await ActivityHandler.obtainShift(shiftId);
 }

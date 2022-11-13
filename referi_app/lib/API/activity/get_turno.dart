@@ -3,7 +3,7 @@ import 'package:referi_app/API/params.dart';
 
 import '../../models/turno.dart';
 
-Future<Turno?> getShift(String shiftId) async {
+Future<Turno?> getTurno(String shiftId) async {
   Dio dio = Dio();
 
   return await dio

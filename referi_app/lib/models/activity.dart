@@ -36,8 +36,8 @@ class Activity {
   // final DateTime? fechaBaja;
   final Organizacion organizacion;
   final Tipo tipo;
-  final List<Turno> turnos;
-  final List<Tarifas> tarifas;
+  final List<TurnoId> turnos;
+  final List<Tarifa> tarifas;
 
   Activity copyWith({
     String? id,
@@ -50,8 +50,8 @@ class Activity {
     // dynamic fechaBaja,
     Organizacion? organizacion,
     Tipo? tipo,
-    List<Turno>? turnos,
-    List<Tarifas>? tarifas,
+    List<TurnoId>? turnos,
+    List<Tarifa>? tarifas,
   }) =>
       Activity(
         id: id ?? this.id,
@@ -79,9 +79,9 @@ class Activity {
         // fechaBaja: json["fechaBaja"],
         organizacion: Organizacion.fromJson(json["organizacion"]),
         tipo: Tipo.fromJson(json["tipo"]),
-        turnos: List<Turno>.from(json["turnos"].map((x) => Turno.fromJson(x))),
-        tarifas: List<Tarifas>.from(
-            json["__tarifas__"].map((x) => Tarifas.fromJson(x))),
+        turnos: List<TurnoId>.from(json["turnos"].map((x) => TurnoId.fromJson(x))),
+        tarifas: List<Tarifa>.from(
+            json["__tarifas__"].map((x) => Tarifa.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -171,8 +171,8 @@ class Organizacion {
       };
 }
 
-class Tarifas {
-  Tarifas({
+class Tarifa {
+  Tarifa({
     required this.id,
     required this.nombre,
     required this.monto,
@@ -190,7 +190,7 @@ class Tarifas {
   // final DateTime fechaActualizacion;
   // final dynamic fechaBaja;
 
-  Tarifas copyWith({
+  Tarifa copyWith({
     String? id,
     String? nombre,
     int? monto,
@@ -199,7 +199,7 @@ class Tarifas {
     // DateTime fechaActualizacion,
     // dynamic fechaBaja,
   }) =>
-      Tarifas(
+      Tarifa(
         id: id ?? this.id,
         nombre: nombre ?? this.nombre,
         monto: monto ?? this.monto,
@@ -209,7 +209,7 @@ class Tarifas {
         // fechaBaja: fechaBaja ?? this.fechaBaja,
       );
 
-  factory Tarifas.fromJson(Map<String, dynamic> json) => Tarifas(
+  factory Tarifa.fromJson(Map<String, dynamic> json) => Tarifa(
         id: json["id"],
         nombre: json["nombre"],
         monto: json["monto"],
@@ -277,8 +277,8 @@ class Tipo {
       };
 }
 
-class Turno {
-  Turno({
+class TurnoId {
+  TurnoId({
     required this.id,
     // required this.fechaCreacion,
     // required this.fechaActualizacion,
@@ -290,20 +290,20 @@ class Turno {
   // final DateTime fechaActualizacion;
   // final dynamic fechaBaja;
 
-  Turno copyWith({
+  TurnoId copyWith({
     String? id,
     // DateTime fechaCreacion,
     // DateTime fechaActualizacion,
     // dynamic fechaBaja,
   }) =>
-      Turno(
+      TurnoId(
         id: id ?? this.id,
         // fechaCreacion: fechaCreacion ?? this.fechaCreacion,
         // fechaActualizacion: fechaActualizacion ?? this.fechaActualizacion,
         // fechaBaja: fechaBaja ?? this.fechaBaja,
       );
 
-  factory Turno.fromJson(Map<String, dynamic> json) => Turno(
+  factory TurnoId.fromJson(Map<String, dynamic> json) => TurnoId(
         id: json["id"],
         // fechaCreacion: DateTime.parse(json["fechaCreacion"]),
         // fechaActualizacion: DateTime.parse(json["fechaActualizacion"]),

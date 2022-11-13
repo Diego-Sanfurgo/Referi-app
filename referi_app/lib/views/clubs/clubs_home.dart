@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:shimmer/shimmer.dart';
 
 import 'package:sizer/sizer.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 
 import '../../controllers/navigation_controller.dart';
+import '../../controllers/organization_controller.dart';
 import '../../widgets/activity_card.dart';
 
 class ClubsHome extends StatelessWidget {
@@ -22,6 +24,40 @@ class _MyActivities extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var activityCards = FutureBuilder(
+      future: OrganizationController.obtainOrganizations(),
+      builder: (BuildContext context, AsyncSnapshot snapshot) {
+        if (snapshot.connectionState != ConnectionState.done) {
+          return Shimmer.fromColors(
+              baseColor: Colors.grey,
+              highlightColor: Colors.grey.shade300,
+              child: SizedBox(height: 10.h));
+        }
+        return ConstrainedBox(
+          constraints: BoxConstraints.expand(height: 10.h),
+          child: PageView.builder(
+            controller: PageController(initialPage: 0, viewportFraction: 0.8),
+            scrollDirection: Axis.horizontal,
+            physics: const BouncingScrollPhysics(),
+            itemCount: 4,
+            padEnds: false,
+            itemBuilder: (context, index) {
+              String imagePath = "assets/images/futbol_regatas.jpg";
+              return SizedBox(
+                child: Text("PRUEBA"),
+              );
+
+              // return ActivityCard(
+              //   imagePath: imagePath,
+              //   title: "Futbol 11 juvenil",
+              //   subtitle1: "Club Regatas",
+              // );
+            },
+          ),
+        );
+      },
+    );
+
     return SliverPadding(
       padding: const EdgeInsets.fromLTRB(0, 16, 0, 16),
       sliver: SliverToBoxAdapter(
@@ -35,27 +71,6 @@ class _MyActivities extends StatelessWidget {
                 style: TextStyle(fontWeight: FontWeight.w500),
                 maxFontSize: 26,
                 minFontSize: 22,
-              ),
-            ),
-            ConstrainedBox(
-              constraints: BoxConstraints.expand(height: 10.h),
-              child: PageView.builder(
-                controller:
-                    PageController(initialPage: 0, viewportFraction: 0.8),
-                scrollDirection: Axis.horizontal,
-                physics: const BouncingScrollPhysics(),
-                itemCount: 4,
-                padEnds: false,
-                itemBuilder: (context, index) {
-                  String imagePath = "assets/images/futbol_regatas.jpg";
-                  return SizedBox();
-
-                  // return ActivityCard(
-                  //   imagePath: imagePath,
-                  //   title: "Futbol 11 juvenil",
-                  //   subtitle1: "Club Regatas",
-                  // );
-                },
               ),
             ),
           ],

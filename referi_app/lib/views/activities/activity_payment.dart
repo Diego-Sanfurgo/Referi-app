@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
+import 'package:sizer/sizer.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+
+import 'package:referi_app/models/activity.dart';
 
 import '../../controllers/navigation_controller.dart';
 import '../../theme/colors.dart' as colors;
@@ -10,27 +13,28 @@ class ActivityPayment extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Activity activity = ModalRoute.of(context)!.settings.arguments as Activity;
+
     return Scaffold(
       appBar: AppBar(title: const Text("Pago")),
-      body: const _Body(),
+      body: _Body(activity),
     );
   }
 }
 
 class _Body extends StatelessWidget {
-  const _Body({Key? key}) : super(key: key);
+  final Activity activity;
+  const _Body(this.activity, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(16, 24, 16, 40),
       child: Column(
-        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const _ActivityCardDetail(),
+          _ActivityCardDetail(activity),
           const SizedBox(height: 24),
-          const _ActivityFees(),
-          // SizedBox(height: 20.h),
+          _ActivityFees(activity.tarifas),
           const Spacer(),
           ElevatedButton(
               onPressed: () =>
@@ -43,10 +47,23 @@ class _Body extends StatelessWidget {
 }
 
 class _ActivityCardDetail extends StatelessWidget {
-  const _ActivityCardDetail({Key? key}) : super(key: key);
+  final Activity activity;
+  const _ActivityCardDetail(this.activity, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    Widget cardDetails = Padding(
+      padding: const EdgeInsets.all(16),
+      child: Column(
+        children: [
+          _CardInfoRow(label: "Actividad", value: activity.nombre),
+          _CardInfoRow(
+              label: "Institución", value: activity.organizacion.nombre),
+          const _CardInfoRow(label: "Horario elegido", value: "Turno 1")
+        ],
+      ),
+    );
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -56,32 +73,14 @@ class _ActivityCardDetail extends StatelessWidget {
           maxFontSize: 26,
           style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
         ),
-        Card(
-          margin: const EdgeInsets.only(top: 16),
-          elevation: 5,
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-          child: Column(
-            children: [
-              ListTile(
-                visualDensity: VisualDensity.compact,
-                leading: AutoSizeText("Actividad:",
-                    style: TextStyle(color: Colors.grey.shade600)),
-                trailing: const AutoSizeText("Nombre Actividad"),
-              ),
-              ListTile(
-                visualDensity: VisualDensity.compact,
-                leading: AutoSizeText("Club:",
-                    style: TextStyle(color: Colors.grey.shade600)),
-                trailing: const AutoSizeText("Nombre Club"),
-              ),
-              ListTile(
-                visualDensity: VisualDensity.compact,
-                leading: AutoSizeText("Horario elegido:",
-                    style: TextStyle(color: Colors.grey.shade600)),
-                trailing: const AutoSizeText("Toda la semana"),
-              ),
-            ],
+        SizedBox(
+          width: 100.w,
+          child: Card(
+            margin: const EdgeInsets.only(top: 16),
+            elevation: 5,
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+            child: cardDetails,
           ),
         ),
       ],
@@ -89,36 +88,69 @@ class _ActivityCardDetail extends StatelessWidget {
   }
 }
 
-class _ActivityFees extends StatelessWidget {
-  const _ActivityFees({Key? key}) : super(key: key);
+class _CardInfoRow extends StatelessWidget {
+  final String label;
+  final String value;
+  const _CardInfoRow({
+    Key? key,
+    required this.label,
+    required this.value,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          AutoSizeText(
+            label,
+            style: TextStyle(color: Colors.grey.shade600),
+            maxFontSize: 16,
+            minFontSize: 12,
+          ),
+          AutoSizeText(
+            value,
+            maxFontSize: 18,
+            minFontSize: 16,
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _ActivityFees extends StatelessWidget {
+  final List<Tarifa> fees;
+  const _ActivityFees(this.fees, {Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    int totalSum = 0;
+    List<Widget> feesTiles = [];
+
+    for (var fee in fees) {
+      feesTiles.add(_CardInfoRow(label: fee.nombre, value: "\$${fee.monto}"));
+      totalSum += fee.monto;
+    }
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        const AutoSizeText(
-          "Resumen de pago",
-          minFontSize: 20,
-          maxFontSize: 26,
-          style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+        const Padding(
+          padding: EdgeInsets.only(bottom: 16),
+          child: AutoSizeText(
+            "Resumen de pago",
+            minFontSize: 20,
+            maxFontSize: 26,
+            style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+          ),
         ),
-        const ListTile(
-          leading: AutoSizeText("Inscripción"),
-          trailing: AutoSizeText("\$1500"),
-          visualDensity: VisualDensity.compact,
-        ),
-        const ListTile(
-          leading: AutoSizeText("Pago mensual"),
-          trailing: AutoSizeText("\$2800"),
-          visualDensity: VisualDensity.compact,
-        ),
+        ...feesTiles,
         Divider(color: colors.primary),
-        const ListTile(
-          leading: AutoSizeText("Total"),
-          trailing: AutoSizeText("\$4300"),
-          visualDensity: VisualDensity.compact,
-        ),
+        _CardInfoRow(label: "Total", value: "\$$totalSum")
       ],
     );
   }
