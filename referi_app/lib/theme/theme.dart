@@ -12,23 +12,24 @@ ThemeData _referiTheme = ThemeData(
   inputDecorationTheme: _inputDecorationTheme,
   elevatedButtonTheme: ElevatedButtonThemeData(style: _elevatedButtonStyle),
   appBarTheme: _appBarTheme,
-  bottomNavigationBarTheme: _barTheme,
+  // bottomNavigationBarTheme: _barTheme,
   listTileTheme: _tileThemeData,
 );
 
 ListTileThemeData _tileThemeData =
     const ListTileThemeData(iconColor: Colors.black87);
 
-BottomNavigationBarThemeData _barTheme = BottomNavigationBarThemeData(
-  elevation: 4,
-  backgroundColor: colors.primary.shade400,
-  // selectedItemColor: colors.secondaryDark,
-  selectedItemColor: Colors.white,
-  unselectedItemColor: Colors.black87,
-  type: BottomNavigationBarType.fixed,
-  unselectedLabelStyle: const TextStyle(fontSize: 12),
-  selectedLabelStyle: const TextStyle(fontSize: 12),
-);
+// BottomNavigationBarThemeData _barTheme = BottomNavigationBarThemeData(
+//   elevation: 4,
+//   backgroundColor: colors.primary.shade400,
+//   // selectedItemColor: colors.secondaryDark,
+//   selectedItemColor: Colors.black,
+//   unselectedItemColor: Colors.black87,
+//   type: BottomNavigationBarType.fixed,
+//   unselectedLabelStyle: const TextStyle(fontSize: 12),
+//   selectedLabelStyle:
+//       const TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+// );
 
 InputDecorationTheme _inputDecorationTheme = const InputDecorationTheme(
   border: OutlineInputBorder(),

@@ -52,6 +52,10 @@ abstract class ShiftUrls {
   static const String getShiftById = "$_baseUrl/actividades/turno/";
 }
 
+abstract class AssociatesUrls{
+  static const getActivitiesByUserId = "$_baseUrl/socios/usuario/";
+}
+
 Map<String, String> getUserToken() {
   String token = AppProviders.userProviderDeaf.currentUserModel!.accessToken;
   return {"Authorization": "bearer $token"};

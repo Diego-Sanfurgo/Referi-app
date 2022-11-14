@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:referi_app/API/params.dart';
 
 import '../../controllers/activity_controller.dart';
 import '../../controllers/navigation_controller.dart';
@@ -74,9 +73,9 @@ class _ActivityGrid extends StatelessWidget {
 }
 
 class _ActivityCard extends StatelessWidget {
-  final GridActivity activity;
+  final GridActivity gridActivity;
 
-  const _ActivityCard(this.activity, {Key? key}) : super(key: key);
+  const _ActivityCard(this.gridActivity, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -87,15 +86,15 @@ class _ActivityCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
         onTap: () => NavigationController.goToWithArguments(
             Routes.activitySearch,
-            args: activity),
+            args: gridActivity),
         child: Stack(
           fit: StackFit.expand,
           children: [
-            Image.network(activity.imgUrl, fit: BoxFit.cover),
-            Container(color: activity.color),
+            Image.network(gridActivity.imgUrl!, fit: BoxFit.cover),
+            Container(color: gridActivity.color),
             Center(
               child: AutoSizeText(
-                activity.tipo.toUpperCase(),
+                gridActivity.tipo.toUpperCase(),
                 textAlign: TextAlign.center,
                 style: const TextStyle(
                     fontWeight: FontWeight.w900,

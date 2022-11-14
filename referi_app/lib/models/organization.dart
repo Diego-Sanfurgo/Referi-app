@@ -4,6 +4,8 @@
 
 import 'dart:convert';
 
+import 'package:referi_app/utils/network_assets_urls.dart';
+
 Organization organizationFromJson(String str) =>
     Organization.fromJson(json.decode(str));
 
@@ -37,7 +39,7 @@ class Organization {
   factory Organization.fromJson(Map<String, dynamic> json) => Organization(
         id: json["id"],
         nombre: json["nombre"],
-        logo: json["logo"],
+        logo: getImageUrl(json["logo"]),
         descripcion: json["descripcion"],
         telefono: json["telefono"],
         email: json["email"],

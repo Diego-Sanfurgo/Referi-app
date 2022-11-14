@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:shimmer/shimmer.dart';
 
 import 'package:sizer/sizer.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 
+import '../../models/activity.dart';
+import '../../controllers/user_controller.dart';
+import '../../theme/animations/activities_not_found.dart';
+
+import '../../models/organization.dart';
+import '../../widgets/activity_card.dart';
 import '../../controllers/navigation_controller.dart';
 import '../../controllers/organization_controller.dart';
-import '../../widgets/activity_card.dart';
 
 class ClubsHome extends StatelessWidget {
   const ClubsHome({Key? key}) : super(key: key);
@@ -24,15 +28,17 @@ class _MyActivities extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var activityCards = FutureBuilder(
-      future: OrganizationController.obtainOrganizations(),
-      builder: (BuildContext context, AsyncSnapshot snapshot) {
+    var activityCards = FutureBuilder<List<Activity>>(
+      future: UserController.obtainUserActivities(),
+      builder: (BuildContext context, AsyncSnapshot<List<Activity>> snapshot) {
         if (snapshot.connectionState != ConnectionState.done) {
-          return Shimmer.fromColors(
-              baseColor: Colors.grey,
-              highlightColor: Colors.grey.shade300,
-              child: SizedBox(height: 10.h));
+          return const Center(child: LinearProgressIndicator());
         }
+
+        if (!snapshot.hasData || snapshot.data!.isEmpty) {
+          return NotFoundAnimation(size: 10.h);
+        }
+
         return ConstrainedBox(
           constraints: BoxConstraints.expand(height: 10.h),
           child: PageView.builder(
@@ -42,16 +48,7 @@ class _MyActivities extends StatelessWidget {
             itemCount: 4,
             padEnds: false,
             itemBuilder: (context, index) {
-              String imagePath = "assets/images/futbol_regatas.jpg";
-              return SizedBox(
-                child: Text("PRUEBA"),
-              );
-
-              // return ActivityCard(
-              //   imagePath: imagePath,
-              //   title: "Futbol 11 juvenil",
-              //   subtitle1: "Club Regatas",
-              // );
+              return ActivityCard(snapshot.data![index]);
             },
           ),
         );
@@ -73,6 +70,7 @@ class _MyActivities extends StatelessWidget {
                 minFontSize: 22,
               ),
             ),
+            activityCards
           ],
         ),
       ),
@@ -87,23 +85,65 @@ class _Institutions extends StatelessWidget {
   Widget build(BuildContext context) {
     return SliverPadding(
       padding: const EdgeInsets.all(16),
-      sliver: SliverList(
-        delegate: SliverChildListDelegate([
-          const _ClubCard('assets/images/clubs/club_obras.png'),
-          const _ClubCard('assets/images/clubs/club_regatas.png'),
-          const _ClubCard('assets/images/clubs/club_tomba.png'),
-        ]),
+      sliver: SliverToBoxAdapter(
+        child: FutureBuilder<List<Organization>>(
+          future: OrganizationController.obtainOrganizations(),
+          builder: (BuildContext context,
+              AsyncSnapshot<List<Organization>> snapshot) {
+            if (snapshot.connectionState != ConnectionState.done) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+
+            if (!snapshot.hasData || snapshot.data!.isEmpty) {
+              return NotFoundAnimation(size: 10.h);
+            }
+            List<Widget> list = [];
+
+            for (var organization in snapshot.data!) {
+              list.add(_ClubCard(organization));
+            }
+            return Column(children: [
+              const Padding(
+                padding: EdgeInsets.only(bottom: 16),
+                child: AutoSizeText(
+                  "Clubes y gimnasios",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontWeight: FontWeight.w500),
+                  maxFontSize: 26,
+                  minFontSize: 22,
+                ),
+              ),
+              ...list
+            ]);
+          },
+        ),
       ),
     );
   }
 }
 
 class _ClubCard extends StatelessWidget {
-  final String imagePath;
-  const _ClubCard(this.imagePath, {Key? key}) : super(key: key);
+  final Organization organization;
+  const _ClubCard(this.organization, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    late final Widget imageLogo;
+    try {
+      imageLogo = Image.network(
+        organization.logo!,
+        fit: BoxFit.fill,
+        errorBuilder: (context, error, stackTrace) => Image.asset(
+            "assets/images/no_image_placeholder.png",
+            fit: BoxFit.fill),
+      );
+    } catch (e) {
+      imageLogo = Image.asset("assets/images/no_image_placeholder.png",
+          fit: BoxFit.fill);
+    }
+
     return Container(
       width: double.infinity,
       height: 30.h,
@@ -121,22 +161,22 @@ class _ClubCard extends StatelessWidget {
             alignment: Alignment.center,
             fit: StackFit.expand,
             children: [
-              Image.asset(imagePath, fit: BoxFit.contain),
+              imageLogo,
               Align(
                 alignment: Alignment.bottomCenter,
                 child: Container(
                   color: const Color.fromRGBO(0, 0, 0, 0.7),
                   height: 10.h,
                   width: double.infinity,
-                  child: const ListTile(
-                    contentPadding: EdgeInsets.all(8),
+                  child: ListTile(
+                    contentPadding: const EdgeInsets.all(8),
                     title: Text(
-                      "Club Obras",
-                      style: TextStyle(color: Colors.white),
+                      organization.nombre,
+                      style: const TextStyle(color: Colors.white),
                     ),
                     subtitle: Text(
-                      "Avenida siempre viva S/N",
-                      style: TextStyle(color: Colors.white),
+                      "${organization.direccion.calle} ${organization.direccion.numero}",
+                      style: const TextStyle(color: Colors.white),
                     ),
                   ),
                 ),
