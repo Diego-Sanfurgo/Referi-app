@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:referi_app/providers/app_providers.dart';
+import 'package:referi_app/controllers/activity_controller.dart';
 
 import 'package:sizer/sizer.dart';
 import 'package:auto_size_text/auto_size_text.dart';
@@ -8,6 +8,7 @@ import 'package:expandable_text/expandable_text.dart';
 import '../../models/activity.dart';
 import '../../theme/colors.dart' as colors;
 import '../../controllers/navigation_controller.dart';
+import '../../providers/app_providers.dart';
 
 import '../../widgets/activities/fees.dart';
 import '../../widgets/activities/time_ranges.dart';
@@ -19,9 +20,15 @@ class ActivityDetail extends StatelessWidget {
   Widget build(BuildContext context) {
     final activity = ModalRoute.of(context)!.settings.arguments as Activity;
 
-    return Scaffold(
-      appBar: AppBar(title: const Text("Detalle de actividad")),
-      body: _Body(activity),
+    return WillPopScope(
+      onWillPop: () {
+        ActivityController.clearTimeRange();
+        return Future.value(true);
+      },
+      child: Scaffold(
+        appBar: AppBar(title: const Text("Detalle de actividad")),
+        body: _Body(activity),
+      ),
     );
   }
 }
@@ -108,7 +115,9 @@ class _HeaderActivity extends StatelessWidget {
           child: ExpandableText(
             activity.descripcion!,
             expandText: "ver más",
+            collapseText: "ver menos",
             expandOnTextTap: true,
+            collapseOnTextTap: true,
             maxLines: 2,
             linkStyle: const TextStyle(fontWeight: FontWeight.bold),
             style: TextStyle(color: Colors.grey.shade700),

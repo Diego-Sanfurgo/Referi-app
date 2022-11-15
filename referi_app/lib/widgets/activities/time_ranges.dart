@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:referi_app/providers/app_providers.dart';
 
 import '../../models/turno.dart';
 import '../../models/activity.dart';
@@ -84,16 +85,18 @@ class _TimeExpansionTileState extends State<_TimeExpansionTile> {
           ));
         }
 
+        String label = "Turno ${widget.index + 1}";
         return ExpansionTile(
           controlAffinity: ListTileControlAffinity.leading,
           trailing: Checkbox(
               value: boxValue,
               onChanged: (value) {
                 boxValue = value!;
+                ActivityController.addTimeRange(turno.id, label, boxValue);
                 setState(() {});
               }),
           tilePadding: EdgeInsets.zero,
-          title: Text("Turno ${widget.index + 1}"),
+          title: Text(label),
           children: timeRange,
         );
       },

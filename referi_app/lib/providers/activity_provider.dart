@@ -4,10 +4,12 @@ import '../../models/activity.dart';
 
 class ActivityProvider extends ChangeNotifier {
   final Set<Activity> _activitySearched = {};
-  final ValueNotifier<bool> _activeFlag = ValueNotifier<bool>(false);
+  final ValueNotifier<bool> activityDetailFlag = ValueNotifier<bool>(false);
+  final Set<Map<String, String>> _timeRangesSelected = {};
 
   Set<Activity> get activitySearched => _activitySearched;
-  ValueNotifier<bool> get activeFlag => _activeFlag;
+  Set<Map<String, String>> get timeRangesSelected => _timeRangesSelected;
+  ValueNotifier<bool> get activeFlag => activityDetailFlag;
 
   void addActivityToSearchedList(Activity activity) {
     _activitySearched.add(activity);
@@ -15,7 +17,29 @@ class ActivityProvider extends ChangeNotifier {
   }
 
   setActiveFlagValue(bool value) {
-    _activeFlag.value = value;
+    activityDetailFlag.value = value;
+    notifyListeners();
+  }
+
+  addTimeRange(String turnoId, String label) {
+    _timeRangesSelected.add({turnoId: label});
+    activityDetailFlag.value = true;
+    notifyListeners();
+  }
+
+  deleteTimeRange(String id) {
+    // _timeRangesSelected.remove(id);
+    _timeRangesSelected.removeWhere((element) => element.keys.first == id);
+
+    if (_timeRangesSelected.isEmpty) {
+      activityDetailFlag.value = false;
+    }
+    notifyListeners();
+  }
+
+  clearTimeRanges() {
+    _timeRangesSelected.clear();
+    activityDetailFlag.value = false;
     notifyListeners();
   }
 }

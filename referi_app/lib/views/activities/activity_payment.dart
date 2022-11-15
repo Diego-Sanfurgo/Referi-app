@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:referi_app/controllers/activity_controller.dart';
+import 'package:referi_app/providers/app_providers.dart';
 
 import 'package:sizer/sizer.dart';
 import 'package:auto_size_text/auto_size_text.dart';
@@ -39,7 +41,14 @@ class _Body extends StatelessWidget {
           ElevatedButton(
               onPressed: () =>
                   NavigationController.goTo(Routes.activityPaymentData),
-              child: const Text("PAGAR"))
+              child: const Text("PAGAR")),
+          Container(
+            padding: const EdgeInsets.only(top: 8),
+            width: double.infinity,
+            child: OutlinedButton(
+                onPressed: () => ActivityController.reservePlace(activity),
+                child: const Text("RESERVAR CUPO")),
+          )
         ],
       ),
     );
@@ -52,6 +61,14 @@ class _ActivityCardDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var provider = AppProviders.activityProvider(context);
+    List<Widget> timeRanges = [];
+
+    for (var time in provider.timeRangesSelected) {
+      timeRanges.add(
+          _CardInfoRow(label: "Horario elegido", value: time.values.first));
+    }
+
     Widget cardDetails = Padding(
       padding: const EdgeInsets.all(16),
       child: Column(
@@ -59,7 +76,7 @@ class _ActivityCardDetail extends StatelessWidget {
           _CardInfoRow(label: "Actividad", value: activity.nombre),
           _CardInfoRow(
               label: "Institución", value: activity.organizacion.nombre),
-          const _CardInfoRow(label: "Horario elegido", value: "Turno 1")
+          ...timeRanges
         ],
       ),
     );

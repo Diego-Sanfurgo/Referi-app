@@ -4,8 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 import 'package:intl/intl.dart';
+import 'package:referi_app/controllers/activity_controller.dart';
 import 'package:referi_app/controllers/navigation_controller.dart';
 import 'package:referi_app/controllers/user_controller.dart';
+import 'package:referi_app/models/activity.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../utils/utils.dart' as util;
@@ -104,5 +106,37 @@ abstract class Alert {
         backgroundColor: Colors.black87,
         textColor: Colors.white,
         fontSize: 16.0);
+  }
+
+  static showReservePlaceMessage(Activity activity) async {
+    String textContent =
+        "Podés reservar tu lugar y pagar luego desde la app o en el establecimiento.\nLa reserva dura 3 días y se pierde si no se realizó ningún pago en este tiempo.\n¿Querés reservar?";
+    await showDialog(
+        context: _navigatorContext,
+        builder: (_) {
+          return AlertDialog(
+            content: Text(
+              textContent,
+              textAlign: TextAlign.center,
+            ),
+            actionsAlignment: MainAxisAlignment.center,
+            actions: [
+              TextButton(
+                onPressed: () => NavigationController.pop(),
+                child: Text(
+                  "CANCELAR",
+                  style: TextStyle(color: Colors.red.shade400),
+                ),
+              ),
+              TextButton(
+                onPressed: () async {
+                  NavigationController.pop();
+                  await ActivityController.enrollToActivity(activity);
+                },
+                child: const Text("RESERVAR"),
+              ),
+            ],
+          );
+        });
   }
 }
