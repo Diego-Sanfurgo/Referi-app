@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:referi_app/API/params.dart';
 import 'package:referi_app/providers/app_providers.dart';
@@ -11,10 +13,10 @@ Future postInscribirActividad() async {
         AppProviders.activityProviderDeaf.timeRangesSelected.first.keys.first,
   };
 
-  await dio
+  return await dio
       .post(
-    ActivityUrls.postInscripcion,
-    data: body.toString(),
+    AssociatesUrls.enrollUserToActivity,
+    data: jsonEncode(body),
     options: Options(headers: getUserToken()),
   )
       .then((value) {

@@ -34,7 +34,7 @@ class Organization {
   final DateTime fechaCreacion;
   final DateTime fechaActualizacion;
   final DateTime? fechaBaja;
-  final Direccion direccion;
+  final Direccion? direccion;
 
   factory Organization.fromJson(Map<String, dynamic> json) => Organization(
         id: json["id"],
@@ -45,8 +45,12 @@ class Organization {
         email: json["email"],
         fechaCreacion: DateTime.parse(json["fechaCreacion"]),
         fechaActualizacion: DateTime.parse(json["fechaActualizacion"]),
-        fechaBaja: json["fechaBaja"],
-        direccion: Direccion.fromJson(json["direccion"]),
+        fechaBaja: json["fechaBaja"] != null
+            ? DateTime.parse(json["fechaBaja"])
+            : json["fechaBaja"],
+        direccion: json["direccion"] != null
+            ? Direccion.fromJson(json["direccion"])
+            : json["direccion"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -59,7 +63,7 @@ class Organization {
         "fechaCreacion": fechaCreacion.toIso8601String(),
         "fechaActualizacion": fechaActualizacion.toIso8601String(),
         "fechaBaja": fechaBaja,
-        "direccion": direccion.toJson(),
+        "direccion": direccion?.toJson(),
       };
 }
 

@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:referi_app/widgets/activities/user_activities.dart';
 
 import 'package:sizer/sizer.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 
 import '../../models/activity.dart';
 import '../../controllers/user_controller.dart';
+import '../../models/enrollment.dart';
 import '../../theme/animations/activities_not_found.dart';
 
 import '../../models/organization.dart';
-import '../../widgets/activity_card.dart';
+import '../../widgets/activities/activity_card.dart';
 import '../../controllers/navigation_controller.dart';
 import '../../controllers/organization_controller.dart';
 
@@ -28,9 +30,10 @@ class _MyActivities extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var activityCards = FutureBuilder<List<Activity>>(
+    var activityCards = FutureBuilder<List<Enrollment>>(
       future: UserController.obtainUserActivities(),
-      builder: (BuildContext context, AsyncSnapshot<List<Activity>> snapshot) {
+      builder:
+          (BuildContext context, AsyncSnapshot<List<Enrollment>> snapshot) {
         if (snapshot.connectionState != ConnectionState.done) {
           return const Center(child: LinearProgressIndicator());
         }
@@ -45,10 +48,10 @@ class _MyActivities extends StatelessWidget {
             controller: PageController(initialPage: 0, viewportFraction: 0.8),
             scrollDirection: Axis.horizontal,
             physics: const BouncingScrollPhysics(),
-            itemCount: 4,
+            itemCount: snapshot.data!.length,
             padEnds: false,
             itemBuilder: (context, index) {
-              return ActivityCard(snapshot.data![index]);
+              return UserActivityCard(snapshot.data![index]);
             },
           ),
         );
@@ -175,7 +178,7 @@ class _ClubCard extends StatelessWidget {
                       style: const TextStyle(color: Colors.white),
                     ),
                     subtitle: Text(
-                      "${organization.direccion.calle} ${organization.direccion.numero}",
+                      "${organization.direccion!.calle} ${organization.direccion!.numero}",
                       style: const TextStyle(color: Colors.white),
                     ),
                   ),

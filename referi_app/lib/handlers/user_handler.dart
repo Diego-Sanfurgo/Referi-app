@@ -4,6 +4,7 @@ import 'package:referi_app/models/activity.dart';
 
 import '../API/users/patch_user.dart';
 import '../controllers/navigation_controller.dart';
+import '../models/enrollment.dart';
 
 abstract class UserHandler {
   static Future<bool> updateUser() async {
@@ -21,8 +22,8 @@ abstract class UserHandler {
     return true;
   }
 
-  static Future<List<Activity>> obtainerUserActivities() async {
-    List<Activity> list = await getUseractivities();
+  static Future<List<Enrollment>> obtainerUserActivities() async {
+    List<Enrollment> list = await getUserEnrollments();
 
     return list;
   }

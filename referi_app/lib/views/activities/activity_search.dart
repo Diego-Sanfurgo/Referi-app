@@ -4,7 +4,7 @@ import '../../models/activity.dart';
 import '../../models/grid_activity.dart';
 import '../../controllers/activity_controller.dart';
 
-import '../../widgets/activity_card.dart';
+import '../../widgets/activities/activity_card.dart';
 import '../../theme/animations/loading_animation.dart';
 import '../../theme/animations/activities_not_found.dart';
 

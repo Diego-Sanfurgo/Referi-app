@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 
-import 'package:referi_app/widgets/activity_card.dart';
+import 'package:referi_app/widgets/activities/activity_card.dart';
 import 'package:referi_app/theme/colors.dart' as colors;
 
 class ClubDetail extends StatelessWidget {

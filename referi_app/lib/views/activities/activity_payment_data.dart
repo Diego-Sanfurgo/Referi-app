@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:referi_app/controllers/activity_controller.dart';
 
 import 'package:referi_app/widgets/forms/textfields.dart';
 import 'package:flutter_credit_card/credit_card_brand.dart';
@@ -6,30 +7,35 @@ import 'package:flutter_credit_card/credit_card_widget.dart';
 
 import 'package:sizer/sizer.dart';
 
+import '../../models/activity.dart';
+
 class ActivityPaymentData extends StatelessWidget {
   const ActivityPaymentData({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    Activity activity = ModalRoute.of(context)?.settings.arguments as Activity;
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("Datos de pago"),
       ),
-      body: const _Body(),
+      body: _Body(activity),
     );
   }
 }
 
 class _Body extends StatelessWidget {
-  const _Body({Key? key}) : super(key: key);
+  final Activity activity;
+  const _Body(this.activity, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return const CustomScrollView(
+    return CustomScrollView(
       slivers: <Widget>[
-        _CreditCard(),
-        _CardForm(),
-        _ActionBtn(),
+        const _CreditCard(),
+        const _CardForm(),
+        _ActionBtn(activity),
       ],
     );
   }
@@ -116,14 +122,18 @@ class _CardForm extends StatelessWidget {
 }
 
 class _ActionBtn extends StatelessWidget {
-  const _ActionBtn({Key? key}) : super(key: key);
+  final Activity activity;
+
+  const _ActionBtn(this.activity, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
       child: Padding(
         padding: const EdgeInsets.fromLTRB(16, 0, 16, 40),
-        child: ElevatedButton(onPressed: () {}, child: const Text("PAGAR")),
+        child: ElevatedButton(
+            onPressed: () => ActivityController.enrollAndPayActivity(activity),
+            child: const Text("PAGAR")),
       ),
     );
   }

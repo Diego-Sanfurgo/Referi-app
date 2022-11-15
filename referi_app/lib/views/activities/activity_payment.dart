@@ -39,8 +39,9 @@ class _Body extends StatelessWidget {
           _ActivityFees(activity.tarifas),
           const Spacer(),
           ElevatedButton(
-              onPressed: () =>
-                  NavigationController.goTo(Routes.activityPaymentData),
+              onPressed: () => NavigationController.goToWithArguments(
+                  Routes.activityPaymentData,
+                  args: activity),
               child: const Text("PAGAR")),
           Container(
             padding: const EdgeInsets.only(top: 8),

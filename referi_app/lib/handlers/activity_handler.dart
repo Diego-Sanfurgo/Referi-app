@@ -23,7 +23,7 @@ abstract class ActivityHandler {
     return await getTurno(shiftId);
   }
 
-  static enrollToActivity() async {
+  static Future<bool> enrollToActivity() async {
     Alert.showLoading();
     bool isOk = await postInscribirActividad();
     NavigationController.pop();

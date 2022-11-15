@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:referi_app/theme/animations/success_view.dart';
 import 'package:referi_app/views/account/account_home.dart';
 import 'package:referi_app/views/activities/activity_detail.dart';
+import 'package:referi_app/views/activities/activity_detail_enrolled.dart';
 import 'package:referi_app/views/activities/activity_payment.dart';
 import 'package:referi_app/views/activities/activity_payment_data.dart';
 import 'package:referi_app/views/activities/activity_search.dart';
@@ -45,6 +47,7 @@ Map<String, WidgetBuilder> routes = {
   //Activities
   'activitySearch': (_) => const ActivitySearch(),
   'activityDetail': (_) => const ActivityDetail(),
+  'activityDetailEnrolled': (_) => const ActivityDetailEnrolled(),
   'activityPayment': (_) => const ActivityPayment(),
   'activityPaymentData': (_) => const ActivityPaymentData(),
 
@@ -62,4 +65,7 @@ Map<String, WidgetBuilder> routes = {
 
   //Scanner
   'scanner': (_) => const Scanner(),
+
+  //Other
+  'successView': (_) => const SuccessView(),
 };

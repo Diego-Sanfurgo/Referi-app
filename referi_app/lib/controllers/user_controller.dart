@@ -8,6 +8,7 @@ import '../../handlers/user_handler.dart';
 import '../../providers/app_providers.dart';
 import '../../controllers/image_controller.dart';
 import '../models/activity.dart';
+import '../models/enrollment.dart';
 import '../utils/utils.dart' as util;
 
 import '../models/local_geolocation.dart';
@@ -46,7 +47,7 @@ abstract class UserController {
     addValueToUser(prov, 'provincia');
   }
 
-  static Future<List<Activity>> obtainUserActivities() async {
+  static Future<List<Enrollment>> obtainUserActivities() async {
     return await UserHandler.obtainerUserActivities();
   }
 }

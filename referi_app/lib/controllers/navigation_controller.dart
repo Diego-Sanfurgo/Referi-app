@@ -53,6 +53,7 @@ enum Routes {
   // activityHome,
   activitySearch,
   activityDetail,
+  activityDetailEnrolled,
   activityPayment,
   activityPaymentData,
 
@@ -65,4 +66,7 @@ enum Routes {
 
   //Scanner
   scanner,
+
+  //other
+  successView,
 }

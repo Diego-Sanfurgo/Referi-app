@@ -28,7 +28,7 @@ abstract class OrganizationUrls {
 }
 
 abstract class ActivityUrls {
-  static const String postInscripcion = "$_baseUrl/actividades/inscribir";
+  // static const String postInscripcion = "$_baseUrl/actividades/inscribir";
   static const String getActivities = "$_baseUrl/actividades/tipo";
   static const String getActivityById = "$_baseUrl/actividades/tipo/";
 }
@@ -52,8 +52,19 @@ abstract class ShiftUrls {
   static const String getShiftById = "$_baseUrl/actividades/turno/";
 }
 
-abstract class AssociatesUrls{
-  static const getActivitiesByUserId = "$_baseUrl/socios/usuario/";
+abstract class AssociatesUrls {
+  static const enrollUserToActivity = "$_baseUrl/socios";
+  static const getEnrollmentsByUserId = "$_baseUrl/socios/usuario/";
+  static const getActivitiesById = "$_baseUrl/socios/actividad/";
+}
+
+abstract class PaymentUrls {
+  static const postPayFee = "$_baseUrl/pagos";
+  static const getFeesByUserId = "$_baseUrl/pagos/cuotas/usuario/";
+}
+
+abstract class FeeUrls {
+  static const getFeesByactivityId = "$_baseUrl/tarifas/actividad/";
 }
 
 Map<String, String> getUserToken() {

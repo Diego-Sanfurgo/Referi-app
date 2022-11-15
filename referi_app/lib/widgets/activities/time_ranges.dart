@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:referi_app/providers/app_providers.dart';
 
 import '../../models/turno.dart';
 import '../../models/activity.dart';
