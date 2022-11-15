@@ -42,6 +42,9 @@ class _SuccessAnimation extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           const AutoSizeText("¡Pago realizado exitosamente!",
+              minFontSize: 20, maxFontSize: 24),
+          const SizedBox(height: 8),
+          const AutoSizeText("Ya te has inscripto en la actividad",
               minFontSize: 20, maxFontSize: 24)
         ],
       ),

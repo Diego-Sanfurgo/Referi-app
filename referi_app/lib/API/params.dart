@@ -60,6 +60,7 @@ abstract class AssociatesUrls {
 
 abstract class PaymentUrls {
   static const postPayFee = "$_baseUrl/pagos";
+  static const getPaymentById = "$_baseUrl/pagos/";
   static const getFeesByUserId = "$_baseUrl/pagos/cuotas/usuario/";
 }
 
