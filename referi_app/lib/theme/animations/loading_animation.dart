@@ -4,7 +4,6 @@ import 'package:sizer/sizer.dart';
 import 'package:lottie/lottie.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 
-
 class LoadingAnimation extends StatelessWidget {
   const LoadingAnimation({Key? key}) : super(key: key);
 

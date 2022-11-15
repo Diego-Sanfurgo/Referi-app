@@ -7,6 +7,7 @@ import 'package:referi_app/controllers/navigation_controller.dart';
 import '../../handlers/user_handler.dart';
 import '../../providers/app_providers.dart';
 import '../../controllers/image_controller.dart';
+import '../models/activity.dart';
 import '../utils/utils.dart' as util;
 
 import '../models/local_geolocation.dart';
@@ -43,5 +44,9 @@ abstract class UserController {
     String prov = actualLocation.ubicacion.provincia.nombre!;
     addValueToUser(dpto, 'ciudad');
     addValueToUser(prov, 'provincia');
+  }
+
+  static Future<List<Activity>> obtainUserActivities() async {
+    return await UserHandler.obtainerUserActivities();
   }
 }

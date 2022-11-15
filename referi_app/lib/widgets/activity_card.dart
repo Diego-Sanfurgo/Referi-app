@@ -10,13 +10,11 @@ import '../controllers/navigation_controller.dart';
 class ActivityCard extends StatelessWidget {
   final Activity activity;
   final bool isCard;
-  // final bool isThreeLine;
 
   const ActivityCard(
     this.activity, {
     Key? key,
     this.isCard = true,
-    // this.isThreeLine = false,
   }) : super(key: key);
 
   @override

@@ -5,7 +5,6 @@ import '../../models/grid_activity.dart';
 import '../../controllers/activity_controller.dart';
 
 import '../../widgets/activity_card.dart';
-import '../../theme/colors.dart' as colors;
 import '../../theme/animations/loading_animation.dart';
 import '../../theme/animations/activities_not_found.dart';
 
@@ -57,7 +56,6 @@ class _Body extends StatelessWidget {
                 return ActivityCard(activity, isCard: false);
               },
               separatorBuilder: (context, index) => const SizedBox(height: 8),
-                  // Divider(height: 8, color: colors.primary.shade800),
               itemCount: snapshot.data!.length,
             );
           }),

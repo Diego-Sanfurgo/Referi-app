@@ -241,7 +241,7 @@ class Tipo {
 
   final String id;
   final String tipo;
-  final String imgUrl;
+  final String? imgUrl;
   // final DateTime fechaCreacion;
   // final dynamic fechaBaja;
 

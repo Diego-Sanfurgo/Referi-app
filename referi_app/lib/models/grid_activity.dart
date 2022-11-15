@@ -20,7 +20,7 @@ class GridActivity {
   });
 
   final String id;
-  final String imgUrl;
+  final String? imgUrl;
   final String tipo;
   final Color color;
 
