@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:referi_app/providers/app_providers.dart';
 
 import 'package:sizer/sizer.dart';
 import 'package:auto_size_text/auto_size_text.dart';
@@ -31,6 +32,18 @@ class _Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Widget actionBtn = ValueListenableBuilder(
+      valueListenable: AppProviders.activityProvider(context).activeFlag,
+      builder: (BuildContext context, bool value, Widget? child) {
+        return ElevatedButton(
+            onPressed: value
+                ? () => NavigationController.goToWithArguments(
+                    Routes.activityPayment,
+                    args: activity)
+                : null,
+            child: const Text("INSCRIBIRSE"));
+      },
+    );
     return CustomScrollView(
       slivers: <Widget>[
         SliverPadding(
@@ -51,13 +64,7 @@ class _Body extends StatelessWidget {
               hasScrollBody: false,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  ElevatedButton(
-                      onPressed: () => NavigationController.goToWithArguments(
-                          Routes.activityPayment,
-                          args: activity),
-                      child: const Text("INSCRIBIRSE")),
-                ],
+                children: [actionBtn],
               )),
         ),
       ],
