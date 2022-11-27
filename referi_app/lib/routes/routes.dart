@@ -1,28 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:referi_app/theme/animations/success_view.dart';
-import 'package:referi_app/views/account/account_home.dart';
-import 'package:referi_app/views/activities/activity_detail.dart';
-import 'package:referi_app/views/activities/activity_detail_enrolled.dart';
-import 'package:referi_app/views/activities/activity_payment.dart';
-import 'package:referi_app/views/activities/activity_payment_data.dart';
-import 'package:referi_app/views/activities/activity_search.dart';
-import 'package:referi_app/views/clubs/club_detail.dart';
-import 'package:referi_app/views/clubs/clubs_home.dart';
-import 'package:referi_app/views/credential/credential_home.dart';
-import 'package:referi_app/views/credential/credential_detail.dart';
-import 'package:referi_app/views/login/login.dart';
-import 'package:referi_app/views/password%20recover/pass_recover.dart';
-import 'package:referi_app/views/profile/personal_data_edit.dart';
-import 'package:referi_app/views/scanner/scanner.dart';
 
 import '../../views/home.dart';
-import '../../views/notifications/notifications.dart';
-import '../../views/profile/personal_data.dart';
-import '../../views/profile/profile.dart';
-import '../views/account/operation_detail.dart';
+import '../../views/login/login.dart';
 import '../views/signup/signup_1.dart';
 import '../views/signup/signup_2.dart';
+import '../../views/profile/profile.dart';
+import '../../views/scanner/scanner.dart';
+import '../../views/clubs/clubs_home.dart';
+import '../../views/clubs/club_detail.dart';
+import '../../views/account/account_home.dart';
+import '../views/account/operation_detail.dart';
+import '../../views/profile/personal_data.dart';
+import '../../theme/animations/success_view.dart';
 import '../../views/signup/verification_code.dart';
+import '../../views/profile/personal_data_edit.dart';
+import '../../views/credential/credential_home.dart';
+import '../../views/activities/activity_detail.dart';
+import '../../views/notifications/notifications.dart';
+import '../../views/activities/activity_payment.dart';
+import '../../views/credential/credential_detail.dart';
+import '../../views/password%20recover/pass_recover.dart';
+import '../../views/activities/activity_payment_data.dart';
+import '../../views/activities/activity_detail_enrolled.dart';
+import '../../views/activities/activity_search/activity_search.dart';
 
 Map<String, WidgetBuilder> get routesMap => routes;
 

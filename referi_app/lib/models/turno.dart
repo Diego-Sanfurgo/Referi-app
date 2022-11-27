@@ -29,27 +29,6 @@ class Turno {
   final List<HorarioElement> horarios;
   final List<dynamic> inscriptos;
 
-  Turno copyWith({
-    String? id,
-    // DateTime? fechaCreacion,
-    // DateTime? fechaActualizacion,
-    // dynamic? fechaBaja,
-    // Activity? actividad,
-    Estado? estado,
-    List<HorarioElement>? horarios,
-    List<dynamic>? inscriptos,
-  }) =>
-      Turno(
-        id: id ?? this.id,
-        // fechaCreacion: fechaCreacion ?? this.fechaCreacion,
-        // fechaActualizacion: fechaActualizacion ?? this.fechaActualizacion,
-        // fechaBaja: fechaBaja ?? this.fechaBaja,
-        // actividad: actividad ?? this.actividad,
-        estado: estado ?? this.estado,
-        horarios: horarios ?? this.horarios,
-        inscriptos: inscriptos ?? this.inscriptos,
-      );
-
   factory Turno.fromJson(Map<String, dynamic> json) => Turno(
         id: json["id"],
         // fechaCreacion: DateTime.parse(json["fechaCreacion"]),

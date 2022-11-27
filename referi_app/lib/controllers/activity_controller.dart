@@ -16,7 +16,13 @@ abstract class ActivityController {
 
   static Future<List<Activity>?> obtainActivitiesByType(
       String activityId) async {
-    return await ActivityHandler.obtainActivitiesByType(activityId);
+    List<Activity>? activitiesSearched =
+        await ActivityHandler.obtainActivitiesByType(activityId);
+    if (activitiesSearched != null) {
+      AppProviders.activityProviderDeaf
+          .setActivitiesSearchedList(activitiesSearched);
+    }
+    return activitiesSearched;
   }
 
   static Future<Turno?> obtainShift(String shiftId) async =>

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-import '../../models/activity.dart';
-import '../../models/grid_activity.dart';
-import '../../controllers/activity_controller.dart';
+import '../../../models/activity.dart';
+import '../../../models/grid_activity.dart';
+import '../../../controllers/activity_controller.dart';
 
-import '../../widgets/activities/activity_card.dart';
-import '../../theme/animations/loading_animation.dart';
-import '../../theme/animations/activities_not_found.dart';
+import '../../../widgets/activities/activity_card.dart';
+import '../../../theme/animations/loading_animation.dart';
+import '../../../theme/animations/activities_not_found.dart';
 
 class ActivitySearch extends StatelessWidget {
   const ActivitySearch({Key? key}) : super(key: key);
@@ -15,6 +15,7 @@ class ActivitySearch extends StatelessWidget {
   Widget build(BuildContext context) {
     final GridActivity activity =
         ModalRoute.of(context)!.settings.arguments as GridActivity;
+
     return Scaffold(
       appBar: AppBar(
         title: Text(activity.tipo),
@@ -53,9 +54,13 @@ class _Body extends StatelessWidget {
               itemBuilder: (context, index) {
                 Activity activity = snapshot.data![index];
 
-                return ActivityCard(activity, isCard: false);
+                return ActivityCard(
+                  activity,
+                  isCard: false,
+                  heroId: "$index-img",
+                );
               },
-              separatorBuilder: (context, index) => const SizedBox(height: 8),
+              separatorBuilder: (context, index) => const SizedBox(height: 16),
               itemCount: snapshot.data!.length,
             );
           }),
