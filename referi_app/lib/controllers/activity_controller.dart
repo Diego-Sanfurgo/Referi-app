@@ -1,28 +1,17 @@
-import 'package:referi_app/controllers/alert_controller.dart';
-import 'package:referi_app/controllers/navigation_controller.dart';
-import 'package:referi_app/controllers/payment_controller.dart';
-import 'package:referi_app/handlers/activity_handler.dart';
-import 'package:referi_app/models/grid_activity.dart';
-import 'package:referi_app/providers/app_providers.dart';
-
-import '../models/activity.dart';
-import '../models/activity_fee_payment.dart';
 import '../models/turno.dart';
+import '../models/activity.dart';
+import '../models/grid_activity.dart';
+import '../models/activity_fee_payment.dart';
+
+import '../providers/app_providers.dart';
+import '../handlers/activity_handler.dart';
+import '../controllers/alert_controller.dart';
+import '../controllers/payment_controller.dart';
+import '../controllers/navigation_controller.dart';
 
 abstract class ActivityController {
   static Future<List<GridActivity>> obtainActivityTypes() async {
     return await ActivityHandler.obtainActivityTypes();
-  }
-
-  static Future<List<Activity>?> obtainActivitiesByType(
-      String activityId) async {
-    List<Activity>? activitiesSearched =
-        await ActivityHandler.obtainActivitiesByType(activityId);
-    if (activitiesSearched != null) {
-      AppProviders.activityProviderDeaf
-          .setActivitiesSearchedList(activitiesSearched);
-    }
-    return activitiesSearched;
   }
 
   static Future<Turno?> obtainShift(String shiftId) async =>

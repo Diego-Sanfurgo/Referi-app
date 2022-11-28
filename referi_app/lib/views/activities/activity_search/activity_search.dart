@@ -1,69 +1,72 @@
 import 'package:flutter/material.dart';
 
-import '../../../models/activity.dart';
-import '../../../models/grid_activity.dart';
-import '../../../controllers/activity_controller.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../widgets/activities/activity_card.dart';
-import '../../../theme/animations/loading_animation.dart';
-import '../../../theme/animations/activities_not_found.dart';
+import 'widgets/body.dart';
+import 'widgets/search_appbar.dart';
+import 'bloc/activity_search_bloc.dart';
+
+import '../../../models/grid_activity.dart';
 
 class ActivitySearch extends StatelessWidget {
-  const ActivitySearch({Key? key}) : super(key: key);
+  const ActivitySearch({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final GridActivity activity =
-        ModalRoute.of(context)!.settings.arguments as GridActivity;
-
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(activity.tipo),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.search_rounded),
-            onPressed: () {},
-          )
-        ],
-      ),
-      body: _Body(activity),
+    return BlocProvider(
+      create: (context) => ActivitySearchBloc(),
+      child: const _ActivitySearchView(),
     );
   }
 }
 
-class _Body extends StatelessWidget {
-  final GridActivity activity;
-  const _Body(this.activity, {Key? key}) : super(key: key);
+class _ActivitySearchView extends StatefulWidget {
+  const _ActivitySearchView({Key? key}) : super(key: key);
 
   @override
+  State<_ActivitySearchView> createState() => _ActivitySearchViewState();
+}
+
+class _ActivitySearchViewState extends State<_ActivitySearchView> {
+  @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(16, 8, 16, 40),
-      child: FutureBuilder<List<Activity>?>(
-          future: ActivityController.obtainActivitiesByType(activity.id),
-          builder: (context, AsyncSnapshot<List<Activity>?> snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return const LoadingAnimation();
-            }
+    final GridActivity activity =
+        ModalRoute.of(context)!.settings.arguments as GridActivity;
+    final blocProvider = BlocProvider.of<ActivitySearchBloc>(context);
+    bool isSearching = false;
 
-            if (!snapshot.hasData) {
-              return const NotFoundAnimation();
-            }
-            return ListView.separated(
-              padding: const EdgeInsets.symmetric(vertical: 16),
-              itemBuilder: (context, index) {
-                Activity activity = snapshot.data![index];
-
-                return ActivityCard(
-                  activity,
-                  isCard: false,
-                  heroId: "$index-img",
-                );
+    return WillPopScope(
+      onWillPop: () => _onWillPopFunction(blocProvider),
+      child: Scaffold(
+        appBar: AppBar(
+          title: SearchActivityAppbar(activity.tipo),
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.search_rounded),
+              onPressed: () {
+                isSearching = !isSearching;
+                blocProvider.add(SwitchAppbar(isSearching));
               },
-              separatorBuilder: (context, index) => const SizedBox(height: 16),
-              itemCount: snapshot.data!.length,
-            );
-          }),
+            )
+          ],
+        ),
+        body: Body(activity),
+      ),
     );
+  }
+}
+
+Future<bool> _onWillPopFunction(ActivitySearchBloc blocProvider) {
+  if (blocProvider.state is ActivitySearchResults) {
+    var actualState = blocProvider.state as ActivitySearchResults;
+
+    if (actualState.isSearching) {
+      blocProvider.add(ToInitial());
+      return Future.value(false);
+    } else {
+      return Future.value(true);
+    }
+  } else {
+    return Future.value(true);
   }
 }

@@ -20,7 +20,7 @@ ListTileThemeData _tileThemeData =
     const ListTileThemeData(iconColor: Colors.black87);
 
 BottomNavigationBarThemeData _barTheme = BottomNavigationBarThemeData(
-  elevation: 4,
+  // elevation: 6,
   // backgroundColor: colors.primary.shade400,
   backgroundColor: Colors.white,
   // selectedItemColor: colors.secondaryDark,

@@ -1,47 +1,81 @@
 import 'package:flutter/material.dart';
-import 'package:referi_app/models/activity.dart';
-import 'package:referi_app/providers/app_providers.dart';
 
-import '../../../../models/grid_activity.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../bloc/activity_search_bloc.dart';
 
 class SearchActivityAppbar extends StatefulWidget {
   final String activityType;
-  const SearchActivityAppbar(this.activityType, {super.key});
+  const SearchActivityAppbar(
+    this.activityType, {
+    super.key,
+  });
 
   @override
   State<SearchActivityAppbar> createState() => _SearchActivityAppbarState();
 }
 
 class _SearchActivityAppbarState extends State<SearchActivityAppbar> {
-  var title = const Text("");
-  var searchTitle = TextField();
-  var switcherWidget = Text("");
+  late Widget switcherWidget;
 
   @override
   Widget build(BuildContext context) {
-    title = Text(widget.activityType);
-    return AnimatedSwitcher(
-      duration: Duration(milliseconds: 300),
-      child: switcherWidget,
+    final title = Text(widget.activityType);
+    final searchTitle = _SearchTitle(widget.activityType);
+    switcherWidget = title;
+
+    return BlocBuilder<ActivitySearchBloc, ActivitySearchState>(
+      builder: (context, state) {
+        if (state is ActivitySearchInitial) {
+          switcherWidget = title;
+        }
+        if (state is SwitchedAppbarState) {
+          switcherWidget = searchTitle;
+        }
+        return AnimatedSwitcher(
+          duration: const Duration(milliseconds: 300),
+          child: switcherWidget,
+        );
+      },
     );
   }
 }
 
-class SearchTitle extends StatefulWidget {
-  const SearchTitle({super.key});
+class _SearchTitle extends StatefulWidget {
+  final String initialText;
+  const _SearchTitle(this.initialText);
 
   @override
-  State<SearchTitle> createState() => _SearchTitleState();
+  State<_SearchTitle> createState() => _SearchTitleState();
 }
 
-class _SearchTitleState extends State<SearchTitle> {
+class _SearchTitleState extends State<_SearchTitle> {
+  late final TextEditingController controller;
+  @override
+  void initState() {
+    super.initState();
+    controller = TextEditingController(text: widget.initialText);
+    BlocProvider.of<ActivitySearchBloc>(context)
+        .add(FilterList(widget.initialText));
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    List<Activity> list =
-        AppProviders.activityProvider(context).activitiesSearched;
     return TextField(
-      decoration: InputDecoration(hintText: "algo"),
-      onChanged: (value) {},
+      controller: controller,
+      cursorColor: Colors.black,
+      decoration: const InputDecoration(
+        hintText: "Actividad",
+        border: InputBorder.none,
+      ),
+      onChanged: (value) =>
+          BlocProvider.of<ActivitySearchBloc>(context).add(FilterList(value)),
     );
   }
 }
