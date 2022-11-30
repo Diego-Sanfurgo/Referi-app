@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:auto_size_text/auto_size_text.dart';
 
-import '../../models/activity.dart';
+import '../../models/tarifa.dart';
 
 class Fees extends StatelessWidget {
   final List<Tarifa> fees;

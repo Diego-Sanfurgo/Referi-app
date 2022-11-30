@@ -5,7 +5,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import '../../controllers/activity_controller.dart';
 import '../../controllers/navigation_controller.dart';
 
-import '../../models/grid_activity.dart';
+import '../../models/activity_type.dart';
 
 class ActivitiesHome extends StatelessWidget {
   const ActivitiesHome({Key? key}) : super(key: key);
@@ -44,9 +44,9 @@ class _ActivityGrid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
-      child: FutureBuilder<List<GridActivity>>(
+      child: FutureBuilder<List<ActivityType>>(
         future: ActivityController.obtainActivityTypes(),
-        builder: (context, AsyncSnapshot<List<GridActivity>> snapshot) {
+        builder: (context, AsyncSnapshot<List<ActivityType>> snapshot) {
           if (!snapshot.hasData) {
             return const Center(child: CircularProgressIndicator());
           }
@@ -73,7 +73,7 @@ class _ActivityGrid extends StatelessWidget {
 }
 
 class _ActivityCard extends StatelessWidget {
-  final GridActivity gridActivity;
+  final ActivityType gridActivity;
 
   const _ActivityCard(this.gridActivity, {Key? key}) : super(key: key);
 

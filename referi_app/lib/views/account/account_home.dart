@@ -1,11 +1,13 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+
 import 'package:intl/intl.dart';
-import 'package:referi_app/controllers/navigation_controller.dart';
-import 'package:referi_app/controllers/payment_controller.dart';
-import 'package:referi_app/theme/animations/activities_not_found.dart';
-import 'package:referi_app/theme/colors.dart';
-import 'package:referi_app/widgets/tile_leading_icon.dart';
+import 'package:auto_size_text/auto_size_text.dart';
+
+import '../../theme/colors.dart';
+import '../../widgets/tile_leading_icon.dart';
+import '../../controllers/payment_controller.dart';
+import '../../controllers/navigation_controller.dart';
+import '../../theme/animations/activities_not_found.dart';
 
 import '../../models/activity_fee_payment.dart';
 
@@ -14,11 +16,11 @@ class AccountHome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const CustomScrollView(
-      physics: BouncingScrollPhysics(),
+    return CustomScrollView(
+      physics: const BouncingScrollPhysics(),
       shrinkWrap: true,
       slivers: <Widget>[
-        SliverPadding(
+        const SliverPadding(
           padding: EdgeInsets.symmetric(vertical: 16, horizontal: 16),
           sliver: SliverToBoxAdapter(
             child: AutoSizeText(
@@ -28,86 +30,10 @@ class AccountHome extends StatelessWidget {
           ),
         ),
         SliverToBoxAdapter(
-          child: _AccountActivity(),
+          child: RefreshIndicator(
+              onRefresh: () => PaymentController.getUserFees(),
+              child: const _AccountActivity()),
         ),
-        // SliverToBoxAdapter(
-        //   child: ListView.separated(
-        //     physics: const NeverScrollableScrollPhysics(),
-        //     shrinkWrap: true,
-        //     itemCount: 10,
-        //     separatorBuilder: (context, index) =>
-        //         Divider(color: primary.shade800, height: 0),
-        //     itemBuilder: (context, index) {
-        //       if (index == 4) {
-        //         return ListTile(
-        //           onTap: () =>
-        //               NavigationController.goTo(Routes.operationDetail),
-        //           leading: const TileLeadingIcon(Icons.draw_rounded),
-        //           title: const Text("Inscipción",
-        //               style: TextStyle(fontWeight: FontWeight.bold)),
-        //           subtitle: const Text("Club Andino"),
-        //           trailing: Column(
-        //             crossAxisAlignment: CrossAxisAlignment.end,
-        //             mainAxisAlignment: MainAxisAlignment.center,
-        //             children: [
-        //               const Text("\$2500",
-        //                   style: TextStyle(fontWeight: FontWeight.bold)),
-        //               Text(DateFormat.Md('es, ES')
-        //                   .format(DateTime.now())
-        //                   .toString()),
-        //             ],
-        //           ),
-        //         );
-        //       } else if (index > 4) {
-        //         return ListTile(
-        //           onTap: () =>
-        //               NavigationController.goTo(Routes.operationDetail),
-        //           leading: TileLeadingIcon(
-        //             Icons.payments_rounded,
-        //             color: Colors.green[400],
-        //           ),
-        //           title: const Text("Pago de cuota",
-        //               style: TextStyle(fontWeight: FontWeight.bold)),
-        //           subtitle: const Text("Club Obras"),
-        //           trailing: Column(
-        //             crossAxisAlignment: CrossAxisAlignment.end,
-        //             mainAxisAlignment: MainAxisAlignment.center,
-        //             children: [
-        //               const Text("\$2500",
-        //                   style: TextStyle(fontWeight: FontWeight.bold)),
-        //               Text(DateFormat.Md('es, ES')
-        //                   .format(DateTime.now())
-        //                   .toString()),
-        //             ],
-        //           ),
-        //         );
-        //       } else {
-        //         return ListTile(
-        //           onTap: () =>
-        //               NavigationController.goTo(Routes.operationDetail),
-        //           leading: TileLeadingIcon(
-        //             Icons.priority_high_rounded,
-        //             color: Colors.red[400],
-        //           ),
-        //           title: const Text("Pago de cuota rechazado",
-        //               style: TextStyle(fontWeight: FontWeight.bold)),
-        //           subtitle: const Text("Club Obras"),
-        //           trailing: Column(
-        //             crossAxisAlignment: CrossAxisAlignment.end,
-        //             mainAxisAlignment: MainAxisAlignment.center,
-        //             children: [
-        //               const Text("\$2500",
-        //                   style: TextStyle(fontWeight: FontWeight.bold)),
-        //               Text(DateFormat.Md('es, ES')
-        //                   .format(DateTime.now())
-        //                   .toString()),
-        //             ],
-        //           ),
-        //         );
-        //       }
-        //     },
-        //   ),
-        // )
       ],
     );
   }
@@ -148,24 +74,14 @@ class _AccountActivity extends StatelessWidget {
           if (cuota.pago == null && isExpired) {
             icon = Icons.priority_high_rounded;
             iconColor = Colors.red.shade400;
-            statusText = "Vencido$statusText";
+            statusText = "Vencido $statusText";
           }
 
-          listTiles.add(ListTile(
-            onTap: () => NavigationController.goTo(Routes.operationDetail),
-            leading: TileLeadingIcon(icon, color: iconColor),
-            title: Text(cuota.tarifa.nombre,
-                style: const TextStyle(fontWeight: FontWeight.bold)),
-            subtitle: Text(cuota.tarifa.actividad.nombre),
-            trailing: Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text("\$${cuota.tarifa.monto}",
-                    style: const TextStyle(fontWeight: FontWeight.bold)),
-                Text(statusText),
-              ],
-            ),
+          listTiles.add(_OperationTile(
+            cuota: cuota,
+            icon: icon,
+            iconColor: iconColor,
+            statusText: statusText,
           ));
         }
 
@@ -180,6 +96,43 @@ class _AccountActivity extends StatelessWidget {
           },
         );
       },
+    );
+  }
+}
+
+class _OperationTile extends StatelessWidget {
+  const _OperationTile({
+    Key? key,
+    required this.cuota,
+    required this.icon,
+    required this.iconColor,
+    required this.statusText,
+  }) : super(key: key);
+
+  final ActivityFeePayment cuota;
+  final IconData icon;
+  final Color iconColor;
+  final String statusText;
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      onTap: () => NavigationController.goToWithArguments(
+          Routes.operationDetail,
+          args: cuota),
+      leading: TileLeadingIcon(icon, color: iconColor),
+      title: Text(cuota.tarifa.nombre,
+          style: const TextStyle(fontWeight: FontWeight.bold)),
+      subtitle: Text(cuota.actividad.nombre),
+      trailing: Column(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text("\$${cuota.tarifa.monto}",
+              style: const TextStyle(fontWeight: FontWeight.bold)),
+          Text(statusText),
+        ],
+      ),
     );
   }
 }

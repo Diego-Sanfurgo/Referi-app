@@ -2,7 +2,7 @@ import 'package:referi_app/controllers/navigation_controller.dart';
 
 import '../../models/turno.dart';
 import '../../models/activity.dart';
-import '../../models/grid_activity.dart';
+import '../models/activity_type.dart';
 import '../../API/activity/get_turno.dart';
 import '../../controllers/alert_controller.dart';
 import '../../API/activity/get_activity_type.dart';
@@ -10,7 +10,7 @@ import '../../API/activity/get_activities_by_type.dart';
 import '../../API/activity/post_inscribir_actividad.dart';
 
 abstract class ActivityHandler {
-  static Future<List<GridActivity>> obtainActivityTypes() async {
+  static Future<List<ActivityType>> obtainActivityTypes() async {
     return await getActivityTypes();
   }
 

@@ -1,16 +1,16 @@
 import 'package:dio/dio.dart';
 
 import 'package:referi_app/API/params.dart';
-import 'package:referi_app/models/grid_activity.dart';
+import 'package:referi_app/models/activity_type.dart';
 
-Future<List<GridActivity>> getActivityTypes() async {
+Future<List<ActivityType>> getActivityTypes() async {
   Dio dio = Dio();
-  List<GridActivity> activities = [];
+  List<ActivityType> activities = [];
 
   return await dio.get(ActivityUrls.getActivities).then((value) {
     for (var activity in value.data['data']) {
       if (activities.length <= 11 && activity['tipo'] != "Hockey") {
-        activities.insert(0, GridActivity.fromJson(activity));
+        activities.insert(0, ActivityType.fromJson(activity));
       }
     }
 

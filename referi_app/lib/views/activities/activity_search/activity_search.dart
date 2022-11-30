@@ -6,7 +6,7 @@ import 'widgets/body.dart';
 import 'widgets/search_appbar.dart';
 import 'bloc/activity_search_bloc.dart';
 
-import '../../../models/grid_activity.dart';
+import '../../../models/activity_type.dart';
 
 class ActivitySearch extends StatelessWidget {
   const ActivitySearch({super.key});
@@ -30,8 +30,8 @@ class _ActivitySearchView extends StatefulWidget {
 class _ActivitySearchViewState extends State<_ActivitySearchView> {
   @override
   Widget build(BuildContext context) {
-    final GridActivity activity =
-        ModalRoute.of(context)!.settings.arguments as GridActivity;
+    final ActivityType activity =
+        ModalRoute.of(context)!.settings.arguments as ActivityType;
     final blocProvider = BlocProvider.of<ActivitySearchBloc>(context);
     bool isSearching = false;
 

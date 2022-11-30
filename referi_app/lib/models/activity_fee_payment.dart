@@ -4,6 +4,8 @@
 
 import 'dart:convert';
 
+import 'package:referi_app/models/pago.dart';
+import 'package:referi_app/models/tarifa.dart';
 import 'package:referi_app/utils/network_assets_urls.dart';
 
 ActivityFeePayment activityFeePaymentFromJson(String str) =>
@@ -24,7 +26,7 @@ class ActivityFeePayment {
     this.fechaBaja,
     required this.tarifa,
     this.pago,
-    required this.inscripcion,
+    required this.actividad,
   });
 
   final String id;
@@ -35,24 +37,26 @@ class ActivityFeePayment {
   final DateTime fechaCreacion;
   final DateTime fechaActualizacion;
   final dynamic fechaBaja;
-  final TarifaPayment tarifa;
-  final dynamic pago;
-  final Inscripcion inscripcion;
+  final Tarifa tarifa;
+  final Pago? pago;
+  final ActivityPayment actividad;
+  // final Inscripcion inscripcion;
 
   factory ActivityFeePayment.fromJson(Map<String, dynamic> json) =>
       ActivityFeePayment(
-        id: json["id"],
-        monto: json["monto"],
-        periodoInicio: DateTime.parse(json["periodoInicio"]),
-        periodoFin: DateTime.parse(json["periodoFin"]),
-        fechaVencimiento: DateTime.parse(json["fechaVencimiento"]),
-        fechaCreacion: DateTime.parse(json["fechaCreacion"]),
-        fechaActualizacion: DateTime.parse(json["fechaActualizacion"]),
-        fechaBaja: json["fechaBaja"],
-        tarifa: TarifaPayment.fromJson(json["tarifa"]),
-        pago: json["pago"],
-        inscripcion: Inscripcion.fromJson(json["inscripcion"]),
-      );
+          id: json["id"],
+          monto: json["monto"],
+          periodoInicio: DateTime.parse(json["periodoInicio"]),
+          periodoFin: DateTime.parse(json["periodoFin"]),
+          fechaVencimiento: DateTime.parse(json["fechaVencimiento"]),
+          fechaCreacion: DateTime.parse(json["fechaCreacion"]),
+          fechaActualizacion: DateTime.parse(json["fechaActualizacion"]),
+          fechaBaja: json["fechaBaja"],
+          tarifa: Tarifa.fromJson(json["tarifa"]),
+          pago: json["pago"] != null ? Pago.fromJson(json["pago"]) : null,
+          actividad: ActivityPayment.fromJson(json["tarifa"]["actividad"])
+          // inscripcion: Inscripcion.fromJson(json["inscripcion"]),
+          );
 
   Map<String, dynamic> toJson() => {
         "id": id,
@@ -65,123 +69,123 @@ class ActivityFeePayment {
         "fechaBaja": fechaBaja,
         "tarifa": tarifa.toJson(),
         "pago": pago,
-        "inscripcion": inscripcion.toJson(),
+        // "inscripcion": inscripcion.toJson(),
       };
 }
 
-class Inscripcion {
-  Inscripcion({
-    required this.id,
-    required this.fechaCreacion,
-    required this.fechaActualizacion,
-    this.fechaBaja,
-  });
+// class Inscripcion {
+//   Inscripcion({
+//     required this.id,
+//     required this.fechaCreacion,
+//     required this.fechaActualizacion,
+//     this.fechaBaja,
+//   });
 
-  final String id;
-  final DateTime fechaCreacion;
-  final DateTime fechaActualizacion;
-  final dynamic fechaBaja;
+//   final String id;
+//   final DateTime fechaCreacion;
+//   final DateTime fechaActualizacion;
+//   final dynamic fechaBaja;
 
-  factory Inscripcion.fromJson(Map<String, dynamic> json) => Inscripcion(
-        id: json["id"],
-        fechaCreacion: DateTime.parse(json["fechaCreacion"]),
-        fechaActualizacion: DateTime.parse(json["fechaActualizacion"]),
-        fechaBaja: json["fechaBaja"],
-      );
+//   factory Inscripcion.fromJson(Map<String, dynamic> json) => Inscripcion(
+//         id: json["id"],
+//         fechaCreacion: DateTime.parse(json["fechaCreacion"]),
+//         fechaActualizacion: DateTime.parse(json["fechaActualizacion"]),
+//         fechaBaja: json["fechaBaja"],
+//       );
 
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "fechaCreacion": fechaCreacion.toIso8601String(),
-        "fechaActualizacion": fechaActualizacion.toIso8601String(),
-        "fechaBaja": fechaBaja,
-      };
-}
+//   Map<String, dynamic> toJson() => {
+//         "id": id,
+//         "fechaCreacion": fechaCreacion.toIso8601String(),
+//         "fechaActualizacion": fechaActualizacion.toIso8601String(),
+//         "fechaBaja": fechaBaja,
+//       };
+// }
 
-class TarifaPayment {
-  TarifaPayment({
-    required this.id,
-    required this.nombre,
-    required this.monto,
-    required this.esOpcional,
-    required this.fechaCreacion,
-    required this.fechaActualizacion,
-    this.fechaBaja,
-    required this.actividad,
-  });
+// class TarifaPayment {
+//   TarifaPayment({
+//     required this.id,
+//     required this.nombre,
+//     required this.monto,
+//     required this.esOpcional,
+//     // required this.fechaCreacion,
+//     required this.fechaActualizacion,
+//     // this.fechaBaja,
+//     // required this.actividad,
+//   });
 
-  final String id;
-  final String nombre;
-  final int monto;
-  final bool esOpcional;
-  final DateTime fechaCreacion;
-  final DateTime fechaActualizacion;
-  final dynamic fechaBaja;
-  final ActivityPayment actividad;
+//   final String id;
+//   final String nombre;
+//   final int monto;
+//   final bool esOpcional;
+//   // final DateTime fechaCreacion;
+//   final DateTime fechaActualizacion;
+//   // final dynamic fechaBaja;
+//   // final ActivityPayment actividad;
 
-  factory TarifaPayment.fromJson(Map<String, dynamic> json) => TarifaPayment(
-        id: json["id"],
-        nombre: json["nombre"],
-        monto: json["monto"],
-        esOpcional: json["esOpcional"],
-        fechaCreacion: DateTime.parse(json["fechaCreacion"]),
-        fechaActualizacion: DateTime.parse(json["fechaActualizacion"]),
-        fechaBaja: json["fechaBaja"],
-        actividad: ActivityPayment.fromJson(json["actividad"]),
-      );
+//   factory TarifaPayment.fromJson(Map<String, dynamic> json) => TarifaPayment(
+//         id: json["id"],
+//         nombre: json["nombre"],
+//         monto: json["monto"],
+//         esOpcional: json["esOpcional"],
+//         // fechaCreacion: DateTime.parse(json["fechaCreacion"]),
+//         fechaActualizacion: DateTime.parse(json["fechaActualizacion"]),
+//         // fechaBaja: json["fechaBaja"],
+//         // actividad: ActivityPayment.fromJson(json["actividad"]),
+//       );
 
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "nombre": nombre,
-        "monto": monto,
-        "esOpcional": esOpcional,
-        "fechaCreacion": fechaCreacion.toIso8601String(),
-        "fechaActualizacion": fechaActualizacion.toIso8601String(),
-        "fechaBaja": fechaBaja,
-        "actividad": actividad.toJson(),
-      };
-}
+//   Map<String, dynamic> toJson() => {
+//         "id": id,
+//         "nombre": nombre,
+//         "monto": monto,
+//         "esOpcional": esOpcional,
+//         // "fechaCreacion": fechaCreacion.toIso8601String(),
+//         "fechaActualizacion": fechaActualizacion.toIso8601String(),
+//         // "fechaBaja": fechaBaja,
+//         // "actividad": actividad.toJson(),
+//       };
+// }
 
 class ActivityPayment {
   ActivityPayment({
     required this.id,
     required this.nombre,
-    required this.descripcion,
-    required this.cupo,
+    // required this.descripcion,
+    // required this.cupo,
     this.imgUrl,
-    required this.fechaCreacion,
+    // required this.fechaCreacion,
     required this.fechaActualizacion,
-    this.fechaBaja,
+    // this.fechaBaja,
   });
 
   final String id;
   final String nombre;
-  final String descripcion;
-  final int cupo;
+  // final String descripcion;
+  // final int cupo;
   final String? imgUrl;
-  final DateTime fechaCreacion;
+  // final DateTime fechaCreacion;
   final DateTime fechaActualizacion;
-  final dynamic fechaBaja;
+  // final dynamic fechaBaja;
 
   factory ActivityPayment.fromJson(Map<String, dynamic> json) =>
       ActivityPayment(
         id: json["id"],
         nombre: json["nombre"],
-        descripcion: json["descripcion"],
-        cupo: json["cupo"],
+        // descripcion: json["descripcion"],
+        // cupo: json["cupo"],
         imgUrl: getImageUrl(json["imgUrl"]),
-        fechaCreacion: DateTime.parse(json["fechaCreacion"]),
+        // fechaCreacion: DateTime.parse(json["fechaCreacion"]),
         fechaActualizacion: DateTime.parse(json["fechaActualizacion"]),
-        fechaBaja: json["fechaBaja"],
+        // fechaBaja: json["fechaBaja"],
       );
 
   Map<String, dynamic> toJson() => {
         "id": id,
         "nombre": nombre,
-        "descripcion": descripcion,
-        "cupo": cupo,
+        // "descripcion": descripcion,
+        // "cupo": cupo,
         "imgUrl": imgUrl,
-        "fechaCreacion": fechaCreacion.toIso8601String(),
+        // "fechaCreacion": fechaCreacion.toIso8601String(),
         "fechaActualizacion": fechaActualizacion.toIso8601String(),
-        "fechaBaja": fechaBaja,
+        // "fechaBaja": fechaBaja,
       };
 }

@@ -4,8 +4,10 @@
 
 import 'dart:convert';
 
-import 'package:referi_app/models/organization.dart';
-import 'package:referi_app/utils/network_assets_urls.dart';
+import '../../models/tarifa.dart';
+import '../../models/organization.dart';
+import '../../models/activity_type.dart';
+import '../../utils/network_assets_urls.dart';
 
 Activity activityFromJson(String str) => Activity.fromJson(json.decode(str));
 
@@ -36,7 +38,7 @@ class Activity {
   // final DateTime fechaActualizacion;
   // final DateTime? fechaBaja;
   final Organization organizacion;
-  final Tipo tipo;
+  final ActivityType tipo;
   final List<TurnoId> turnos;
   final List<Tarifa> tarifas;
 
@@ -47,7 +49,7 @@ class Activity {
         cupo: json["cupo"],
         imgUrl: getImageUrl(json["imgUrl"]),
         organizacion: Organization.fromJson(json["organizacion"]),
-        tipo: Tipo.fromJson(json["tipo"]),
+        tipo: ActivityType.fromJson(json["tipo"]),
         turnos:
             List<TurnoId>.from(json["turnos"].map((x) => TurnoId.fromJson(x))),
         tarifas: List<Tarifa>.from(
@@ -67,59 +69,29 @@ class Activity {
       };
 }
 
-class Tarifa {
-  Tarifa({
-    required this.id,
-    required this.nombre,
-    required this.monto,
-    required this.esOpcional,
-  });
+// class Tipo {
+//   Tipo({
+//     required this.id,
+//     required this.tipo,
+//     required this.imgUrl,
+//   });
 
-  final String id;
-  final String nombre;
-  final int monto;
-  final bool esOpcional;
+//   final String id;
+//   final String tipo;
+//   final String? imgUrl;
 
+//   factory Tipo.fromJson(Map<String, dynamic> json) => Tipo(
+//         id: json["id"],
+//         tipo: json["tipo"],
+//         imgUrl: getImageUrl(json["imgUrl"]),
+//       );
 
-
-  factory Tarifa.fromJson(Map<String, dynamic> json) => Tarifa(
-        id: json["id"],
-        nombre: json["nombre"],
-        monto: json["monto"],
-        esOpcional: json["esOpcional"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "nombre": nombre,
-        "monto": monto,
-        "esOpcional": esOpcional,
-      };
-}
-
-class Tipo {
-  Tipo({
-    required this.id,
-    required this.tipo,
-    required this.imgUrl,
-  });
-
-  final String id;
-  final String tipo;
-  final String? imgUrl;
-
-  factory Tipo.fromJson(Map<String, dynamic> json) => Tipo(
-        id: json["id"],
-        tipo: json["tipo"],
-        imgUrl: getImageUrl(json["imgUrl"]),
-      );
-
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "tipo": tipo,
-        "imgUrl": imgUrl,
-      };
-}
+//   Map<String, dynamic> toJson() => {
+//         "id": id,
+//         "tipo": tipo,
+//         "imgUrl": imgUrl,
+//       };
+// }
 
 class TurnoId {
   TurnoId({

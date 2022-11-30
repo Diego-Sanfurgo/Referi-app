@@ -4,12 +4,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'activities_list.dart';
 import '../bloc/activity_search_bloc.dart';
-import '../../../../models/grid_activity.dart';
+import '../../../../models/activity_type.dart';
 import '../../../../theme/animations/activities_not_found.dart';
 import '../../../../theme/animations/loading_animation.dart';
 
 class Body extends StatelessWidget {
-  final GridActivity activity;
+  final ActivityType activity;
   const Body(this.activity, {Key? key}) : super(key: key);
 
   @override

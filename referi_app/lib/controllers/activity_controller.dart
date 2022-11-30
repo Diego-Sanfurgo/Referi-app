@@ -1,6 +1,6 @@
 import '../models/turno.dart';
 import '../models/activity.dart';
-import '../models/grid_activity.dart';
+import '../models/activity_type.dart';
 import '../models/activity_fee_payment.dart';
 
 import '../providers/app_providers.dart';
@@ -10,7 +10,7 @@ import '../controllers/payment_controller.dart';
 import '../controllers/navigation_controller.dart';
 
 abstract class ActivityController {
-  static Future<List<GridActivity>> obtainActivityTypes() async {
+  static Future<List<ActivityType>> obtainActivityTypes() async {
     return await ActivityHandler.obtainActivityTypes();
   }
 
