@@ -29,9 +29,9 @@ abstract class PaymentHandler {
   }
 
   static Future<PaymentDetail?> obtainPaymentById(String id) async {
-    Alert.showLoading();
+    // Alert.showLoading();
     var payment = await getPaymetById(id);
-    NavigationController.pop();
+    // NavigationController.pop();
     if (payment == null) {
       Alert.showError(
           "Ocurrió un error al leer el detalle del pago. Intenta nuevamente.");

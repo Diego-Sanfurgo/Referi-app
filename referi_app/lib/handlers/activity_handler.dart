@@ -1,3 +1,4 @@
+import 'package:referi_app/API/activity/get_activity_by_id.dart';
 import 'package:referi_app/controllers/navigation_controller.dart';
 
 import '../../models/turno.dart';
@@ -17,6 +18,10 @@ abstract class ActivityHandler {
   static Future<List<Activity>?> obtainActivitiesByType(
       String activityId) async {
     return await getActivitiesByType(activityId);
+  }
+
+  static Future<Activity> fetchActivityById(String activityId) async {
+    return await getActivityById(activityId);
   }
 
   static Future<Turno?> obtainShift(String shiftId) async {

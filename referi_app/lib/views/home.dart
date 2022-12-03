@@ -5,7 +5,7 @@ import '../../controllers/navigation_controller.dart';
 import '../../providers/app_providers.dart';
 
 import '../../views/clubs/clubs_home.dart';
-import '../../views/account/account_home.dart';
+import 'account/account_home/account_home.dart';
 import 'credential/credential_home.dart';
 import '../../views/activities/activities_home.dart';
 

@@ -69,7 +69,7 @@ class Cuota {
     required this.fechaCreacion,
     required this.fechaActualizacion,
     this.fechaBaja,
-    required this.inscripcion,
+    // required this.inscripcion,
   });
 
   final String id;
@@ -80,7 +80,7 @@ class Cuota {
   final DateTime fechaCreacion;
   final DateTime fechaActualizacion;
   final dynamic fechaBaja;
-  final Inscripcion inscripcion;
+  // final Inscripcion inscripcion;
 
   factory Cuota.fromJson(Map<String, dynamic> json) => Cuota(
         id: json["id"],
@@ -91,7 +91,7 @@ class Cuota {
         fechaCreacion: DateTime.parse(json["fechaCreacion"]),
         fechaActualizacion: DateTime.parse(json["fechaActualizacion"]),
         fechaBaja: json["fechaBaja"],
-        inscripcion: Inscripcion.fromJson(json["inscripcion"]),
+        // inscripcion: Inscripcion.fromJson(json["inscripcion"]),
       );
 
   Map<String, dynamic> toJson() => {
@@ -103,45 +103,45 @@ class Cuota {
         "fechaCreacion": fechaCreacion.toIso8601String(),
         "fechaActualizacion": fechaActualizacion.toIso8601String(),
         "fechaBaja": fechaBaja,
-        "inscripcion": inscripcion.toJson(),
+        // "inscripcion": inscripcion.toJson(),
       };
 }
 
-class Inscripcion {
-  Inscripcion({
-    required this.id,
-    required this.fechaCreacion,
-    required this.fechaActualizacion,
-    required this.fechaBaja,
-    required this.turnoActividad,
-    required this.actividad,
-  });
+// class Inscripcion {
+//   Inscripcion({
+//     required this.id,
+//     required this.fechaCreacion,
+//     required this.fechaActualizacion,
+//     required this.fechaBaja,
+//     required this.turnoActividad,
+//     required this.actividad,
+//   });
 
-  final String id;
-  final DateTime fechaCreacion;
-  final DateTime fechaActualizacion;
-  final dynamic fechaBaja;
-  final Inscripcion turnoActividad;
-  final Actividad actividad;
+//   final String id;
+//   final DateTime fechaCreacion;
+//   final DateTime fechaActualizacion;
+//   final dynamic fechaBaja;
+//   final Inscripcion turnoActividad;
+//   final Actividad actividad;
 
-  factory Inscripcion.fromJson(Map<String, dynamic> json) => Inscripcion(
-        id: json["id"],
-        fechaCreacion: DateTime.parse(json["fechaCreacion"]),
-        fechaActualizacion: DateTime.parse(json["fechaActualizacion"]),
-        fechaBaja: json["fechaBaja"],
-        turnoActividad: Inscripcion.fromJson(json["turnoActividad"]),
-        actividad: Actividad.fromJson(json["actividad"]),
-      );
+//   factory Inscripcion.fromJson(Map<String, dynamic> json) => Inscripcion(
+//         id: json["id"],
+//         fechaCreacion: DateTime.parse(json["fechaCreacion"]),
+//         fechaActualizacion: DateTime.parse(json["fechaActualizacion"]),
+//         fechaBaja: json["fechaBaja"],
+//         turnoActividad: Inscripcion.fromJson(json["turnoActividad"]),
+//         actividad: Actividad.fromJson(json["actividad"]),
+//       );
 
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "fechaCreacion": fechaCreacion.toIso8601String(),
-        "fechaActualizacion": fechaActualizacion.toIso8601String(),
-        "fechaBaja": fechaBaja,
-        "turnoActividad": turnoActividad.toJson(),
-        "actividad": actividad.toJson(),
-      };
-}
+//   Map<String, dynamic> toJson() => {
+//         "id": id,
+//         "fechaCreacion": fechaCreacion.toIso8601String(),
+//         "fechaActualizacion": fechaActualizacion.toIso8601String(),
+//         "fechaBaja": fechaBaja,
+//         "turnoActividad": turnoActividad.toJson(),
+//         "actividad": actividad.toJson(),
+//       };
+// }
 
 class Actividad {
   Actividad({

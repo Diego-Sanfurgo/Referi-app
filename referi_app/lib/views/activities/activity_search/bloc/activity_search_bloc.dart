@@ -30,7 +30,6 @@ class ActivitySearchBloc
     });
 
     on<ObtainActivitiesByType>((event, emit) async {
-      event.activityId;
       List<Activity>? activitiesSearched =
           await ActivityHandler.obtainActivitiesByType(event.activityId);
       if (activitiesSearched == null) {

@@ -14,6 +14,10 @@ abstract class ActivityController {
     return await ActivityHandler.obtainActivityTypes();
   }
 
+  static Future<Activity> obtainActivityById(String activityId) async {
+    return await ActivityHandler.fetchActivityById(activityId);
+  }
+
   static Future<Turno?> obtainShift(String shiftId) async =>
       await ActivityHandler.obtainShift(shiftId);
 

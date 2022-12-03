@@ -19,6 +19,7 @@ class NotFoundAnimation extends StatelessWidget {
             'assets/animations/lottie_not_found_lens.zip',
             width: widthAndHeight,
             height: widthAndHeight,
+            repeat: false,
           ),
           const SizedBox(height: 16),
           const AutoSizeText("No encontramos actividades",

@@ -6,7 +6,7 @@ Future<List<Activity>?> getActivitiesByType(String activityId) async {
   Dio dio = Dio();
 
   return await dio
-      .get(ActivityUrls.getActivityById + activityId,
+      .get(ActivityUrls.getActivityTypeById + activityId,
           options: Options(headers: getUserToken()))
       .then((value) {
     var list = value.data['data'] as List;

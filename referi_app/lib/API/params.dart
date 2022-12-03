@@ -30,7 +30,8 @@ abstract class OrganizationUrls {
 abstract class ActivityUrls {
   // static const String postInscripcion = "$_baseUrl/actividades/inscribir";
   static const String getActivities = "$_baseUrl/actividades/tipo";
-  static const String getActivityById = "$_baseUrl/actividades/tipo/";
+  static const String getActivityTypeById = "$_baseUrl/actividades/tipo/";
+  static const String getActivityById = "$_baseUrl/actividades/";
 }
 
 abstract class NotificationUrls {
