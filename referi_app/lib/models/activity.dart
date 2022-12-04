@@ -4,10 +4,10 @@
 
 import 'dart:convert';
 
-import '../../models/tarifa.dart';
-import '../../models/organization.dart';
-import '../../models/activity_type.dart';
-import '../../utils/network_assets_urls.dart';
+import '/models/tarifa.dart';
+import '/models/organization.dart';
+import '/models/activity_type.dart';
+import '/utils/network_assets_urls.dart';
 
 Activity activityFromJson(String str) => Activity.fromJson(json.decode(str));
 
@@ -68,30 +68,6 @@ class Activity {
         "__tarifas__": List<dynamic>.from(tarifas.map((x) => x.toJson())),
       };
 }
-
-// class Tipo {
-//   Tipo({
-//     required this.id,
-//     required this.tipo,
-//     required this.imgUrl,
-//   });
-
-//   final String id;
-//   final String tipo;
-//   final String? imgUrl;
-
-//   factory Tipo.fromJson(Map<String, dynamic> json) => Tipo(
-//         id: json["id"],
-//         tipo: json["tipo"],
-//         imgUrl: getImageUrl(json["imgUrl"]),
-//       );
-
-//   Map<String, dynamic> toJson() => {
-//         "id": id,
-//         "tipo": tipo,
-//         "imgUrl": imgUrl,
-//       };
-// }
 
 class TurnoId {
   TurnoId({

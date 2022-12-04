@@ -58,24 +58,27 @@ List<BottomNavigationBarItem> _items = [
       icon: Icon(Icons.sports_rounded), label: "Clubes"),
   const BottomNavigationBarItem(
       icon: Icon(Icons.badge_rounded), label: "Credencial"),
-  // BottomNavyBarItem(
-  //     activeColor: Colors.black87,
-  //     inactiveColor: Colors.black87,
-  //     icon: const Icon(Icons.home_rounded),
-  //     title: const Text('Inicio')),
-  // BottomNavyBarItem(
-  //     activeColor: Colors.black87,
-  //     inactiveColor: Colors.black87,
-  //     icon: const Icon(Icons.account_balance_wallet_rounded),
-  //     title: const Text('Cuenta')),
-  // BottomNavyBarItem(
-  //     activeColor: Colors.black87,
-  //     inactiveColor: Colors.black87,
-  //     icon: const Icon(Icons.sports_rounded),
-  //     title: const Text('Clubes')),
-  // BottomNavyBarItem(
-  //     activeColor: Colors.black87,
-  //     inactiveColor: Colors.black87,
-  //     icon: const Icon(Icons.badge_rounded),
-  //     title: const Text('Credencial')),
 ];
+
+// List<BottomNavyBarItem> _items = [
+//     BottomNavyBarItem(
+//       activeColor: Colors.black87,
+//       inactiveColor: Colors.black87,
+//       icon: const Icon(Icons.home_rounded),
+//       title: const Text('Inicio')),
+//   BottomNavyBarItem(
+//       activeColor: Colors.black87,
+//       inactiveColor: Colors.black87,
+//       icon: const Icon(Icons.account_balance_wallet_rounded),
+//       title: const Text('Cuenta')),
+//   BottomNavyBarItem(
+//       activeColor: Colors.black87,
+//       inactiveColor: Colors.black87,
+//       icon: const Icon(Icons.sports_rounded),
+//       title: const Text('Clubes')),
+//   BottomNavyBarItem(
+//       activeColor: Colors.black87,
+//       inactiveColor: Colors.black87,
+//       icon: const Icon(Icons.badge_rounded),
+//       title: const Text('Credencial')),
+// ];

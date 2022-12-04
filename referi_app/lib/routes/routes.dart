@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:referi_app/views/account/activity_account/activity_account.dart';
 
 import '/views/home.dart';
 import '/views/login/login.dart';
@@ -54,6 +55,7 @@ Map<String, WidgetBuilder> routes = {
   //Account
   'accountHome': (_) => const AccountHome(),
   'operationDetail': (_) => const OperationDetail(),
+  'activityAccount': (_) => const ActivityAccount(),
 
   //Credential
   'credential': (_) => const CredentialHome(),

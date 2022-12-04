@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-import 'package:intl/intl.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:referi_app/controllers/activity_controller.dart';
+import 'package:referi_app/models/activity.dart';
 
-import '/theme/colors.dart';
-import 'widgets/operation_tile.dart';
 import '/models/activity_fee_payment.dart';
 import '/controllers/payment_controller.dart';
+import '/controllers/navigation_controller.dart';
 import '/theme/animations/activities_not_found.dart';
 
 class AccountHome extends StatelessWidget {
@@ -14,26 +14,24 @@ class AccountHome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RefreshIndicator(
-      onRefresh: () => PaymentController.getUserFees(),
-      child: const CustomScrollView(
-        physics: AlwaysScrollableScrollPhysics(),
-        shrinkWrap: true,
-        slivers: <Widget>[
-          SliverPadding(
-            padding: EdgeInsets.symmetric(vertical: 16, horizontal: 16),
-            sliver: SliverToBoxAdapter(
-              child: AutoSizeText(
-                "Actividad de la cuenta",
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-              ),
+    return const CustomScrollView(
+      physics: AlwaysScrollableScrollPhysics(),
+      shrinkWrap: true,
+      slivers: <Widget>[
+        SliverPadding(
+          padding: EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+          sliver: SliverToBoxAdapter(
+            child: AutoSizeText(
+              "Actividad de la cuenta",
+              // "Actividades",
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
           ),
-          SliverToBoxAdapter(
-            child: _AccountActivity(),
-          ),
-        ],
-      ),
+        ),
+        SliverToBoxAdapter(
+          child: _AccountActivity(),
+        ),
+      ],
     );
   }
 }
@@ -63,7 +61,7 @@ class _AccountActivity extends StatelessWidget {
           shrinkWrap: true,
           itemCount: listTiles.length,
           separatorBuilder: (context, index) =>
-              Divider(color: primary.shade800, height: 0),
+              Divider(color: Colors.grey.shade400, height: 0),
           itemBuilder: (context, index) {
             return listTiles[index];
           },
@@ -74,7 +72,7 @@ class _AccountActivity extends StatelessWidget {
 }
 
 List<Widget> _buildListTile(List<ActivityFeePayment> list) {
-  List<Map<String, dynamic>> groupedFees = [];
+  List<Map<String, List<ActivityFeePayment>>> groupedFees = [];
   for (var cuota in list) {
     var previousItems = list.getRange(0, list.indexOf(cuota));
     bool alreadyRead = previousItems
@@ -95,41 +93,26 @@ List<Widget> _buildListTile(List<ActivityFeePayment> list) {
   List<Widget> auxList = [];
 
   for (var group in groupedFees) {
-    //TODO
+    String activityId = group.values.first.first.actividad.id;
+    Widget orgName = FutureBuilder<Activity>(
+      future: ActivityController.obtainActivityById(activityId),
+      builder: (BuildContext context, AsyncSnapshot<Activity> snapshot) {
+        if (!snapshot.hasData) {
+          return const Text("Institución");
+        }
+        return Text(snapshot.data!.organizacion.nombre);
+      },
+    );
+
     auxList.add(ListTile(
       title: Text(group.keys.first),
-      trailing: Icon(Icons.keyboard_arrow_right_rounded),
+      subtitle: orgName,
+      trailing: const Icon(Icons.keyboard_arrow_right_rounded),
+      onTap: () => NavigationController.goToWithArguments(
+          Routes.activityAccount,
+          args: group.values.first),
     ));
   }
 
-  print(groupedFees);
-  print(auxList);
-  return auxList;
-
-  for (var cuota in list) {
-    IconData icon = Icons.request_page_rounded;
-    Color iconColor = secondary;
-    bool isExpired = DateTime.now().isAfter(cuota.fechaVencimiento);
-    String statusText =
-        "vto:${DateFormat.Md('es, ES').format(cuota.fechaVencimiento)}";
-
-    if (cuota.pago != null) {
-      icon = Icons.payments_rounded;
-      iconColor = Colors.green.shade400;
-      statusText = "Pagado";
-    }
-    if (cuota.pago == null && isExpired) {
-      icon = Icons.priority_high_rounded;
-      iconColor = Colors.red.shade400;
-      statusText = "Vencido $statusText";
-    }
-
-    auxList.add(OperationTile(
-      cuota: cuota,
-      icon: icon,
-      iconColor: iconColor,
-      statusText: statusText,
-    ));
-  }
   return auxList;
 }

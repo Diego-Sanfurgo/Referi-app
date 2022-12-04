@@ -1,10 +1,10 @@
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
-import 'package:referi_app/API/params.dart';
-import 'package:referi_app/providers/app_providers.dart';
 
-import '../../models/activity_fee_payment.dart';
+import '/API/params.dart';
+import '/providers/app_providers.dart';
+import '/models/activity_fee_payment.dart';
 
 Future<List<ActivityFeePayment>> getFeesByUserId() async {
   Dio dio = Dio();
@@ -18,6 +18,9 @@ Future<List<ActivityFeePayment>> getFeesByUserId() async {
   )
       .then((value) {
     for (var fee in value.data["data"]) {
+      if (fee['tarifa'] == null) {
+        continue;
+      }
       list.add(ActivityFeePayment.fromJson(fee));
     }
     return list;

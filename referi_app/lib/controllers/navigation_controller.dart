@@ -37,20 +37,23 @@ enum Routes {
   signup_2,
   signup_3,
   passwordRecover,
-  //homes
-  home,
-  accountHome,
+
+  //Clubs
   clubsHome,
   clubDetail,
 
-  account,
-  // institutions,
+  //Account
+  accountHome,
+  activityAccount,
+
+  //Credential
   credentialHome,
   credentialDetail,
 
   operationDetail,
 
   // activityHome,
+  home,
   activitySearch,
   activityDetail,
   activityDetailEnrolled,
@@ -62,6 +65,7 @@ enum Routes {
   personalData,
   personalDataEdit,
 
+  //Notifications
   notifications,
 
   //Scanner

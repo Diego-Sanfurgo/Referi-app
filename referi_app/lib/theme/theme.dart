@@ -25,7 +25,7 @@ BottomNavigationBarThemeData _barTheme = BottomNavigationBarThemeData(
   backgroundColor: Colors.white,
   // selectedItemColor: colors.secondaryDark,
   selectedItemColor: colors.primary.shade700,
-  unselectedItemColor: Colors.grey.shade400,
+  unselectedItemColor: Colors.grey,
   type: BottomNavigationBarType.fixed,
   unselectedLabelStyle: const TextStyle(fontSize: 12),
   selectedLabelStyle:

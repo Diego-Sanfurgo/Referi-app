@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:shimmer/shimmer.dart';
 
-import '../../controllers/activity_controller.dart';
-import '../../controllers/navigation_controller.dart';
-
-import '../../models/activity_type.dart';
+import '../../widgets/placeholders/activity_home_placeholder.dart';
+import '/models/activity_type.dart';
+import '/controllers/activity_controller.dart';
+import '/controllers/navigation_controller.dart';
 
 class ActivitiesHome extends StatelessWidget {
   const ActivitiesHome({Key? key}) : super(key: key);
@@ -48,7 +49,8 @@ class _ActivityGrid extends StatelessWidget {
         future: ActivityController.obtainActivityTypes(),
         builder: (context, AsyncSnapshot<List<ActivityType>> snapshot) {
           if (!snapshot.hasData) {
-            return const Center(child: CircularProgressIndicator());
+            // return const Center(child: CircularProgressIndicator());{}
+            return const ActivityHomePlaceholder();
           }
 
           return GridView.builder(
