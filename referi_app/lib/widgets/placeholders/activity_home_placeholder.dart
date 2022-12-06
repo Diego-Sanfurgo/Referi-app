@@ -16,8 +16,11 @@ class ActivityHomePlaceholder extends StatelessWidget {
           (index) => Shimmer.fromColors(
                 baseColor: Colors.grey.shade300,
                 highlightColor: Colors.grey.shade100,
-                child: Container(
-                  color: Colors.white,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: Container(
+                    color: Colors.white,
+                  ),
                 ),
               )),
     );

@@ -1,16 +1,14 @@
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 
-import '../../controllers/navigation_controller.dart';
-import '../../providers/app_providers.dart';
-
-import '../../views/clubs/clubs_home.dart';
-import 'account/account_home/account_home.dart';
+import 'clubs/clubs home/clubs_home.dart';
+import '/providers/app_providers.dart';
+import '/widgets/home/profile_icon.dart';
 import 'credential/credential_home.dart';
-import '../../views/activities/activities_home.dart';
-
 import '../widgets/home/bottom_navbar.dart';
-import '../../widgets/home/profile_icon.dart';
+import 'activities/home/activities_home.dart';
+import 'account/account_home/account_home.dart';
+import '/controllers/navigation_controller.dart';
 
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);
