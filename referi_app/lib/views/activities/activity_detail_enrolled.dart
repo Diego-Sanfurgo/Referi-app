@@ -6,11 +6,10 @@ import 'package:sizer/sizer.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:expandable_text/expandable_text.dart';
 
-import '../../models/activity_fee.dart';
-import '../../models/enrollment.dart';
-import '../../theme/colors.dart' as colors;
-import '../../controllers/navigation_controller.dart';
-import '../../widgets/activities/fees.dart';
+import '/models/enrollment.dart';
+import '/models/activity_fee.dart';
+import '/theme/colors.dart' as colors;
+import '/controllers/navigation_controller.dart';
 
 class ActivityDetailEnrolled extends StatelessWidget {
   const ActivityDetailEnrolled({Key? key}) : super(key: key);

@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'activities_list.dart';
+import '/models/activity_type.dart';
 import '../bloc/activity_search_bloc.dart';
-import '../../../../models/activity_type.dart';
-import '../../../../theme/animations/activities_not_found.dart';
-import '../../../../theme/animations/loading_animation.dart';
+import '/theme/animations/activities_not_found.dart';
+import '/theme/animations/loading_animation.dart';
+
+import 'activities_list.dart';
 
 class Body extends StatelessWidget {
   final ActivityType activity;

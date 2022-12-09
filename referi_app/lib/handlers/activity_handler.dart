@@ -1,5 +1,6 @@
 import 'package:referi_app/API/activity/get_activity_by_id.dart';
 import 'package:referi_app/controllers/navigation_controller.dart';
+import 'package:referi_app/models/dto/activity_dto.dart';
 
 import '../../models/turno.dart';
 import '../../models/activity.dart';
@@ -15,10 +16,9 @@ abstract class ActivityHandler {
     return await getActivityTypes();
   }
 
-  static Future<List<Activity>?> obtainActivitiesByType(
-      String activityId) async {
-    return await getActivitiesByType(activityId);
-  }
+  static Future<List<DTOActivity>?> obtainActivitiesByType(
+          String activityId) async =>
+      await getActivitiesByType(activityId);
 
   static Future<Activity> fetchActivityById(String activityId) async {
     return await getActivityById(activityId);

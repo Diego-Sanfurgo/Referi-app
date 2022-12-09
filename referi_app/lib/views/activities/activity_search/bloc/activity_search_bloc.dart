@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 
-import '../../../../handlers/activity_handler.dart';
-import '../../../../models/activity.dart';
+import '/models/dto/activity_dto.dart';
+import '/handlers/activity_handler.dart';
 
 part 'activity_search_event.dart';
 part 'activity_search_state.dart';
@@ -13,8 +13,8 @@ class ActivitySearchBloc
     on<ToInitial>((event, emit) => emit(ActivitySearchInitial()));
 
     on<FilterList>((event, emit) {
-      List<Activity> filteredList = _activitiesSearched.where((activity) {
-        String activityName = activity.nombre.toLowerCase();
+      List<DTOActivity> filteredList = _activitiesSearched.where((activity) {
+        String activityName = activity.nombre!.toLowerCase();
         String query = event.query.toLowerCase().trim();
         return activityName.contains(query);
       }).toList();
@@ -30,7 +30,7 @@ class ActivitySearchBloc
     });
 
     on<ObtainActivitiesByType>((event, emit) async {
-      List<Activity>? activitiesSearched =
+      List<DTOActivity>? activitiesSearched =
           await ActivityHandler.obtainActivitiesByType(event.activityId);
       if (activitiesSearched == null) {
         emit(ActivitySearchNotFound());
@@ -43,4 +43,4 @@ class ActivitySearchBloc
   }
 }
 
-List<Activity> _activitiesSearched = [];
+List<DTOActivity> _activitiesSearched = [];

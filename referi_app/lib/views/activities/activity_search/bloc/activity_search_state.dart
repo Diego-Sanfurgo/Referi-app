@@ -8,7 +8,7 @@ class ActivitySearchInitial extends ActivitySearchState {}
 class ActivitySearchNotFound extends ActivitySearchState {}
 
 class ActivitySearchResults extends ActivitySearchState {
-  final List<Activity> list;
+  final List<DTOActivity> list;
   final bool isSearching;
 
   ActivitySearchResults(this.list, {required this.isSearching});

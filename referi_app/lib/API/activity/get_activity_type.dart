@@ -9,9 +9,10 @@ Future<List<ActivityType>> getActivityTypes() async {
 
   return await dio.get(ActivityUrls.getActivities).then((value) {
     for (var activity in value.data['data']) {
-      if (activities.length <= 11 && activity['tipo'] != "Hockey") {
-        activities.insert(0, ActivityType.fromJson(activity));
-      }
+      activities.insert(0, ActivityType.fromJson(activity));
+      // if (activities.length <= 11 && activity['tipo'] != "Hockey") {
+      //   activities.insert(0, ActivityType.fromJson(activity));
+      // }
     }
 
     return activities;

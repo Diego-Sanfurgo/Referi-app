@@ -11,9 +11,10 @@ class DTOActivityType {
     this.imgUrl,
   });
 
-  factory DTOActivityType.fromJson(Map<String, dynamic> json) => DTOActivityType(
+  factory DTOActivityType.fromJson(Map<String, dynamic> json) =>
+      DTOActivityType(
         id: json['id'],
-        imgUrl: getImageUrl(json['imgUrl']),
+        imgUrl: json["imgUrl"] != null ? getImageUrl(json['imgUrl']) : null,
         tipo: json['tipo'],
       );
 }

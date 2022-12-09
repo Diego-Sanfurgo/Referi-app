@@ -23,7 +23,6 @@ class AccountHome extends StatelessWidget {
           sliver: SliverToBoxAdapter(
             child: AutoSizeText(
               "Actividad de la cuenta",
-              // "Actividades",
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
           ),
@@ -45,9 +44,7 @@ class _AccountActivity extends StatelessWidget {
       future: PaymentController.getUserFees(),
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         if (snapshot.connectionState != ConnectionState.done) {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
+          return const Center(child: CircularProgressIndicator());
         }
 
         if (!snapshot.hasData) {

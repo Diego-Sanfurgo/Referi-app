@@ -1,6 +1,6 @@
 import 'package:referi_app/models/dto/activity_dto.dart';
 
-class DTOACtivityFee {
+class DTOActivityFee {
   String? id;
   String? nombre;
   String? monto;
@@ -13,7 +13,7 @@ class DTOACtivityFee {
   String? fechaBaja;
   DTOActivity? actividad;
 
-  DTOACtivityFee({
+  DTOActivityFee({
     this.id,
     this.nombre,
     this.monto,
@@ -27,17 +27,24 @@ class DTOACtivityFee {
     this.actividad,
   });
 
-  factory DTOACtivityFee.fromJson(Map<String, dynamic> json) => DTOACtivityFee(
+  factory DTOActivityFee.fromJson(Map<String, dynamic> json) => DTOActivityFee(
         id: json["id"],
         nombre: json["nombre"],
-        monto: json["monto"].toString(),
+        monto: json["monto"]?.toString(),
         esOpcional: json["esOpcional"],
-        frecuencia: DTOFrequency.fromJson(json["frecuencia"]),
-        fechaCreacion: DateTime.parse(json["fechaCreacion"]).toString(),
-        fechaActualizacion:
-            DateTime.parse(json["fechaActualizacion"]).toString(),
+        frecuencia: json["frecuencia"] != null
+            ? DTOFrequency.fromJson(json["frecuencia"])
+            : null,
+        fechaCreacion: json["fechaCreacion"] != null
+            ? DateTime.parse(json["fechaCreacion"]).toString()
+            : null,
+        fechaActualizacion: json["fechaActualizacion"] != null
+            ? DateTime.parse(json["fechaActualizacion"]).toString()
+            : null,
         fechaBaja: json["fechaBaja"],
-        actividad: DTOActivity.fromJsonToActivityPaymentDTO(json["actividad"]),
+        actividad: json["actividad"] != null
+            ? DTOActivity.fromJsonToActivityPaymentDTO(json["actividad"])
+            : null,
       );
 }
 
@@ -61,10 +68,13 @@ class DTOFrequency {
   factory DTOFrequency.fromJson(Map<String, dynamic> json) => DTOFrequency(
         id: json["id"],
         nombre: json["nombre"],
-        cantDias: json["cantDias"].toString(),
-        fechaCreacion: DateTime.parse(json["fechaCreacion"]).toString(),
-        fechaActualizacion:
-            DateTime.parse(json["fechaActualizacion"]).toString(),
+        cantDias: json["cantDias"]?.toString(),
+        fechaCreacion: json["fechaCreacion"] != null
+            ? DateTime.parse(json["fechaCreacion"]).toString()
+            : null,
+        fechaActualizacion: json["fechaActualizacion"] != null
+            ? DateTime.parse(json["fechaActualizacion"]).toString()
+            : null,
         fechaBaja: json["fechaBaja"],
       );
 

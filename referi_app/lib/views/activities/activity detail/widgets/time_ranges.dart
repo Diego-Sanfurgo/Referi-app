@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 import 'package:auto_size_text/auto_size_text.dart';
 
-import '../../models/turno.dart';
-import '../../models/activity.dart';
-import '../../controllers/activity_controller.dart';
+import '/models/turno.dart';
+import '/models/activity.dart';
+import '/controllers/activity_controller.dart';
 
 class TimeRanges extends StatelessWidget {
   final List<TurnoId> timeRanges;

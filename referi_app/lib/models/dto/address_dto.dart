@@ -16,7 +16,7 @@ class DTOAddress {
   factory DTOAddress.fromJson(Map<String, dynamic> json) => DTOAddress(
         id: json["id"],
         calle: json["calle"],
-        numero: json["numero"].toString(),
+        numero: json["numero"]?.toString(),
         ciudad: json["ciudad"],
         provincia: json["provincia"],
       );

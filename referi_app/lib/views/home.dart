@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'clubs/clubs home/clubs_home.dart';
 import '/providers/app_providers.dart';
 import '/widgets/home/profile_icon.dart';
-import 'credential/credential_home.dart';
+import 'credential/credential home/credential_home.dart';
 import '../widgets/home/bottom_navbar.dart';
 import 'activities/home/activities_home.dart';
 import 'account/account_home/account_home.dart';

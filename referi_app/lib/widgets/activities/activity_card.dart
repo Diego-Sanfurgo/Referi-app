@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:referi_app/models/activity.dart';
+import 'package:referi_app/models/dto/activity_dto.dart';
 import 'package:referi_app/theme/colors.dart';
 
 import 'package:sizer/sizer.dart';
@@ -8,7 +8,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import '../../controllers/navigation_controller.dart';
 
 class ActivityCard extends StatelessWidget {
-  final Activity activity;
+  final DTOActivity activity;
   final bool isCard;
   final String heroId;
 
@@ -22,8 +22,8 @@ class ActivityCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Map<String, dynamic> args = {"activity": activity, "tag": heroId};
-    final String subtitle1 = activity.organizacion.nombre;
-    final int subtitle2 = activity.turnos.length;
+    final String subtitle1 = activity.organizacion!.nombre!;
+    final int subtitle2 = activity.turnos!.length;
 
     late final Widget subtitleWidget = Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -69,7 +69,7 @@ class ActivityCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    AutoSizeText(activity.nombre,
+                    AutoSizeText(activity.nombre!,
                         maxFontSize: 20,
                         minFontSize: 16,
                         maxLines: 2,

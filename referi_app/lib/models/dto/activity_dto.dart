@@ -1,6 +1,6 @@
-import 'package:referi_app/models/dto/activity_fee_dto.dart';
-import 'package:referi_app/models/dto/activity_type_dto.dart';
-import 'package:referi_app/models/dto/organization_dto.dart';
+import '/models/dto/activity_fee_dto.dart';
+import '/models/dto/organization_dto.dart';
+import '/models/dto/activity_type_dto.dart';
 
 import '../../utils/network_assets_urls.dart';
 import '../activity.dart';
@@ -12,10 +12,10 @@ class DTOActivity {
   String? cupo;
   String? imgUrl;
 
-  DTOOrganization? organization;
+  DTOOrganization? organizacion;
   DTOActivityType? type;
-  List<TurnoId>? shifts;
-  List<DTOACtivityFee>? fees;
+  List<TurnoId>? turnos;
+  List<DTOActivityFee>? tarifas;
 
   String? fechaCreacion;
   String? fechaActualizacion;
@@ -27,10 +27,10 @@ class DTOActivity {
     this.descripcion,
     this.cupo,
     this.imgUrl,
-    this.organization,
+    this.organizacion,
     this.type,
-    this.shifts,
-    this.fees,
+    this.turnos,
+    this.tarifas,
     this.fechaActualizacion,
     this.fechaBaja,
     this.fechaCreacion,
@@ -40,18 +40,28 @@ class DTOActivity {
         id: json["id"],
         nombre: json["nombre"],
         descripcion: json["descripcion"],
-        cupo: json["cupo"].toString(),
-        imgUrl: getImageUrl(json["imgUrl"]),
-        organization: DTOOrganization.fromJson(json["organizacion"]),
-        type: DTOActivityType.fromJson(json['tipo']),
+        cupo: json["cupo"]?.toString(),
+        imgUrl: json["imgUrl"] != null ? getImageUrl(json["imgUrl"]) : null,
+        organizacion: json["organizacion"] != null
+            ? DTOOrganization.fromJson(json["organizacion"])
+            : null,
+        type: json["tipo"] != null
+            ? DTOActivityType.fromJson(json['tipo'])
+            : null,
         // shifts: List<String>.from(json["turnos"].map(x) => x["id"]),
-        shifts:
-            List<TurnoId>.from(json["turnos"].map((x) => TurnoId.fromJson(x))),
-        fees: List<DTOACtivityFee>.from(
-            json["__tarifas__"].map((x) => DTOACtivityFee.fromJson(x))),
-        fechaCreacion: DateTime.parse(json["fechaCreacion"]).toString(),
-        fechaActualizacion:
-            DateTime.parse(json["fechaActualizacion"]).toString(),
+        turnos: json["turnos"] != null
+            ? List<TurnoId>.from(json["turnos"].map((x) => TurnoId.fromJson(x)))
+            : null,
+        tarifas: json["__tarifas__"] != null
+            ? List<DTOActivityFee>.from(
+                json["__tarifas__"].map((x) => DTOActivityFee.fromJson(x)))
+            : null,
+        fechaCreacion: json["fechaCreacion"] != null
+            ? DateTime.parse(json["fechaCreacion"]).toString()
+            : null,
+        fechaActualizacion: json["fechaActualizacion"] != null
+            ? DateTime.parse(json["fechaActualizacion"]).toString()
+            : null,
         fechaBaja: json["fechaBaja"],
       );
 

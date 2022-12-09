@@ -23,11 +23,14 @@ class DTOOrganization {
 
   factory DTOOrganization.fromJson(Map<String, dynamic> json) =>
       DTOOrganization(
-          id: json["id"],
-          nombre: json["nombre"],
-          logo: getImageUrl(json["logo"]),
-          descripcion: json["descripcion"],
-          telefono: json["telefono"],
-          email: json["email"],
-          direccion: DTOAddress.fromJson(json["direccion"]));
+        id: json["id"],
+        nombre: json["nombre"],
+        logo: json["logo"] != null ? getImageUrl(json["logo"]) : null,
+        descripcion: json["descripcion"],
+        telefono: json["telefono"],
+        email: json["email"],
+        direccion: json["direccion"] != null
+            ? DTOAddress.fromJson(json["direccion"])
+            : null,
+      );
 }

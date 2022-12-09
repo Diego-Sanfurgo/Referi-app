@@ -5,11 +5,12 @@ import 'package:lottie/lottie.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 
 class LoadingAnimation extends StatelessWidget {
-  const LoadingAnimation({Key? key}) : super(key: key);
+  final double? size;
+  const LoadingAnimation({Key? key, this.size}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    double widthAndHeight = 35.w;
+    double widthAndHeight = size ?? 35.w;
 
     return Center(
       child: Column(

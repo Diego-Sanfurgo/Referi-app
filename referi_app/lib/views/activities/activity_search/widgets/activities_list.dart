@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:referi_app/models/dto/activity_dto.dart';
 
-import '../../../../models/activity.dart';
-import '../../../../widgets/activities/activity_card.dart';
-import '../../../../theme/animations/activities_not_found.dart';
+import '/widgets/activities/activity_card.dart';
+import '/theme/animations/activities_not_found.dart';
 
 class ActivitiesList extends StatelessWidget {
-  final List<Activity> list;
+  final List<DTOActivity> list;
   const ActivitiesList(this.list, {super.key});
 
   @override
@@ -19,7 +19,7 @@ class ActivitiesList extends StatelessWidget {
         itemCount: list.length,
         separatorBuilder: (context, index) => const SizedBox(height: 16),
         itemBuilder: (context, index) {
-          Activity activity = list[index];
+          DTOActivity activity = list[index];
 
           return ActivityCard(
             activity,

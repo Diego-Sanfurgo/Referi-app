@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:referi_app/models/organization.dart';
+import 'package:referi_app/theme/colors.dart';
 
 class ExtendedClubAppBar extends StatelessWidget {
   // final String heroTag;
@@ -11,8 +12,7 @@ class ExtendedClubAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return SliverAppBar.large(
         backgroundColor: Colors.grey.shade100,
-        pinned: true,
-        iconTheme: const IconThemeData(color: Colors.white),
+        iconTheme: IconThemeData(color: primary),
         flexibleSpace: FlexibleSpaceBar(
           title: Text(
             org.nombre,
@@ -23,17 +23,6 @@ class ExtendedClubAppBar extends StatelessWidget {
           background: org.logo != null
               ? Image.network(org.logo!)
               : Image.asset("assets/images/no_image_placeholder.png"),
-          // background: Image.asset(
-          //   'assets/images/club_regatas_foto.jpg',
-          //   fit: BoxFit.fill,
-          // ),
-          // background: Hero(
-          //   tag: heroTag,
-          //   child: Image.asset(
-          //     'assets/images/club_regatas_foto.jpg',
-          //     fit: BoxFit.fill,
-          //   ),
-          // ),
         ));
   }
 }

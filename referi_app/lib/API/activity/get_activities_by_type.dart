@@ -1,8 +1,9 @@
 import 'package:dio/dio.dart';
-import 'package:referi_app/API/params.dart';
-import 'package:referi_app/models/activity.dart';
 
-Future<List<Activity>?> getActivitiesByType(String activityId) async {
+import '/API/params.dart';
+import '/models/dto/activity_dto.dart';
+
+Future<List<DTOActivity>?> getActivitiesByType(String activityId) async {
   Dio dio = Dio();
 
   return await dio
@@ -13,10 +14,18 @@ Future<List<Activity>?> getActivitiesByType(String activityId) async {
     if (list.isEmpty) {
       return null;
     }
-    List<Activity> activityList = [];
+    // List<Activity> activityList = [];
+
+    // for (var activity in value.data['data']) {
+    //   activityList.add(Activity.fromJson(activity));
+    // }
+    List<DTOActivity> activityList = [];
 
     for (var activity in value.data['data']) {
-      activityList.add(Activity.fromJson(activity));
+      if (activity['tarifas'] == null) {
+        continue;
+      }
+      activityList.add(DTOActivity.fromJson(activity));
     }
     return activityList;
   }).onError((error, stackTrace) {
