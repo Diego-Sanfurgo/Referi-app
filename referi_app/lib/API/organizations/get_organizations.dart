@@ -1,20 +1,22 @@
 import 'package:referi_app/API/params.dart';
 
 import 'package:dio/dio.dart';
-import 'package:referi_app/models/organization.dart';
+import 'package:referi_app/models/dto/organization_dto.dart';
 
-Future<List<Organization>> getOrganizations() async {
+Future<List<DTOOrganization>> getOrganizations() async {
   Dio dio = Dio();
 
   String url = OrganizationUrls.getOrganizations;
 
-  List<Organization> orgList = [];
+  // List<Organization> orgList = [];
+  List<DTOOrganization> orgList = [];
 
   return await dio
       .get(url, options: Options(headers: getUserToken()))
       .then((value) {
         for (var org in value.data['data']) {
-          orgList.add(Organization.fromJson(org));
+          // orgList.add(Organization.fromJson(org));
+          orgList.add(DTOOrganization.fromJson(org));
         }
         return orgList;
       })

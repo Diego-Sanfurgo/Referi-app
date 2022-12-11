@@ -33,4 +33,17 @@ class DTOOrganization {
             ? DTOAddress.fromJson(json["direccion"])
             : null,
       );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "nombre": nombre,
+        "logo": logo,
+        "descripcion": descripcion,
+        "telefono": telefono,
+        "email": email,
+        // "fechaCreacion": fechaCreacion.toIso8601String(),
+        // "fechaActualizacion": fechaActualizacion.toIso8601String(),
+        // "fechaBaja": fechaBaja,
+        "direccion": direccion?.toJson(),
+      };
 }

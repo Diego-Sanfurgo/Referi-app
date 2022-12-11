@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:referi_app/models/dto/organization_dto.dart';
 
 import 'package:sizer/sizer.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 
-import '/models/organization.dart';
 import 'bloc/club_detail_bloc.dart';
 import '/theme/colors.dart' as colors;
 import '/theme/animations/loading_animation.dart';
@@ -18,8 +18,8 @@ class ClubDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Organization org =
-        ModalRoute.of(context)?.settings.arguments as Organization;
+    DTOOrganization org =
+        ModalRoute.of(context)?.settings.arguments as DTOOrganization;
     return BlocProvider(
       create: (context) => ClubDetailBloc(),
       child: _ClubDetailView(org),
@@ -28,7 +28,7 @@ class ClubDetail extends StatelessWidget {
 }
 
 class _ClubDetailView extends StatelessWidget {
-  final Organization org;
+  final DTOOrganization org;
   const _ClubDetailView(this.org);
 
   @override
@@ -40,7 +40,7 @@ class _ClubDetailView extends StatelessWidget {
 }
 
 class _Body extends StatelessWidget {
-  final Organization org;
+  final DTOOrganization org;
   const _Body(this.org, {Key? key}) : super(key: key);
 
   @override
@@ -89,8 +89,7 @@ class _Body extends StatelessWidget {
 }
 
 class _ClubActivities extends StatelessWidget {
-  // final String orgId;
-  final Organization org;
+  final DTOOrganization org;
   const _ClubActivities(this.org, {Key? key}) : super(key: key);
 
   @override

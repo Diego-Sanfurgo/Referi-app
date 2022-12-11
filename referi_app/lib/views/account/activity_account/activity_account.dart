@@ -30,15 +30,18 @@ class _Body extends StatelessWidget {
   Widget build(BuildContext context) {
     List<Widget> listTiles = _buildListTile(list);
 
-    return ListView.separated(
-      physics: const NeverScrollableScrollPhysics(),
-      shrinkWrap: true,
-      itemCount: listTiles.length,
-      separatorBuilder: (context, index) =>
-          Divider(color: colors.primary.shade800, height: 0),
-      itemBuilder: (context, index) {
-        return listTiles[index];
-      },
+    return Padding(
+      padding: const EdgeInsets.only(top: 8.0),
+      child: ListView.separated(
+        physics: const NeverScrollableScrollPhysics(),
+        shrinkWrap: true,
+        itemCount: listTiles.length,
+        separatorBuilder: (context, index) =>
+            Divider(color: colors.primary.shade800, height: 0),
+        itemBuilder: (context, index) {
+          return listTiles[index];
+        },
+      ),
     );
   }
 }

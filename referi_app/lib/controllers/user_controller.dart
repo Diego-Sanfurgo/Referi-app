@@ -48,6 +48,6 @@ abstract class UserController {
   }
 
   static Future<List<Enrollment>> obtainUserActivities() async {
-    return await UserHandler.obtainerUserActivities();
+    return await UserHandler.obtainerUserEnrollments();
   }
 }

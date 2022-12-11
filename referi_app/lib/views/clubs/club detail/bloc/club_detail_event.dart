@@ -9,7 +9,7 @@ abstract class ClubDetailEvent extends Equatable {
 
 class FetchClubActivities extends ClubDetailEvent {
   // final String orgId;
-  final Organization org;
+  final DTOOrganization org;
 
   const FetchClubActivities(this.org);
 }

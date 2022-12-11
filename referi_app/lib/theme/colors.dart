@@ -14,6 +14,10 @@ MaterialColor primary = const MaterialColor(_orangePrimaryValue, <int, Color>{
   900: Color(0xFFE65200),
 });
 
-Color secondary = const Color(0XFF0C9EE8);
+// const int _blueSecondaryValue = 0XFF0C9EE8;
+// MaterialAccentColor secondaryAccent = const MaterialAccentColor(
+//     _blueSecondaryValue, <int, Color>{50: Color(0XFF123456)});
 
+Color secondary = const Color(0XFF0C9EE8);
+Color secondaryLight = const Color(0XFFE1F6FE);
 Color secondaryDark = const Color(0XFF0070B5);

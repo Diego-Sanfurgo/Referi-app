@@ -28,6 +28,7 @@ class OperationTile extends StatelessWidget {
       title: Text(cuota.tarifa.nombre,
           style: const TextStyle(fontWeight: FontWeight.bold)),
       subtitle: Text(cuota.actividad.nombre),
+      visualDensity: VisualDensity.comfortable,
       trailing: Column(
         crossAxisAlignment: CrossAxisAlignment.end,
         mainAxisAlignment: MainAxisAlignment.center,

@@ -62,6 +62,7 @@ class _TimeExpansionTileState extends State<_TimeExpansionTile> {
 
         Turno turno = snapshot.data!;
         List<Widget> timeRange = [];
+
         for (var hourRange in turno.horarios) {
           timeRange.add(Padding(
             padding: const EdgeInsets.symmetric(vertical: 8),
@@ -85,6 +86,7 @@ class _TimeExpansionTileState extends State<_TimeExpansionTile> {
         }
 
         String label = "Turno ${widget.index + 1}";
+
         return ExpansionTile(
           controlAffinity: ListTileControlAffinity.leading,
           trailing: Checkbox(

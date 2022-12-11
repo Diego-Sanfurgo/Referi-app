@@ -10,17 +10,19 @@ class LoadingScreen extends StatelessWidget {
     return SizedBox.expand(
       child: Center(
           child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const CircularProgressIndicator(),
-          if (text != null) ...[
-            const SizedBox(height: 16),
-            AutoSizeText(
+          const SizedBox(height: 16),
+          Visibility(
+            visible: text != null,
+            child: AutoSizeText(
               text!,
               maxFontSize: 26,
               minFontSize: 20,
               style: const TextStyle(fontSize: 24),
-            )
-          ]
+            ),
+          )
         ],
       )),
     );

@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
-import 'package:referi_app/API/params.dart';
-import 'package:referi_app/models/dto/activity_dto.dart';
+
+import '/API/params.dart';
+import '/models/dto/activity_dto.dart';
 
 Future<List<DTOActivity>?> getActivityiesByOrg(String orgId) async {
   Dio dio = Dio();
@@ -26,9 +27,9 @@ Future<List<DTOActivity>?> getActivityiesByOrg(String orgId) async {
     List<DTOActivity> activityList = [];
 
     for (var activity in value.data['data']) {
-      if (activity['tarifas'] == null) {
-        continue;
-      }
+      // if (activity['tarifas'] == null) {
+      //   continue;
+      // }
       activityList.add(DTOActivity.fromJson(activity));
     }
     return activityList;

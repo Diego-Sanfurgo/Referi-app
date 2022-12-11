@@ -1,12 +1,13 @@
-import 'package:referi_app/API/organizations/get_organization_by_id.dart';
-import 'package:referi_app/API/organizations/get_organizations.dart';
-import 'package:referi_app/controllers/alert_controller.dart';
-
 import '../models/organization.dart';
+import '/controllers/alert_controller.dart';
+import '../models/dto/organization_dto.dart';
+import '/API/organizations/get_organizations.dart';
+import '/API/organizations/get_organization_by_id.dart';
 
 abstract class OrganizationHandler {
-  static Future<List<Organization>> obtainOrganizations() async {
-    List<Organization>? orgList = await getOrganizations();
+  static Future<List<DTOOrganization>> obtainOrganizations() async {
+    // List<Organization>? orgList = await getOrganizations();
+    List<DTOOrganization>? orgList = await getOrganizations();
 
     if (orgList.isEmpty) {
       Alert.showError(

@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:referi_app/widgets/placeholders/clubs_placeholder.dart';
 
 import 'package:sizer/sizer.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 
-import 'widgets/club_card.dart';
 import '/models/enrollment.dart';
-import '/models/organization.dart';
+import '/models/dto/organization_dto.dart';
 import '/controllers/user_controller.dart';
-import '/widgets/activities/user_activities.dart';
 import '/controllers/organization_controller.dart';
 import '/theme/animations/activities_not_found.dart';
-import '/widgets/placeholders/my_activities_placeholder.dart';
+
+import '/widgets/activities/user_activities.dart';
+
+import 'widgets/club_card.dart';
+import 'widgets/clubs_placeholder.dart';
+import 'widgets/my_activities_placeholder.dart';
 
 class ClubsHome extends StatelessWidget {
   const ClubsHome({Key? key}) : super(key: key);
@@ -85,10 +87,10 @@ class _Institutions extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var clubCards = FutureBuilder<List<Organization>>(
+    var clubCards = FutureBuilder<List<DTOOrganization>>(
       future: OrganizationController.obtainOrganizations(),
-      builder:
-          (BuildContext context, AsyncSnapshot<List<Organization>> snapshot) {
+      builder: (BuildContext context,
+          AsyncSnapshot<List<DTOOrganization>> snapshot) {
         if (snapshot.connectionState != ConnectionState.done) {
           return const ClubsPlaceholder();
         }

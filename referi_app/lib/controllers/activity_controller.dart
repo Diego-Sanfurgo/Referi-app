@@ -1,3 +1,5 @@
+import 'package:referi_app/models/dto/activity_dto.dart';
+
 import '../models/turno.dart';
 import '../models/activity.dart';
 import '../models/activity_type.dart';
@@ -21,13 +23,14 @@ abstract class ActivityController {
   static Future<Turno?> obtainShift(String shiftId) async =>
       await ActivityHandler.obtainShift(shiftId);
 
-  static enrollToActivity(Activity activity) async {
+  static enrollToActivity(DTOActivity activity) async {
     return await ActivityHandler.enrollToActivity();
   }
 
-  static enrollAndPayActivity(Activity activity) async {
+  static enrollAndPayActivity(DTOActivity activity) async {
     bool isEnrolled = await enrollToActivity(activity);
     if (!isEnrolled) return;
+
     List<ActivityFeePayment> feeList = await PaymentController.getUserFees();
     List<String> feesId = [feeList.first.id];
 
@@ -40,7 +43,7 @@ abstract class ActivityController {
     NavigationController.goTo(Routes.successView, popPage: true);
   }
 
-  static reservePlace(Activity activity) async {
+  static reservePlace(DTOActivity activity) async {
     await Alert.showReservePlaceMessage(activity);
   }
 

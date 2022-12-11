@@ -16,7 +16,10 @@ class ClubsPlaceholder extends StatelessWidget {
             3,
             (_) => Container(
               margin: const EdgeInsets.only(bottom: 16),
-              color: Colors.white,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15),
+                color: Colors.white,
+              ),
               height: 30.h,
             ),
           ),

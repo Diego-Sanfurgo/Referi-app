@@ -22,7 +22,7 @@ abstract class UserHandler {
     return true;
   }
 
-  static Future<List<Enrollment>> obtainerUserActivities() async {
+  static Future<List<Enrollment>> obtainerUserEnrollments() async {
     List<Enrollment> list = await getUserEnrollments();
 
     return list;

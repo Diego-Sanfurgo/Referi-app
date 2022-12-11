@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-import 'package:referi_app/models/organization.dart';
-import 'package:referi_app/theme/colors.dart';
+import '/theme/colors.dart';
+import '/models/dto/organization_dto.dart';
 
 class ExtendedClubAppBar extends StatelessWidget {
   // final String heroTag;
-  final Organization org;
+  final DTOOrganization org;
   const ExtendedClubAppBar({Key? key, required this.org}) : super(key: key);
 
   @override
@@ -15,13 +15,16 @@ class ExtendedClubAppBar extends StatelessWidget {
         iconTheme: IconThemeData(color: primary),
         flexibleSpace: FlexibleSpaceBar(
           title: Text(
-            org.nombre,
+            org.nombre!,
             style: const TextStyle(
                 color: Colors.white,
                 shadows: [Shadow(color: Colors.black, blurRadius: 10)]),
           ),
           background: org.logo != null
-              ? Image.network(org.logo!)
+              ? Image.network(
+                  org.logo!,
+                  fit: BoxFit.fill,
+                )
               : Image.asset("assets/images/no_image_placeholder.png"),
         ));
   }

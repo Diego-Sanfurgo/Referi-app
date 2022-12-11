@@ -5,7 +5,6 @@ import 'package:sizer/sizer.dart';
 
 import 'activity_description.dart';
 import 'activity_and_institution_name.dart';
-import 'package:referi_app/models/activity.dart';
 
 class ActivityDetailHeader extends StatelessWidget {
   final DTOActivity activity;
@@ -24,7 +23,7 @@ class ActivityDetailHeader extends StatelessWidget {
               tag: heroTag,
               child: Image.network(
                 activity.imgUrl!,
-                fit: BoxFit.cover,
+                fit: BoxFit.fill,
                 width: 100.w,
                 height: 25.h,
               ),
@@ -55,7 +54,7 @@ class ActivityDetailHeader extends StatelessWidget {
               children: [
                 NameAndInstitution(
                     activityName: activity.nombre!,
-                    orgName: activity.organizacion!.nombre!),
+                    org: activity.organizacion!),
                 ActivityDescription(activity.descripcion),
               ],
             ),

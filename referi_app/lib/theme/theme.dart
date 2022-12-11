@@ -11,9 +11,37 @@ ThemeData _referiTheme = ThemeData(
   //
   inputDecorationTheme: _inputDecorationTheme,
   elevatedButtonTheme: ElevatedButtonThemeData(style: _elevatedButtonStyle),
+  outlinedButtonTheme: OutlinedButtonThemeData(style: _outlinedBtnStyle),
   appBarTheme: _appBarTheme,
   bottomNavigationBarTheme: _barTheme,
   listTileTheme: _tileThemeData,
+);
+
+ButtonStyle _outlinedBtnStyle = ButtonStyle(
+  side: MaterialStateProperty.resolveWith((states) {
+    if (states.contains(MaterialState.disabled)) {
+      return const BorderSide(color: Colors.grey);
+    }
+    return BorderSide(color: colors.secondaryDark);
+  }),
+  foregroundColor: MaterialStateProperty.resolveWith((states) {
+    if (states.contains(MaterialState.disabled)) {
+      return Colors.grey.shade700;
+    }
+    return colors.secondary;
+  }),
+  overlayColor: MaterialStateProperty.resolveWith((states) {
+    if (states.contains(MaterialState.disabled)) {
+      return null;
+    }
+    return colors.secondaryLight;
+  }),
+  // surfaceTintColor: MaterialStateProperty.resolveWith((states) {
+  //   if (states.contains(MaterialState.disabled)) {
+  //     return null;
+  //   }
+  //   return colors.secondary;
+  // }),
 );
 
 ListTileThemeData _tileThemeData =

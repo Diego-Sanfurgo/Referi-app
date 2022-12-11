@@ -8,6 +8,7 @@ import 'package:referi_app/controllers/activity_controller.dart';
 import 'package:referi_app/controllers/navigation_controller.dart';
 import 'package:referi_app/controllers/user_controller.dart';
 import 'package:referi_app/models/activity.dart';
+import 'package:referi_app/models/dto/activity_dto.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../utils/utils.dart' as util;
@@ -108,7 +109,7 @@ abstract class Alert {
         fontSize: 16.0);
   }
 
-  static showReservePlaceMessage(Activity activity) async {
+  static showReservePlaceMessage(DTOActivity activity) async {
     String textContent =
         "Podés reservar tu lugar y pagar luego desde la app o en el establecimiento.\nLa reserva dura 3 días y se pierde si no se realizó ningún pago en este tiempo.\n¿Querés reservar?";
     await showDialog(

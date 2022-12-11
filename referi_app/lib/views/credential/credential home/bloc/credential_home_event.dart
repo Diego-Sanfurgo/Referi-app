@@ -6,3 +6,7 @@ abstract class CredentialHomeEvent extends Equatable {
   @override
   List<Object> get props => [];
 }
+
+class FetchCredentials extends CredentialHomeEvent {}
+
+class FetchUserFees extends CredentialHomeEvent {}

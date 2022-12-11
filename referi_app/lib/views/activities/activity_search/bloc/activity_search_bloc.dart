@@ -2,7 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 
 import '/models/dto/activity_dto.dart';
-import '/handlers/activity_handler.dart';
+import '/API/activity/get_activities_by_type.dart';
 
 part 'activity_search_event.dart';
 part 'activity_search_state.dart';
@@ -31,7 +31,7 @@ class ActivitySearchBloc
 
     on<ObtainActivitiesByType>((event, emit) async {
       List<DTOActivity>? activitiesSearched =
-          await ActivityHandler.obtainActivitiesByType(event.activityId);
+          await getActivitiesByType(event.activityId);
       if (activitiesSearched == null) {
         emit(ActivitySearchNotFound());
         return;

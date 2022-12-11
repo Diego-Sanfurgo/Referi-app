@@ -2,15 +2,16 @@ import 'package:flutter/material.dart';
 
 import 'package:auto_size_text/auto_size_text.dart';
 
-import 'package:referi_app/theme/colors.dart' as colors;
-import 'package:referi_app/controllers/navigation_controller.dart';
+import '/theme/colors.dart' as colors;
+import '/models/dto/organization_dto.dart';
+import '/controllers/navigation_controller.dart';
 
 class NameAndInstitution extends StatelessWidget {
-  // final Activity activity;
   final String activityName;
-  final String orgName;
+  final DTOOrganization org;
+
   const NameAndInstitution(
-      {Key? key, required this.activityName, required this.orgName})
+      {Key? key, required this.activityName, required this.org})
       : super(key: key);
 
   @override
@@ -27,9 +28,11 @@ class NameAndInstitution extends StatelessWidget {
             minFontSize: 18,
           ),
           GestureDetector(
-            onTap: () => NavigationController.goTo(Routes.clubDetail),
+            onTap: () => NavigationController.goToWithArguments(
+                Routes.clubDetail,
+                args: org),
             child: AutoSizeText(
-              orgName,
+              org.nombre!,
               style: TextStyle(color: colors.secondaryDark),
               maxFontSize: 16,
               minFontSize: 12,

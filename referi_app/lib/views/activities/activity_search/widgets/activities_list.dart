@@ -12,22 +12,19 @@ class ActivitiesList extends StatelessWidget {
   Widget build(BuildContext context) {
     if (list.isEmpty) return const NotFoundAnimation();
 
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(16, 8, 16, 40),
-      child: ListView.separated(
-        padding: const EdgeInsets.symmetric(vertical: 16),
-        itemCount: list.length,
-        separatorBuilder: (context, index) => const SizedBox(height: 16),
-        itemBuilder: (context, index) {
-          DTOActivity activity = list[index];
+    return ListView.separated(
+      padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+      itemCount: list.length,
+      separatorBuilder: (context, index) => const SizedBox(height: 16),
+      itemBuilder: (context, index) {
+        DTOActivity activity = list[index];
 
-          return ActivityCard(
-            activity,
-            isCard: false,
-            heroId: "$index-img",
-          );
-        },
-      ),
+        return ActivityCard(
+          activity,
+          isCard: false,
+          heroId: "$index-img",
+        );
+      },
     );
   }
 }

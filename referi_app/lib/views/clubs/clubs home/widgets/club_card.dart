@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 
 import 'package:sizer/sizer.dart';
 
-import 'package:referi_app/models/organization.dart';
-import 'package:referi_app/controllers/navigation_controller.dart';
+import '/models/dto/organization_dto.dart';
+import '/controllers/navigation_controller.dart';
 
 class ClubCard extends StatelessWidget {
-  final Organization organization;
+  final DTOOrganization organization;
   final String heroKey;
   const ClubCard(this.organization, {Key? key, required this.heroKey})
       : super(key: key);
@@ -60,7 +60,7 @@ class ClubCard extends StatelessWidget {
                   child: ListTile(
                     contentPadding: const EdgeInsets.all(8),
                     title: Text(
-                      organization.nombre,
+                      organization.nombre!,
                       style: const TextStyle(color: Colors.white),
                     ),
                     subtitle: Text(

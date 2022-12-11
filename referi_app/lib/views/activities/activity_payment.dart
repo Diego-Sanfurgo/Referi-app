@@ -5,6 +5,8 @@ import 'package:auto_size_text/auto_size_text.dart';
 
 import 'package:referi_app/models/activity.dart';
 
+import '../../models/dto/activity_dto.dart';
+import '../../models/dto/activity_fee_dto.dart';
 import '../../models/tarifa.dart';
 import '../../theme/colors.dart' as colors;
 import '../../providers/app_providers.dart';
@@ -16,7 +18,8 @@ class ActivityPayment extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Activity activity = ModalRoute.of(context)!.settings.arguments as Activity;
+    DTOActivity activity =
+        ModalRoute.of(context)!.settings.arguments as DTOActivity;
 
     return Scaffold(
       appBar: AppBar(title: const Text("Pago")),
@@ -26,7 +29,7 @@ class ActivityPayment extends StatelessWidget {
 }
 
 class _Body extends StatelessWidget {
-  final Activity activity;
+  final DTOActivity activity;
   const _Body(this.activity, {Key? key}) : super(key: key);
 
   @override
@@ -37,7 +40,7 @@ class _Body extends StatelessWidget {
         children: [
           _ActivityCardDetail(activity),
           const SizedBox(height: 24),
-          _ActivityFees(activity.tarifas),
+          _ActivityFees(activity.tarifas!),
           const Spacer(),
           ElevatedButton(
               onPressed: () => NavigationController.goToWithArguments(
@@ -58,7 +61,7 @@ class _Body extends StatelessWidget {
 }
 
 class _ActivityCardDetail extends StatelessWidget {
-  final Activity activity;
+  final DTOActivity activity;
   const _ActivityCardDetail(this.activity, {Key? key}) : super(key: key);
 
   @override
@@ -75,9 +78,9 @@ class _ActivityCardDetail extends StatelessWidget {
       padding: const EdgeInsets.all(16),
       child: Column(
         children: [
-          _CardInfoRow(label: "Actividad", value: activity.nombre),
+          _CardInfoRow(label: "Actividad", value: activity.nombre!),
           _CardInfoRow(
-              label: "Institución", value: activity.organizacion.nombre),
+              label: "Institución", value: activity.organizacion!.nombre!),
           ...timeRanges
         ],
       ),
@@ -141,7 +144,7 @@ class _CardInfoRow extends StatelessWidget {
 }
 
 class _ActivityFees extends StatelessWidget {
-  final List<Tarifa> fees;
+  final List<DTOActivityFee> fees;
   const _ActivityFees(this.fees, {Key? key}) : super(key: key);
 
   @override
@@ -150,8 +153,8 @@ class _ActivityFees extends StatelessWidget {
     List<Widget> feesTiles = [];
 
     for (var fee in fees) {
-      feesTiles.add(_CardInfoRow(label: fee.nombre, value: "\$${fee.monto}"));
-      totalSum += fee.monto;
+      feesTiles.add(_CardInfoRow(label: fee.nombre!, value: "\$${fee.monto}"));
+      totalSum += int.parse(fee.monto!);
     }
 
     return Column(

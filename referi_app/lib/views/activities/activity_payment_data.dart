@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:referi_app/controllers/activity_controller.dart';
+import 'package:referi_app/models/dto/activity_dto.dart';
 
-import 'package:referi_app/widgets/forms/textfields.dart';
+import 'package:sizer/sizer.dart';
 import 'package:flutter_credit_card/credit_card_brand.dart';
 import 'package:flutter_credit_card/credit_card_widget.dart';
 
-import 'package:sizer/sizer.dart';
-
-import '../../models/activity.dart';
+import '/widgets/forms/textfields.dart';
+import '/controllers/activity_controller.dart';
 
 class ActivityPaymentData extends StatelessWidget {
   const ActivityPaymentData({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    Activity activity = ModalRoute.of(context)?.settings.arguments as Activity;
+    DTOActivity activity =
+        ModalRoute.of(context)?.settings.arguments as DTOActivity;
 
     return Scaffold(
       appBar: AppBar(
@@ -26,7 +26,7 @@ class ActivityPaymentData extends StatelessWidget {
 }
 
 class _Body extends StatelessWidget {
-  final Activity activity;
+  final DTOActivity activity;
   const _Body(this.activity, {Key? key}) : super(key: key);
 
   @override
@@ -122,7 +122,7 @@ class _CardForm extends StatelessWidget {
 }
 
 class _ActionBtn extends StatelessWidget {
-  final Activity activity;
+  final DTOActivity activity;
 
   const _ActionBtn(this.activity, {Key? key}) : super(key: key);
 

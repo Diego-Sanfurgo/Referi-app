@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:referi_app/controllers/user_controller.dart';
 
-import '../../controllers/navigation_controller.dart';
-import '../../widgets/forms/name_and_surname_fields.dart';
-import '../../widgets/forms/street_and_number_fields.dart';
-
-import '../../widgets/forms/textfields.dart';
+import '/widgets/forms/textfields.dart';
+import '/controllers/user_controller.dart';
+import '/controllers/navigation_controller.dart';
+import '/widgets/forms/name_and_surname_fields.dart';
+import '/widgets/forms/street_and_number_fields.dart';
 
 class PersonalDataEdit extends StatelessWidget {
   const PersonalDataEdit({Key? key}) : super(key: key);
@@ -81,10 +80,10 @@ class _Buttons extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverPadding(
-      padding: const EdgeInsets.all(16),
-      sliver: SliverToBoxAdapter(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      sliver: SliverFillRemaining(
         child: Column(
-          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.end,
           children: [
             ElevatedButton(
                 onPressed: () => UserController.updateUser(formKey),
@@ -93,7 +92,8 @@ class _Buttons extends StatelessWidget {
                 width: double.infinity,
                 child: OutlinedButton(
                     onPressed: () => NavigationController.pop(),
-                    child: const Text("Cancelar")))
+                    child: const Text("Cancelar"))),
+            const SizedBox(height: 40),
           ],
         ),
       ),

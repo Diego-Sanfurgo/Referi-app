@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'widgets/body.dart';
 import '/models/activity_type.dart';
+
+import 'widgets/body.dart';
 import 'widgets/search_appbar.dart';
 import 'bloc/activity_search_bloc.dart';
 

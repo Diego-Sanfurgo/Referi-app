@@ -22,9 +22,6 @@ Future<List<DTOActivity>?> getActivitiesByType(String activityId) async {
     List<DTOActivity> activityList = [];
 
     for (var activity in value.data['data']) {
-      if (activity['tarifas'] == null) {
-        continue;
-      }
       activityList.add(DTOActivity.fromJson(activity));
     }
     return activityList;
