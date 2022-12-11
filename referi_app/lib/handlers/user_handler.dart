@@ -1,10 +1,8 @@
-import 'package:referi_app/API/associates/get_user_activities.dart';
-import 'package:referi_app/controllers/alert_controller.dart';
-import 'package:referi_app/models/activity.dart';
-
-import '../API/users/patch_user.dart';
-import '../controllers/navigation_controller.dart';
-import '../models/enrollment.dart';
+import '/models/enrollment.dart';
+import '/API/users/patch_user.dart';
+import '/controllers/alert_controller.dart';
+import '/controllers/navigation_controller.dart';
+import '/API/associates/get_user_activities.dart';
 
 abstract class UserHandler {
   static Future<bool> updateUser() async {

@@ -2,17 +2,15 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 
 import 'package:image_picker/image_picker.dart';
-import 'package:referi_app/controllers/navigation_controller.dart';
 
-import '../../handlers/user_handler.dart';
-import '../../providers/app_providers.dart';
-import '../../controllers/image_controller.dart';
-import '../models/activity.dart';
-import '../models/enrollment.dart';
-import '../utils/utils.dart' as util;
-
-import '../models/local_geolocation.dart';
-import '../handlers/location_handler.dart';
+import '/models/enrollment.dart';
+import '/utils/utils.dart' as util;
+import '/handlers/user_handler.dart';
+import '/providers/app_providers.dart';
+import '/models/local_geolocation.dart';
+import '/handlers/location_handler.dart';
+import '/controllers/image_controller.dart';
+import '/controllers/navigation_controller.dart';
 
 abstract class UserController {
   static updateUser(GlobalKey<FormState> formKey) async {

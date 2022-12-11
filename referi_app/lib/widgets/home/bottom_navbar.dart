@@ -1,8 +1,6 @@
-import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:flutter/material.dart';
 
-import 'package:referi_app/controllers/navigation_controller.dart';
-import 'package:referi_app/theme/colors.dart';
+import '/controllers/navigation_controller.dart';
 
 class BottomNavBar extends StatefulWidget {
   const BottomNavBar({Key? key}) : super(key: key);

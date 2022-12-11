@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
-import '/models/organization.dart';
 import '/models/dto/activity_dto.dart';
 import '/models/dto/organization_dto.dart';
 import '/API/activity/get_activities_by_org.dart';

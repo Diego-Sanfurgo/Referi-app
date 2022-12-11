@@ -3,15 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 
-import 'package:referi_app/models/activity.dart';
-
-import '../../models/dto/activity_dto.dart';
-import '../../models/dto/activity_fee_dto.dart';
-import '../../models/tarifa.dart';
-import '../../theme/colors.dart' as colors;
-import '../../providers/app_providers.dart';
-import '../../controllers/activity_controller.dart';
-import '../../controllers/navigation_controller.dart';
+import '/theme/colors.dart' as colors;
+import '/models/dto/activity_dto.dart';
+import '/providers/app_providers.dart';
+import '/models/dto/activity_fee_dto.dart';
+import '/controllers/activity_controller.dart';
+import '/controllers/navigation_controller.dart';
 
 class ActivityPayment extends StatelessWidget {
   const ActivityPayment({Key? key}) : super(key: key);

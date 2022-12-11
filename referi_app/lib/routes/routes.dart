@@ -21,7 +21,7 @@ import '/views/credential/credential_detail.dart';
 import '/views/password%20recover/pass_recover.dart';
 import '/views/activities/activity_payment_data.dart';
 import '/views/account/account_home/account_home.dart';
-import '/views/activities/activity_detail_enrolled.dart';
+import '../views/activities/activity detail enrolled/activity_detail_enrolled.dart';
 import '/views/account/operation_detail/operation_detail.dart';
 import '/views/activities/activity_search/activity_search.dart';
 

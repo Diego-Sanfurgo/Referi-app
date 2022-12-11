@@ -9,9 +9,9 @@ import 'bloc/club_detail_bloc.dart';
 import '/theme/colors.dart' as colors;
 import '/theme/animations/loading_animation.dart';
 import '/theme/animations/activities_not_found.dart';
+import '/views/activities/activity_search/widgets/activities_list.dart';
 
 import 'widgets/extended_app_bar.dart';
-import '/views/activities/activity_search/widgets/activities_list.dart';
 
 class ClubDetail extends StatelessWidget {
   const ClubDetail({Key? key}) : super(key: key);
@@ -51,25 +51,28 @@ class _Body extends StatelessWidget {
     return CustomScrollView(
       slivers: [
         ExtendedClubAppBar(org: org),
-        SliverToBoxAdapter(
-            child: ListTile(
-          onTap: () {},
-          leading: Icon(Icons.location_pin, color: colors.secondary),
-          title: Text(
-              "${org.direccion?.calle} ${org.direccion?.numero}, ${org.direccion?.ciudad}"),
-          visualDensity: VisualDensity.compact,
-        )),
-        SliverToBoxAdapter(
-            child: org.descripcion != null
-                ? Padding(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 16, horizontal: 16),
-                    child: Text(
-                      org.descripcion as String,
-                      textAlign: TextAlign.center,
-                    ),
-                  )
-                : null),
+        SliverVisibility(
+          visible: org.direccion != null,
+          sliver: SliverToBoxAdapter(
+              child: ListTile(
+            onTap: () {},
+            leading: Icon(Icons.location_pin, color: colors.secondary),
+            title: Text(
+                "${org.direccion?.calle} ${org.direccion?.numero}, ${org.direccion?.ciudad}"),
+            visualDensity: VisualDensity.compact,
+          )),
+        ),
+        SliverVisibility(
+          visible: org.descripcion != null,
+          sliver: SliverToBoxAdapter(
+              child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+            child: Text(
+              org.descripcion!,
+              textAlign: TextAlign.center,
+            ),
+          )),
+        ),
         const SliverToBoxAdapter(
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 16),

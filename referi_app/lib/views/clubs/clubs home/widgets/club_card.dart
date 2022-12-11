@@ -51,26 +51,40 @@ class ClubCard extends StatelessWidget {
             fit: StackFit.expand,
             children: [
               Hero(tag: heroKey, child: imageLogo),
-              Align(
-                alignment: Alignment.bottomCenter,
-                child: Container(
-                  color: const Color.fromRGBO(0, 0, 0, 0.7),
-                  height: 10.h,
-                  width: double.infinity,
-                  child: ListTile(
-                    contentPadding: const EdgeInsets.all(8),
-                    title: Text(
-                      organization.nombre!,
-                      style: const TextStyle(color: Colors.white),
-                    ),
-                    subtitle: Text(
-                      "${organization.direccion!.calle} ${organization.direccion!.numero}",
-                      style: const TextStyle(color: Colors.white),
-                    ),
-                  ),
-                ),
-              )
+              _ClubInfoTile(organization: organization)
             ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _ClubInfoTile extends StatelessWidget {
+  const _ClubInfoTile({
+    Key? key,
+    required this.organization,
+  }) : super(key: key);
+
+  final DTOOrganization organization;
+
+  @override
+  Widget build(BuildContext context) {
+    return Align(
+      alignment: Alignment.bottomCenter,
+      child: Container(
+        color: const Color.fromRGBO(0, 0, 0, 0.7),
+        height: 10.h,
+        width: double.infinity,
+        child: ListTile(
+          contentPadding: const EdgeInsets.all(8),
+          title: Text(
+            organization.nombre!,
+            style: const TextStyle(color: Colors.white),
+          ),
+          subtitle: Text(
+            "${organization.direccion!.calle} ${organization.direccion!.numero}",
+            style: const TextStyle(color: Colors.white),
           ),
         ),
       ),

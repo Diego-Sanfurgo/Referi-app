@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:referi_app/controllers/alert_controller.dart';
 
-import '../../handlers/auth_handler.dart';
-import '../../providers/app_providers.dart';
+import '/handlers/auth_handler.dart';
+import '/providers/app_providers.dart';
 
 import 'navigation_controller.dart';
 import 'user_controller.dart';

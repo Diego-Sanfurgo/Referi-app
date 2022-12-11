@@ -1,19 +1,17 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 import 'package:intl/intl.dart';
-import 'package:referi_app/controllers/activity_controller.dart';
-import 'package:referi_app/controllers/navigation_controller.dart';
-import 'package:referi_app/controllers/user_controller.dart';
-import 'package:referi_app/models/activity.dart';
-import 'package:referi_app/models/dto/activity_dto.dart';
 import 'package:sizer/sizer.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
-import '../../utils/utils.dart' as util;
-
-import '../widgets/circular_container.dart';
+import '/utils/utils.dart' as util;
+import '/models/dto/activity_dto.dart';
+import '/widgets/circular_container.dart';
+import '/controllers/user_controller.dart';
+import '/controllers/activity_controller.dart';
+import '/controllers/navigation_controller.dart';
 
 final BuildContext _navigatorContext =
     util.navigatorKey.currentContext as BuildContext;
