@@ -7,6 +7,7 @@ abstract class AuthUrls {
   static const String postRegister = "$_baseUrl/auth/register";
   static const String postRecover = "$_baseUrl/auth/recover";
   static const String postVerify = "$_baseUrl/auth/verify";
+  static const String postChangePassword = "$_baseUrl/auth/change_password";
 }
 
 abstract class UserUrls {
