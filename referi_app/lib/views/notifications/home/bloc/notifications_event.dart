@@ -8,3 +8,7 @@ abstract class NotificationsEvent extends Equatable {
 }
 
 class FetchNotifications extends NotificationsEvent {}
+
+class ClearIconNotifications extends NotificationsEvent {}
+
+class FetchIconNotifications extends NotificationsEvent {}

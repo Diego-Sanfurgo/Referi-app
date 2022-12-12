@@ -8,8 +8,8 @@ import 'package:sizer/sizer.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
-import '../../theme/colors.dart' as colors;
-import '../../widgets/forms/progress_bar_signup.dart';
+import '../../../theme/colors.dart' as colors;
+import '../../../widgets/forms/progress_bar_signup.dart';
 
 ValueNotifier<bool> _enableBtn = ValueNotifier<bool>(false);
 late final String _code;
@@ -126,7 +126,7 @@ class _BodyState extends State<_Body> {
         guideText,
         const SizedBox(height: 32),
         const Text("Ingrese el código", style: TextStyle(fontSize: 16)),
-        const _CodeInputField(),
+        const CodeInputField(),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -143,14 +143,14 @@ class _BodyState extends State<_Body> {
   }
 }
 
-class _CodeInputField extends StatefulWidget {
-  const _CodeInputField({Key? key}) : super(key: key);
+class CodeInputField extends StatefulWidget {
+  const CodeInputField({Key? key}) : super(key: key);
 
   @override
-  State<_CodeInputField> createState() => _CodeInputFieldState();
+  State<CodeInputField> createState() => _CodeInputFieldState();
 }
 
-class _CodeInputFieldState extends State<_CodeInputField> {
+class _CodeInputFieldState extends State<CodeInputField> {
   late final TextEditingController codeController;
 
   @override

@@ -64,9 +64,11 @@ enum Routes {
   profile,
   personalData,
   personalDataEdit,
+  passwordEdit,
 
   //Notifications
   notifications,
+  notificationDetail,
 
   //Scanner
   scanner,

@@ -20,8 +20,19 @@ class Notifications extends StatelessWidget {
   }
 }
 
-class _NotificationsView extends StatelessWidget {
+class _NotificationsView extends StatefulWidget {
   const _NotificationsView({Key? key}) : super(key: key);
+
+  @override
+  State<_NotificationsView> createState() => _NotificationsViewState();
+}
+
+class _NotificationsViewState extends State<_NotificationsView> {
+  @override
+  void initState() {
+    super.initState();
+    BlocProvider.of<NotificationsBloc>(context).add(ClearIconNotifications());
+  }
 
   @override
   Widget build(BuildContext context) {

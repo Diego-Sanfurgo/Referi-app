@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 
-import '/views/home.dart';
+import '../views/home/home.dart';
 import '/views/login/login.dart';
 import '/views/signup/signup_1.dart';
 import '/views/signup/signup_2.dart';
-import '../views/profile/home/profile.dart';
 import '/views/scanner/scanner.dart';
+import '../views/profile/home/profile.dart';
 import '/theme/animations/success_view.dart';
-import '/views/signup/verification_code.dart';
 import '/views/profile/personal_data_edit.dart';
-import '/views/notifications/notifications.dart';
 import '/views/activities/activity_payment.dart';
 import '/views/credential/credential_detail.dart';
 import '../views/clubs/clubs home/clubs_home.dart';
@@ -17,12 +15,16 @@ import '../views/clubs/club detail/club_detail.dart';
 import '/views/password%20recover/pass_recover.dart';
 import '/views/activities/activity_payment_data.dart';
 import '/views/account/account_home/account_home.dart';
+import '../views/notifications/home/notifications.dart';
 import '../views/profile/personal data/personal_data.dart';
+import '/views/profile/password_edit.dart/password_edit.dart';
 import '/views/account/activity_account/activity_account.dart';
 import '/views/account/operation_detail/operation_detail.dart';
 import '/views/activities/activity_search/activity_search.dart';
+import '../views/signup/verification code/verification_code.dart';
 import '../views/credential/credential home/credential_home.dart';
 import '../views/activities/activity detail/activity_detail.dart';
+import '/views/notifications/notification%20detail/notification_detail.dart';
 import '../views/activities/activity detail enrolled/activity_detail_enrolled.dart';
 
 Map<String, WidgetBuilder> get routesMap => routes;
@@ -41,9 +43,11 @@ Map<String, WidgetBuilder> routes = {
   'profile': (_) => const Profile(),
   'personalData': (_) => const PersonalData(),
   'personalDataEdit': (_) => const PersonalDataEdit(),
+  'passwordEdit': (_) => const PasswordEdit(),
 
   //Notifications
   'notifications': (_) => const Notifications(),
+  'notificationDetail': (_) => const NotificationDetail(),
 
   //Activities
   'activitySearch': (_) => const ActivitySearch(),

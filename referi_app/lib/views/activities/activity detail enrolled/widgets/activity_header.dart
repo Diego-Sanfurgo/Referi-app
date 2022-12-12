@@ -138,7 +138,7 @@ class _ActivityImage extends StatelessWidget {
       child: activity.imgUrl != null
           ? Image.network(
               activity.imgUrl!,
-              fit: BoxFit.cover,
+              fit: BoxFit.fill,
               width: 100.w,
               height: 25.h,
             )

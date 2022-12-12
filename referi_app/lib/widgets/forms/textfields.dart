@@ -62,8 +62,13 @@ class _NumberTextFieldState extends State<NumberTextField> {
 class NameTextField extends StatefulWidget {
   final bool isEditing;
   final String label;
-  const NameTextField(this.isEditing, {Key? key, required this.label})
-      : super(key: key);
+  final TextEditingController? fieldController;
+  const NameTextField(
+    this.isEditing, {
+    Key? key,
+    required this.label,
+    this.fieldController,
+  }) : super(key: key);
 
   @override
   State<NameTextField> createState() => _NameTextFieldState();
@@ -75,9 +80,9 @@ class _NameTextFieldState extends State<NameTextField> {
   @override
   void initState() {
     super.initState();
-    controller = widget.isEditing
+    controller =  widget.isEditing
         ? _initController(widget.label)
-        : TextEditingController();
+        : widget.fieldController ?? TextEditingController();
   }
 
   @override

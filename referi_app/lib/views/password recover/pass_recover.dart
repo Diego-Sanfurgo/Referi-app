@@ -1,10 +1,26 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:referi_app/controllers/navigation_controller.dart';
-import 'package:referi_app/widgets/forms/textfields.dart';
+
+import 'package:sizer/sizer.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:auto_size_text/auto_size_text.dart';
+
+import '/widgets/forms/textfields.dart';
+import 'bloc/password_recover_bloc.dart';
 
 class PassRecover extends StatelessWidget {
-  const PassRecover({Key? key}) : super(key: key);
+  const PassRecover({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) => PasswordRecoverBloc(),
+      child: const _PassRecoverView(),
+    );
+  }
+}
+
+class _PassRecoverView extends StatelessWidget {
+  const _PassRecoverView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,36 +39,51 @@ class _Body extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     GlobalKey<FormState> formKey = GlobalKey<FormState>();
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 40),
-      child: Form(
-        key: formKey,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            const AutoSizeText(
-              "Introduce un correo electrónico para recibir una contraseña auxiliar.",
-              maxLines: 2,
-              maxFontSize: 24,
-              minFontSize: 18,
-              textAlign: TextAlign.center,
+    TextEditingController controller = TextEditingController();
+
+    return CustomScrollView(
+      slivers: <Widget>[
+        SliverToBoxAdapter(
+          child: Form(
+            key: formKey,
+            child: Padding(
+              padding: EdgeInsets.fromLTRB(16, 30.h, 16, 0),
+              child: Column(
+                children: [
+                  const AutoSizeText(
+                    // "Introduce un correo electrónico para recibir una contraseña auxiliar.",
+                    "Te enviaremos una contraseña auxiliar al correo electrónico que introduzcas a continuación.",
+                    maxLines: 3,
+                    maxFontSize: 24,
+                    minFontSize: 18,
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: 8),
+                  NameTextField(false,
+                      label: "Correo electrónico", fieldController: controller),
+                  const SizedBox(height: 40),
+                ],
+              ),
             ),
-            const SizedBox(height: 8),
-            const NameTextField(false, label: "Correo electrónico"),
-            const SizedBox(height: 40),
-            ElevatedButton(
-                onPressed: () {
-                  if (!formKey.currentState!.validate()) {
-                    return;
-                  }
-                  formKey.currentState!.save();
-                  NavigationController.goTo(Routes.signup_3);
-                },
-                child: const Text('Enviar código'))
-          ],
+          ),
         ),
-      ),
+        SliverFillRemaining(
+          hasScrollBody: false,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 40),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                ElevatedButton(
+                    onPressed: () =>
+                        BlocProvider.of<PasswordRecoverBloc>(context)
+                            .add(SendRecoveryEmail(controller.text, formKey)),
+                    child: const Text('Enviar código')),
+              ],
+            ),
+          ),
+        )
+      ],
     );
   }
 }

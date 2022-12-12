@@ -6,6 +6,9 @@ final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 NavigatorState? get navigatorState => navigatorKey.currentState;
 
+BuildContext get navigatorContext =>
+    navigatorKey.currentState?.context as BuildContext;
+
 BuildContext get actualContext => scaffoldKey.currentContext as BuildContext;
 
 String removeAccentsToLowerCase(String value) {

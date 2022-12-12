@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:referi_app/models/dto/notification_dto.dart';
 
 import 'notification_tile.dart';
 
 class NotificationsList extends StatelessWidget {
-  final List notifications;
+  final List<DTONotification> notifications;
   const NotificationsList(
     this.notifications, {
     Key? key,
@@ -11,13 +12,19 @@ class NotificationsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    notifications.sort(
+      (a, b) {
+        DateTime first = DateTime.parse(a.fecha);
+        DateTime second = DateTime.parse(b.fecha);
+        return first.compareTo(second);
+      },
+    );
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 16),
       child: ListView.separated(
         itemCount: notifications.length,
         itemBuilder: (context, index) {
-          return const NotificationTile(
-              "El pago de tu cuota fue realizado con éxito.");
+          return NotificationTile(notifications[index]);
         },
         separatorBuilder: (ctx, idx) =>
             const Divider(color: Colors.grey, height: 8),

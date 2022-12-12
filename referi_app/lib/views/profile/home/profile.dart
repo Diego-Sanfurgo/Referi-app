@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:sizer/sizer.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 
 import '/theme/colors.dart' as colors;
@@ -30,14 +29,11 @@ class _Body extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 40),
       child: Column(
-        // crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           const ProfileImage(),
           const AutoSizeText("Tu foto se podrá usar para credenciales.",
               maxFontSize: 16, minFontSize: 12),
-          // const SizedBox(height: 8),
           Divider(color: colors.secondaryDark, height: 8),
-          // SizedBox(height: 4.6.h),
           const _ActionsList(),
         ],
       ),
@@ -59,6 +55,12 @@ class _ActionsList extends StatelessWidget {
             trailing: const Icon(Icons.keyboard_arrow_right),
             title: const AutoSizeText("Datos personales"),
             onTap: () => NavigationController.goTo(Routes.personalData),
+          ),
+          ListTile(
+            leading: const Icon(Icons.shield_rounded),
+            trailing: const Icon(Icons.keyboard_arrow_right),
+            title: const AutoSizeText("Editar contraseña"),
+            onTap: () => NavigationController.goTo(Routes.passwordEdit),
           ),
           ListTile(
             leading: const Icon(Icons.logout_rounded),

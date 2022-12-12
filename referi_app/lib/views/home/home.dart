@@ -1,14 +1,17 @@
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
+import 'package:referi_app/API/notifications/get_user_notifications.dart';
+import 'package:referi_app/models/dto/notification_dto.dart';
 
-import 'clubs/clubs home/clubs_home.dart';
+import '../clubs/clubs home/clubs_home.dart';
 import '/providers/app_providers.dart';
 import '/widgets/home/profile_icon.dart';
-import 'credential/credential home/credential_home.dart';
-import '../widgets/home/bottom_navbar.dart';
-import 'activities/home/activities_home.dart';
-import 'account/account_home/account_home.dart';
+import '../credential/credential home/credential_home.dart';
+import '../../widgets/home/bottom_navbar.dart';
+import '../activities/home/activities_home.dart';
+import '../account/account_home/account_home.dart';
 import '/controllers/navigation_controller.dart';
+import 'widgets/notification_icon.dart';
 
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);
@@ -77,17 +80,10 @@ List<Widget> get _appBarActions => [
       IconButton(
           onPressed: () => NavigationController.goTo(Routes.scanner),
           icon: const Icon(Icons.qr_code_scanner_rounded)),
-      IconButton(
-          onPressed: () => NavigationController.goTo(Routes.notifications),
-          icon: const Icon(Icons.notifications_rounded)),
-      // Badge(
-      //   ignorePointer: true,
-      //   animationType: BadgeAnimationType.scale,
-      //   badgeContent: const Text("1", style: TextStyle(color: Colors.white)),
-      //   padding: const EdgeInsets.all(8),
-      //   position: BadgePosition.bottomStart(bottom: 0, start: 0),
-      //   child: IconButton(
-      //       onPressed: () => NavigationController.goTo(Routes.notifications),
-      //       icon: const Icon(Icons.notifications_rounded)),
-      // ),
+      const NotificationIcon(),
+      // IconButton(
+      //     onPressed: () => NavigationController.goTo(Routes.notifications),
+      //     icon: const Icon(Icons.notifications_rounded)),
     ];
+
+

@@ -26,7 +26,7 @@ class UserActivityCard extends StatelessWidget {
           child: AutoSizeText(enrollment.turnoActividad.actividad.nombre,
               maxFontSize: 20,
               minFontSize: 16,
-              maxLines: 2,
+              maxLines: 1,
               overflow: TextOverflow.ellipsis,
               style: const TextStyle(fontWeight: FontWeight.bold)),
         ),

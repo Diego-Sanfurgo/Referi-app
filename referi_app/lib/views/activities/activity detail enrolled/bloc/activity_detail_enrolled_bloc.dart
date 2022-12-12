@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:referi_app/views/activities/activity%20detail%20enrolled/alerts/alerts.dart';
 
 import '../functions/get_status_data.dart';
 import '/API/payments/get_fees_by_user_id.dart';
@@ -31,10 +32,18 @@ class ActivityDetailEnrolledBloc
 
     on<CancelInscriptionEvent>((event, emit) async {
       if (_statusData!["estado"] == "Deuda") {
+        await ActivityDetailEnrolledAlert.cannotCancelDialog();
         return;
       }
 
+      bool isConfirmed = await ActivityDetailEnrolledAlert.askConfirmation();
+      if (!isConfirmed) return;
+
+      Alert.showLoading();
+
       bool isOk = await deleteAssociate(event.enrollment.id);
+
+      NavigationController.pop();
 
       if (isOk) {
         Alert.showToast("Has cancelado tu inscripción a esta actividad");

@@ -10,9 +10,17 @@ abstract class NotificationsState extends Equatable {
 class NotificationsInitial extends NotificationsState {}
 
 class NotificationsResult extends NotificationsState {
-  final List notifications;
+  final List<DTONotification> notifications;
 
   const NotificationsResult(this.notifications);
 }
 
 class NoNotificationsFound extends NotificationsState {}
+
+class IconNotificationClean extends NotificationsState {}
+
+class IconNotificationResults extends NotificationsState {
+  final String amount;
+
+  const IconNotificationResults(this.amount);
+}

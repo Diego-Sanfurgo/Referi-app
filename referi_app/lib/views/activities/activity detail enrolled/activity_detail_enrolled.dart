@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:referi_app/views/activities/activity%20detail%20enrolled/widgets/activity_status.dart';
 
 import '/models/enrollment.dart';
 
@@ -8,6 +7,8 @@ import 'widgets/action_btns.dart';
 import 'widgets/time_ranges.dart';
 import 'widgets/activity_fees.dart';
 import 'widgets/activity_header.dart';
+import 'widgets/activity_status.dart';
+
 import 'bloc/activity_detail_enrolled_bloc.dart';
 
 class ActivityDetailEnrolled extends StatelessWidget {
