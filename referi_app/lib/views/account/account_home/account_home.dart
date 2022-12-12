@@ -51,6 +51,11 @@ class _AccountActivity extends StatelessWidget {
           return const NotFoundAnimation();
         }
         List<ActivityFeePayment> list = snapshot.data;
+
+        if (list.isEmpty) {
+          return const NotFoundAnimation(infoText: "No tienes cuotas");
+        }
+
         List<Widget> listTiles = _buildListTile(list);
 
         return ListView.separated(

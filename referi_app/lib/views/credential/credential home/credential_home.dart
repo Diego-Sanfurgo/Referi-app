@@ -31,6 +31,12 @@ class _CredentialHomeView extends StatelessWidget {
           BlocProvider.of<CredentialHomeBloc>(context).add(FetchCredentials());
           return const Center(child: LoadingScreen("Cargando credenciales..."));
         } else if (state is CredentialHomeResults) {
+          if (state.credentials.isEmpty) {
+            return const NotFoundAnimation(
+              infoText: "No estás inscripto en ninguna institución todavía.",
+            );
+          }
+
           return ListView.separated(
               padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 16),
               itemCount: state.credentials.length,

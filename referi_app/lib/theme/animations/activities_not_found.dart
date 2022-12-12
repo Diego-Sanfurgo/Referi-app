@@ -24,8 +24,12 @@ class NotFoundAnimation extends StatelessWidget {
             repeat: false,
           ),
           const SizedBox(height: 16),
-          AutoSizeText(infoText ?? "No encontramos actividades",
-              minFontSize: 20, maxFontSize: 24)
+          AutoSizeText(
+            infoText ?? "No encontramos actividades",
+            minFontSize: 20,
+            maxFontSize: 24,
+            textAlign: TextAlign.center,
+          )
         ],
       ),
     );
