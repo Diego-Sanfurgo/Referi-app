@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:flutter_image_compress/flutter_image_compress.dart';
@@ -14,9 +15,7 @@ abstract class ImageController {
 
     final XFile? image = await imagePicker
         .pickImage(source: source)
-        .onError((error, stackTrace) async {
-      return null;
-    });
+        .onError((error, stackTrace) async => null);
 
     if (image == null) return null;
 
@@ -25,8 +24,10 @@ abstract class ImageController {
   }
 
   static uploadUserImage(Uint8List image) async {
-    Uint8List lightImage = await _compressImage(image);
-    bool imageUploaded = await ImageHandler.uploadImage(lightImage);
+    // File imageFile = File.fromRawPath(image);
+
+    // Uint8List lightImage = await _compressImage(image);
+    bool imageUploaded = await ImageHandler.uploadImage(image);
 
     if (!imageUploaded) {
       NavigationController.pop();

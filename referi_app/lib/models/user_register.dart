@@ -31,7 +31,7 @@ class UserRegister {
   final int? dni;
   String? telefono;
   DateTime? fechaNacimiento;
-   String? fotoPerfil;
+  String? fotoPerfil;
   final Domicilio? domicilio;
 
   UserRegister copyWith({
@@ -65,7 +65,9 @@ class UserRegister {
       // dni: int.parse(json["dni"]),
       dni: int.parse(json["dni"]),
       telefono: json["telefono"],
-      fechaNacimiento: DateFormat('dd/MM/yyyy').parse(json["fechanacimiento"]),
+      fechaNacimiento: json["fechanacimiento"] != ""
+          ? DateFormat.yMd().parse(json["fechanacimiento"])
+          : null,
       fotoPerfil: json["fotoPerfil"],
       domicilio: Domicilio.fromJson(json['domicilio']));
 
@@ -110,7 +112,11 @@ class Domicilio {
 
   factory Domicilio.fromJson(Map<String, dynamic> json) => Domicilio(
         calle: json["calle"],
-        numero: json["numero"] == "" ? null : int.parse(json["numero"]),
+        numero: (json["numero"] is int)
+            ? json["numero"]
+            : (json["numero"] == "")
+                ? null
+                : int.parse(json["numero"]),
         ciudad: json["ciudad"],
         provincia: json["Provincia"],
       );

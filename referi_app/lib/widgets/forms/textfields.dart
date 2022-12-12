@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+
 import 'package:intl/intl.dart';
 
-import '../../models/user.dart';
-import '../../utils/utils.dart' as util;
-import '../../providers/app_providers.dart';
-import '../../controllers/user_controller.dart';
-import '../../controllers/alert_controller.dart';
-import '../../utils/validators_and_regexps.dart';
+import '/models/user.dart';
+import '/utils/utils.dart' as util;
+import '/providers/app_providers.dart';
+import '/controllers/user_controller.dart';
+import '/controllers/alert_controller.dart';
+import '/utils/validators_and_regexps.dart';
 
 class NumberTextField extends StatefulWidget {
   final bool isEditing;
@@ -29,7 +30,9 @@ class _NumberTextFieldState extends State<NumberTextField> {
   @override
   void initState() {
     super.initState();
-    controller = _initController(widget.label);
+    controller = widget.isEditing
+        ? _initController(widget.label)
+        : TextEditingController();
   }
 
   @override
@@ -72,7 +75,9 @@ class _NameTextFieldState extends State<NameTextField> {
   @override
   void initState() {
     super.initState();
-    controller = _initController(widget.label);
+    controller = widget.isEditing
+        ? _initController(widget.label)
+        : TextEditingController();
   }
 
   @override
@@ -121,7 +126,9 @@ class _DateTextFieldState extends State<DateTextField> {
   @override
   void initState() {
     super.initState();
-    controller = _initController(widget.label);
+    controller = widget.isEditing
+        ? _initController(widget.label)
+        : TextEditingController();
   }
 
   @override
@@ -168,10 +175,10 @@ String selectProperty(String label) {
       return user.nombre;
     case "apellido":
       return user.apellido;
-    // case "numero":
-    //   return user.domicilio.numero.toString();
-    // case "calle":
-    //   return user.domicilio.calle;
+    case "numero":
+      return user.domicilio.numero.toString();
+    case "calle":
+      return user.domicilio.calle;
     case "telefono":
       return user.telefono ?? '';
     case "fecha de nacimiento":

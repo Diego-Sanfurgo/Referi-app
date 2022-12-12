@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
 import 'package:intl/intl.dart';
+import 'package:equatable/equatable.dart';
 
 import '/models/enrollment.dart';
 import '/models/activity_fee_payment.dart';

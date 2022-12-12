@@ -3,7 +3,8 @@ import 'package:intl/intl.dart';
 
 import '/theme/colors.dart' as colors;
 import '/models/activity_fee_payment.dart';
-import '../account_home/widgets/operation_tile.dart';
+
+import 'widgets/operation_tile.dart';
 
 class ActivityAccount extends StatelessWidget {
   const ActivityAccount({super.key});

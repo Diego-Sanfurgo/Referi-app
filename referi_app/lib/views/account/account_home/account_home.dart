@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:referi_app/controllers/activity_controller.dart';
-import 'package:referi_app/models/activity.dart';
 
+import '/models/activity.dart';
 import '/models/activity_fee_payment.dart';
 import '/controllers/payment_controller.dart';
+import '/controllers/activity_controller.dart';
 import '/controllers/navigation_controller.dart';
 import '/theme/animations/activities_not_found.dart';
 

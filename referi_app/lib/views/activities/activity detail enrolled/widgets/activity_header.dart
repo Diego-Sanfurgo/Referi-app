@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:referi_app/models/dto/organization_dto.dart';
 
 import 'package:sizer/sizer.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:expandable_text/expandable_text.dart';
 
 import '/models/enrollment.dart';
-import 'package:referi_app/theme/colors.dart' as colors;
+import '/theme/colors.dart' as colors;
+import '/models/dto/organization_dto.dart';
 import '/controllers/navigation_controller.dart';
 
 class HeaderActivity extends StatelessWidget {
@@ -20,7 +20,54 @@ class HeaderActivity extends StatelessWidget {
 
     var activity = enrollment.turnoActividad.actividad;
 
-    Widget nameAndInstitute = Padding(
+    return SliverToBoxAdapter(
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
+        child: Container(
+          width: 100.w,
+          decoration: BoxDecoration(
+            border: Border.all(color: Colors.blueGrey),
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _ActivityImage(activity),
+              Container(
+                width: double.infinity,
+                padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    _NameAndInstitution(
+                        activity: activity, org: org, enrollment: enrollment),
+                    _Description(activity),
+                  ],
+                ),
+              )
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _NameAndInstitution extends StatelessWidget {
+  const _NameAndInstitution({
+    Key? key,
+    required this.activity,
+    required this.org,
+    required this.enrollment,
+  }) : super(key: key);
+
+  final EnrollmentActivity activity;
+  final DTOOrganization org;
+  final Enrollment enrollment;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
       padding: const EdgeInsets.only(bottom: 8.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -45,7 +92,19 @@ class HeaderActivity extends StatelessWidget {
         ],
       ),
     );
-    Widget activityDescription = Padding(
+  }
+}
+
+class _Description extends StatelessWidget {
+  final EnrollmentActivity activity;
+  const _Description(
+    this.activity, {
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
       padding: const EdgeInsets.only(bottom: 8.0),
       child: Visibility(
           visible: activity.descripcion != null ? true : false,
@@ -60,8 +119,19 @@ class HeaderActivity extends StatelessWidget {
             style: TextStyle(color: Colors.grey.shade700),
           )),
     );
+  }
+}
 
-    Widget activityImage = Container(
+class _ActivityImage extends StatelessWidget {
+  final EnrollmentActivity activity;
+  const _ActivityImage(
+    this.activity, {
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
       padding: const EdgeInsets.only(bottom: 8),
       clipBehavior: Clip.hardEdge,
       decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
@@ -78,31 +148,6 @@ class HeaderActivity extends StatelessWidget {
               width: 100.w,
               height: 25.h,
             ),
-    );
-
-    return Container(
-      width: 100.w,
-      decoration: BoxDecoration(
-        border: Border.all(color: Colors.blueGrey),
-        borderRadius: BorderRadius.circular(10),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          activityImage,
-          Container(
-            width: double.infinity,
-            padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                nameAndInstitute,
-                activityDescription,
-              ],
-            ),
-          )
-        ],
-      ),
     );
   }
 }

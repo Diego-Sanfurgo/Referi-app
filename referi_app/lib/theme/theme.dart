@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../theme/colors.dart' as colors;
+import '/theme/colors.dart' as colors;
 
 ThemeData get theme => _referiTheme;
 
@@ -36,12 +36,6 @@ ButtonStyle _outlinedBtnStyle = ButtonStyle(
     }
     return colors.secondaryLight;
   }),
-  // surfaceTintColor: MaterialStateProperty.resolveWith((states) {
-  //   if (states.contains(MaterialState.disabled)) {
-  //     return null;
-  //   }
-  //   return colors.secondary;
-  // }),
 );
 
 ListTileThemeData _tileThemeData =
@@ -52,8 +46,10 @@ BottomNavigationBarThemeData _barTheme = BottomNavigationBarThemeData(
   // backgroundColor: colors.primary.shade400,
   backgroundColor: Colors.white,
   // selectedItemColor: colors.secondaryDark,
-  selectedItemColor: colors.primary.shade700,
-  unselectedItemColor: Colors.grey,
+  // selectedItemColor: colors.primary.shade700,
+  selectedItemColor: Colors.black87,
+  // unselectedItemColor: Colors.grey,
+  unselectedItemColor: colors.primary.shade700,
   type: BottomNavigationBarType.fixed,
   unselectedLabelStyle: const TextStyle(fontSize: 12),
   selectedLabelStyle:

@@ -1,8 +1,27 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '/views/loadings/loading_screen.dart';
+import '/theme/animations/activities_not_found.dart';
+
+import 'bloc/notifications_bloc.dart';
+import 'widgets/notifications_list.dart';
+
 class Notifications extends StatelessWidget {
-  const Notifications({Key? key}) : super(key: key);
+  const Notifications({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) => NotificationsBloc(),
+      child: const _NotificationsView(),
+    );
+  }
+}
+
+class _NotificationsView extends StatelessWidget {
+  const _NotificationsView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,32 +37,24 @@ class _Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 16),
-      child: ListView.separated(
-        itemCount: 3,
-        itemBuilder: (context, index) {
-          return const _NotificationListTile(
-              "El pago de tu cuota fue realizado con éxito.");
-        },
-        separatorBuilder: (ctx, idx) =>
-            const Divider(color: Colors.grey, height: 8),
-      ),
+    Widget notFoundWidget = const NotFoundAnimation(
+      infoText: "No tienes notificaciones",
     );
-  }
-}
+    return BlocBuilder<NotificationsBloc, NotificationsState>(
+      builder: (context, state) {
+        if (state is NotificationsInitial) {
+          BlocProvider.of<NotificationsBloc>(context).add(FetchNotifications());
+          return const LoadingScreen("Cargando notificaciones...");
+        } else if (state is NotificationsResult) {
+          if (state.notifications.isEmpty) {
+            return notFoundWidget;
+          }
 
-class _NotificationListTile extends StatelessWidget {
-  final String title;
-  const _NotificationListTile(this.title, {Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return ListTile(
-      title: AutoSizeText(title),
-      leading: const Icon(Icons.check_circle_rounded, color: Colors.green),
-      horizontalTitleGap: 0,
-      onTap: () {},
+          return NotificationsList(state.notifications);
+        } else {
+          return notFoundWidget;
+        }
+      },
     );
   }
 }

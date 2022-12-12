@@ -6,7 +6,9 @@ import 'package:auto_size_text/auto_size_text.dart';
 
 class NotFoundAnimation extends StatelessWidget {
   final double? size;
-  const NotFoundAnimation({Key? key, this.size}) : super(key: key);
+  final String? infoText;
+  const NotFoundAnimation({Key? key, this.size, this.infoText})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +24,7 @@ class NotFoundAnimation extends StatelessWidget {
             repeat: false,
           ),
           const SizedBox(height: 16),
-          const AutoSizeText("No encontramos actividades",
+          AutoSizeText(infoText ?? "No encontramos actividades",
               minFontSize: 20, maxFontSize: 24)
         ],
       ),

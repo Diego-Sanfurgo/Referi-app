@@ -4,50 +4,6 @@ import 'package:auto_size_text/auto_size_text.dart';
 
 import '../../controllers/user_controller.dart';
 
-class CustomTextField extends StatelessWidget {
-  final String labelText;
-  final String saveKeyLabel;
-  final TextInputType keyboard;
-  final String? Function(String?)? validator;
-  final int? maxLength;
-  final bool showCounter;
-  final void Function()? onTap;
-  final void Function(String?)? onChaged;
-
-  const CustomTextField(
-    this.labelText, {
-    Key? key,
-    required this.keyboard,
-    required this.saveKeyLabel,
-    this.validator,
-    this.maxLength = 50,
-    this.showCounter = true,
-    this.onTap,
-    this.onChaged,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    // RegExp formatter = getFormatter(keyboard);
-
-    return Container(
-      margin: const EdgeInsets.only(bottom: 24),
-      child: TextFormField(
-        style: const TextStyle(fontSize: 14),
-        keyboardType: keyboard,
-        maxLength: showCounter ? maxLength : null,
-        decoration: InputDecoration(labelText: labelText),
-        textInputAction: TextInputAction.next,
-        onTap: onTap,
-        onChanged: onChaged,
-        onSaved: (value) => UserController.addValueToUser(value!, saveKeyLabel),
-        // inputFormatters: [LengthLimitingTextInputFormatter(maxLength)],
-        validator: validator ?? _validator,
-      ),
-    );
-  }
-}
-
 //Textfield for passwords
 class PasswordTextField extends StatefulWidget {
   final String label;

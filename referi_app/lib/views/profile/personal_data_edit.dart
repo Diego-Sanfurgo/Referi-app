@@ -82,6 +82,7 @@ class _Buttons extends StatelessWidget {
     return SliverPadding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       sliver: SliverFillRemaining(
+        hasScrollBody: false,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [

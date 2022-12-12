@@ -38,6 +38,8 @@ abstract class ActivityUrls {
 
 abstract class NotificationUrls {
   static const String getNotificationsById = "$_baseUrl/notificaciones/";
+  static const String getNotificationsByUserId =
+      "$_baseUrl/notificaciones/socios/";
   static const String getNotifications = "$_baseUrl/notificaciones";
 }
 
@@ -59,6 +61,7 @@ abstract class AssociatesUrls {
   static const enrollUserToActivity = "$_baseUrl/socios";
   static const getEnrollmentsByUserId = "$_baseUrl/socios/usuario/";
   static const getActivitiesById = "$_baseUrl/socios/actividad/";
+  static const deleteEnrollmentByAssociateId = "$_baseUrl/socios/";
 }
 
 abstract class PaymentUrls {

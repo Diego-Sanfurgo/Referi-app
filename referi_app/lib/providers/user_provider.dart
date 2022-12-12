@@ -16,7 +16,7 @@ class UserProvider extends ChangeNotifier {
     "dni": "123",
     "telefono": "",
     // "fechaNacimiento": "",
-    "fechaacimiento": "",
+    "fechanacimiento": "",
     "fotoperfil": "",
     "domicilio": {
       "calle": "",
