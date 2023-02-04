@@ -21,7 +21,7 @@ abstract class UserController {
   }
 
   static captureImage(bool fromCamera) async {
-    Uint8List? bytesImage = fromCamera
+    XFile? bytesImage = fromCamera
         ? await ImageController.getImage(ImageSource.camera)
         : await ImageController.getImage(ImageSource.gallery);
 
