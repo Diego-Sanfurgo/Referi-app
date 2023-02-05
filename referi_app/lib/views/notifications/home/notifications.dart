@@ -14,7 +14,7 @@ class Notifications extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => NotificationsBloc(),
+      create: (context) => NotificationBloc(),
       child: const _NotificationsView(),
     );
   }
@@ -31,7 +31,7 @@ class _NotificationsViewState extends State<_NotificationsView> {
   @override
   void initState() {
     super.initState();
-    BlocProvider.of<NotificationsBloc>(context).add(ClearIconNotifications());
+    // BlocProvider.of<NotificationBloc>(context).add(ClearIconNotifications());
   }
 
   @override
@@ -51,20 +51,22 @@ class _Body extends StatelessWidget {
     Widget notFoundWidget = const NotFoundAnimation(
       infoText: "No tienes notificaciones",
     );
-    return BlocBuilder<NotificationsBloc, NotificationsState>(
+    return BlocBuilder<NotificationBloc, NotificationsState>(
       builder: (context, state) {
         if (state is NotificationsInitial) {
-          BlocProvider.of<NotificationsBloc>(context).add(FetchNotifications());
+          BlocProvider.of<NotificationBloc>(context).add(FetchNotifications());
           return const LoadingScreen("Cargando notificaciones...");
-        } else if (state is NotificationsResult) {
+        }
+
+        if (state is NotificationsResult) {
           if (state.notifications.isEmpty) {
             return notFoundWidget;
           }
 
           return NotificationsList(state.notifications);
-        } else {
-          return notFoundWidget;
         }
+
+        return notFoundWidget;
       },
     );
   }

@@ -4,8 +4,6 @@
 
 import 'dart:convert';
 
-import 'package:intl/intl.dart';
-
 DTONotification dtoNotificationFromJson(String str) =>
     DTONotification.fromJson(json.decode(str));
 
@@ -21,6 +19,7 @@ class DTONotification {
     required this.titulo,
     required this.cuerpo,
     required this.fecha,
+    this.read = false,
   });
 
   String id;
@@ -30,6 +29,8 @@ class DTONotification {
   String titulo;
   String cuerpo;
   String fecha;
+  bool read;
+  String? parentId;
 
   factory DTONotification.fromJson(Map<String, dynamic> json) =>
       DTONotification(

@@ -1,11 +1,11 @@
-import 'dart:io';
 import 'dart:typed_data';
 
-import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:referi_app/controllers/navigation_controller.dart';
-import 'package:referi_app/handlers/user_handler.dart';
-import '../../handlers/image_handler.dart';
+import 'package:flutter_image_compress/flutter_image_compress.dart';
+
+import '/handlers/user_handler.dart';
+import '/handlers/image_handler.dart';
+import '/controllers/navigation_controller.dart';
 
 abstract class ImageController {
   static Future<Uint8List?> getImage(ImageSource source,

@@ -1,6 +1,11 @@
-import 'package:badges/badges.dart';
+import 'dart:async';
+
+import 'package:badges/badges.dart' as bd;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:provider/provider.dart';
+import 'package:referi_app/providers/app_providers.dart';
+import 'package:referi_app/providers/navigation_provider.dart';
 
 import '/controllers/navigation_controller.dart';
 import '/views/notifications/home/bloc/notifications_bloc.dart';
@@ -11,7 +16,7 @@ class NotificationIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => NotificationsBloc(),
+      create: (context) => NotificationBloc(),
       child: const _BadgeIcon(),
     );
   }
@@ -25,35 +30,39 @@ class _BadgeIcon extends StatefulWidget {
 }
 
 class _BadgeIconState extends State<_BadgeIcon> {
+  int vecesCargado = 0;
+  @override
+  void initState() {
+    super.initState();
+    BlocProvider.of<NotificationBloc>(context).add(FetchNotifications());
+
+    Timer.periodic(
+      const Duration(seconds: 30),
+      (timer) {
+        BlocProvider.of<NotificationBloc>(context).add(FetchNotifications());
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     bool showBadge = false;
-    String notificationAmount = "1";
 
-    return BlocBuilder<NotificationsBloc, NotificationsState>(
-      // buildWhen: (previous, current) {
-      //   if (current is IconNotificationResults) {
-      //     return true;
-      //   }
+    return ValueListenableBuilder<int>(
+      valueListenable: AppProviders.navigationProvider(context).unreadAmount,
+      builder: (BuildContext context, int value, Widget? child) {
+        showBadge = value > 0 ? true : false;
 
-      //   return false;
-      // },
-      builder: (context, state) {
-        if (state is IconNotificationResults) {
-          notificationAmount = state.amount;
-          showBadge = true;
-        } else {
-          showBadge = false;
-        }
-
-        return Badge(
+        return bd.Badge(
           showBadge: showBadge,
           ignorePointer: true,
-          animationType: BadgeAnimationType.scale,
-          badgeContent: Text(notificationAmount,
-              style: const TextStyle(color: Colors.white)),
-          padding: const EdgeInsets.all(8),
-          position: BadgePosition.bottomStart(bottom: 0, start: 0),
+          badgeAnimation: const bd.BadgeAnimation.scale(),
+          badgeContent:
+              Text("$value", style: const TextStyle(color: Colors.white)),
+          badgeStyle: const bd.BadgeStyle(
+            padding: EdgeInsets.all(8),
+          ),
+          position: bd.BadgePosition.bottomStart(bottom: 0, start: 0),
           child: IconButton(
               onPressed: () => NavigationController.goTo(Routes.notifications),
               icon: const Icon(Icons.notifications_rounded)),

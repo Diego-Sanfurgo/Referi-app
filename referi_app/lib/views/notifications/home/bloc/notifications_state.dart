@@ -17,10 +17,10 @@ class NotificationsResult extends NotificationsState {
 
 class NoNotificationsFound extends NotificationsState {}
 
-class IconNotificationClean extends NotificationsState {}
+// class IconNotificationClean extends NotificationsState {}
 
-class IconNotificationResults extends NotificationsState {
-  final String amount;
+// class IconNotificationResults extends NotificationsState {
+//   final int amount;
 
-  const IconNotificationResults(this.amount);
-}
+//   const IconNotificationResults(this.amount);
+// }

@@ -38,10 +38,11 @@ abstract class ActivityUrls {
 }
 
 abstract class NotificationUrls {
-  static const String getNotificationsById = "$_baseUrl/notificaciones/";
+  // static const String getNotificationsById = "$_baseUrl/notificaciones/";
   static const String getNotificationsByUserId =
       "$_baseUrl/notificaciones/socios/";
-  static const String getNotifications = "$_baseUrl/notificaciones";
+  // static const String getNotifications = "$_baseUrl/notificaciones";
+  static const String postNotificationRead = "$_baseUrl/notificaciones/read/";
 }
 
 abstract class AssistanceUrls {
