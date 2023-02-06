@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 
-import '../clubs/clubs home/clubs_home.dart';
 import '/providers/app_providers.dart';
-import '/widgets/home/profile_icon.dart';
-import '../credential/credential home/credential_home.dart';
-import '../../widgets/home/bottom_navbar.dart';
+import '../clubs/clubs home/clubs_home.dart';
 import '../activities/home/activities_home.dart';
-import '../account/account_home/account_home.dart';
 import '/controllers/navigation_controller.dart';
+import '../account/account_home/account_home.dart';
+import '../credential/credential home/credential_home.dart';
+
+import 'widgets/bottom_navbar.dart';
 import 'widgets/notification_icon.dart';
+import 'widgets/profile_icon.dart';
 
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);
@@ -78,7 +79,4 @@ List<Widget> get _appBarActions => [
           onPressed: () => NavigationController.goTo(Routes.scanner),
           icon: const Icon(Icons.qr_code_scanner_rounded)),
       const NotificationIcon(),
-      // IconButton(
-      //     onPressed: () => NavigationController.goTo(Routes.notifications),
-      //     icon: const Icon(Icons.notifications_rounded)),
     ];

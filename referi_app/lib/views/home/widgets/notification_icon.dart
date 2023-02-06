@@ -28,18 +28,24 @@ class _BadgeIcon extends StatefulWidget {
 }
 
 class _BadgeIconState extends State<_BadgeIcon> {
-  int vecesCargado = 0;
+  late Timer timer;
   @override
   void initState() {
     super.initState();
     BlocProvider.of<NotificationBloc>(context).add(FetchNotifications());
 
-    Timer.periodic(
+    timer = Timer.periodic(
       const Duration(seconds: 30),
       (timer) {
         BlocProvider.of<NotificationBloc>(context).add(FetchNotifications());
       },
     );
+  }
+
+  @override
+  void dispose() {
+    timer.cancel();
+    super.dispose();
   }
 
   @override

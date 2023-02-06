@@ -68,7 +68,7 @@ class UserRegister {
       fechaNacimiento: json["fechanacimiento"] != ""
           ? DateFormat.yMd().parse(json["fechanacimiento"])
           : null,
-      fotoPerfil: json["fotoPerfil"],
+      fotoPerfil: json["fotoperfil"],
       domicilio: Domicilio.fromJson(json['domicilio']));
 
   Map<String, dynamic> toJson() => {

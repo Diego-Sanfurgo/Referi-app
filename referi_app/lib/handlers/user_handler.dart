@@ -16,7 +16,7 @@ abstract class UserHandler {
       return false;
     }
 
-    Alert.showToast("¡Editaste tus datos personales!");
+    Alert.showToast("Editaste tus datos personales");
     return true;
   }
 

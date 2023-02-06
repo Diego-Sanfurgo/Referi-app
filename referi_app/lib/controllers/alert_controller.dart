@@ -38,7 +38,8 @@ abstract class Alert {
             topRight: Radius.circular(30),
           ),
         ),
-        context: util.navigatorKey.currentContext as BuildContext,
+        // context: util.navigatorKey.currentContext as BuildContext,
+        context: util.navigatorContext,
         builder: (context) {
           return Container(
             height: 20.h,

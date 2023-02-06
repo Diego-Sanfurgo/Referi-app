@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:referi_app/views/scanner/widgets/success.dart';
 
 import '../views/home/home.dart';
 import '/views/login/login.dart';
@@ -74,4 +75,5 @@ Map<String, WidgetBuilder> routes = {
 
   //Other
   'successView': (_) => const SuccessView(),
+  'succesAttendance': (_) => const SuccessAttendance(),
 };

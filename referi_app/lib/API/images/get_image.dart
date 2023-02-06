@@ -10,7 +10,7 @@ Future<bool> getImage(String imageString) async {
     options: Options(headers: getUserToken()),
   )
       .then((value) {
-    print(value.data);
+    // print(value.data);
     return true;
   }).onError((error, stackTrace) {
     return false;

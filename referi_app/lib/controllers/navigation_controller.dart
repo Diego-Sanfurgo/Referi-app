@@ -75,4 +75,5 @@ enum Routes {
 
   //other
   successView,
+  succesAttendance,
 }

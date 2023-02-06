@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:referi_app/models/user_register.dart';
 
 import '../models/user.dart';
+import '/models/user_register.dart';
 
 class UserProvider extends ChangeNotifier {
   final String _auxPass = '';

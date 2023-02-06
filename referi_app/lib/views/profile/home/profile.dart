@@ -31,6 +31,7 @@ class _Body extends StatelessWidget {
       child: Column(
         children: [
           const ProfileImage(),
+          const SizedBox(height: 8),
           const AutoSizeText("Tu foto se podrá usar para credenciales.",
               maxFontSize: 16, minFontSize: 12),
           Divider(color: colors.secondaryDark, height: 8),

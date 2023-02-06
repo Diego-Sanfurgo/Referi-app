@@ -1,7 +1,8 @@
 import 'package:dio/dio.dart';
-import 'package:referi_app/models/user.dart';
-import 'package:referi_app/providers/app_providers.dart';
-import '../../API/params.dart';
+
+import '/API/params.dart';
+import '/models/user.dart';
+import '/providers/app_providers.dart';
 
 Future<bool> postAuthLogin(String email, String password) async {
   Dio dio = Dio();
@@ -12,12 +13,9 @@ Future<bool> postAuthLogin(String email, String password) async {
   };
 
   return await dio.post(AuthUrls.postLogin, data: body).then((value) {
-    if (value.statusCode == 200) {
-      UserModel registeredUser = UserModel.fromJson(value.data['data']);
-      AppProviders.userProviderDeaf.setUserModel(registeredUser);
-      return true;
-    }
-    return false;
+    UserModel registeredUser = UserModel.fromJson(value.data['data']);
+    AppProviders.userProviderDeaf.setUserModel(registeredUser);
+    return true;
   }).onError((error, stackTrace) {
     return false;
   });

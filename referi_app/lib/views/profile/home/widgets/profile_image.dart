@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:referi_app/providers/app_providers.dart';
 
 import 'package:sizer/sizer.dart';
+import '/providers/app_providers.dart';
 import 'package:badges/badges.dart' as bd;
 
 import '/controllers/alert_controller.dart';
@@ -14,12 +14,12 @@ class ProfileImage extends StatelessWidget {
     final double imageAndContainerSize = 30.h;
 
     String? imgPath =
-        AppProviders.userProvider(context).userRegisterModel.fotoPerfil;
+        AppProviders.userProvider(context).currentUser!.fotoPerfil;
 
     return SizedBox.square(
       dimension: imageAndContainerSize,
       child: bd.Badge(
-        stackFit: StackFit.loose,
+        stackFit: StackFit.expand,
         badgeStyle: const bd.BadgeStyle(
           badgeColor: Colors.black,
           padding: EdgeInsets.all(8),
@@ -28,14 +28,14 @@ class ProfileImage extends StatelessWidget {
             onPressed: () => Alert.showImagePickerSheet(),
             icon: const Icon(Icons.camera_alt_rounded),
             color: Colors.white),
-        position: bd.BadgePosition.bottomEnd(bottom: 2.h, end: 5.w),
+        position: bd.BadgePosition.bottomEnd(bottom: 16, end: 16),
         badgeAnimation: const bd.BadgeAnimation.scale(
           animationDuration: Duration.zero,
         ),
         child: GestureDetector(
           onTap: () => Alert.showImagePickerSheet(),
           child: imgPath != null
-              ? Image.network(imgPath)
+              ? CircleAvatar(backgroundImage: NetworkImage(imgPath))
               : Icon(
                   Icons.account_circle_rounded,
                   color: Colors.grey,

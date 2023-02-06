@@ -1,11 +1,25 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:mobile_scanner/mobile_scanner.dart';
 
-import 'package:sizer/sizer.dart';
+import 'bloc/scanner_bloc.dart';
+import 'widgets/torch_btn.dart';
 
 class Scanner extends StatelessWidget {
   const Scanner({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) => ScannerBloc(),
+      child: const _ScannerView(),
+    );
+  }
+}
+
+class _ScannerView extends StatelessWidget {
+  const _ScannerView();
 
   @override
   Widget build(BuildContext context) {
@@ -24,9 +38,6 @@ class _Body extends StatefulWidget {
 
 class _BodyState extends State<_Body> {
   late final MobileScannerController _cameraController;
-  String? _auxCode = '';
-  bool canScan = true;
-  late Timer timer;
 
   @override
   void initState() {
@@ -38,68 +49,27 @@ class _BodyState extends State<_Body> {
   @override
   void dispose() {
     _cameraController.dispose();
-    _auxCode = '';
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        MobileScanner(
-            allowDuplicates: true,
-            controller: _cameraController,
-            onDetect: (barcode, args) => onDetect(
-                  context,
-                  barcode: barcode,
-                  controller: _cameraController,
-                )),
-        TorchBtn(_cameraController)
-      ],
-    );
-  }
-
-  onDetect(BuildContext context,
-      {required Barcode barcode,
-      required MobileScannerController controller}) async {
-    if (_auxCode == barcode.rawValue && !canScan) {
-      return;
-    }
-
-    canScan = false;
-    _auxCode = barcode.rawValue;
-    timer = Timer(const Duration(seconds: 3), () => canScan = true);
-
-    // bool packageAdded = await ScannerController.addPackage(context, _auxCode);
-  }
-}
-
-class TorchBtn extends StatelessWidget {
-  const TorchBtn(this.cameraController, {Key? key}) : super(key: key);
-
-  final MobileScannerController cameraController;
-
-  @override
-  Widget build(BuildContext context) {
-    return Positioned(
-      top: 8.h,
-      right: 16,
-      child: IconButton(
-        iconSize: 30.sp,
-        color: Colors.white,
-        onPressed: () => cameraController.toggleTorch(),
-        icon: ValueListenableBuilder(
-          valueListenable: cameraController.torchState,
-          builder: (context, state, child) {
-            switch (state as TorchState) {
-              case TorchState.off:
-                return const Icon(Icons.flash_off);
-              case TorchState.on:
-                return const Icon(Icons.flash_on);
-            }
-          },
-        ),
-      ),
+    return BlocBuilder<ScannerBloc, ScannerState>(
+      builder: (context, state) {
+        bool isReading = (state is ScannerReading) ? true : false;
+        return Stack(
+          children: [
+            MobileScanner(
+                allowDuplicates: true,
+                controller: _cameraController,
+                onDetect: (barcode, args) => isReading
+                    ? null
+                    : BlocProvider.of<ScannerBloc>(context)
+                        .add(ReadData(barcode, _cameraController))),
+            TorchBtn(_cameraController)
+          ],
+        );
+      },
     );
   }
 }

@@ -1,8 +1,7 @@
-import 'package:referi_app/API/auth/post_verify.dart';
-
-import '../../models/user_register.dart';
-import '../../providers/app_providers.dart';
-import '../../API/auth/post_auth_login.dart';
+import '/API/auth/post_verify.dart';
+import '/models/user_register.dart';
+import '/providers/app_providers.dart';
+import '/API/auth/post_auth_login.dart';
 
 import '../API/auth/post_auth_register.dart';
 import '../controllers/alert_controller.dart';
