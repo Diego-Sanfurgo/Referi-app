@@ -16,7 +16,7 @@ class NotificationsList extends StatelessWidget {
       (a, b) {
         DateTime first = DateTime.parse(a.fecha);
         DateTime second = DateTime.parse(b.fecha);
-        return first.compareTo(second);
+        return second.compareTo(first);
       },
     );
 

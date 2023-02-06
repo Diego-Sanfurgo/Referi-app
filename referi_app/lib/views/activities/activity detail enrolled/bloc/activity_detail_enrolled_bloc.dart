@@ -8,7 +8,7 @@ import '/API/payments/get_fees_by_user_id.dart';
 import '/models/enrollment.dart';
 import '/models/activity_fee_payment.dart';
 
-import '/controllers/alert_controller.dart';
+import '../../../../controllers/general_alert_controller.dart';
 import '/API/associates/delete_associate.dart';
 import '/controllers/navigation_controller.dart';
 
@@ -39,18 +39,18 @@ class ActivityDetailEnrolledBloc
       bool isConfirmed = await ActivityDetailEnrolledAlert.askConfirmation();
       if (!isConfirmed) return;
 
-      Alert.showLoading();
+      GeneralAlert.showLoading();
 
       bool isOk = await deleteAssociate(event.enrollment.id);
 
       NavigationController.pop();
 
       if (isOk) {
-        Alert.showToast("Has cancelado tu inscripción a esta actividad");
+        GeneralAlert.showToast("Has cancelado tu inscripción a esta actividad");
         NavigationController.pop();
         return;
       } else {
-        Alert.showError(
+        GeneralAlert.showError(
             "Ocurrió un error al intentar cancelar tu inscripción. Intenta de nuevo más tarde");
       }
     });

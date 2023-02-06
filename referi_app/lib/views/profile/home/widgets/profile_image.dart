@@ -4,7 +4,7 @@ import 'package:sizer/sizer.dart';
 import '/providers/app_providers.dart';
 import 'package:badges/badges.dart' as bd;
 
-import '/controllers/alert_controller.dart';
+import '../../../../controllers/general_alert_controller.dart';
 
 class ProfileImage extends StatelessWidget {
   const ProfileImage({Key? key}) : super(key: key);
@@ -25,7 +25,7 @@ class ProfileImage extends StatelessWidget {
           padding: EdgeInsets.all(8),
         ),
         badgeContent: IconButton(
-            onPressed: () => Alert.showImagePickerSheet(),
+            onPressed: () => GeneralAlert.showImagePickerSheet(),
             icon: const Icon(Icons.camera_alt_rounded),
             color: Colors.white),
         position: bd.BadgePosition.bottomEnd(bottom: 16, end: 16),
@@ -33,7 +33,7 @@ class ProfileImage extends StatelessWidget {
           animationDuration: Duration.zero,
         ),
         child: GestureDetector(
-          onTap: () => Alert.showImagePickerSheet(),
+          onTap: () => GeneralAlert.showImagePickerSheet(),
           child: imgPath != null
               ? CircleAvatar(backgroundImage: NetworkImage(imgPath))
               : Icon(

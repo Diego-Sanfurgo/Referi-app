@@ -6,7 +6,7 @@ import '/models/user.dart';
 import '/utils/utils.dart' as util;
 import '/providers/app_providers.dart';
 import '/controllers/user_controller.dart';
-import '/controllers/alert_controller.dart';
+import '../../controllers/general_alert_controller.dart';
 import '/utils/validators_and_regexps.dart';
 
 class NumberTextField extends StatefulWidget {
@@ -152,7 +152,7 @@ class _DateTextFieldState extends State<DateTextField> {
         keyboardType: TextInputType.datetime,
         decoration: const InputDecoration(labelText: "Fecha de nacimiento"),
         onTap: () async {
-          String? chosenDate = await Alert.showDateAlert();
+          String? chosenDate = await GeneralAlert.showDateAlert();
           if (chosenDate != null) {
             controller.text = chosenDate;
           }

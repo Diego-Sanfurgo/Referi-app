@@ -30,7 +30,6 @@ class NotificationBloc extends Bloc<NotificationsEvent, NotificationsState> {
     on<ReadNotification>((event, emit) async {
       await postReadNotification(event.notificationID);
       add(FetchNotifications());
-      // emit(IconNotificationResults(_amountUnread));
     });
   }
 }

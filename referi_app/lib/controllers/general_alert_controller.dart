@@ -16,7 +16,7 @@ import '/controllers/navigation_controller.dart';
 final BuildContext _navigatorContext =
     util.navigatorKey.currentContext as BuildContext;
 
-abstract class Alert {
+abstract class GeneralAlert {
   static Future<String?> showDateAlert() async {
     DateTime? chosenDate = await showDatePicker(
         context: util.navigatorState?.context as BuildContext,

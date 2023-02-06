@@ -1,15 +1,14 @@
-import 'package:referi_app/models/dto/activity_dto.dart';
+import '/models/turno.dart';
+import '/models/activity.dart';
+import '/models/activity_type.dart';
+import '/models/dto/activity_dto.dart';
+import '/models/activity_fee_payment.dart';
 
-import '../models/turno.dart';
-import '../models/activity.dart';
-import '../models/activity_type.dart';
-import '../models/activity_fee_payment.dart';
-
-import '../providers/app_providers.dart';
-import '../handlers/activity_handler.dart';
-import '../controllers/alert_controller.dart';
-import '../controllers/payment_controller.dart';
-import '../controllers/navigation_controller.dart';
+import '/providers/app_providers.dart';
+import 'general_alert_controller.dart';
+import '/handlers/activity_handler.dart';
+import '/controllers/payment_controller.dart';
+import '/controllers/navigation_controller.dart';
 
 abstract class ActivityController {
   static Future<List<ActivityType>> obtainActivityTypes() async {
@@ -23,9 +22,8 @@ abstract class ActivityController {
   static Future<Turno?> obtainShift(String shiftId) async =>
       await ActivityHandler.obtainShift(shiftId);
 
-  static enrollToActivity(DTOActivity activity) async {
-    return await ActivityHandler.enrollToActivity();
-  }
+  static enrollToActivity(DTOActivity activity) async =>
+      await ActivityHandler.enrollToActivity();
 
   static enrollAndPayActivity(DTOActivity activity) async {
     bool isEnrolled = await enrollToActivity(activity);
@@ -36,16 +34,15 @@ abstract class ActivityController {
 
     bool isPayed = await PaymentController.payActivity(feesId);
     if (!isPayed) {
-      Alert.showError(
+      GeneralAlert.showError(
           "Ocurrió un error al intentar pagar la cuota. Intenta nuevamente");
       return;
     }
     NavigationController.goTo(Routes.successView, popPage: true);
   }
 
-  static reservePlace(DTOActivity activity) async {
-    await Alert.showReservePlaceMessage(activity);
-  }
+  static reservePlace(DTOActivity activity) async =>
+      await GeneralAlert.showReservePlaceMessage(activity);
 
   static addTimeRange(String id, String label, bool value) {
     if (value) {

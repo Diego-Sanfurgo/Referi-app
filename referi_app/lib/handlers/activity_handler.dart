@@ -4,7 +4,7 @@ import '/models/activity_type.dart';
 import '/API/activity/get_turno.dart';
 import '/API/activity/get_activity_by_id.dart';
 import '/controllers/navigation_controller.dart';
-import '/controllers/alert_controller.dart';
+import '../controllers/general_alert_controller.dart';
 import '/API/activity/get_activity_type.dart';
 import '/API/activity/post_inscribir_actividad.dart';
 
@@ -22,11 +22,11 @@ abstract class ActivityHandler {
   }
 
   static Future<bool> enrollToActivity() async {
-    Alert.showLoading();
+    GeneralAlert.showLoading();
     bool isOk = await postInscribirActividad();
     NavigationController.pop();
     if (!isOk) {
-      Alert.showError(
+      GeneralAlert.showError(
           "Ocurrió un error al inscribirte en la actividad. Intenta de nuevo.");
       return false;
     }

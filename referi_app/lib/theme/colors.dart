@@ -21,3 +21,5 @@ MaterialColor primary = const MaterialColor(_orangePrimaryValue, <int, Color>{
 Color secondary = const Color(0XFF0C9EE8);
 Color secondaryLight = const Color(0XFFE1F6FE);
 Color secondaryDark = const Color(0XFF0070B5);
+
+const Color colorOverlay = Color(0x99000000);
