@@ -114,7 +114,9 @@ class User {
         telefono: json["telefono"],
         verificado: json["verificado"],
         fechaNacimiento: DateTime.parse(json["fechaNacimiento"]),
-        fotoPerfil: json["fotoPerfil"],
+        fotoPerfil: (json["fotoPerfil"] == 'uploads/profile.jpeg')
+            ? null
+            : json["fotoPerfil"],
         fechaCreacion: DateTime.parse(json["fechaCreacion"]),
         fechaActualizacion: DateTime.parse(json["fechaActualizacion"]),
         fechaBaja: json["fechaBaja"],

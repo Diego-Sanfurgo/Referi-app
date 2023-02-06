@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:referi_app/models/dto/activity_dto.dart';
 
 import 'package:sizer/sizer.dart';
 import 'package:flutter_credit_card/credit_card_brand.dart';
 import 'package:flutter_credit_card/credit_card_widget.dart';
 
+import '/models/dto/activity_dto.dart';
 import '/widgets/forms/textfields.dart';
 import '/controllers/activity_controller.dart';
 

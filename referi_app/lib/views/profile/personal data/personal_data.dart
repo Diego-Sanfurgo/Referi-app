@@ -52,14 +52,6 @@ class _Body extends StatelessWidget {
                   icon: const Icon(Icons.edit_rounded),
                   label: const Text("Editar datos")),
             ),
-            // Container(
-            //   margin: const EdgeInsets.only(top: 32),
-            //   child: OutlinedButton.icon(
-            //       onPressed: () =>
-            //           NavigationController.goTo(Routes.personalDataEdit),
-            //       icon: const Icon(Icons.edit_rounded),
-            //       label: const Text("Editar datos")),
-            // )
           ],
         ),
       ),

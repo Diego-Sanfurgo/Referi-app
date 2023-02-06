@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
+import 'package:sizer/sizer.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 
-import '../../widgets/forms/textfield.dart';
-import '../../widgets/forms/textfields.dart';
-import '../../controllers/signup_controller.dart';
-import '../../controllers/navigation_controller.dart';
-
-import 'package:referi_app/theme/colors.dart' as colors;
+import '/theme/colors.dart' as color;
+import '/widgets/forms/textfield.dart';
+import '/widgets/forms/textfields.dart';
+import '/controllers/signup_controller.dart';
+import '/controllers/navigation_controller.dart';
 
 class Login extends StatelessWidget {
   const Login({Key? key}) : super(key: key);
@@ -46,16 +46,28 @@ class _Header extends StatelessWidget {
     return ClipPath(
       clipper: WaveClipperTwo(flip: true),
       child: Container(
-        color: Theme.of(context).primaryColor,
+        padding: const EdgeInsets.fromLTRB(16, 0, 16, 32),
+        color: color.primary,
         width: double.infinity,
-        height: MediaQuery.of(context).size.height * 0.3,
-        child: const Center(
-          child: AutoSizeText(
-            "Bienvenido a Referí",
-            maxLines: 1,
-            maxFontSize: 34,
-            minFontSize: 26,
-          ),
+        height: 40.h,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SizedBox.square(
+              dimension: 25.h,
+              child: Image.asset(
+                "assets/logo/logo_splash_900x900.png",
+                fit: BoxFit.cover,
+              ),
+            ),
+            const AutoSizeText(
+              "¡Bienvenido!",
+              maxLines: 1,
+              maxFontSize: 34,
+              minFontSize: 26,
+              style: TextStyle(color: Colors.white),
+            ),
+          ],
         ),
       ),
     );
@@ -100,7 +112,7 @@ class _Body extends StatelessWidget {
               GestureDetector(
                 onTap: () => NavigationController.goTo(Routes.passwordRecover),
                 child: AutoSizeText("Recuperar contraseña",
-                    style: TextStyle(fontSize: 14, color: colors.secondary)),
+                    style: TextStyle(fontSize: 14, color: color.secondary)),
               ),
             ],
           ),
@@ -133,7 +145,7 @@ class _Footer extends StatelessWidget {
                   child: AutoSizeText(
                     "Registrate",
                     style: TextStyle(
-                      color: colors.secondary,
+                      color: color.secondary,
                     ),
                   ))
             ],

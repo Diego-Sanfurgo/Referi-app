@@ -16,7 +16,6 @@ Future<bool> payFee(List<String> feesId) async {
       .post(PaymentUrls.postPayFee,
           data: jsonEncode(body), options: Options(headers: getUserToken()))
       .then((value) {
-    print(value);
     return true;
   }).onError((error, stackTrace) {
     return false;

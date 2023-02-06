@@ -11,11 +11,11 @@ Future<List<ActivityFeePayment>> getFeesByUserId() async {
 
   List<ActivityFeePayment> list = [];
 
+  String url = PaymentUrls.getFeesByUserId +
+      AppProviders.userProviderDeaf.currentUser!.id;
+
   return await dio
-      .get(
-    PaymentUrls.getFeesByUserId + AppProviders.userProviderDeaf.currentUser!.id,
-    options: Options(headers: getUserToken()),
-  )
+      .get(url, options: Options(headers: getUserToken()))
       .then((value) {
     for (var fee in value.data["data"]) {
       if (fee['tarifa'] == null) {

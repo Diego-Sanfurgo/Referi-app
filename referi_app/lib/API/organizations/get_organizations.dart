@@ -20,7 +20,9 @@ Future<List<DTOOrganization>> getOrganizations() async {
         }
         return orgList;
       })
-      .onError((error, stackTrace) => orgList)
+      .onError((error, stackTrace) {
+        return orgList;
+      })
       .timeout(
         const Duration(seconds: 40),
         onTimeout: () => orgList,

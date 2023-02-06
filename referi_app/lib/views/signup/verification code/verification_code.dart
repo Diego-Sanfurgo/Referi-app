@@ -1,15 +1,14 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 
-import 'package:referi_app/controllers/signup_controller.dart';
-import 'package:referi_app/providers/app_providers.dart';
-
 import 'package:sizer/sizer.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
-import '../../../theme/colors.dart' as colors;
-import '../../../widgets/forms/progress_bar_signup.dart';
+import '/theme/colors.dart' as colors;
+import '/providers/app_providers.dart';
+import '/controllers/signup_controller.dart';
+import '/widgets/forms/progress_bar_signup.dart';
 
 ValueNotifier<bool> _enableBtn = ValueNotifier<bool>(false);
 late final String _code;

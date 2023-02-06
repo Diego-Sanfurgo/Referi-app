@@ -14,7 +14,7 @@ class ProfileIcon extends StatelessWidget {
     String? imgPath =
         AppProviders.userProvider(context).currentUser!.fotoPerfil;
 
-    return (imgPath == null)
+    return (imgPath == null || imgPath == '')
         ? IconButton(
             icon: const Icon(Icons.account_circle_rounded, size: 40),
             onPressed: () => NavigationController.goTo(Routes.profile))

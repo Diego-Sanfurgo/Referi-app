@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:referi_app/providers/activity_provider.dart';
-import 'package:referi_app/views/login/login.dart';
 
 import 'package:sizer/sizer.dart';
 import 'package:provider/provider.dart';
@@ -9,10 +7,11 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'providers/user_provider.dart';
 import 'providers/navigation_provider.dart';
 
-import '../../routes/routes.dart';
-// import '../../views/signin/signin.dart';
-import "../../utils/utils.dart" as util;
-import "../../theme/theme.dart" as theme;
+import '/routes/routes.dart';
+import '/views/login/login.dart';
+import "/utils/utils.dart" as util;
+import "/theme/theme.dart" as theme;
+import '/providers/activity_provider.dart';
 
 void main() {
   runApp(MultiProvider(
