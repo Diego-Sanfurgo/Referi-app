@@ -1,5 +1,5 @@
 import 'dart:typed_data';
-
+import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 
@@ -8,9 +8,8 @@ import '/handlers/image_handler.dart';
 import '/controllers/navigation_controller.dart';
 
 abstract class ImageController {
-  static Future<Uint8List?> getImage(ImageSource source,
+  static Future<XFile?> getImage(ImageSource source,
       {bool popContext = true}) async {
-    // UtilsProvider provider = Provider.of<UtilsProvider>(context, listen: false);
     ImagePicker imagePicker = ImagePicker();
 
     final XFile? image = await imagePicker
@@ -19,13 +18,10 @@ abstract class ImageController {
 
     if (image == null) return null;
 
-    Uint8List imageContent = await image.readAsBytes();
-    return imageContent;
+    return image;
   }
 
-  static uploadUserImage(Uint8List image) async {
-    // File imageFile = File.fromRawPath(image);
-
+  static uploadUserImage(XFile image) async {
     // Uint8List lightImage = await _compressImage(image);
     bool imageUploaded = await ImageHandler.uploadImage(image);
 

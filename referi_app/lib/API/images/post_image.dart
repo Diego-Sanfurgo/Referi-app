@@ -1,36 +1,30 @@
-import 'dart:typed_data';
-
-import 'package:dio/dio.dart';
+import 'package:http/http.dart' as http;
+import 'package:http_parser/http_parser.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '/API/params.dart';
-import '/providers/app_providers.dart';
+import 'package:mime_type/mime_type.dart';
 
-Future<bool> postImage(Uint8List image) async {
-  Dio dio = Dio();
+Future<http.StreamedResponse> postImage(XFile file) async {
+  List<int> imageBytes = await file.readAsBytes();
 
-  String userId = AppProviders.userProviderDeaf.currentUser!.id;
+  if (file.name.isEmpty) throw Error();
 
   final uri = Uri.parse(ImageUrls.postImage);
-
-  var file = MultipartFile.fromBytes(
-    image,
-    filename: "${userId}_profileImage.jpg",
+  var request = http.MultipartRequest('POST', uri);
+  var extension = mime( file.name ).toString().split('/')[1];
+  request.files.add(
+      http.MultipartFile.fromBytes(
+          'file',
+          imageBytes,
+          filename: 'image.${extension}',
+          contentType:  MediaType('image', extension)
+      )
   );
 
-  FormData body = FormData.fromMap({
-    "file": file,
-  });
+  request.headers['content-type'] = 'multipart/form-data';
+  request.headers.addAll(getUserToken());
 
-  return await dio
-      .postUri(uri,
-          data: body,
-          options: Options(
-              headers: getUserToken(), contentType: "multipart/form-data"))
-      .then((value) {
-    AppProviders.userProviderDeaf.userRegisterModel.fotoPerfil =
-        value.data['path'];
-    return true;
-  }).onError((error, stackTrace) {
-    return false;
-  });
+  var res = await request.send();
+  return res;
 }

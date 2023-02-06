@@ -1,20 +1,19 @@
+import 'dart:io';
+import 'dart:typed_data';
+
 import 'package:flutter/foundation.dart';
+import 'package:http/http.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '/API/images/post_image.dart';
 import '/controllers/alert_controller.dart';
 import '/controllers/navigation_controller.dart';
 
 abstract class ImageHandler {
-  static Future<bool> uploadImage(Uint8List image) async {
+  static Future<bool> uploadImage(XFile image) async {
     Alert.showLoading();
-    bool isOK = await postImage(image);
+    StreamedResponse isOK = await postImage(image);
     NavigationController.pop();
-
-    if (!isOK) {
-      await Alert.showError(
-          "Ocurrió un error al cargar la imágen. Intentalo de nuevo más tarde.");
-      return false;
-    }
     return true;
   }
 }
