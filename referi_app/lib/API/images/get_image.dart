@@ -10,11 +10,8 @@ Future<bool> getImage(String imageString) async {
     options: Options(headers: getUserToken()),
   )
       .then((value) {
-    if (value.statusCode! >= 200 && value.statusCode! < 300) {
-      print(value.data);
-      return true;
-    }
-    return false;
+    print(value.data);
+    return true;
   }).onError((error, stackTrace) {
     return false;
   }).timeout(const Duration(seconds: 30));

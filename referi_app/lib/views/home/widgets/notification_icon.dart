@@ -1,12 +1,10 @@
 import 'dart:async';
+import 'package:flutter/material.dart';
 
 import 'package:badges/badges.dart' as bd;
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:provider/provider.dart';
-import 'package:referi_app/providers/app_providers.dart';
-import 'package:referi_app/providers/navigation_provider.dart';
 
+import '/providers/app_providers.dart';
 import '/controllers/navigation_controller.dart';
 import '/views/notifications/home/bloc/notifications_bloc.dart';
 

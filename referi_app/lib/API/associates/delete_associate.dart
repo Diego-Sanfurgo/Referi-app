@@ -9,7 +9,6 @@ Future<bool> deleteAssociate(String associateId) async {
   return await dio
       .delete(url, options: Options(headers: getUserToken()))
       .then((value) {
-    print(value);
     return true;
   }).onError((error, stackTrace) => false);
 }
