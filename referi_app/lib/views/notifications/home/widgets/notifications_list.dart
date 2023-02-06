@@ -19,6 +19,7 @@ class NotificationsList extends StatelessWidget {
         return first.compareTo(second);
       },
     );
+
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 16),
       child: ListView.separated(

@@ -1,34 +1,38 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
+import '/providers/app_providers.dart';
 import '/models/dto/notification_dto.dart';
 import '/API/notifications/get_user_notifications.dart';
+import '/API/notifications/post_read_notification.dart';
 
 part 'notifications_event.dart';
 part 'notifications_state.dart';
 
-class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
-  NotificationsBloc() : super(NotificationsInitial()) {
+class NotificationBloc extends Bloc<NotificationsEvent, NotificationsState> {
+  NotificationBloc() : super(NotificationsInitial()) {
     on<FetchNotifications>((event, emit) async {
-      List<DTONotification>? notifications = await getUserNotifications();
-      if (notifications == null) {
+      _notifications = await getUserNotifications();
+
+      if (_notifications.isEmpty) {
         emit(NoNotificationsFound());
         return;
       }
 
-      emit(NotificationsResult(notifications));
+      int unread =
+          _notifications.where((element) => element.read == false).length;
+
+      AppProviders.navigationProviderDeaf.setUnreadAmount(unread);
+
+      emit(NotificationsResult(_notifications));
     });
 
-    on<FetchIconNotifications>((event, emit) async {
-      List<DTONotification>? notifications = await getUserNotifications();
-      if (notifications == null) {
-        emit(IconNotificationClean());
-        return;
-      }
-
-      emit(IconNotificationResults(notifications.length.toString()));
+    on<ReadNotification>((event, emit) async {
+      await postReadNotification(event.notificationID);
+      add(FetchNotifications());
+      // emit(IconNotificationResults(_amountUnread));
     });
-
-    on<ClearIconNotifications>((event, emit) => emit(IconNotificationClean()));
   }
 }
+
+List<DTONotification> _notifications = [];

@@ -7,8 +7,8 @@ import 'navigation_provider.dart';
 import 'package:referi_app/utils/utils.dart' as util;
 
 abstract class AppProviders {
-  static NavigationProvider get navigationProvider =>
-      Provider.of<NavigationProvider>(util.actualContext);
+  static NavigationProvider navigationProvider(context) =>
+      Provider.of<NavigationProvider>(context);
   static NavigationProvider get navigationProviderDeaf =>
       Provider.of<NavigationProvider>(util.actualContext, listen: false);
   // static UserProvider get userProvider =>

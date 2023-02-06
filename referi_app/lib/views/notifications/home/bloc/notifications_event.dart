@@ -9,6 +9,12 @@ abstract class NotificationsEvent extends Equatable {
 
 class FetchNotifications extends NotificationsEvent {}
 
-class ClearIconNotifications extends NotificationsEvent {}
+// class ClearIconNotifications extends NotificationsEvent {}
 
-class FetchIconNotifications extends NotificationsEvent {}
+// class FetchIconNotifications extends NotificationsEvent {}
+
+class ReadNotification extends NotificationsEvent {
+  final String notificationID;
+
+  const ReadNotification(this.notificationID);
+}

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:referi_app/providers/app_providers.dart';
 
 import 'package:sizer/sizer.dart';
-import 'package:badges/badges.dart';
+import 'package:badges/badges.dart' as bd;
 
 import '/controllers/alert_controller.dart';
 
@@ -18,17 +18,20 @@ class ProfileImage extends StatelessWidget {
 
     return SizedBox.square(
       dimension: imageAndContainerSize,
-      child: Badge(
+      child: bd.Badge(
         stackFit: StackFit.loose,
-        badgeColor: Colors.black,
+        badgeStyle: const bd.BadgeStyle(
+          badgeColor: Colors.black,
+          padding: EdgeInsets.all(8),
+        ),
         badgeContent: IconButton(
             onPressed: () => Alert.showImagePickerSheet(),
             icon: const Icon(Icons.camera_alt_rounded),
             color: Colors.white),
-        position: BadgePosition.bottomEnd(bottom: 2.h, end: 5.w),
-        padding: const EdgeInsets.all(8),
-        animationType: BadgeAnimationType.scale,
-        animationDuration: Duration.zero,
+        position: bd.BadgePosition.bottomEnd(bottom: 2.h, end: 5.w),
+        badgeAnimation: const bd.BadgeAnimation.scale(
+          animationDuration: Duration.zero,
+        ),
         child: GestureDetector(
           onTap: () => Alert.showImagePickerSheet(),
           child: imgPath != null

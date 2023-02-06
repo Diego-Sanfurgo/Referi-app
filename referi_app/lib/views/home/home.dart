@@ -1,7 +1,4 @@
-import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
-import 'package:referi_app/API/notifications/get_user_notifications.dart';
-import 'package:referi_app/models/dto/notification_dto.dart';
 
 import '../clubs/clubs home/clubs_home.dart';
 import '/providers/app_providers.dart';
@@ -29,7 +26,7 @@ class Home extends StatelessWidget {
       ),
       bottomNavigationBar: const BottomNavBar(),
       body: ValueListenableBuilder<int>(
-        valueListenable: AppProviders.navigationProvider.navbarIndex,
+        valueListenable: AppProviders.navigationProvider(context).navbarIndex,
         builder: (BuildContext context, int value, Widget? child) {
           switch (value) {
             case 0:
@@ -55,7 +52,7 @@ class _AppBarTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder<int>(
-      valueListenable: AppProviders.navigationProvider.navbarIndex,
+      valueListenable: AppProviders.navigationProvider(context).navbarIndex,
       builder: (BuildContext context, int value, Widget? child) {
         String nombre =
             AppProviders.userProvider(context).currentUser?.nombre ?? '';
@@ -85,5 +82,3 @@ List<Widget> get _appBarActions => [
       //     onPressed: () => NavigationController.goTo(Routes.notifications),
       //     icon: const Icon(Icons.notifications_rounded)),
     ];
-
-

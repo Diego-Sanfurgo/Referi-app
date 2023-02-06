@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-import 'package:referi_app/controllers/navigation_controller.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:referi_app/models/dto/notification_dto.dart';
+import 'package:intl/intl.dart';
+
+import '../bloc/notifications_bloc.dart';
+import '/models/dto/notification_dto.dart';
+import '/controllers/navigation_controller.dart';
 
 class NotificationTile extends StatelessWidget {
   final DTONotification notification;
@@ -13,14 +16,27 @@ class NotificationTile extends StatelessWidget {
     String date =
         DateFormat.Md("es, ES").format(DateTime.parse(notification.fecha));
     return ListTile(
-      title: Text(notification.titulo),
-      subtitle: Text(notification.nombreRemitente),
-      // leading: const Icon(Icons.check_circle_rounded, color: Colors.green),
-      trailing: Text(date),
+      title: decideIfBold(notification.titulo, notification),
+      subtitle: decideIfBold(notification.nombreRemitente, notification),
+      trailing: decideIfBold(date, notification),
+      tileColor: notification.read ? Colors.white : Colors.blueGrey.shade50,
       horizontalTitleGap: 0,
-      onTap: () => NavigationController.goToWithArguments(
-          Routes.notificationDetail,
-          args: notification),
+      onTap: () {
+        if (!notification.read) {
+          BlocProvider.of<NotificationBloc>(context)
+              .add(ReadNotification(notification.parentId!));
+        }
+        NavigationController.goToWithArguments(Routes.notificationDetail,
+            args: notification);
+      },
     );
   }
+}
+
+decideIfBold(String text, DTONotification notification) {
+  return Text(
+    text,
+    style: TextStyle(
+        fontWeight: notification.read ? FontWeight.normal : FontWeight.bold),
+  );
 }

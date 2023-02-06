@@ -1,9 +1,9 @@
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
 import 'package:image_picker/image_picker.dart';
+
 import '/API/params.dart';
 import 'package:mime_type/mime_type.dart';
-
 
 Future<http.StreamedResponse> postImage(XFile file) async {
   List<int> imageBytes = await file.readAsBytes();

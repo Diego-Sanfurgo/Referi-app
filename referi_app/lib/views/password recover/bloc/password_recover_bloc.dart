@@ -25,7 +25,9 @@ class PasswordRecoverBloc
         return;
       }
 
-      NavigationController.goTo(Routes.signup_3);
+      Alert.showToast("Enviamos una nueva contraseña al email ingresado.");
+      // NavigationController.goTo(Routes.signup_3);
+      NavigationController.pop();
     });
   }
 }
