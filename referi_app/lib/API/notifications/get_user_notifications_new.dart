@@ -8,7 +8,7 @@ Future<List<DTONotification>> getUserNotificationsNew() async {
   Dio dio = Dio();
 
   String url =
-      '${NotificationUrls.getNotificationsByUserId}${AppProviders.userProviderDeaf.currentUser!.id}/new';
+      '${NotificationUrls.getNotificationsByUserId}${AppProviders.userProviderDeaf.currentUserId}/new';
 
   try {
     return await dio

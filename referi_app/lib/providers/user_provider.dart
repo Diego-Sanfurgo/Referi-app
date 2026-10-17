@@ -33,6 +33,12 @@ class UserProvider extends ChangeNotifier {
   UserModel? get currentUserModel => _currentUser;
   User? get currentUser => _currentUser?.user;
 
+  String get currentUserId {
+    final user = currentUser;
+    if (user == null) throw StateError('No authenticated user');
+    return user.id;
+  }
+
   setUserModel(UserModel value) {
     _currentUser = value;
     notifyListeners();
@@ -40,6 +46,11 @@ class UserProvider extends ChangeNotifier {
 
   setUser(User user) {
     _currentUser!.user = user;
+    notifyListeners();
+  }
+
+  clearUser() {
+    _currentUser = null;
     notifyListeners();
   }
 

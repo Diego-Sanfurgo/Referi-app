@@ -9,7 +9,7 @@ Future<bool> patchUser() async {
   Dio dio = Dio();
   UserRegister user = AppProviders.userProviderDeaf.userRegisterModel;
   String url =
-      UserUrls.patchUserById + AppProviders.userProviderDeaf.currentUser!.id;
+      UserUrls.patchUserById + AppProviders.userProviderDeaf.currentUserId;
   bool result = false;
 
   await dio

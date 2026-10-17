@@ -42,7 +42,6 @@ class User {
   User({
     required this.id,
     required this.email,
-    required this.password,
     required this.nombre,
     required this.apellido,
     required this.dni,
@@ -58,7 +57,6 @@ class User {
 
   final String id;
   final String email;
-  final String password;
   final String nombre;
   final String apellido;
   final int dni;
@@ -74,7 +72,6 @@ class User {
   User copyWith({
     String? id,
     String? email,
-    String? password,
     String? nombre,
     String? apellido,
     int? dni,
@@ -90,7 +87,6 @@ class User {
       User(
         id: id ?? this.id,
         email: email ?? this.email,
-        password: password ?? this.password,
         nombre: nombre ?? this.nombre,
         apellido: apellido ?? this.apellido,
         dni: dni ?? this.dni,
@@ -107,7 +103,6 @@ class User {
   factory User.fromJson(Map<String, dynamic> json) => User(
         id: json["id"],
         email: json["email"],
-        password: json["password"],
         nombre: json["nombre"],
         apellido: json["apellido"],
         dni: json["dni"],
@@ -126,7 +121,6 @@ class User {
   Map<String, dynamic> toJson() => {
         "id": id,
         "email": email,
-        "password": password,
         "nombre": nombre,
         "apellido": apellido,
         "dni": dni,
@@ -137,7 +131,7 @@ class User {
         "fechaCreacion": fechaCreacion.toIso8601String(),
         "fechaActualizacion": fechaActualizacion.toIso8601String(),
         "fechaBaja": fechaBaja,
-        // "domicilio": domicilio.toJson(),
+        "domicilio": domicilio.toJson(),
       };
 }
 

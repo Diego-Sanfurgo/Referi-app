@@ -30,6 +30,10 @@ abstract class ActivityController {
     if (!isEnrolled) return;
 
     List<ActivityFeePayment> feeList = await PaymentController.getUserFees();
+    if (feeList.isEmpty) {
+      GeneralAlert.showError("No se encontraron cuotas para esta actividad");
+      return;
+    }
     List<String> feesId = [feeList.first.id];
 
     bool isPayed = await PaymentController.payActivity(feesId);

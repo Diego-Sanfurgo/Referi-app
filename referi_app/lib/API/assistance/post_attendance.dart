@@ -5,7 +5,7 @@ import 'package:referi_app/providers/app_providers.dart';
 Future<bool> postAttendance(String url) async {
   Dio dio = Dio();
 
-  Map body = {"id": AppProviders.userProviderDeaf.currentUser!.id};
+  Map body = {"id": AppProviders.userProviderDeaf.currentUserId};
   return await dio
       .post(url, options: Options(headers: getUserToken()), data: body)
       .then((value) {

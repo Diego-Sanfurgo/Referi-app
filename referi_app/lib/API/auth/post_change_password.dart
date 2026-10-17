@@ -7,7 +7,7 @@ Future<bool> postChangePassword(String oldPsw, String newPsw) async {
   Dio dio = Dio();
 
   Map body = {
-    "id": AppProviders.userProviderDeaf.currentUser!.id,
+    "id": AppProviders.userProviderDeaf.currentUserId,
     "oldPassword": oldPsw,
     "newPassword": newPsw,
   };
