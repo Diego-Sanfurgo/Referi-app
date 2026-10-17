@@ -118,13 +118,13 @@ class Domicilio {
                 ? null
                 : int.parse(json["numero"]),
         ciudad: json["ciudad"],
-        provincia: json["Provincia"],
+        provincia: json["provincia"],
       );
 
   Map<String, dynamic> toJson() => {
         "calle": calle,
         "numero": numero,
         "ciudad": ciudad,
-        "Provincia": provincia,
+        "provincia": provincia,
       };
 }

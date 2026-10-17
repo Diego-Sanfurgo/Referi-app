@@ -11,23 +11,16 @@ Future<List<DTONotification>> getUserNotifications() async {
       AppProviders.userProviderDeaf.currentUser!.id;
 
   try {
-    return await dio
-        .get(url, options: Options(headers: getUserToken()))
-        .then((value) {
-      List<DTONotification> list = [];
-      Map data = value.data as Map;
-      for (var i = 0; i < data.length; i++) {
-        DTONotification dto =
-            DTONotification.fromJson(value.data["$i"]['notificacion']);
-        dto.parentId = value.data['$i']['id'];
-        if (value.data['$i']['fechaLectura'] != null) {
-          dto.read = true;
-        }
-        list.add(dto);
-      }
-      return list;
-    });
-  } on Exception {
+    final response = await dio.get(url, options: Options(headers: getUserToken()));
+    final List<dynamic> notifications = response.data['data'] ?? [];
+
+    return notifications.map((item) {
+      DTONotification dto = DTONotification.fromJson(item['notificacion']);
+      dto.parentId = item['id'];
+      dto.read = item['fechaLectura'] != null;
+      return dto;
+    }).toList();
+  } catch (_) {
     return [];
   }
 }

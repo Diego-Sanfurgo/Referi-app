@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:referi_app/API/params.dart';
 import 'package:referi_app/models/payment_detail.dart';
 
-Future<PaymentDetail?> getPaymetById(String id) async {
+Future<PaymentDetail?> getPaymentById(String id) async {
   Dio dio = Dio();
 
   return await dio

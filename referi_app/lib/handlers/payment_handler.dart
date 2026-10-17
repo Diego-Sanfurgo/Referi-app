@@ -24,7 +24,7 @@ abstract class PaymentHandler {
       await getFeesByUserId();
 
   static Future<PaymentDetail?> obtainPaymentById(String id) async {
-    var payment = await getPaymetById(id);
+    var payment = await getPaymentById(id);
     if (payment == null) {
       GeneralAlert.showError(
           "Ocurrió un error al leer el detalle del pago. Intenta nuevamente.");
