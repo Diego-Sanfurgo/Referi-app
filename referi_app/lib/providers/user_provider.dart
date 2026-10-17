@@ -3,26 +3,28 @@ import 'package:flutter/material.dart';
 import '../models/user.dart';
 import '/models/user_register.dart';
 
+Map<String, dynamic> _emptyUserRegister() => {
+      "email": "",
+      "password": "",
+      "nombre": "",
+      "apellido": "",
+      // UserRegister.fromJson runs int.parse on this, so it can't be empty.
+      "dni": "123",
+      "telefono": "",
+      "fechanacimiento": "",
+      "fotoperfil": "",
+      "domicilio": {
+        "calle": "",
+        "numero": 0,
+      }
+    };
+
 class UserProvider extends ChangeNotifier {
   final String _auxPass = '';
   UserModel? _currentUser;
   final UserRegister _userRegisterCompleteModel = UserRegister();
 
-  final Map<String, dynamic> _userRegister = {
-    "email": "",
-    "password": "",
-    "nombre": "",
-    "apellido": "",
-    "dni": "123",
-    "telefono": "",
-    // "fechaNacimiento": "",
-    "fechanacimiento": "",
-    "fotoperfil": "",
-    "domicilio": {
-      "calle": "",
-      "numero": 0,
-    }
-  };
+  final Map<String, dynamic> _userRegister = _emptyUserRegister();
 
   UserRegister get userRegisterModel => UserRegister.fromJson(_userRegister);
   Map<String, dynamic> get userRegister => _userRegister;
@@ -49,8 +51,13 @@ class UserProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  clearUser() {
+  // Clears the draft too: it backs the profile form, so stale values would be
+  // submitted under the next account that signs in.
+  clearSession() {
     _currentUser = null;
+    _userRegister
+      ..clear()
+      ..addAll(_emptyUserRegister());
     notifyListeners();
   }
 
