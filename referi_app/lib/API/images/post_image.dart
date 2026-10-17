@@ -1,9 +1,10 @@
 import 'package:dio/dio.dart';
 import 'package:http_parser/http_parser.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:referi_app/controllers/user_controller.dart';
 
 import '/API/params.dart';
+import '/providers/app_providers.dart';
+import '/utils/network_assets_urls.dart';
 import 'package:mime_type/mime_type.dart';
 
 // Future<http.StreamedResponse> postImage(XFile file) async {
@@ -35,7 +36,7 @@ Future<bool> postImage(XFile file) async {
 
   if (file.name.isEmpty) throw Error();
 
-  final uri = Uri.parse(ImageUrls.postImage);
+  final uri = Uri.parse(ImageUrls.postUserImage);
   var extension = mime(file.name).toString().split('/')[1];
 
   FormData body = FormData.fromMap({
@@ -54,8 +55,13 @@ Future<bool> postImage(XFile file) async {
             headers: getUserToken(),
           ))
       .then((value) {
-    String imagePath = ImageUrls.urlToUserImage + value.data['path'];
-    UserController.addValueToUser(imagePath, "fotoperfil");
+    // The endpoint already persisted fotoPerfil; mirror it locally so the
+    // profile and app bar show the new photo without re-logging in.
+    final user = AppProviders.userProviderDeaf.currentUser;
+    if (user != null) {
+      AppProviders.userProviderDeaf
+          .setUser(user.copyWith(fotoPerfil: getImageUrl(value.data['path'])));
+    }
     return true;
   }).onError((error, stackTrace) => false);
 }

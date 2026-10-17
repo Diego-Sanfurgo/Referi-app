@@ -4,6 +4,8 @@
 
 import 'dart:convert';
 
+import '/utils/network_assets_urls.dart';
+
 UserModel userRegisterFromJson(String str) =>
     UserModel.fromJson(json.decode(str));
 
@@ -114,9 +116,11 @@ class User {
         telefono: json["telefono"],
         verificado: json["verificado"],
         fechaNacimiento: DateTime.parse(json["fechaNacimiento"]),
+        // The API stores a path relative to the server ("uploads/<id>.jpg");
+        // getImageUrl turns it into a URL the image widgets can actually load.
         fotoPerfil: (json["fotoPerfil"] == 'uploads/profile.jpeg')
             ? null
-            : json["fotoPerfil"],
+            : getImageUrl(json["fotoPerfil"] ?? ''),
         fechaCreacion: DateTime.parse(json["fechaCreacion"]),
         fechaActualizacion: DateTime.parse(json["fechaActualizacion"]),
         fechaBaja: json["fechaBaja"],

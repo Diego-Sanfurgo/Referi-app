@@ -7,7 +7,8 @@ Future<bool> payFee(List<String> feesId) async {
   Dio dio = Dio();
 
   Map body = {
-    "medioDePago": "TRANSFERENCIA",
+    // Must match the backend's MedioDePago enum value exactly.
+    "medioDePago": "TRANSFERENCIA BANCARIA",
     "numeroDeComprobante": "",
     "idsCuota": feesId
   };

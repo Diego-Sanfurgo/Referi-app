@@ -7,9 +7,8 @@ import '/controllers/navigation_controller.dart';
 abstract class ImageHandler {
   static Future<bool> uploadImage(XFile image) async {
     GeneralAlert.showLoading();
-    // StreamedResponse isOK = await postImage(image);
-    await postImage(image);
+    bool isOK = await postImage(image);
     NavigationController.pop();
-    return true;
+    return isOK;
   }
 }

@@ -6,6 +6,9 @@ import 'navigation_provider.dart';
 
 import 'package:referi_app/utils/utils.dart' as util;
 
+/// The `*Deaf` getters below fetch a provider with `listen: false` — i.e. they
+/// don't rebuild on changes. Use the `context`-based variants when a widget
+/// needs to react to the provider's state.
 abstract class AppProviders {
   static NavigationProvider navigationProvider(context) =>
       Provider.of<NavigationProvider>(context);

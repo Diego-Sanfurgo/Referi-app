@@ -51,9 +51,9 @@ abstract class AssistanceUrls {
 
 abstract class ImageUrls {
   static const String postImage = "$_baseUrl/uploads";
+  static const String postUserImage = "$_baseUrl/uploads/user";
   static const String getImage = "$_baseUrl/uploads/";
   static const String deleteImage = "$_baseUrl/uploads/";
-  static const String urlToUserImage = "$_baseUrl/";
 }
 
 abstract class ShiftUrls {
@@ -79,5 +79,5 @@ abstract class FeeUrls {
 
 Map<String, String> getUserToken() {
   String token = AppProviders.userProviderDeaf.currentUserModel!.accessToken;
-  return {"Authorization": "bearer $token"};
+  return {"Authorization": "Bearer $token"};
 }

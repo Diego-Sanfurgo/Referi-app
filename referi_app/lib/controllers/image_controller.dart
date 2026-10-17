@@ -1,7 +1,7 @@
 import 'package:image_picker/image_picker.dart';
 
-import '/handlers/user_handler.dart';
 import '/handlers/image_handler.dart';
+import '/controllers/general_alert_controller.dart';
 import '/controllers/navigation_controller.dart';
 
 abstract class ImageController {
@@ -22,13 +22,14 @@ abstract class ImageController {
     // Uint8List lightImage = await _compressImage(image);
     bool imageUploaded = await ImageHandler.uploadImage(image);
 
-    if (!imageUploaded) {
-      NavigationController.pop();
-      return;
-    }
-
-    await UserHandler.updateUser();
+    // Closes the image-source sheet. No PATCH follows: the upload endpoint
+    // persists fotoPerfil itself and postImage refreshes the local user.
     NavigationController.pop();
+
+    if (!imageUploaded) {
+      GeneralAlert.showError(
+          "Ocurrió un error al subir la imagen. Intenta nuevamente.");
+    }
   }
 }
 
