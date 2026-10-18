@@ -6,7 +6,8 @@ Future<PaymentDetail?> getPaymetById(String id) async {
   Dio dio = Dio();
 
   return await dio
-      .get(PaymentUrls.getPaymentById + id)
+      .get(PaymentUrls.getPaymentById + id,
+          options: Options(headers: getUserToken()))
       .then((value) {
         if (value.data == '' || value.data == null) {
           return null;
