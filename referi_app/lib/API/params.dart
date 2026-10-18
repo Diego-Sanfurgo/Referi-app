@@ -11,8 +11,6 @@ abstract class AuthUrls {
 }
 
 abstract class UserUrls {
-  static const String postUser = "$_baseUrl/usuarios";
-  static const String getUsers = "$_baseUrl/usuarios";
   static const String getUserById = "$_baseUrl/usuarios/";
   static const String patchUserById = "$_baseUrl/usuarios/";
   static const String deleteUserById = "$_baseUrl/usuarios/";
@@ -47,6 +45,8 @@ abstract class NotificationUrls {
 
 abstract class AssistanceUrls {
   static const String postAssistance = "$_baseUrl/asistencias/crear";
+  // Prefix of the URL the web panel encodes in the attendance QR code.
+  static const String postAttendanceByOrg = "$_baseUrl/asistencias/";
 }
 
 abstract class ImageUrls {
