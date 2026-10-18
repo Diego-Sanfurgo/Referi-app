@@ -25,7 +25,8 @@ class _Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    User user = AppProviders.userProvider(context).currentUser!;
+    User? user = AppProviders.userProvider(context).currentUser;
+    if (user == null) return const SizedBox.shrink();
     String date = DateFormat.yMd('es, ES').format(user.fechaNacimiento);
 
     return SingleChildScrollView(

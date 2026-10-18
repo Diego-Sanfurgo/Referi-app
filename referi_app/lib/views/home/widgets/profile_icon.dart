@@ -12,7 +12,7 @@ class ProfileIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     String? imgPath =
-        AppProviders.userProvider(context).currentUser!.fotoPerfil;
+        AppProviders.userProvider(context).currentUser?.fotoPerfil;
 
     return (imgPath == null || imgPath == '')
         ? IconButton(

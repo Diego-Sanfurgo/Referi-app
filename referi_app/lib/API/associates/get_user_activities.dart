@@ -6,7 +6,7 @@ import '../../providers/app_providers.dart';
 
 Future<List<Enrollment>> getUserEnrollments() async {
   Dio dio = Dio();
-  String userId = AppProviders.userProviderDeaf.currentUser!.id;
+  String userId = AppProviders.userProviderDeaf.currentUserId;
 
   List<Enrollment> list = [];
 

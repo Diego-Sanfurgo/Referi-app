@@ -8,7 +8,7 @@ Future postInscribirActividad() async {
   Dio dio = Dio();
 
   Map body = {
-    "idUsuario": AppProviders.userProviderDeaf.currentUser!.id,
+    "idUsuario": AppProviders.userProviderDeaf.currentUserId,
     "idTurnoActividad":
         AppProviders.activityProviderDeaf.timeRangesSelected.first.keys.first,
   };

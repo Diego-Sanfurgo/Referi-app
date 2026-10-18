@@ -78,6 +78,7 @@ abstract class FeeUrls {
 }
 
 Map<String, String> getUserToken() {
-  String token = AppProviders.userProviderDeaf.currentUserModel!.accessToken;
-  return {"Authorization": "bearer $token"};
+  final userModel = AppProviders.userProviderDeaf.currentUserModel;
+  if (userModel == null) throw StateError('No authenticated user');
+  return {"Authorization": "Bearer ${userModel.accessToken}"};
 }

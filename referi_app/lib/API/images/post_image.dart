@@ -36,7 +36,10 @@ Future<bool> postImage(XFile file) async {
   if (file.name.isEmpty) throw Error();
 
   final uri = Uri.parse(ImageUrls.postImage);
-  var extension = mime(file.name).toString().split('/')[1];
+  final mimeType = mime(file.name);
+  final mimeParts = mimeType?.split('/');
+  var extension =
+      (mimeParts != null && mimeParts.length > 1) ? mimeParts[1] : 'jpeg';
 
   FormData body = FormData.fromMap({
     'file': MultipartFile.fromBytes(

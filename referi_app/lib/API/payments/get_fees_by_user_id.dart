@@ -12,7 +12,7 @@ Future<List<ActivityFeePayment>> getFeesByUserId() async {
   List<ActivityFeePayment> list = [];
 
   String url = PaymentUrls.getFeesByUserId +
-      AppProviders.userProviderDeaf.currentUser!.id;
+      AppProviders.userProviderDeaf.currentUserId;
 
   return await dio
       .get(url, options: Options(headers: getUserToken()))

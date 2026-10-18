@@ -4,6 +4,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 
 import '/theme/colors.dart' as colors;
 import '/controllers/navigation_controller.dart';
+import '/API/auth/post_auth_logout.dart';
 
 import 'widgets/profile_image.dart';
 
@@ -67,8 +68,10 @@ class _ActionsList extends StatelessWidget {
             leading: const Icon(Icons.logout_rounded),
             trailing: const Icon(Icons.keyboard_arrow_right),
             title: const AutoSizeText("Cerrar sesión"),
-            onTap: () =>
-                NavigationController.goTo(Routes.login, popUntil: true),
+            onTap: () async {
+              await postAuthLogout();
+              NavigationController.goTo(Routes.login, popUntil: true);
+            },
           ),
         ],
       ),

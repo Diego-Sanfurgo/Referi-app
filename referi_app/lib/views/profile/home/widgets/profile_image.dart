@@ -14,7 +14,7 @@ class ProfileImage extends StatelessWidget {
     final double imageAndContainerSize = 30.h;
 
     String? imgPath =
-        AppProviders.userProvider(context).currentUser!.fotoPerfil;
+        AppProviders.userProvider(context).currentUser?.fotoPerfil;
 
     return SizedBox.square(
       dimension: imageAndContainerSize,
